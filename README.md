@@ -1,3 +1,4 @@
+![image](https://github.com/zqh531500317/arknight-script/blob/master/asset/demo/demo1.png)
 ## 一、安装
 
 ### 1、python 3.9.X 64位
