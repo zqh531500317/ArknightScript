@@ -1,0 +1,63 @@
+{
+  "applicationId": "Script.Arknight",
+  "version": "1.0.0",
+  "defaultMode": "window",
+  "port": 8080,
+  "documentRoot": "/resources/",
+  "url": "/",
+  "enableServer": true,
+  "enableNativeAPI": true,
+  "tokenSecurity": "one-time",
+  "logging": {
+    "enabled": true,
+    "writeToLogFile": true
+  },
+  "nativeAllowList": [
+    "*",
+    "app.*",
+    "os.*",
+    "filesystem.*"
+  ],
+  "globalVariables": {
+  },
+  "modes": {
+    "window": {
+      "title": "Arknight-Script",
+      "width": 1200,
+      "height": 800,
+      "minWidth": 600,
+      "minHeight": 400,
+      "fullScreen": false,
+      "alwaysOnTop": false,
+      "icon": "/resources/icons/appIcon.png",
+      "enableInspector": true,
+      "borderless": false,
+      "maximize": false,
+      "hidden": false,
+      "resizable": true,
+      "exitProcessOnClose": false
+    },
+    "browser": {
+      "globalVariables": {
+        "TEST": "Test value browser"
+      },
+      "nativeBlockList": [
+        "filesystem.*"
+      ]
+    },
+    "cloud": {
+      "url": "/resources/#cloud",
+      "nativeAllowList": [
+        "app.*"
+      ]
+    }
+  },
+  "cli": {
+    "binaryName": "Arknight-Script",
+    "resourcesPath": "/resources/",
+    "extensionsPath": "/extensions/",
+    "clientLibrary": "/resources/js/main.js",
+    "binaryVersion": "4.3.0",
+    "clientVersion": "3.2.0"
+  }
+}
