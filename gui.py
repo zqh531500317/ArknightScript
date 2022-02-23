@@ -1,4 +1,3 @@
-print('hello')
 from module.utils.core_config import *
 import os
 import sys
@@ -58,7 +57,7 @@ def resume_scheduler():
 @app.route('/is_scheduler_running', methods=['get'])
 def is_scheduler_running():
     state = module.schedule.baseScheduler.is_scheduler_running()
-    #logger.debug("调度器状态为{}".format(state))
+    # logger.debug("调度器状态为{}".format(state))
     return jsonify({'result': state})
 
 
