@@ -14,8 +14,10 @@ pip install .\tookit\python_Levenshtein-0.12.2-cp39-cp39-win_amd64.whl
 pip install -r requirements.txt
 ```
 
-###3、复制config/templete.yaml为config.yaml,修改config.yaml,注意修改serial、project_path
+### 3、复制config/templete.yaml为config.yaml,修改config.yaml,注意修改serial、project_path
 
-##二、使用
-###1、运行Arknight-Script.bat可启动图形界面
-###2、运行start_flask.bat可启动web服务，浏览器访问127.0.0.1:5000访问
+## 二、使用
+
+### 1、运行Arknight-Script.bat可启动图形界面
+
+### 2、运行start_flask.bat可启动web服务，浏览器访问127.0.0.1:5000访问
