@@ -12,7 +12,7 @@ Config:
   Log:
     level: DEBUG
     #是否在控制台输出日志
-    handler: true
+    handler: false
     #是否在文件输出日志
     file: true
   Screen:
