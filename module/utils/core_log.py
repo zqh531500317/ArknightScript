@@ -1,4 +1,5 @@
 import logging
+import os
 
 from logzero import LogFormatter, setup_default_logger, logfile, logger
 from module.utils.core_config import configList
@@ -33,9 +34,10 @@ def init_log():
     if configList["Config"]["Log"]["file"]:
         file_format = '[%(asctime)s| %(levelname)s |%(filename)s:%(lineno)d] %(message)s'
         formatter = logging.Formatter(file_format, data_style)
-        logfile(configList["Config"]["System"]["project_path"] + '/log/log.log',
+        dic_path = configList["Config"]["System"]["project_path"] + '/log/'
+        if not os.path.exists(dic_path):
+            os.mkdir(dic_path)
+        logfile(dic_path + 'log.log',
                 formatter=formatter,
                 maxBytes=1e6, encoding='utf-8', loglevel=level)
     logger.info("初始化日志配置")
-
-
