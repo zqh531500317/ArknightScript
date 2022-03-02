@@ -23,3 +23,4 @@ ERROR 2022-02-28 23:48:08,200 Unable to parse native call payload: Unknown excep
 ERROR 2022-03-01 19:25:33,442 Unable to parse native call payload: Unknown exception api/debug/debug.cpp:16 zqh@ZQH
 ERROR 2022-03-01 21:21:14,765 Unable to parse native call payload: Unknown exception api/debug/debug.cpp:16 zqh@ZQH
 ERROR 2022-03-01 23:20:16,482 Unable to parse native call payload: Unknown exception api/debug/debug.cpp:16 zqh@ZQH
+ERROR 2022-03-02 20:24:35,825 Unable to parse native call payload: Unknown exception api/debug/debug.cpp:16 zqh@ZQH

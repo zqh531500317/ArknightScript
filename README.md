@@ -6,7 +6,8 @@
 ### 2、
 
 ```Bash
-cd 到项目根目录
+git clone https://github.com/zqh531500317/arknight-script.git
+cd arknight-script
 python -m venv venv
 .\venv\Scripts\activate
 .\venv\scripts\python.exe -m pip install --upgrade pip
