@@ -1,6 +1,6 @@
 import logging
 import os
-
+import sys
 from logzero import LogFormatter, setup_default_logger, logfile, logger
 from module.utils.core_config import configList
 
@@ -37,6 +37,8 @@ def init_log():
         dic_path = configList["Config"]["System"]["project_path"] + '/log/'
         if not os.path.exists(dic_path):
             os.mkdir(dic_path)
+        sys.stderr = open(configList["Config"]["System"]["project_path"] + "/log/stderr.txt", "w+", encoding='utf-8')
+        sys.stdout = open(configList["Config"]["System"]["project_path"] + "/log/stdout.txt", "w+", encoding='utf-8')
         if not os.path.exists(configList["Config"]["System"]["project_path"] + '/cache/'):
             os.mkdir(configList["Config"]["System"]["project_path"] + '/cache/')
         logfile(dic_path + 'log.log',

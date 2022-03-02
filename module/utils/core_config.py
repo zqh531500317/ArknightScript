@@ -7,17 +7,11 @@ import json
 from collections import OrderedDict
 
 
-# 该模块会解析/config/config.yaml的内容，通过调入该模块，实现配置文件的读写
-# 不要尝试在其他模块使用以下变量
-# 其他模块只能使用read和write函数
-
 class CoreConfig:
 
     def __init__(self):
         logger.info("初始化配置文件类")
         self.project_path = os.path.abspath('')
-        sys.stderr = open(self.project_path + "/log/stderr.txt", "w+", encoding='utf-8')
-        sys.stdout = open(self.project_path + "/log/stdout.txt", "w+", encoding='utf-8')
         self.screen_path = self.project_path + '/cache/screen.png'
         self.configList = {}
         self.read()
