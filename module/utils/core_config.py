@@ -20,11 +20,13 @@ class CoreConfig:
         self.configList = {}
         self.read()
         # 判断程序是否正在运行
-        pid = int(self.configList["Config"]["System"]["pid"])
-        for process in psutil.process_iter():
-            if process.pid == pid and process.name == 'python.exe':
-                print("进程{}正在运行，退出本程序".format(pid))
-                sys.exit()
+        pid=self.configList["Config"]["System"]["pid"]
+        if pid is not None:
+            pid = int(pid)
+            for process in psutil.process_iter():
+                if process.pid == pid and process.name == 'python.exe':
+                    print("进程{}正在运行，退出本程序".format(pid))
+                    sys.exit()
         self.write("project_path", self.project_path)
         self.write("pid", os.getpid())
 
