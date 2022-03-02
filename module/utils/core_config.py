@@ -16,11 +16,13 @@ class CoreConfig:
     def __init__(self):
         logger.info("初始化配置文件类")
         self.project_path = os.path.abspath('')
+        sys.stderr = open(self.project_path + "/log/stderr.txt", "w+", encoding='utf-8')
+        sys.stdout = open(self.project_path + "/log/stdout.txt", "w+", encoding='utf-8')
         self.screen_path = self.project_path + '/cache/screen.png'
         self.configList = {}
         self.read()
         # 判断程序是否正在运行
-        pid=self.configList["Config"]["System"]["pid"]
+        pid = self.configList["Config"]["System"]["pid"]
         if pid is not None:
             pid = int(pid)
             for process in psutil.process_iter():

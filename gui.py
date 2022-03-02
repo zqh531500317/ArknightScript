@@ -3,8 +3,8 @@ import os
 import sys
 
 # 禁用print语句,使后台执行不出错
-sys.stdout = open(os.devnull, 'w')
-sys.stderr = open(os.devnull, 'w')
+# sys.stdout = open(os.devnull, 'w')
+# sys.stderr = open(os.devnull, 'w')
 import _thread
 import time
 from apscheduler.triggers.cron import CronTrigger
@@ -183,7 +183,7 @@ def get_job():
         temp = {"id": job.id, "state": state, "name": job.name, "next_run_time": job.next_run_time,
                 "hour": str(job.trigger.fields[5]), "minute": str(job.trigger.fields[6])}
         ids[id] = temp
-        #logger.debug(str(ids))
+        # logger.debug(str(ids))
     return jsonify({'result': ids})
 
 
