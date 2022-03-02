@@ -37,6 +37,8 @@ def init_log():
         dic_path = configList["Config"]["System"]["project_path"] + '/log/'
         if not os.path.exists(dic_path):
             os.mkdir(dic_path)
+        if not os.path.exists(configList["Config"]["System"]["project_path"] + '/cache/'):
+            os.mkdir(configList["Config"]["System"]["project_path"] + '/cache/')
         logfile(dic_path + 'log.log',
                 formatter=formatter,
                 maxBytes=1e6, encoding='utf-8', loglevel=level)
