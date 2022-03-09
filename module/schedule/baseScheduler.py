@@ -113,6 +113,7 @@ def close_game():
             should_close = False
     if module.task.state.running_task_num > 0:
         should_close = False
+        logger.debug("当前队列任务数:%s", module.task.state.running_task_num)
     if should_close and isLive():
         for i in range(0, 5):
             logger.info("在%s分钟内无任务,将在%s秒后关闭游戏", minutes, str(10 - 2 * i))
