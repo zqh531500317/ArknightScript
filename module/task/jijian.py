@@ -60,6 +60,7 @@ def schedual():
         item["next_index"] = index
     cf.write_json(temp, project_path + "/config/schedual.json")
     module.step.jijian_step.auto_sleep()
+    module.step.judge_step.ensureGameOpenAndInMain()
 
 
 # 判断当前时间和排班时间是否在1h内，执行

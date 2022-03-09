@@ -1,6 +1,5 @@
 import time
 
-
 import module.task.daily
 import module.task.huodong
 import module.task.jijian
@@ -16,6 +15,7 @@ import module.step.recruit_step
 from cnstd import CnStd
 import cv2
 import module.step.jijian_step
+import module.step.judge_step
 
 
 def test_daily():
@@ -36,21 +36,7 @@ def test_jijian():
 
 
 if __name__ == '__main__':
-    init()
-    screen()
-    from cnstd import CnStd
-    from cnocr import CnOcr
-
-    std = CnStd()
-    cn_ocr = CnOcr(cand_alphabet="1234567890-")
-
-    box_infos = std.detect(screen_path)
-
-    for box_info in box_infos['detected_texts']:
-        cropped_img = box_info['cropped_img']
-        ocr_res = cn_ocr.ocr_for_single_line(cropped_img)
-        print('ocr result: %s' % str(ocr_res))
-
+    module.step.judge_step.ensureGameOpenAndInMain()
     # region = read(screen_path)
     # cropped = cut(region, 766, 25, 863, 48)  # 基建无人机
     # cropped = cut(region, 585, 193, 687, 225)#判断剿灭是否打完

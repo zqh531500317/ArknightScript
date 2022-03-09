@@ -13,11 +13,11 @@ def into_jijian():
 
 
 def into_main():
-    time.sleep(3)
+    time.sleep(sleep_time)
     if not module.step.judge_step.isInMain():
 
         randomClick("terminal")
-        time.sleep(2)
+        time.sleep(sleep_time)
         randomClick("terminal_go_home")
         screen()
         if compareSame("go_home_from_construction"):
@@ -25,7 +25,7 @@ def into_main():
         close_alert()
         # 等待直到进入主界面
         while True:
-            time.sleep(2)
+            time.sleep(sleep_time)
             screen()
             b = module.step.judge_step.isInMain()
             if b:
@@ -39,7 +39,7 @@ def into_login():
         logger.info("尝试登陆游戏")
         start()
         while True:
-            time.sleep(3)
+            time.sleep(sleep_time)
             b = module.step.judge_step.isInLogin()
             if b:
                 logger.info('到登录界面')
@@ -47,7 +47,7 @@ def into_login():
         randomClick("login")
 
         while True:
-            time.sleep(3)
+            time.sleep(sleep_time)
             if module.step.judge_step.isInMain():
                 logger.info('到主界面')
                 break
@@ -65,7 +65,7 @@ def close_alert():
         x2 = det[2]
         y2 = det[3]
         randomClick((x1, y1, x2, y2))
-        time.sleep(3)
+        time.sleep(sleep_time)
 
     det = template_match_best('get_items.png', 514, 0, 758, 720)
     if len(det) != 0 and det[4] >= 0.8:
@@ -79,7 +79,7 @@ def close_alert():
 def into_Fight():
     module.step.judge_step.ensureGameOpen()
     click(1150, 660)
-    time.sleep(3)
+    time.sleep(sleep_time)
     screen()
     if module.step.judge_step.isInReason():
         return False
@@ -103,7 +103,7 @@ def out_Fight():
 
 def out_fight_fail():
     randomClick((1007, 316, 1056, 340))
-    time.sleep(10)
+    time.sleep(3*sleep_time)
     click(600, 300)
 
 
@@ -114,7 +114,7 @@ def choosedailizhihui(game):
     rgb = getRGB(1060, 585)
     if not (rgb[0] == 255 and rgb[1] == 255 and rgb[2] == 255):
         click(1060, 585)
-    time.sleep(1)
+    time.sleep(2)
     screen()
     rgb = getRGB(1060, 585)
     if not (rgb[0] == 255 and rgb[1] == 255 and rgb[2] == 255):
@@ -125,11 +125,11 @@ def choosedailizhihui(game):
 def use_medicine_or_stone(use_medicine, medicine_num, use_stone, stone_num):
     if use_medicine and medicine_num > 0:
         screen()
-        time.sleep(3)
+        time.sleep(sleep_time)
         if compareSimilar("use_medicine_before_fight") < 0.9:
             raise module.error.game.ErrorPage()
         randomClick("use_medicine_before_fight")
-        time.sleep(2)
+        time.sleep(sleep_time)
         return 1
     # 随便点个地方退出理智补充界面
     click(1247, 500)
