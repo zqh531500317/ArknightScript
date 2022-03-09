@@ -32,7 +32,7 @@ ui["month_after_login"] = {"area": (1189, 63, 1215, 89), "button": (1189, 63, 12
 ui["terminal"] = {"area": (197, 21, 333, 54), "button": (238, 26, 294, 52), "file": "/asset/ui/terminal.png"}
 ui["main_jijian"] = {"area": (940, 580, 1058, 661), "button": (940, 580, 1058, 661),
                      "file": "/asset/ui/main_jijian.png"}
-ui["terminal_go_home"] = {"area": (68, 231, 118, 302), "button": (68, 231, 118, 302),
+ui["terminal_go_home"] = {"area": (87, 280, 90, 285), "button": (87, 280, 90, 285),
                           "file": "/asset/ui/terminal_go_home.png"}
 ui["main_renwu"] = {"area": (715, 554, 802, 614), "button": (727, 567, 786, 600),
                     "file": "/asset/ui/main_renwu.png"}
