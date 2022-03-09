@@ -3,6 +3,8 @@ import time
 import module.task.daily
 import module.task.huodong
 import module.task.jijian
+import module.schedule.dailyScheduler
+import module.task.state
 import module.utils.core_control
 import module.utils.core_template
 from module.utils.core_init import init
@@ -36,7 +38,7 @@ def test_jijian():
 
 
 if __name__ == '__main__':
-    module.step.judge_step.ensureGameOpenAndInMain()
+    module.schedule.dailyScheduler.quick_lizhi()
     # region = read(screen_path)
     # cropped = cut(region, 766, 25, 863, 48)  # 基建无人机
     # cropped = cut(region, 585, 193, 687, 225)#判断剿灭是否打完
@@ -44,3 +46,5 @@ if __name__ == '__main__':
     # cropped =cut(region, 1116, 20, 1245, 57)  # 获取理智
     # write(screen_path,cropped)
     # ocr_without_position(screen_path)
+    while True:
+        pass

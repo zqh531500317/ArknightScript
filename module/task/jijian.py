@@ -9,6 +9,7 @@ b = configList["Config"]["Game"]["b"]
 
 
 # 基建一键收货
+@func_set_timeout(timeout_time)
 def jijian_receive():
     module.step.judge_step.ensureGameOpenAndInMain()
     module.step.click_step.into_jijian()
@@ -18,6 +19,7 @@ def jijian_receive():
 
 
 # 基建使用电力
+@func_set_timeout(timeout_time)
 def use_electricity():
     module.step.judge_step.ensureGameOpenAndInMain()
     module.step.click_step.into_jijian()
@@ -33,6 +35,7 @@ def use_electricity():
 
 
 # 基建排班
+@func_set_timeout(timeout_time_max)
 def schedual():
     temp = cf.read_json(project_path + "/config/schedual.json")
     schedual_dict = temp["Config"]

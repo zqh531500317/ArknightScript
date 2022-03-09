@@ -18,4 +18,4 @@ cnocr==2.1.0
 cnstd==1.1.1
 flask-cors==3.0.10
 psutil==5.9.0
-timeout-decorator==0.5.0
+func_timeout

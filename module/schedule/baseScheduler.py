@@ -11,6 +11,7 @@ from apscheduler.events import EVENT_JOB_ERROR, EVENT_JOB_EXECUTED, EVENT_JOB_SU
 import module.task.state
 from module.utils.core_email import send
 from module.utils.core_control import *
+import func_timeout
 
 
 def startListener(event):
@@ -30,9 +31,11 @@ def finishListener(event):
     global end_time
     end_time = datetime.datetime.now()
     jobid = str(event.job_id)
+    if isinstance(event.exception, func_timeout.exceptions.FunctionTimedOut):
+        stop()
     if event.exception:
         send("任务调度出错",
-             "jobid=" + str(event.job_id) + " " + str(event.exception) + " " + str(event.traceback))
+             "jobid=" + str(event.job_id) + "\n " + str(event.exception) + "\n " + str(event.traceback))
     if "once_ziyuanshouji" in jobid or "once_jiaomie" in jobid or "once_unknown" in jobid or \
             "once_recently" in jobid or "once_zhuxian" in jobid or "fight" in jobid or \
             "zhuxian" in jobid or "ziyuanshouji" in jobid or "jiaomie" in jobid or "huodong" in jobid:

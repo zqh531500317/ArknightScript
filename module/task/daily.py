@@ -9,6 +9,7 @@ import cv2
 
 
 # 收货每日任务和每周任务
+@func_set_timeout(timeout_time)
 def receive_renwu():
     module.step.judge_step.ensureGameOpenAndInMain()
     randomClick("main_renwu")
@@ -20,6 +21,7 @@ def receive_renwu():
 
 
 # 拜访好友获取信赖
+@func_set_timeout(timeout_time)
 def friend():
     module.step.judge_step.ensureGameOpenAndInMain()
     randomClick("main_friend")
@@ -32,6 +34,7 @@ def friend():
 
 
 # 商店收取信用
+@func_set_timeout(timeout_time)
 def receive_xinyong():
     module.step.judge_step.ensureGameOpenAndInMain()
     randomClick("main_shop")
@@ -45,6 +48,7 @@ def receive_xinyong():
 
 
 # 购买信用商店
+@func_set_timeout(timeout_time)
 def buy_xinyong_shop():
     # 筛选出能买的  1、没卖掉 2、不是家具零件和碳
     module.step.judge_step.ensureGameOpenAndInMain()
@@ -103,6 +107,7 @@ def buy_xinyong_shop():
 
 
 # 公开招募自动刷新、选择
+@func_set_timeout(timeout_time)
 def recruit_daily():
     module.step.judge_step.ensureGameOpenAndInMain()
     randomClick("main_recruit")

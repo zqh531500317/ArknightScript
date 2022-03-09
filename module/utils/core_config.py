@@ -5,6 +5,7 @@ from logzero import logger
 import sys
 import json
 from collections import OrderedDict
+from func_timeout import func_set_timeout
 
 
 class CoreConfig:
@@ -75,5 +76,7 @@ configList = cf.configList
 project_path = cf.project_path
 compared_path = screen_path = cf.screen_path
 sleep_time = cf.configList["Config"]["Screen"]["time"]
+timeout_time = 60 * 20
+timeout_time_max = 60 * 60
 with open(project_path + "/asset/cand_alphabet/officer.txt", "r", encoding='utf-8') as f:
     cand_alphabet_officer = f.read()
