@@ -2,3 +2,7 @@ config/schedual.json
 config/config.yaml
 webapp/neutralinojs.log
 /log/stderr.txt
+/log/stdout.txt.txt
+/log/log.log
+result.jpg
+/cache/screen.png
