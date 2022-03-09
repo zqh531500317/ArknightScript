@@ -1,10 +1,10 @@
 import re
+import requests
 
 
 # 根据prts网页内容获取全部干员名称并去重
 def getList():
-    with open("d:/1.txt", "r", encoding='utf-8') as f:
-        data = f.read()  # 读取文件
+    data = requests.get('https://prts.wiki/w/干员一览').text
     res = re.findall("data-cn=\"(.*?)\"", data)
     str = ""
     for t in res:
@@ -16,4 +16,8 @@ def getList():
             res = res + str[i]
 
     print(res)
+    with open(r"..\..\asset\cand_alphabet\officer.txt", "w", encoding="utf-8") as f:
+        f.write(res)
 
+
+getList()
