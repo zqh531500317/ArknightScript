@@ -19,7 +19,7 @@ import module.schedule.dailyScheduler
 from module.utils.core_init import init
 from flask_cors import CORS
 
-app = Flask(__name__, template_folder="webapp/resources")
+app = Flask(__name__, template_folder="webapp/resources", static_folder="webapp/resources", static_url_path="")
 CORS(app, supports_credentials=True)
 app.jinja_env.variable_start_string = '<<'
 app.jinja_env.variable_end_string = '>>'
