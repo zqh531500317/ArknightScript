@@ -1,13 +1,6 @@
-import time
-
 from module.utils.core_template import *
-from module.utils.core_ocr import ocr_without_position
+from module.utils.core_ocr import ocr_without_position, jijian_ocr, cnstd, number_ocr
 from module.error.ocr import CharactersNotFound
-from cnstd import CnStd
-from cnocr import CnOcr
-
-cnstd = CnStd(rotated_bbox=False, resized_shape=(1280, 704))
-ocr = CnOcr(model_name="densenet_lite_136-fc", cand_alphabet=cand_alphabet_officer)
 
 
 def __pre_process(res):
@@ -95,7 +88,7 @@ def do_schedual(x, y, names, type):
             x = int((box[0] + box[2]) / 2)
             y = int((box[1] + box[3]) / 2)
             cropped_img = box_info['cropped_img']
-            ocr_res = ocr.ocr_for_single_line(cropped_img)
+            ocr_res = jijian_ocr.ocr_for_single_line(cropped_img)
             res = "".join(str(i) for i in ocr_res[0])
             res = __pre_process(res)
             if res in names:
@@ -200,7 +193,7 @@ def now_electricity(index=3):
     cropped = cut(region, 762, 23, 862, 48)
     write(screen_path, cropped)
     time.sleep(5)
-    result = ocr_without_position(screen_path)
+    result = ocr_without_position(screen_path, number_ocr)
     print(result)
     num = []
     try:
@@ -271,7 +264,7 @@ def special_electricity():
             x = int((box[0] + box[2]) / 2)
             y = int((box[1] + box[3]) / 2)
             cropped_img = box_info['cropped_img']
-            ocr_res = ocr.ocr_for_single_line(cropped_img)
+            ocr_res = jijian_ocr.ocr_for_single_line(cropped_img)
             res = "".join(str(i) for i in ocr_res[0])
             res = __pre_process(res)
             if "巫恋" == res:

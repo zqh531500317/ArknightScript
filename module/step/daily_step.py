@@ -1,5 +1,5 @@
 from module.utils.core_picture import *
-from module.utils.core_ocr import ocr_without_position
+from module.utils.core_ocr import ocr_without_position, number_ocr
 
 
 def receive_daily_renwu():
@@ -27,7 +27,7 @@ def friend_home():
     cropped = cut(region, 1187, 28, 1277, 52)
     write(screen_path, cropped)
     time.sleep(5)
-    result = ocr_without_position(screen_path)
+    result = ocr_without_position(screen_path, number_ocr)
     pre = result[0]["words"]
     while True:
         randomClick("friend_home")

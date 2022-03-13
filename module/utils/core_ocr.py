@@ -16,6 +16,7 @@ recruit_tag = "医疗干员远程位治新手高级资深近战先锋狙击" \
               "移控场爆发召唤快复活费用回机械"
 recruit_ocr = CnOcr(model_name="densenet_lite_136-gru", cand_alphabet=recruit_tag)
 jijian_ocr = CnOcr(model_name="densenet_lite_136-fc", cand_alphabet=cand_alphabet_officer)
+number_ocr = CnOcr(model_name="densenet_lite_136-fc", cand_alphabet="1234567890/")
 
 
 def ocr_with_position(uri, limit=None):
