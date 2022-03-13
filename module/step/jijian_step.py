@@ -278,6 +278,7 @@ def special_electricity():
     time.sleep(sleep_time)
     click(41, 39)
     time.sleep(sleep_time)
+    return False
 
 
 # 使用电力 a:第几行 b:第几列  example 1,1 表示电力使用与第一行第一列的建筑
@@ -286,9 +287,8 @@ def use_electricity(a, b):
     if efficient:
         if special_electricity():
             return
-    else:
-        randomClick(ui["jijian_{}_{}".format(a, b)]["button"])
-        time.sleep(3)
+    randomClick(ui["jijian_{}_{}".format(a, b)]["button"])
+    time.sleep(3)
     # 点击经验书或赤金
     randomClick((41, 570, 124, 650))
     time.sleep(2)
