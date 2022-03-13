@@ -38,7 +38,7 @@ def test_jijian():
 
 
 if __name__ == '__main__':
-    module.schedule.dailyScheduler.quick_lizhi()
+    module.task.jijian.use_electricity()
     # region = read(screen_path)
     # cropped = cut(region, 766, 25, 863, 48)  # 基建无人机
     # cropped = cut(region, 585, 193, 687, 225)#判断剿灭是否打完
