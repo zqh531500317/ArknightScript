@@ -46,7 +46,7 @@ def finishListener(event):
     close_game()
 
 
-def add_job(func, trigger, id, args=None, misfire_grace_time=3600):
+def add_job(func, trigger, id, args=None, misfire_grace_time=7200):
     job = scheduler.get_job(id)
     if job is None:
         scheduler.add_job(func, args=args, trigger=trigger, id=id, name=id, misfire_grace_time=misfire_grace_time)
