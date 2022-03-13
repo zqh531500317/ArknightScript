@@ -4,7 +4,7 @@ from module.error.ocr import CharactersNotFound
 
 
 def __pre_process(res):
-    print(res)
+    logger.info(res)
     if res == "罗比拉塔":
         return "罗比菈塔"
     elif res == "桑赛":
