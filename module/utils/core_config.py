@@ -1,11 +1,11 @@
 import yaml
 import os
 import psutil
-from logzero import logger
 import sys
 import json
 from collections import OrderedDict
 from func_timeout import func_set_timeout
+from core_decoratir import *
 
 
 class CoreConfig:

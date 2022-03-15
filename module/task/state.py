@@ -14,6 +14,7 @@ running_task_num = 0
 # 获取当前理智
 # 返回[当前理智,最大理智]
 @func_set_timeout(timeout_time)
+@timer
 def get_lizhi():
     module.step.judge_step.ensureGameOpenAndInMain()
     time.sleep(1)

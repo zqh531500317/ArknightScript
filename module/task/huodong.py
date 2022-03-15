@@ -8,6 +8,7 @@ from module.utils.core_clickLoader import ci
 from module.utils.core_control import *
 
 
+@timer
 def huodong(name, max_fight_time, use_medicine, medicine_num, use_stone, stone_num):
     now = "wudaoxianlu"
     eval(now)(name, max_fight_time, use_medicine, medicine_num, use_stone, stone_num)

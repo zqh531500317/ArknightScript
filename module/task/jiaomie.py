@@ -8,6 +8,7 @@ from module.utils.core_clickLoader import ci
 from module.utils.core_control import *
 
 
+@timer
 def jiaomie(map_name, max_fight_time, use_medicine, medicine_num, use_stone, stone_num):
     module.step.judge_step.ensureGameOpenAndInMain()
 

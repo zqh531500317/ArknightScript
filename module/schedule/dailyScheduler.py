@@ -21,14 +21,12 @@ def receive_renwu():
 
 
 def friend():
-    module.schedule.baseScheduler.add_job(module.task.daily.friend, trigger=CronTrigger(hour="6"), id="friend",
-                                          misfire_grace_time=60 * 60 * 12)
+    module.schedule.baseScheduler.add_job(module.task.daily.friend, trigger=CronTrigger(hour="6"), id="friend", )
 
 
 def receive_xinyong():
     module.schedule.baseScheduler.add_job(module.task.daily.receive_xinyong, trigger=CronTrigger(hour="6"),
-                                          id="receive_xinyong",
-                                          misfire_grace_time=60 * 60 * 12)
+                                          id="receive_xinyong")
 
 
 def get_lizhi():
@@ -38,8 +36,7 @@ def get_lizhi():
 
 def buy_xinyong_shop():
     module.schedule.baseScheduler.add_job(module.task.daily.buy_xinyong_shop, trigger=CronTrigger(hour="6", minute="5"),
-                                          id="buy_xinyong_shop",
-                                          misfire_grace_time=60 * 60 * 12)
+                                          id="buy_xinyong_shop")
 
 
 def quick_lizhi():
@@ -59,5 +56,3 @@ def recruit_daily():
 def once_recruit(times):
     module.schedule.baseScheduler.add_job(module.task.daily.once_recruit, args=(times,),
                                           trigger=DateTrigger(), id="once_recruit")
-
-

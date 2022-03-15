@@ -77,6 +77,7 @@ def cycleFight(max_fight_time, game, use_medicine, medicine_num, use_stone, ston
         send("作战结束", "循环作战结束,总计进行{}次{}".format(fight_time, game))
 
 
+@timer
 def recently(name, max_fight_time, use_medicine, medicine_num, use_stone, stone_num):
     module.step.judge_step.ensureGameOpenAndInMain()
     v = ci["recently"]

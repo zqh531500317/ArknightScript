@@ -15,7 +15,7 @@ import func_timeout
 
 
 def startListener(event):
-    logger.info("scheduler %s is started", event.job_id)
+    # logger.info("scheduler %s is started", event.job_id)
     global start_time
     start_time = datetime.datetime.now()
     jobid = event.job_id
@@ -26,7 +26,7 @@ def startListener(event):
 
 
 def finishListener(event):
-    logger.info("scheduler %s is finished", event.job_id)
+    # logger.info("scheduler %s is finished", event.job_id)
     module.task.state.running_task_num -= 1
     global end_time
     end_time = datetime.datetime.now()
