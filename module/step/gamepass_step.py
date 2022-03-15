@@ -5,52 +5,63 @@ from module.utils.core_template import *
 from module.utils.core_ocr import ocr_with_position
 from module.utils.core_clickLoader import dic
 
+
 def exec_by_clickLoader(v):
+    time.sleep(sleep_time)
     for i, action in enumerate(v):
-        time.sleep(5)
         if action[0] == "click":
             randomClick(action[1])
         elif action[0] == "scroll":
             scroll_by_tuple(action[1])
+        time.sleep(sleep_time)
 
 
 # 为主线 滑动到最左边
 def goto_ahead_for_zhuxian():
     for i in range(5):
         scroll(520, 40, 1400, 43, 150)
-        time.sleep(3)
+        time.sleep(sleep_time)
 
 
 # 为活动 滑动到最左边
 def goto_ahead_for_huodong():
     for i in range(3):
         scroll(520, 40, 1400, 43, 150)
-        time.sleep(3)
+        time.sleep(sleep_time)
 
 
 # 为资源本 滑动到最左边
 def goto_ahead_for_ziyuanshouji():
     scroll(200, 300, 1000, 300, 150)
-    time.sleep(2)
+    time.sleep(sleep_time)
     scroll(200, 300, 1000, 300, 150)
 
 
 # 为资源本 滑动到最右边
 def goto_behind_for_ziyuanshouji():
     scroll(1000, 300, 200, 300, 150)
-    time.sleep(2)
+    time.sleep(sleep_time)
     scroll(1000, 300, 200, 300, 150)
+
+
+def goto_behind_for_huodong():
+    scroll(1000, 300, 200, 300, 150)
+    time.sleep(sleep_time)
+    scroll(1000, 300, 200, 300, 150)
+    time.sleep(sleep_time)
+    scroll(1000, 300, 200, 300, 150)
+    time.sleep(sleep_time)
 
 
 # 判断剿灭是否打完 return num 表示还要打num把才能打完
 def jiaomieIsFinish():
-    time.sleep(2)
+    time.sleep(sleep_time)
     screen()
-    time.sleep(3)
+    time.sleep(sleep_time)
     region = read(screen_path)
     cropped = cut(region, 585, 193, 687, 225)
     write(screen_path, cropped)
-    time.sleep(3)
+    time.sleep(sleep_time)
     result = ocr_with_position(screen_path)
     print(result)
     x = result[len(result) - 1]["words"]
@@ -130,13 +141,13 @@ def find_game_position(name, type="zhuxian"):
                 break
             temp = list
             scroll(1000, 40, 760, 43, 200)
-            time.sleep(3)
+            time.sleep(sleep_time)
 
         if flag == -1:
             logger.error("未找到关卡%s", name)
             for i in range(6):
                 scroll(600, 40, 1000, 43, 200)
-                time.sleep(2)
+                time.sleep(sleep_time)
 
             raise module.error.game.GameNotFound(name)
         randomClick((x1, y1, x2, y2))
@@ -170,7 +181,7 @@ def find_game_position_with_template(name, type="zhuxian"):
             if flag == 1:
                 break
             scroll(1000, 40, 760, 43, 200)
-            time.sleep(3)
+            time.sleep(sleep_time)
             if times > 20:
                 flag = -1
                 break
@@ -179,7 +190,7 @@ def find_game_position_with_template(name, type="zhuxian"):
         logger.error("未找到关卡%s", name)
         for i in range(6):
             scroll(600, 40, 1000, 43, 200)
-            time.sleep(2)
+            time.sleep(sleep_time)
 
         raise module.error.game.GameNotFound(name)
     randomClick((x1, y1, x2, y2))

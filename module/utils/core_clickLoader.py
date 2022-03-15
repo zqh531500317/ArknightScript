@@ -87,6 +87,7 @@ ci["lizhi"] = [a_zhongduan, nearist_fight]
 # 剿灭部分
 ci["jiaomie"] = [a_zhongduan, b_meizhoubushu]
 # 活动部分
+ci["huodong"] = [a_zhongduan, ["click", (132, 550, 280, 590)]]
 ci["changyelinguang"] = [a_zhongduan, ["click", (132, 550, 280, 590)], ["click", (1077, 426, 1163, 453)]]
 ci["gudaofengyun"] = [a_zhongduan, ["click", (132, 550, 280, 590)], ["click", (1062, 145, 1163, 171)]]
 ci["fengxueguojing"] = [a_zhongduan, ["click", (132, 550, 280, 590)], ["click", (1102, 313, 1203, 344)]]

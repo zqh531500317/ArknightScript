@@ -93,7 +93,7 @@ def scroll_by_tuple(name):
     ctime = name[4]
     os.system(adb_path + port + " shell input swipe {} {} {} {} {}".format(x1, y1, x2, y2, ctime))
     logger.info("scroll({},{}) to ({},{}) cost {}".format(x1, y1, x2, y2, ctime))
-
+    time.sleep(ctime / 1000)
 
 # 截图至path
 def screen(path="/cache/screen.png"):

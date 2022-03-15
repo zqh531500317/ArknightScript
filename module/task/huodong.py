@@ -9,8 +9,29 @@ from module.utils.core_control import *
 
 
 def huodong(name, max_fight_time, use_medicine, medicine_num, use_stone, stone_num):
-    now = "jiangjinjiu"
+    now = "wudaoxianlu"
     eval(now)(name, max_fight_time, use_medicine, medicine_num, use_stone, stone_num)
+
+
+# name 名称    fight_time最大次数
+def wudaoxianlu(name, max_fight_time, use_medicine, medicine_num, use_stone, stone_num):
+    module.step.judge_step.ensureGameOpenAndInMain()
+    v = ci["huodong"]
+    module.step.gamepass_step.exec_by_clickLoader(v)
+    randomClick((1114, 465, 1130, 482))
+    time.sleep(sleep_time)
+    # 移动到章节最右边
+    module.step.gamepass_step.goto_behind_for_huodong()
+    if name == "GA-6":
+        randomClick((34, 332, 95, 350))
+    elif name == "GA-7":
+        randomClick((317, 332, 382, 350))
+    elif name == "GA-8":
+        randomClick((612, 332, 678, 350))
+    else:
+        return
+    time.sleep(sleep_time)
+    module.task.fight.cycleFight(max_fight_time, name, use_medicine, medicine_num, use_stone, stone_num)
 
 
 # name 名称    fight_time最大次数

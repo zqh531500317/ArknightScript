@@ -9,7 +9,8 @@ def getList():
     str = ""
     for t in res:
         str = str + t
-    print(str)
+    more = "见行者菲亚梅塔风丸"
+    print(str + more)
     res = ""
     for i in range(len(str)):
         if (str[i] not in res):

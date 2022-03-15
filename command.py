@@ -29,7 +29,7 @@ def test_daily():
 
 
 def test_fight():
-    module.task.huodong.huodong("IW-6", 99, False, 0, False, 0)
+    module.task.huodong.huodong("GA-8", 99, False, 0, False, 0)
 
 
 def test_jijian():
@@ -38,7 +38,7 @@ def test_jijian():
 
 
 if __name__ == '__main__':
-    module.task.jijian.use_electricity()
+    module.task.huodong.huodong("GA-8", 1, False, 0, False, 0)
     # region = read(screen_path)
     # cropped = cut(region, 766, 25, 863, 48)  # 基建无人机
     # cropped = cut(region, 585, 193, 687, 225)#判断剿灭是否打完
