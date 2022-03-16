@@ -9,6 +9,7 @@ from module.utils.core_ocr import ocr_without_position
 lizhi = {"time": "0", "lizhi": "0", "maxlizhi": "0"}
 is_fight = "stop"
 running_task_num = 0
+debug_run = False
 
 
 # 获取当前理智

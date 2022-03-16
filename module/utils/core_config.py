@@ -4,8 +4,9 @@ import psutil
 import sys
 import json
 from collections import OrderedDict
+from logzero import logger
+from module.utils.core_decoratir import *
 from func_timeout import func_set_timeout
-from core_decoratir import *
 
 
 class CoreConfig:

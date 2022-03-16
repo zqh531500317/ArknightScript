@@ -68,6 +68,7 @@ def do_schedual(x, y, names, type):
     choosed_num = 0
     flag = False
     cyc_times = 5
+    temp = []
     for index in range(cyc_times):
         screen()
         img = Image.open(screen_path)
@@ -92,7 +93,7 @@ def do_schedual(x, y, names, type):
             res = "".join(str(i) for i in ocr_res[0])
             res = __pre_process(res)
             if res in names:
-                logger.info("选中干员%s", res)
+                temp.append(res)
                 click(x, y)
                 time.sleep(1)
                 choosed_num += 1
@@ -102,6 +103,7 @@ def do_schedual(x, y, names, type):
         if flag:
             break
         scroll(1275, 350, 465, 350, 3000)
+    logger.info("x=%s,y=%s,name=%s,type=%s选中干员=%s", x, y, names, type, str(temp))
     later_schedual()
 
 

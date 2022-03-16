@@ -38,7 +38,7 @@ def test_jijian():
 
 
 if __name__ == '__main__':
-    module.task.huodong.huodong("GA-8", 1, False, 0, False, 0)
+    module.task.daily.receive_renwu()
     # region = read(screen_path)
     # cropped = cut(region, 766, 25, 863, 48)  # 基建无人机
     # cropped = cut(region, 585, 193, 687, 225)#判断剿灭是否打完

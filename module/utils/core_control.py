@@ -95,8 +95,13 @@ def scroll_by_tuple(name):
     logger.info("scroll({},{}) to ({},{}) cost {}".format(x1, y1, x2, y2, ctime))
     time.sleep(ctime / 1000)
 
+
 # 截图至path
 def screen(path="/cache/screen.png"):
+    i = (project_path + path).rindex("/")
+    dic_path = (project_path + path)[:i]
+    if not os.path.exists(dic_path):
+        os.makedirs(dic_path)
     os.system(adb_path + port + ' shell screencap -p /sdcard/screen.png')
     os.system(adb_path + port + ' pull /sdcard/screen.png ' + project_path + path)
     time.sleep(screen_time)

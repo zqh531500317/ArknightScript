@@ -123,6 +123,7 @@ def close_game():
             logger.info("在%s分钟内无任务,将在%s秒后关闭游戏", minutes, str(10 - 2 * i))
             time.sleep(2)
         stop()
+    time.sleep(2)
 
 
 def pause_scheduler():
