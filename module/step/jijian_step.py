@@ -104,13 +104,16 @@ def do_schedual(x, y, names, type):
         if flag:
             break
         scroll(1275, 350, 465, 350, 3000)
-    logger.info("x=%s,y=%s,name=%s,type=%s,选中干员=%s", x, y, names, type, str(temp))
+    msg = "x={},y={},name={},type={},选中干员={}".format(x, y, names, type, str(temp))
+    logger.info(msg)
     if choosed_num < num and type != "宿舍":
-        send("排班可能出错", "x={},y={},name={},type={},选中干员={}".format(x, y, names, type, str(temp)))
+        send("排班可能出错", msg)
     later_schedual()
+    return msg
 
 
 def auto_sleep():
+    sum = 0
     _auto_sleep = configList["Config"]["Game"]["auto_sleep"]
     if not _auto_sleep:
         return 0
@@ -164,6 +167,7 @@ def auto_sleep():
             for item in sleep_list:
                 randomClick((item[0], item[1], item[2], item[3]))
                 choosed_num += 1
+                sum += 1
                 time.sleep(1)
                 if choosed_num == num:
                     break
@@ -173,6 +177,7 @@ def auto_sleep():
         later_schedual()
         if choosed_num < num:
             break
+    return sum
 
 
 # 判断是否有收菜提示

@@ -3,6 +3,7 @@ import module.step.click_step
 import module.step.judge_step
 import module.step.jijian_step
 from module.utils.core_template import *
+from module.utils.core_email import send
 
 a = configList["Config"]["Game"]["a"]
 b = configList["Config"]["Game"]["b"]
@@ -40,6 +41,7 @@ def use_electricity():
 @timer
 @func_set_timeout(timeout_time_max)
 def schedual():
+    msgList = []
     temp = cf.read_json(project_path + "/config/schedual.json")
     schedual_dict = temp["Config"]
     data = schedual_dict["data"]
@@ -59,13 +61,16 @@ def schedual():
         # 判断调度时间和排班时间在1h内，执行
         if not get_interval(hour, minute):
             continue
-        module.step.jijian_step.do_schedual(x, y, names, type)
+        msg = module.step.jijian_step.do_schedual(x, y, names, type)
+        msgList.append(msg)
         logger.info("安排：" + str(names) + " 入住：" + type + " ({},{})".format(x, y))
         # 修改index为下一位
         index = (index + 1) % num
         item["next_index"] = index
     cf.write_json(temp, project_path + "/config/schedual.json")
-    module.step.jijian_step.auto_sleep()
+    sum = module.step.jijian_step.auto_sleep()
+    msgList.append("宿舍安排{}为干员进行休息".format(sum))
+    send("排班完成", '\n'.join(msgList))
     module.step.judge_step.ensureGameOpenAndInMain()
 
 
