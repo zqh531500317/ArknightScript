@@ -1,6 +1,7 @@
 from module.utils.core_template import *
 from module.utils.core_ocr import ocr_without_position, jijian_ocr, cnstd, number_ocr
 from module.error.ocr import CharactersNotFound
+from module.utils.core_email import send
 
 
 def __pre_process(res):
@@ -103,7 +104,9 @@ def do_schedual(x, y, names, type):
         if flag:
             break
         scroll(1275, 350, 465, 350, 3000)
-    logger.info("x=%s,y=%s,name=%s,type=%s选中干员=%s", x, y, names, type, str(temp))
+    logger.info("x=%s,y=%s,name=%s,type=%s,选中干员=%s", x, y, names, type, str(temp))
+    if choosed_num < num:
+        send("排班可能出错", "x={},y={},name={},type={},选中干员={}".format(x, y, names, type, str(temp)))
     later_schedual()
 
 
