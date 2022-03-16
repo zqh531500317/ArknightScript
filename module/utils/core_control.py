@@ -3,7 +3,6 @@ import random
 from .core_config import *
 from .core_assetLoader import ui
 import timeout_decorator
-
 os.system('chcp 65001')
 
 ADB = configList["Config"]["Control"]["ADB"]
@@ -105,6 +104,17 @@ def screen(path="/cache/screen.png"):
     os.system(adb_path + port + ' shell screencap -p /sdcard/screen.png')
     os.system(adb_path + port + ' pull /sdcard/screen.png ' + project_path + path)
     time.sleep(screen_time)
+    return project_path + path
+
+
+# 截图至path
+def screen_quick(path="/cache/screen.png"):
+    i = (project_path + path).rindex("/")
+    dic_path = (project_path + path)[:i]
+    if not os.path.exists(dic_path):
+        os.makedirs(dic_path)
+    os.system(adb_path + port + ' shell screencap -p /sdcard/screen.png')
+    os.system(adb_path + port + ' pull /sdcard/screen.png ' + project_path + path)
     return project_path + path
 
 

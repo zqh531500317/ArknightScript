@@ -35,5 +35,5 @@ def __sr(kind):
         import module.task.state
         if not module.task.state.debug_run:
             return
-        module.utils.core_control.screen(path="/screenshots/debug/" + str(kind) + "/" + str(time.time()) + ".png")
+        module.utils.core_control.screen_quick(path="/screenshots/debug/" + str(kind) + "/" + str(time.time()) + ".png")
         time.sleep(3)

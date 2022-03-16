@@ -36,16 +36,16 @@ def pre_schedual(x, y, type):
 
     if type == "宿舍":
         # 切换心情排序
-        click(965, 39)
+        click(670, 39)
         time.sleep(1)
-        click(1045, 40)
+        click(974, 40)
         time.sleep(1)
-        click(1045, 40)
+        click(974, 40)
     else:
         # 切换技能排序
-        click(880, 40)
+        click(974, 40)
         time.sleep(1)
-        click(965, 39)
+        click(885, 39)
 
 
 def later_schedual():

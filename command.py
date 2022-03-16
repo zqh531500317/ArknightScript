@@ -37,8 +37,17 @@ def test_jijian():
     module.task.jijian.use_electricity()
 
 
+def test_control():
+    begin_time = time.time()
+    module.utils.core_control.screen_quick()
+    end_time = time.time()
+    run_time = end_time - begin_time
+    print('该循环程序运行时间：', run_time)
+
+
 if __name__ == '__main__':
-    module.task.daily.receive_renwu()
+    test_control()
+    # module.task.daily.receive_renwu()
     # region = read(screen_path)
     # cropped = cut(region, 766, 25, 863, 48)  # 基建无人机
     # cropped = cut(region, 585, 193, 687, 225)#判断剿灭是否打完
@@ -46,5 +55,3 @@ if __name__ == '__main__':
     # cropped =cut(region, 1116, 20, 1245, 57)  # 获取理智
     # write(screen_path,cropped)
     # ocr_without_position(screen_path)
-    while True:
-        pass
