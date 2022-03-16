@@ -105,7 +105,7 @@ def do_schedual(x, y, names, type):
             break
         scroll(1275, 350, 465, 350, 3000)
     logger.info("x=%s,y=%s,name=%s,type=%s,选中干员=%s", x, y, names, type, str(temp))
-    if choosed_num < num:
+    if choosed_num < num and type != "宿舍":
         send("排班可能出错", "x={},y={},name={},type={},选中干员={}".format(x, y, names, type, str(temp)))
     later_schedual()
 
