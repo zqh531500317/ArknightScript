@@ -55,7 +55,10 @@ def ocr_without_position_low(uri, limit=None):
 
 
 def cnocr_without_position(uri, limit):
-    img = cnocr.utils.read_img(uri)
+    if isinstance(uri, str):
+        img = cnocr.utils.read_img(uri)
+    else:
+        img = uri
     if limit is None:
         res = ocr.ocr_for_single_line(img)
     else:

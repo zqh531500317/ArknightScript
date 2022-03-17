@@ -44,8 +44,12 @@ Config:
     #基建无人机使用建筑 a表示第几行 b表示第几个
     a: 1
     b: 2
+    enable_jijian_schedule: false
     # 基建根据心情自动安排进入宿舍
     auto_sleep: true
+    # 若开启自动补全芯片，则会刷精一芯片到xinpian_1，精二芯片到xinpian_2
+    xinpian_1: 6
+    xinpian_2: 10
   Mail:
     enable: false
     sender:

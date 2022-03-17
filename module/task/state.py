@@ -20,6 +20,34 @@ def get_lizhi():
     module.step.judge_step.ensureGameOpenAndInMain()
     time.sleep(1)
     module.step.gamepass_step.exec_by_clickLoader(ci["lizhi"])
+    time.sleep(sleep_time)
+    screen()
+    time.sleep(sleep_time)
+    region = read(screen_path)
+    lizhi_before_fight = ui["lizhi_before_fight"]["area"]
+    x1 = lizhi_before_fight[0]
+    y1 = lizhi_before_fight[1]
+    x2 = lizhi_before_fight[2]
+    y2 = lizhi_before_fight[3]
+    cropped = cut(region, x1, y1, x2, y2)
+    write(screen_path, cropped)
+    time.sleep(sleep_time)
+    result = ocr_without_position(screen_path)
+    logger.debug("获取理智内容是：" + str(result))
+    dic = result[0]["words"].split("/")
+    global lizhi
+    lizhi["time"] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+    lizhi["lizhi"] = dic[0]
+    lizhi["maxlizhi"] = dic[1]
+    module.step.judge_step.ensureGameOpenAndInMain()
+
+
+@func_set_timeout(timeout_time)
+@timer
+def get_lizhi():
+    module.step.judge_step.ensureGameOpenAndInMain()
+    time.sleep(1)
+    module.step.gamepass_step.exec_by_clickLoader(ci["lizhi"])
     time.sleep(3)
     screen()
     time.sleep(3)

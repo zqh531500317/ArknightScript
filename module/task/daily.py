@@ -138,3 +138,14 @@ def once_recruit(times):
         time.sleep(3)
 
     module.task.state.is_fight = "stop"
+
+
+@timer
+def xinpian():
+    module.step.judge_step.ensureGameOpenAndInMain()
+    xinpian_1 = configList["Config"]["Game"]["xinpian_1"]
+    xinpian_2 = configList["Config"]["Game"]["xinpian_2"]
+    data, res = module.step.daily_step.get_xinpian_info(xinpian_1, xinpian_2)
+    module.step.judge_step.ensureGameOpenAndInMain()
+    module.step.daily_step.do_xinpian(data, res)
+    module.step.judge_step.ensureGameOpenAndInMain()

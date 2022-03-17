@@ -1,4 +1,5 @@
 from .core_picture import *
+import copy
 
 
 # 模板匹配 返回所有结果 自动截图  入参：匹配图片  返回：匹配的坐标
@@ -21,9 +22,10 @@ def template_match_most(template_path, x1=0, y1=0, x2=1280, y2=720, screen_re=No
     # 模板置信度
     dets = __template(cutted_gray_img, template_img, template_threshold)
     # count = 0
+    dst = copy.deepcopy(screen_re)
     for coord in dets:
-        cv2.rectangle(screen_re, (int(coord[0]), int(coord[1])), (int(coord[2]), int(coord[3])), (0, 0, 255), 2)
-    cv2.imwrite("result.jpg", screen_re)
+        cv2.rectangle(dst, (int(coord[0]), int(coord[1])), (int(coord[2]), int(coord[3])), (0, 0, 255), 2)
+    cv2.imwrite("result.jpg", dst)
 
     return dets
 

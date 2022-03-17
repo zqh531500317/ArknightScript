@@ -1,6 +1,7 @@
 from logzero import logger
 import module.step.click_step
 from module.utils.core_template import *
+import shutil
 
 
 def isInLogin():
@@ -17,7 +18,8 @@ def isFightEnd(game):
             time.sleep(3)
             logger.info("战斗已结束，存储结算图片")
             screen()
-            save1("jiaomie", "get_items")
+            path = save1("jiaomie", "get_items")
+            shutil.copy(path, endFight_path)
         else:
             logger.debug("战斗未结束")
         return b > 0.8
@@ -26,7 +28,9 @@ def isFightEnd(game):
         if b:
             logger.info("战斗已结束，存储结算图片")
             screen()
-            save1(game, "get_items")
+            path = save1(game, "get_items")
+            shutil.copy(path, endFight_path)
+
         else:
             logger.debug("战斗未结束")
         return b

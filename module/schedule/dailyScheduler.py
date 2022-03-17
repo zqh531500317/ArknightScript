@@ -13,6 +13,7 @@ def add_all():
     get_lizhi()
     buy_xinyong_shop()
     recruit_daily()
+    xinpian()
 
 
 def receive_renwu():
@@ -27,6 +28,11 @@ def friend():
 def receive_xinyong():
     module.schedule.baseScheduler.add_job(module.task.daily.receive_xinyong, trigger=CronTrigger(hour="6"),
                                           id="receive_xinyong")
+
+
+def xinpian():
+    module.schedule.baseScheduler.add_job(module.task.daily.xinpian, trigger=CronTrigger(hour="6,18"),
+                                          id="xinpian")
 
 
 def get_lizhi():

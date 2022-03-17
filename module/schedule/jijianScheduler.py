@@ -3,7 +3,7 @@ from apscheduler.triggers.cron import CronTrigger
 import module.schedule.baseScheduler
 
 import module.task.jijian
-from module.utils.core_config import cf, project_path
+from module.utils.core_config import cf, project_path, configList
 
 
 def add_all():
@@ -30,5 +30,8 @@ def jijian_schedule():
     job = scheduler.get_job("jijian_schedule")
     if job is not None:
         scheduler.remove_job(job.id)
-    module.schedule.baseScheduler.add_job(module.task.jijian.schedual, trigger=CronTrigger(hour=hour, minute=minute),
-                                          id="jijian_schedule")
+    enable_jijian_schedule = configList["Config"]["Game"]["xinpian_1"]
+    if enable_jijian_schedule:
+        module.schedule.baseScheduler.add_job(module.task.jijian.schedual,
+                                              trigger=CronTrigger(hour=hour, minute=minute),
+                                              id="jijian_schedule")

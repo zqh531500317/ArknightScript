@@ -395,6 +395,31 @@
                                 <template slot="prepend">分</template>
                             </el-input>
                         </el-row>
+                        <el-row class="pad">
+                            <el-switch
+                                    v-model="job.xinpian.state"
+                                    active-color="#13ce66"
+                                    inactive-color="#ff4949"
+                                    active-text="开启自动填充芯片"
+                                    inactive-text="关闭自动填充芯片"
+                                    @change="state_change($event,'xinpian')">
+                            </el-switch>
+                        </el-row>
+                        <el-row class="pad">
+                            <span class="input">cron表达式：</span>
+                            <el-input @change="trigger_change($event,'hour','xinpian')"
+                                      v-model="job.xinpian.hour"
+                                      class="input"
+                                      placeholder="时">
+                                <template slot="prepend">时</template>
+                            </el-input>
+                            <el-input @change="trigger_change($event,'minute','xinpian')"
+                                      v-model="job.xinpian.minute"
+                                      class="input"
+                                      placeholder="分">
+                                <template slot="prepend">分</template>
+                            </el-input>
+                        </el-row>
                     </el-card>
                 </div>
                 <div v-if="page=='4-2'">
@@ -900,6 +925,7 @@
                                 "receive_xinyong": {},
                                 "buy_xinyong_shop": {},
                                 "recruit_daily": {},
+                                "xinpian": {},
                             }
                         },
                     })

@@ -3,6 +3,7 @@ import random
 from .core_config import *
 from .core_assetLoader import ui
 import timeout_decorator
+
 os.system('chcp 65001')
 
 ADB = configList["Config"]["Control"]["ADB"]
@@ -80,7 +81,13 @@ def randomClick(name):
 def scroll(x1, y1, x2, y2, ctime):
     os.system(adb_path + port + " shell input swipe {} {} {} {} {}".format(x1, y1, x2, y2, ctime))
     logger.info("scroll ({},{}) to ({},{}) cost {}".format(x1, y1, x2, y2, ctime))
-    time.sleep(ctime / 1000)
+    ctime = ctime / 1000
+    if ctime <= 2:
+        time.sleep(ctime + 5)
+    elif 1 < ctime <= 3:
+        time.sleep(ctime + 3)
+    else:
+        time.sleep(ctime + 1)
 
 
 #
@@ -92,7 +99,13 @@ def scroll_by_tuple(name):
     ctime = name[4]
     os.system(adb_path + port + " shell input swipe {} {} {} {} {}".format(x1, y1, x2, y2, ctime))
     logger.info("scroll({},{}) to ({},{}) cost {}".format(x1, y1, x2, y2, ctime))
-    time.sleep(ctime / 1000)
+    ctime = ctime / 1000
+    if ctime <= 2:
+        time.sleep(ctime + 5)
+    elif 1 < ctime <= 3:
+        time.sleep(ctime + 3)
+    else:
+        time.sleep(ctime + 1)
 
 
 # 截图至path

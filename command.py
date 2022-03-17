@@ -18,7 +18,8 @@ from cnstd import CnStd
 import cv2
 import module.step.jijian_step
 import module.step.judge_step
-
+from module.utils.core_log import init_log
+init_log()
 
 def test_daily():
     module.task.daily.friend()
@@ -46,7 +47,9 @@ def test_control():
 
 
 if __name__ == '__main__':
-    test_control()
+
+    module.task.daily.xinpian()
+
     # module.task.daily.receive_renwu()
     # region = read(screen_path)
     # cropped = cut(region, 766, 25, 863, 48)  # 基建无人机

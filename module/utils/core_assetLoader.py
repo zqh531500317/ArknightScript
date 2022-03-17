@@ -32,6 +32,12 @@ ui["month_after_login"] = {"area": (1189, 63, 1215, 89), "button": (1189, 63, 12
 ui["terminal"] = {"area": (197, 21, 333, 54), "button": (238, 26, 294, 52), "file": "/asset/ui/terminal.png"}
 ui["main_jijian"] = {"area": (940, 580, 1058, 661), "button": (940, 580, 1058, 661),
                      "file": "/asset/ui/main_jijian.png"}
+ui["main_cangku"] = {"area": (1174, 619, 1218, 645), "button": (1174, 619, 1218, 645),
+                     "file": "/asset/ui/main_cangku.png"}
+ui["cangku_yangcheng"] = {"area": (1129, 31, 1204, 49), "button": (1129, 31, 1204, 49),
+                          "file": "/asset/ui/cangku_yangcheng.png"}
+ui["cangku_jichu"] = {"area": (939, 31, 1008, 49), "button": (939, 31, 1008, 49),
+                      "file": "/asset/ui/cangku_jichu.png"}
 ui["terminal_go_home"] = {"area": (87, 280, 90, 285), "button": (87, 280, 90, 285),
                           "file": "/asset/ui/terminal_go_home.png"}
 ui["main_renwu"] = {"area": (715, 554, 802, 614), "button": (727, 567, 786, 600),

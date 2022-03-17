@@ -59,7 +59,7 @@ def schedual():
         minute = schedual["minute"]
         names = schedual["names"]
         # 判断调度时间和排班时间在1h内，执行
-        if not get_interval(hour, minute):
+        if not __get_interval(hour, minute):
             continue
         msg = module.step.jijian_step.do_schedual(x, y, names, type)
         msgList.append(msg)
@@ -75,7 +75,7 @@ def schedual():
 
 
 # 判断当前时间和排班时间是否在1h内，执行
-def get_interval(hour1, minute1):
+def __get_interval(hour1, minute1):
     hour = datetime.datetime.now().hour
     minute = datetime.datetime.now().minute
     if (hour1 == hour and minute >= minute1) or \
