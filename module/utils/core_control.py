@@ -1,8 +1,11 @@
+import subprocess
 import time
 import random
+import numpy
 from .core_config import *
 from .core_assetLoader import ui
 import timeout_decorator
+import cv2
 
 os.system('chcp 65001')
 
@@ -120,15 +123,21 @@ def screen(path="/cache/screen.png"):
     return project_path + path
 
 
-# 截图至path
-def screen_quick(path="/cache/screen.png"):
-    i = (project_path + path).rindex("/")
-    dic_path = (project_path + path)[:i]
-    if not os.path.exists(dic_path):
-        os.makedirs(dic_path)
-    os.system(adb_path + port + ' shell screencap -p /sdcard/screen.png')
-    os.system(adb_path + port + ' pull /sdcard/screen.png ' + project_path + path)
-    return project_path + path
+def screen_memery():
+    proc = subprocess.Popen(
+        adb_path + port + ' shell screencap -p',
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    stdout, stderr = proc.communicate()
+    # returncode 代表执行cmd命令报错
+    # if proc.returncode > 0:
+    #     raise Exception(proc.returncode, stderr)
+    # opencv读取内存图片
+    byteImage = stdout.replace(b'\r\r\n', b'\n')
+    return cv2.imdecode(numpy.asarray(bytearray(byteImage), dtype=numpy.uint8), cv2.IMREAD_COLOR)
+
 
 
 # 保存截图path 例如 /screenshots/test
