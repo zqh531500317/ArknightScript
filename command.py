@@ -86,7 +86,7 @@ def test_jijian():
 
 def test_control():
     begin_time = time.time()
-    module.utils.core_control.screen_memery()
+    module.utils.core_control.__screen_memery()
     end_time = time.time()
     run_time = end_time - begin_time
     print('该程序运行时间：', run_time)
