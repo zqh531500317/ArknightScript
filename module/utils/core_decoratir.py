@@ -38,16 +38,16 @@ def bench_time(n):
     return decorate
 
 
-def debug(func):
+def debug_recode(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         import module.task.state
-        logger.info("debug mode is start:%s", func.__name__)
+        logger.info("debug_recode is start:%s", func.__name__)
         module.task.state.debug_run = True
         _thread.start_new_thread(__sr, (func.__name__,))
         res = func(*args, **kwargs)
         module.task.state.debug_run = False
-        logger.info("debug mode is end:%s", func.__name__)
+        logger.info("debug_recode is end:%s", func.__name__)
 
         return res
 

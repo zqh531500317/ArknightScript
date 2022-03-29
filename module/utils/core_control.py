@@ -114,6 +114,48 @@ class Adb:
         ctime = name[4]
         self.scroll(x1, y1, x2, y2, ctime)
 
+    # 保存截图path 例如 /screenshots/test
+    def save(self, path: str):
+        f_src = open(project_path + "/cache/screen.png", 'rb')
+        store_path = project_path + path
+        store_uri = store_path + "/" + str(time.time()) + ".png"
+        if not os.path.exists(store_path):
+            os.makedirs(store_path)
+        f_copy = open(store_uri, 'wb')
+        if enable_screen:
+            f_copy.write(f_src.read())
+        f_src.close()
+        f_copy.close()
+        return store_uri
+
+    # 保存截图至/type1/type2/X.png
+    def save1(self, type1: str, type2: str):
+        f_src = open(project_path + "/cache/screen.png", 'rb')
+        store_path = project_path + "/screenshots/{}/{}".format(type1, type2)
+        store_uri = store_path + "/" + str(time.time()) + ".png"
+        if not os.path.exists(store_path):
+            os.makedirs(store_path)
+        f_copy = open(store_uri, 'wb')
+        if enable_screen:
+            f_copy.write(f_src.read())
+        f_src.close()
+        f_copy.close()
+        return store_uri
+
+    # 保存截图至/type/X.png
+    def save2(self, type: str):
+        f_src = open(project_path + "/cache/screen.png", 'rb')
+        store_path = project_path + "/screenshots/{}".format(type)
+        store_uri = store_path + "/" + str(time.time()) + ".png"
+        if not os.path.exists(store_path):
+            os.makedirs(store_path)
+        f_copy = open(store_uri, 'wb')
+        if enable_screen:
+            f_copy.write(f_src.read())
+        f_src.close()
+        f_copy.close()
+        return store_uri
+
     def __reverse_server(self):
         if self.server is None:
             server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -261,52 +303,6 @@ stop = adb_.stop
 start = adb_.start
 connect = adb_.connect
 disconnect = adb_.disconnect
-
-
-# 保存截图path 例如 /screenshots/test
-def save(path: str):
-    f_src = open(project_path + "/cache/screen.png", 'rb')
-    store_path = project_path + path
-    store_uri = store_path + "/" + str(time.time()) + ".png"
-    if not os.path.exists(store_path):
-        os.makedirs(store_path)
-    f_copy = open(store_uri, 'wb')
-    if enable_screen:
-        f_copy.write(f_src.read())
-    f_src.close()
-    f_copy.close()
-    return store_uri
-
-
-# 保存截图至/type1/type2/X.png
-def save1(type1: str, type2: str):
-    f_src = open(project_path + "/cache/screen.png", 'rb')
-    store_path = project_path + "/screenshots/{}/{}".format(type1, type2)
-    store_uri = store_path + "/" + str(time.time()) + ".png"
-    if not os.path.exists(store_path):
-        os.makedirs(store_path)
-    f_copy = open(store_uri, 'wb')
-    if enable_screen:
-        f_copy.write(f_src.read())
-    f_src.close()
-    f_copy.close()
-    return store_uri
-
-
-# 保存截图至/type/X.png
-def save2(type: str):
-    f_src = open(project_path + "/cache/screen.png", 'rb')
-    store_path = project_path + "/screenshots/{}".format(type)
-    store_uri = store_path + "/" + str(time.time()) + ".png"
-    if not os.path.exists(store_path):
-        os.makedirs(store_path)
-    f_copy = open(store_uri, 'wb')
-    if enable_screen:
-        f_copy.write(f_src.read())
-    f_src.close()
-    f_copy.close()
-    return store_uri
-
-# def delScreen(uri):
-#     os.remove(uri)
-#     logger.debug("del screen  %s", uri)
+save = adb_.save
+save1 = adb_.save1
+save2 = adb_.save2

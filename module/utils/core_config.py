@@ -5,7 +5,7 @@ import sys
 import json
 from collections import OrderedDict
 from logzero import logger
-from module.utils.core_decoratir import debug, timer, bench_time
+from module.utils.core_decoratir import debug_recode, timer, bench_time
 from func_timeout import func_set_timeout
 
 
