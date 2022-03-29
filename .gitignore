@@ -6,3 +6,5 @@ webapp/neutralinojs.log
 /log/log.log
 result.jpg
 /cache/screen.png
+asset/template/cache/
+cache/
