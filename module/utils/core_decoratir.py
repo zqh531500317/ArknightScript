@@ -38,6 +38,17 @@ def bench_time(n):
     return decorate
 
 
+def singleton(cls):
+    _instance = {}
+
+    def inner():
+        if cls not in _instance:
+            _instance[cls] = cls()
+        return _instance[cls]
+
+    return inner
+
+
 def debug_recode(func):
     @wraps(func)
     def wrapper(*args, **kwargs):

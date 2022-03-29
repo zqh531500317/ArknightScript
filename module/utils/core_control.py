@@ -2,6 +2,8 @@ import socket
 import subprocess
 import time
 import random
+from threading import Lock
+
 import numpy
 from .core_config import *
 from .core_assetLoader import ui
@@ -27,6 +29,7 @@ port = " -s " + connect_uri + " "
 screen_time = configList["Config"]['Screen']['time']
 
 
+@singleton
 class Adb:
     __screenshot_method = [0, 1, 2]
     __screenshot_method_fixed = [0, 1, 2]
@@ -37,6 +40,7 @@ class Adb:
         self.connect()
         self.adb = adbutils.AdbDevice(self.adb_client, self.serial)
         self.server = None
+        logger.info("class Adb __init__")
 
     def connect(self):
         msg = self.adb_client.connect(self.serial)
