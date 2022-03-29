@@ -39,12 +39,12 @@ class Adb:
         self.server = None
 
     def connect(self):
-        self.adb_client.connect(self.serial)
-        logger.info('connect %s', self.serial)
+        msg = self.adb_client.connect(self.serial)
+        logger.info(msg)
 
     def disconnect(self):
-        self.adb_client.disconnect(self.serial)
-        logger.info('disconnect {}'.format(self.serial))
+        msg = self.adb_client.disconnect(self.serial)
+        logger.info(msg)
 
     def start(self):
         self.stop()
@@ -253,19 +253,19 @@ class Adb:
 
     def __screen_memery(self):
         if str(device_control_method).upper() == "ADB":
-            return self.__screen_adb()
+            return self._screen_adb()
         elif str(device_control_method).upper() == "ADB_NC":
-            return self.__screen_adb_nc()
+            return self._screen_adb_nc()
 
-    def __screen_adb(self):
+    def _screen_adb(self, timeout=10, chunk_size=262144):
         cmd = ['screencap', '-p']
         cmd = list(map(str, cmd))
-        stream = self.adb.shell(cmd, timeout=10, stream=True)
-        content = recv_all(stream, 262144)
+        stream = self.adb.shell(cmd, timeout=timeout, stream=True)
+        content = recv_all(stream, chunk_size)
         image = self.__process_screenshot(content)
         return image
 
-    def __screen_adb_nc(self, timeout=5, chunk_size=262144):
+    def _screen_adb_nc(self, timeout=5, chunk_size=262144):
         cmd = ['screencap']
         cmd += ['|', 'nc', '127.0.0.1', 7903]
         cmd = list(map(str, cmd))

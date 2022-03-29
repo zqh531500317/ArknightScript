@@ -30,8 +30,8 @@ def bench_time(n):
             start = time.time()
             func(*args, **kwargs)
             end = time.time()
-            logger.info("task %s cost: %s minutes", func.__name__, end - start)
-            logger.info("avg time: %s minutes", (end - start) / n)
+            logger.info("%-20s cost: %-5ss,times: %-2s,avg time: %-4ss", func.__name__, round(end - start, 2), n,
+                        round((end - start) / n, 2))
 
         return mywrap
 

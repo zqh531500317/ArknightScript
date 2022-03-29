@@ -23,6 +23,7 @@ import os
 import sys
 from logzero import LogFormatter, setup_default_logger, logfile, logger
 from module.utils.core_config import configList
+from module.utils.core_tester import Tester
 
 
 def init_log():
@@ -84,38 +85,7 @@ def test_jijian():
     module.task.jijian.use_electricity()
 
 
-def test_control():
-    avg_time = 0
-    times = 10
-    for i in range(times):
-        begin_time = time.time()
-        screen(memery=False)
-        end_time = time.time()
-        run_time = end_time - begin_time
-        avg_time = avg_time + run_time
-    print(avg_time / times)
-
-
-class Tester(Adb):
-    screen_n = 20
-
-    def __init__(self):
-        super().__init__()
-
-    @bench_time(screen_n)
-    def test_screen(self):
-        for i in range(self.screen_n):
-            screen(memery=True)
-
-
 if __name__ == '__main__':
     # module.task.daily.xinpian()
-    test_daily()
-
-    # region = read(screen_path)
-    # cropped = cut(region, 766, 25, 863, 48)  # 基建无人机
-    # cropped = cut(region, 585, 193, 687, 225)#判断剿灭是否打完
-    # cropped = cut(region, 1187, 28, 1277, 52)  # 拜访好友是否变化
-    # cropped =cut(region, 1116, 20, 1245, 57)  # 获取理智
-    # write(screen_path,cropped)
-    # ocr_without_position(screen_path)
+    t = Tester()
+    t.test_screen()
