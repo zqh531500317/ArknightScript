@@ -268,6 +268,7 @@ def send():
     logfile = project_path + "/log/log.log"
     file = open(logfile, 'r', encoding='utf-8')
     file.read()
+    socketio.emit(event_name, {'data': "连接到websocket"}, broadcast=False, namespace=name_space)
     while True:
         where = file.tell()
         line = file.readline()

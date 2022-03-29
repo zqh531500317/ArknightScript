@@ -85,18 +85,33 @@ def test_jijian():
 
 
 def test_control():
-    begin_time = time.time()
-    module.utils.core_control.__screen_memery()
-    end_time = time.time()
-    run_time = end_time - begin_time
-    print('该程序运行时间：', run_time)
+    avg_time = 0
+    times = 10
+    for i in range(times):
+        begin_time = time.time()
+        screen(memery=False)
+        end_time = time.time()
+        run_time = end_time - begin_time
+        avg_time = avg_time + run_time
+    print(avg_time / times)
+
+
+class Tester(Adb):
+    screen_n = 20
+
+    def __init__(self):
+        super().__init__()
+
+    @bench_time(screen_n)
+    def test_screen(self):
+        for i in range(self.screen_n):
+            screen(memery=True)
 
 
 if __name__ == '__main__':
-    test_control()
     # module.task.daily.xinpian()
+    test_daily()
 
-    # module.task.daily.receive_renwu()
     # region = read(screen_path)
     # cropped = cut(region, 766, 25, 863, 48)  # 基建无人机
     # cropped = cut(region, 585, 193, 687, 225)#判断剿灭是否打完

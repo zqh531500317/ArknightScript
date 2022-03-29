@@ -22,3 +22,18 @@ def getList():
 
 
 getList()
+
+import sys
+import six
+
+
+def a():
+    i = 1 / 0
+
+
+try:
+    a()
+except Exception:
+    value = sys.exc_info()
+    # do something
+    six.reraise(*value)  # 借助six模块抛异常

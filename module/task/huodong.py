@@ -10,8 +10,29 @@ from module.utils.core_control import *
 
 @timer
 def huodong(name, max_fight_time, use_medicine, medicine_num, use_stone, stone_num):
-    now = "wudaoxianlu"
+    now = "yichenmanbu"
     eval(now)(name, max_fight_time, use_medicine, medicine_num, use_stone, stone_num)
+
+
+# name 名称    fight_time最大次数
+def yichenmanbu(name, max_fight_time, use_medicine, medicine_num, use_stone, stone_num):
+    module.step.judge_step.ensureGameOpenAndInMain()
+    v = ci["huodong"]
+    module.step.gamepass_step.exec_by_clickLoader(v)
+    randomClick((1049, 540, 1111, 555))
+    time.sleep(sleep_time)
+    # 移动到章节最右边
+    module.step.gamepass_step.goto_behind_for_huodong()
+    if name == "WD-6":
+        randomClick((13, 338, 73, 361))
+    elif name == "WD-7":
+        randomClick((139, 458, 216, 481))
+    elif name == "WD-8":
+        randomClick((455, 461, 527, 481))
+    else:
+        return
+    time.sleep(sleep_time)
+    module.task.fight.cycleFight(max_fight_time, name, use_medicine, medicine_num, use_stone, stone_num)
 
 
 # name 名称    fight_time最大次数

@@ -5,7 +5,7 @@ import sys
 import json
 from collections import OrderedDict
 from logzero import logger
-from module.utils.core_decoratir import *
+from module.utils.core_decoratir import debug, timer, bench_time
 from func_timeout import func_set_timeout
 
 
@@ -17,6 +17,7 @@ class CoreConfig:
         self.screen_path = self.project_path + '/cache/screen.png'
         self.configList = {}
         self.read()
+        self.serial = self.configList["Config"]["Emulator"]["serial"]
         # 判断程序是否正在运行
         pid = self.configList["Config"]["System"]["pid"]
         if pid is not None:
@@ -78,6 +79,8 @@ project_path = cf.project_path
 compared_path = screen_path = cf.screen_path
 endFight_path = project_path + "/asset/template/cache/endFight.png"
 sleep_time = cf.configList["Config"]["Screen"]["time"]
+device_control_method = cf.configList["Config"]["Emulator"]["device_control_method"]
+device_screenshot_method = cf.configList["Config"]["Emulator"]["device_screenshot_method"]
 timeout_time = 60 * 20
 timeout_time_max = 60 * 60
 with open(project_path + "/asset/cand_alphabet/officer.txt", "r", encoding='utf-8') as f:

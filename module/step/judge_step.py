@@ -10,7 +10,7 @@ def isInLogin():
 
 
 def isFightEnd(game):
-    time.sleep(3)
+    time.sleep(sleep_time)
     if game == "剿灭":
         b = compareSimilar("end_jiaomie")
         if b > 0.8:

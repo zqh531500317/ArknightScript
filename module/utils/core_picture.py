@@ -4,6 +4,8 @@ from PIL import Image
 import cv2
 import numpy as np
 from .core_control import *
+
+
 # 展示图片
 def show(region):
     cv2.imshow('image', region)
@@ -37,6 +39,7 @@ def write(uri, region):
 def getRGB(x, y, img_path=screen_path):
     image = Image.open(img_path)
     return image.getpixel((x, y))[:3]
+
 
 # 均值哈希算法
 def aHash(img):
@@ -176,7 +179,6 @@ def compareAllWhile(name):
 
 # 比较图片子区域是否完全相同
 def compareSame(name):
-    screen()
     obj = ui[name]
     templete_path = obj["file"]
     x1 = obj["area"][0]
@@ -184,7 +186,7 @@ def compareSame(name):
     x2 = obj["area"][2]
     y2 = obj["area"][3]
     image1 = cv2.imread(templete_path)[y1: y2, x1: x2]
-    image2 = cv2.imread(compared_path)[y1: y2, x1: x2]
+    image2 = screen(memery=True)[y1: y2, x1: x2]
     # cv2.imwrite("image1.jpg", image1)
     # cv2.imwrite("image2.jpg", image2)
     difference = cv2.subtract(image1, image2)
@@ -195,13 +197,11 @@ def compareSame(name):
         logger.debug("图片%s与%s完全相同", templete_path, compared_path)
     else:
         logger.debug("图片%s与%s不相同", templete_path, compared_path)
-        pass
     return result
 
 
 # 比较图片子区域是否相似 返回相似度0<=n<=1
 def compareSimilar(name):
-    screen()
     obj = ui[name]
     templete_path = obj["file"]
     x1 = obj["area"][0]
@@ -209,7 +209,7 @@ def compareSimilar(name):
     x2 = obj["area"][2]
     y2 = obj["area"][3]
     image1 = cv2.imread(templete_path)[y1: y2, x1: x2]
-    image2 = cv2.imread(compared_path)[y1: y2, x1: x2]
+    image2 = screen(memery=True)[y1: y2, x1: x2]
     # cv2.imwrite("image1.jpg", image1)
     # cv2.imwrite("image2.jpg", image2)
 

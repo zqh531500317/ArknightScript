@@ -190,7 +190,7 @@ def is_any_notification():
 def receive_notification():
     randomClick("jijian_notification")
     for i in range(5):
-        time.sleep(2)
+        time.sleep(sleep_time)
         randomClick((191, 658, 276, 705))
 
 
@@ -198,7 +198,7 @@ def receive_notification():
 # return [当前电力,总电力]
 def now_electricity(index=3):
     screen()
-    time.sleep(3)
+    time.sleep(sleep_time)
     region = read(screen_path)
     cropped = cut(region, 762, 23, 862, 48)
     write(screen_path, cropped)
@@ -236,7 +236,7 @@ def special_electricity():
         time.sleep(sleep_time)
     # 点击经验书或赤金
     randomClick((41, 570, 124, 650))
-    time.sleep(2)
+    time.sleep(sleep_time)
     screen()
     res = template_match_most("jijian/trade_list.png", x1=0, x2=240)
     for item in res:
@@ -298,10 +298,13 @@ def use_electricity(a, b):
         if special_electricity():
             return
     randomClick(ui["jijian_{}_{}".format(a, b)]["button"])
-    time.sleep(3)
+    time.sleep(sleep_time)
+    if is_in_jijian_main():
+        randomClick(ui["jijian_{}_{}".format(a, b)]["button"])
+        time.sleep(sleep_time)
     # 点击经验书或赤金
     randomClick((41, 570, 124, 650))
-    time.sleep(2)
+    time.sleep(sleep_time)
     # 判断加速类型
     if is_template_match("jijian/manufacturing_experience_book.png"):
         use_electricity_manufacturing(1)
@@ -318,15 +321,15 @@ def use_electricity(a, b):
 # 1经验书 2赤金 3原石碎片
 def use_electricity_manufacturing(kind):
     # 点击快进符号
-    time.sleep(2)
+    time.sleep(sleep_time)
     randomClick((1210, 530, 1234, 547))
-    time.sleep(2)
+    time.sleep(sleep_time)
     # 点击最多
     randomClick((934, 319, 989, 353))
-    time.sleep(2)
+    time.sleep(sleep_time)
     # 点击确定
     randomClick((837, 565, 1000, 600))
-    time.sleep(3)
+    time.sleep(sleep_time)
     # 点击任意位置
     randomClick((994, 66, 1144, 138))
     # 点击收取
@@ -340,18 +343,18 @@ def use_electricity_trade(kind):
         if len(res) == 0:
             return
         randomClick((res[0], res[1], res[2], res[3]))
-        time.sleep(3)
+        time.sleep(sleep_time)
         # 点击最多
         randomClick((934, 319, 989, 353))
-        time.sleep(2)
+        time.sleep(sleep_time)
         # 点击确定
         randomClick((837, 565, 1000, 600))
-        time.sleep(3)
+        time.sleep(sleep_time)
         res = template_match_best("jijian/trade_deliverable.png")
         if len(res) == 0:
             break
         randomClick((res[0], res[1], res[2], res[3]))
-        time.sleep(3)
+        time.sleep(sleep_time)
 
 
 def is_in_jijian_main():

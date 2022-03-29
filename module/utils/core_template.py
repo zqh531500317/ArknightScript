@@ -6,8 +6,7 @@ import copy
 # screen cut 是截圖   template_path 是模板圖
 def template_match_most(template_path, x1=0, y1=0, x2=1280, y2=720, screen_re=None, template_threshold=0.8):
     if screen_re is None:
-        screen()
-        screen_re = cut_by_path(compared_path, x1, y1, x2, y2)
+        screen_re = screen(memery=True)[y1: y2, x1: x2]
         cutted_gray_img = cv2.cvtColor(screen_re, cv2.COLOR_BGR2GRAY)  # 转化成灰色
     else:
         cutted_gray_img = cv2.cvtColor(screen_re, cv2.COLOR_BGR2GRAY)  # 转化成灰色
@@ -123,6 +122,6 @@ def __template(img_gray, template_img, template_threshold):
     thresh = 0.3  # NMS里面的IOU交互比阈值
 
     keep_dets = __py_nms(data_hstack, thresh)
-    print("nms time:", time.time() - start_time)  # 打印数据处理到nms运行时间
+    # print("nms time:", time.time() - start_time)  # 打印数据处理到nms运行时间
     dets = data_hstack[keep_dets]  # 最终的nms获得的矩形框
     return dets
