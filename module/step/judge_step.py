@@ -21,8 +21,8 @@ def isFightEnd(game):
             logger.info("战斗已结束，存储结算图片")
             screen()
             path = save1("jiaomie", "get_items")
-            if not os.path.exists(path[:path.rfind("/")]):
-                os.makedirs(path[:path.rfind("/")])
+            if not os.path.exists(endFight_path[:endFight_path.rfind("/")]):
+                os.makedirs(endFight_path[:endFight_path.rfind("/")])
             shutil.copy(path, endFight_path)
         else:
             logger.debug("战斗未结束")
@@ -33,8 +33,8 @@ def isFightEnd(game):
             logger.info("战斗已结束，存储结算图片")
             screen()
             path = save1(game, "get_items")
-            if not os.path.exists(path[:path.rfind("/")]):
-                os.makedirs(path[:path.rfind("/")])
+            if not os.path.exists(endFight_path[:endFight_path.rfind("/")]):
+                os.makedirs(endFight_path[:endFight_path.rfind("/")])
             shutil.copy(path, endFight_path)
 
         else:
