@@ -263,6 +263,7 @@ class Adb:
         stream = self.adb.shell(cmd, timeout=timeout, stream=True)
         content = recv_all(stream, chunk_size)
         image = self.__process_screenshot(content)
+        image = cv2.cvtColor(image, cv2.COLOR_BGRA2RGB)
         return image
 
     def _screen_adb_nc(self, timeout=5, chunk_size=262144):
