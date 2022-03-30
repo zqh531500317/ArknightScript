@@ -194,9 +194,9 @@ def compareSame(name):
     result = not np.any(difference)
 
     if result is True:
-        logger.debug("图片%s与%s完全相同", templete_path, compared_path)
+        logger.debug("与图片%s完全相同", templete_path)
     else:
-        logger.debug("图片%s与%s不相同", templete_path, compared_path)
+        logger.debug("与图片%s不相同", templete_path)
     return result
 
 
@@ -214,5 +214,5 @@ def compareSimilar(name):
     # cv2.imwrite("image2.jpg", image2)
 
     n = classify_hist_with_split(image1, image2)
-    logger.debug("图片%s与%s相似度为%s", templete_path, compared_path, n)
+    logger.debug("与图片%s相似度为%s", templete_path, n)
     return n
