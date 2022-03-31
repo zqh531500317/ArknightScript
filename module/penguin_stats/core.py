@@ -6,8 +6,8 @@ import cv2
 import numpy as np
 from cnocr import CnOcr
 
-from module import item_index, stage_index, droptype_index
-from module import endFight_path
+from module.penguin_stats.gui_preload import item_index, stage_index, droptype_index
+from module.utils.core_config import endFight_path
 
 TOP = 0
 BOTTOM = 1
@@ -439,6 +439,10 @@ def analyse() -> (dict, str):
 
     data, display = asyncio.run(test())
     return data, display
+
+
+def get_name_by_id(id):
+    return item_index[id]['name_i18n']['zh']
 
 
 if __name__ == "__main__":

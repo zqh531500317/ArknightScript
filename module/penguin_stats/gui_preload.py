@@ -1,7 +1,7 @@
 import json
 import cv2
 import requests
-from module import project_path
+from module.utils.core_config import project_path
 
 
 def get_stageindex():

@@ -149,3 +149,7 @@ def xinpian():
     module.step.judge_step.ensureGameOpenAndInMain()
     module.step.daily_step.do_xinpian(data, res)
     module.step.judge_step.ensureGameOpenAndInMain()
+
+
+if __name__ == '__main__':
+    xinpian()
