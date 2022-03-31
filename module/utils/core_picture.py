@@ -3,7 +3,7 @@ import time
 from PIL import Image
 import cv2
 import numpy as np
-from .core_control import *
+from module.utils.core_control import *
 
 
 # 展示图片

@@ -1,4 +1,4 @@
-from .core_config import *
+from module.utils.core_config import *
 import yagmail
 
 enable = configList["Config"]["Mail"]["enable"]

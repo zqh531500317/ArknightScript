@@ -13,7 +13,7 @@ python -m venv venv
 .\venv\scripts\python.exe -m pip install --upgrade pip
 pip install .\tookit\Polygon3-3.0.9.1-cp39-cp39-win_amd64.whl
 pip install .\tookit\python_Levenshtein-0.12.2-cp39-cp39-win_amd64.whl
-pip install -r requirements.txt
+pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
 ### 3、复制config/templete.yaml为config.yaml,修改config.yaml,注意修改serial、project_path

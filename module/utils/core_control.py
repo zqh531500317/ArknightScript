@@ -4,9 +4,9 @@ import random
 import numpy
 import cv2
 import adbutils
-from .core_config import *
-from .core_assetLoader import ui
-from .core_utils import recv_all, random_port
+from module.utils.core_config import *
+from module.utils.core_assetLoader import ui
+from module.utils.core_utils import recv_all, random_port
 
 os.system('chcp 65001')
 

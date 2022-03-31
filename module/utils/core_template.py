@@ -1,4 +1,4 @@
-from .core_picture import *
+from module.utils.core_picture import *
 import copy
 
 

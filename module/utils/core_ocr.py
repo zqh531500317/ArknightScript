@@ -1,7 +1,6 @@
 import cnocr.utils
-from aip import AipOcr
 from cnocr import CnOcr
-from .core_config import *
+from module.utils.core_config import *
 from cnstd import CnStd
 
 use = configList["Config"]["Ocr"]["use"]
