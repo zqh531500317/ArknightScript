@@ -6,9 +6,6 @@ from cnstd import CnStd
 
 use = configList["Config"]["Ocr"]["use"]
 
-APP_ID = configList["Config"]["Ocr"]["baidu"]["APP_ID"]
-API_KEY = configList["Config"]["Ocr"]["baidu"]["API_KEY"]
-SECRET_KEY = configList["Config"]["Ocr"]["baidu"]["SECRET_KEY"]
 ocr = CnOcr(model_name="densenet_lite_136-fc")
 cnstd = CnStd(rotated_bbox=False, resized_shape=(1280, 704))
 ziyuanshouji_tag = "空中威胁资源保障粉碎防御货物运送战术演习固若金汤势不可挡摧枯拉朽身先士卒"

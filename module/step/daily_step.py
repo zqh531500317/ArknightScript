@@ -5,6 +5,7 @@ from logzero import logger
 from datetime import datetime
 from module.task.ziyuanshouji import findGame
 from module.task.fight import fight
+from module.inventory.demo import show_bag
 
 
 def get_xinpian_info(xinpian_1, xinpian_2):
@@ -20,8 +21,7 @@ def get_xinpian_info(xinpian_1, xinpian_2):
                     "xf1", "xf2", "xf3", "zl1", "zl2", "zl3"]
     data = {}
     for i in range(1):
-        screen()
-        screen_img = read(screen_path)
+        screen_img = screen(memery=True)
         for item in xinpian_list:
             res = template_match_best("items/{}.png".format(item), screen_re=screen_img, template_threshold=0.9)
             if len(res) == 0:
@@ -186,3 +186,22 @@ def __cal_by_data(data: dict, limit1=6, limit2=10):
             else:
                 del res[k]
     return res
+
+
+def __get_bag_info():
+    bag_info = {}
+    pre_items = None
+    while True:
+        items = show_bag()
+        later_items = items.keys()
+        if pre_items == later_items:
+            break
+        bag_info.update(items)
+        scroll(1240, 475, 465, 475, 3000)
+        pre_items = later_items
+    return bag_info
+
+
+if __name__ == '__main__':
+    # get_xinpian_info(6, 10)
+    __get_bag_info()

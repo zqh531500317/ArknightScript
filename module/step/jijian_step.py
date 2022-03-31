@@ -112,74 +112,6 @@ def do_schedual(x, y, names, type):
     return msg
 
 
-def auto_sleep():
-    sum = 0
-    _auto_sleep = configList["Config"]["Game"]["auto_sleep"]
-    if not _auto_sleep:
-        return 0
-    for ss in range(4):
-        num = 5
-        choosed_num = 0
-        cyc_times = 5
-        pre_schedual(ss + 1, 4, "宿舍")
-        for index in range(cyc_times):
-            working_dets = template_match_most("jijian/working.png")
-            sleeping_dets = template_match_most("jijian/sleeping.png")
-            emotion_dets = template_match_most("jijian/emotion.png")
-            sleep_list = []
-            for coord in emotion_dets:
-                _cut = cut_by_path(screen_path, int(coord[0]),
-                                   int(coord[1]),
-                                   int(coord[2]),
-                                   int(coord[3]))
-                flag = False
-                for y in range(_cut.shape[0]):
-                    if flag:
-                        break
-                    for x in range(_cut.shape[1]):
-                        rgb = _cut[y, x]
-                        if (130 <= rgb[2] <= 150) and (190 <= rgb[1] <= 210) and (60 <= rgb[0] <= 70):
-                            flag = True
-                            break
-                if not flag:
-                    sleep_list.append([int(coord[0]),
-                                       int(coord[1]),
-                                       int(coord[2]),
-                                       int(coord[3])])
-
-            for i in range(len(sleep_list) - 1, -1, -1):
-                flag = False
-                pos_x = sleep_list[i][2] + 10
-                pos_y = sleep_list[i][1] - 72
-                for coord in working_dets:
-                    if int(coord[0]) <= pos_x <= int(coord[2]) and \
-                            int(coord[1]) <= pos_y <= int(coord[3]):
-                        flag = True
-                        break
-                if not flag:
-                    for coord in sleeping_dets:
-                        if int(coord[0]) <= pos_x <= int(coord[2]) and \
-                                int(coord[1]) <= pos_y <= int(coord[3]):
-                            flag = True
-                            break
-                if flag:
-                    sleep_list.remove(sleep_list[i])
-            for item in sleep_list:
-                randomClick((item[0], item[1], item[2], item[3]))
-                choosed_num += 1
-                sum += 1
-                time.sleep(1)
-                if choosed_num == num:
-                    break
-            if choosed_num == num:
-                break
-            scroll(1275, 350, 465, 350, 3000)
-        later_schedual()
-        if choosed_num < num:
-            break
-    return sum
-
-
 # 判断是否有收菜提示
 def is_any_notification():
     b = compareSimilar("jijian_notification") > 0.75
@@ -359,3 +291,75 @@ def use_electricity_trade(kind):
 
 def is_in_jijian_main():
     return is_template_match("jijian/jijian_main.png")
+
+
+def auto_sleep():
+    sum = 0
+    _auto_sleep = configList["Config"]["Game"]["auto_sleep"]
+    if not _auto_sleep:
+        return 0
+    for ss in range(4):
+        num = 5
+        choosed_num = 0
+        cyc_times = 5
+        pre_schedual(ss + 1, 4, "宿舍")
+        for index in range(cyc_times):
+            screen()
+            working_dets = template_match_most("jijian/working.png")
+            sleeping_dets = template_match_most("jijian/sleeping.png")
+            emotion_dets = template_match_most("jijian/emotion.png")
+            sleep_list = []
+            for coord in emotion_dets:
+                _cut = cut_by_path(screen_path, int(coord[0]),
+                                   int(coord[1]),
+                                   int(coord[2]),
+                                   int(coord[3]))
+                flag = False
+                for y in range(_cut.shape[0]):
+                    if flag:
+                        break
+                    for x in range(_cut.shape[1]):
+                        rgb = _cut[y, x]
+                        if (130 <= rgb[2] <= 150) and (190 <= rgb[1] <= 210) and (60 <= rgb[0] <= 70):
+                            flag = True
+                            break
+                if not flag:
+                    sleep_list.append([int(coord[0]),
+                                       int(coord[1]),
+                                       int(coord[2]),
+                                       int(coord[3])])
+            for i in range(len(sleep_list) - 1, -1, -1):
+                flag = False
+                pos_x = sleep_list[i][2] + 10
+                pos_y = sleep_list[i][1] - 72
+                for coord in working_dets:
+                    if int(coord[0]) <= pos_x <= int(coord[2]) and \
+                            int(coord[1]) <= pos_y <= int(coord[3]):
+                        flag = True
+                        break
+                if not flag:
+                    for coord in sleeping_dets:
+                        if int(coord[0]) <= pos_x <= int(coord[2]) and \
+                                int(coord[1]) <= pos_y <= int(coord[3]):
+                            flag = True
+                            break
+                if flag:
+                    sleep_list.remove(sleep_list[i])
+            for item in sleep_list:
+                randomClick((item[0], item[1], item[2], item[3]))
+                choosed_num += 1
+                sum += 1
+                time.sleep(1)
+                if choosed_num == num:
+                    break
+            if choosed_num == num:
+                break
+            scroll(1275, 350, 465, 350, 3000)
+        later_schedual()
+        if choosed_num < num:
+            break
+    return sum
+
+
+if __name__ == '__main__':
+    auto_sleep()
