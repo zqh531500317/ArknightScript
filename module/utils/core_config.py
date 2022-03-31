@@ -5,15 +5,15 @@ import sys
 import json
 from collections import OrderedDict
 from logzero import logger
+from module.utils.core_utils import project_root_path
 from module.utils.core_decoratir import debug_recode, timer, bench_time, singleton
 from func_timeout import func_set_timeout
-
 
 class CoreConfig:
 
     def __init__(self):
         logger.info("初始化配置文件类")
-        self.project_path = os.path.abspath('')
+        self.project_path = project_root_path()
         self.screen_path = self.project_path + '/cache/screen.png'
         self.configList = {}
         self.read()

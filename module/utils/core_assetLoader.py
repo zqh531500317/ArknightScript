@@ -1,5 +1,4 @@
-from .core_config import *
-
+from module.utils.core_config import project_path
 # 图片资源加载器  启动时会加载所有的图片资源及区域与其可点击有效区域的关系
 ui = {}
 

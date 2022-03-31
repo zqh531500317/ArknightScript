@@ -20,20 +20,24 @@ def ziyuanshouji(max_fight_time, game, use_medicine, medicine_num, use_stone, st
 def findGame(game):
     module.step.judge_step.ensureGameOpenAndInMain()
     # 进入资源收集区域
-    time.sleep(2)
+    time.sleep(sleep_time)
     randomClick((920, 142, 1021, 182))
-    time.sleep(2)
+    time.sleep(sleep_time)
     randomClick((706, 661, 732, 677))
-    time.sleep(2)
-
-    try:
-        # 滑到最左侧寻找
-        module.step.gamepass_step.goto_ahead_for_ziyuanshouji()
-        module.step.gamepass_step.find_game_position(game, "ziyuanshouji")
-    except module.error.game.GameNotFound as e:
-        # 滑到最右侧寻找
-        module.step.gamepass_step.goto_behind_for_ziyuanshouji()
-        module.step.gamepass_step.find_game_position(game, "ziyuanshouji")
+    time.sleep(sleep_time)
+    module.step.gamepass_step.find_game_position(game, "ziyuanshouji")
+    # try:
+    #     # 滑到最左侧寻找
+    #     module.step.gamepass_step.goto_ahead_for_ziyuanshouji()
+    #     module.step.gamepass_step.find_game_position(game, "ziyuanshouji")
+    # except module.error.game.GameNotFound as e:
+    #     # 滑到最右侧寻找
+    #     module.step.gamepass_step.goto_behind_for_ziyuanshouji()
+    #     module.step.gamepass_step.find_game_position(game, "ziyuanshouji")
     # 已经进入界面  到作战前界面
     v = ci[game]
     module.step.gamepass_step.exec_by_clickLoader(v)
+
+
+if __name__ == '__main__':
+    findGame("PR-C-2")

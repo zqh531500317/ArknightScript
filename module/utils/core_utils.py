@@ -1,7 +1,17 @@
+import os
 import random
 import socket
 
 from adbutils import _AdbStreamConnection, AdbTimeout
+
+
+def project_root_path():
+    path = os.path.dirname(__file__)
+    while True:
+        if os.path.isdir(path + "/module"):
+            return path
+        else:
+            path = os.path.abspath(os.path.join(path, ".."))
 
 
 def recv_all(stream, chunk_size=4096) -> bytes:

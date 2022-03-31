@@ -26,15 +26,8 @@ Config:
     project_path: E:\project\arknight
     pid: 15132
   Ocr:
-    #baidu、cnocr
+    #cnocr
     use: cnocr
-    baidu:
-      # 应用的appid
-      APP_ID:
-      # 应用的appkey
-      API_KEY:
-      # 应用的secretkey
-      SECRET_KEY:
   Game:
     # 是否关闭游戏 当x分钟内无任务
     closable: true

@@ -1,7 +1,7 @@
 import itertools
 
 from module.utils.core_picture import *
-from module.utils.core_ocr import ocr_with_position,ocr_without_position,recruit_ocr
+from module.utils.core_ocr import ocr_without_position, recruit_ocr
 from module.utils.core_email import send
 import module.utils.core_recruitLoader
 
@@ -145,22 +145,6 @@ def best_choose():
     else:
         logger.info("未有4星及以上的tag组合,已选择时间至9小时")
         return 0
-
-
-def _recruit_result():
-    screen()
-    time.sleep(3)
-    region = read(screen_path)
-    x1 = recruit_tag[0]
-    y1 = recruit_tag[1]
-    x2 = recruit_tag[2]
-    y2 = recruit_tag[3]
-    cropped = cut(region, x1, y1, x2, y2)
-    write(screen_path, cropped)
-    time.sleep(3)
-    result = ocr_with_position(screen_path)
-    logger.debug("词条内容是：" + str(result))
-    return result
 
 
 # 对于不能识别文字位置的cnocr 进行不同处理，用flag=1标志

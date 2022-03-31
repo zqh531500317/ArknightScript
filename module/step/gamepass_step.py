@@ -2,8 +2,15 @@ import module.error.game
 from retrying import retry
 import math
 from module.utils.core_template import *
-from module.utils.core_ocr import ocr_with_position
+from module.utils.core_ocr import ocr_without_position, ziyuanshouji_tag
 from module.utils.core_clickLoader import dic
+from module.stage.demo import recognize_all_screen_stage_tags
+
+
+# 获取当前的关卡信息
+def stage():
+    data = recognize_all_screen_stage_tags(screen(memery=True))
+    return data
 
 
 def exec_by_clickLoader(v):
@@ -56,14 +63,9 @@ def goto_behind_for_huodong():
 # 判断剿灭是否打完 return num 表示还要打num把才能打完
 def jiaomieIsFinish():
     time.sleep(sleep_time)
-    screen()
-    time.sleep(sleep_time)
-    region = read(screen_path)
+    region = screen(memery=True)
     cropped = cut(region, 585, 193, 687, 225)
-    write(screen_path, cropped)
-    time.sleep(sleep_time)
-    result = ocr_with_position(screen_path)
-    print(result)
+    result = ocr_without_position(cropped, limit=None, cand_alphabet="1234567890")
     x = result[len(result) - 1]["words"]
     if x[0] == "/":
         now = 0
@@ -98,22 +100,38 @@ def find_game_position(name, type="zhuxian"):
         right = name[3]
         if left == "PR":
             left = left + right
-        ch_names = dic[left]
-
-        screen()
-        list = ocr_with_position(project_path + "/cache/screen.png")
-        for one in list:
-            for ch_name in ch_names:
-                if one["words"].lower() == ch_name.lower():
+        ch_names = dic[left][0]
+        list = []
+        list1 = [(93, 237), (308, 436), (512, 651), (723, 852), (930, 1064), (1137, 1270)]
+        list2 = [(633, 766), (841, 972), (1048, 1181)]
+        goto_ahead_for_ziyuanshouji()
+        re = screen(memery=True)
+        list = list1
+        for i in range(2):
+            for item in list:
+                temp = cut(re, item[0], 460, item[1], 494)
+                res = ocr_without_position(temp, None, ziyuanshouji_tag)[0]["words"]
+                if res == ch_names:
                     logger.info("识别到关卡%s", name)
-                    flag = 1
-                    location = one["location"]
-                    x1 = location["left"]
-                    y1 = location["top"]
-                    x2 = x1 + location["width"]
-                    y2 = y1 + location["height"]
-                    randomClick((x1, y1, x2, y2))
+                    randomClick((item[0], 460, item[1], 494))
                     return
+            goto_behind_for_ziyuanshouji()
+            re = screen(memery=True)
+            list = list2
+        # screen()
+        # list = ocr_with_position(project_path + "/cache/screen.png")
+        # for one in list:
+        #     for ch_name in ch_names:
+        #         if one["words"].lower() == ch_name.lower():
+        #             logger.info("识别到关卡%s", name)
+        #             flag = 1
+        #             location = one["location"]
+        #             x1 = location["left"]
+        #             y1 = location["top"]
+        #             x2 = x1 + location["width"]
+        #             y2 = y1 + location["height"]
+        #             randomClick((x1, y1, x2, y2))
+        #             return
 
         logger.error("未找到关卡%s", name)
         raise module.error.game.GameNotFound(name)
@@ -122,21 +140,27 @@ def find_game_position(name, type="zhuxian"):
         flag = 0
         while True:
             logger.info("尝试寻找关卡%s", name)
-            screen()
-            list = ocr_with_position(project_path + "/cache/screen.png")
+            list = stage()
+
+            # screen()
+            # list = ocr_with_position(project_path + "/cache/screen.png")
             if temp == list:
                 flag = -1
                 break
-            for one in list:
-                if one["words"].lower() == name.lower():
-                    logger.info("识别到关卡%s", name)
-                    flag = 1
-                    location = one["location"]
-                    x1 = location["left"]
-                    y1 = location["top"]
-                    x2 = x1 + location["width"]
-                    y2 = y1 + location["height"]
-                    break
+            if name in list:
+                logger.info("识别到关卡%s", name)
+                click(list[name][0], list[name][1])
+                return
+            # for one in list:
+            #     if one["words"].lower() == name.lower():
+            #         logger.info("识别到关卡%s", name)
+            #         flag = 1
+            #         location = one["location"]
+            #         x1 = location["left"]
+            #         y1 = location["top"]
+            #         x2 = x1 + location["width"]
+            #         y2 = y1 + location["height"]
+            #         break
             if flag == 1:
                 break
             temp = list
@@ -194,3 +218,10 @@ def find_game_position_with_template(name, type="zhuxian"):
 
         raise module.error.game.GameNotFound(name)
     randomClick((x1, y1, x2, y2))
+
+
+if __name__ == '__main__':
+    # data = stage()
+    # find_game_position(name="PR-C-2", type="ziyuanshouji")
+    res = jiaomieIsFinish()
+    print(res)
