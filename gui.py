@@ -8,13 +8,11 @@ import sys
 import _thread
 import time
 from apscheduler.triggers.cron import CronTrigger
-from flask import Flask, jsonify
-from flask import render_template
-from flask import request
+from flask import Flask, jsonify, render_template, request
 import module.task.state
-from flask_socketio import SocketIO, send
-import module.schedule.fightScheduler
+from flask_socketio import SocketIO
 import module.schedule.baseScheduler
+import module.schedule.fightScheduler
 import module.schedule.dailyScheduler
 from module.utils.core_init import init
 from flask_cors import CORS
