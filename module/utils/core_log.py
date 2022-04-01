@@ -3,9 +3,11 @@ import os
 import sys
 from logzero import LogFormatter, setup_default_logger, logfile, logger
 from module.utils.core_config import configList
+from module.utils.core_utils import project_root_path
 
 
 def init_log():
+    print("init_log")
     # 日志等级
     level_str = configList["Config"]["Log"]["level"]
     level = logging.INFO
@@ -32,15 +34,11 @@ def init_log():
 
     # 文件输出格式
     if configList["Config"]["Log"]["file"]:
+        dic_path = project_root_path() + "/log/"
         file_format = '[%(asctime)s| %(levelname)s |%(filename)s:%(lineno)d] %(message)s'
         formatter = logging.Formatter(file_format, data_style)
-        dic_path = configList["Config"]["System"]["project_path"] + '/log/'
-        if not os.path.exists(dic_path):
-            os.mkdir(dic_path)
-        sys.stderr = open(configList["Config"]["System"]["project_path"] + "/log/stderr.txt", "w+", encoding='utf-8')
-        sys.stdout = open(configList["Config"]["System"]["project_path"] + "/log/stdout.txt", "w+", encoding='utf-8')
-        if not os.path.exists(configList["Config"]["System"]["project_path"] + '/cache/'):
-            os.mkdir(configList["Config"]["System"]["project_path"] + '/cache/')
+        # sys.stderr = open(configList["Config"]["System"]["project_path"] + "/log/stderr.txt", "w+", encoding='utf-8')
+        # sys.stdout = open(configList["Config"]["System"]["project_path"] + "/log/stdout.txt", "w+", encoding='utf-8')
         logfile(dic_path + 'log.log',
                 formatter=formatter,
                 maxBytes=1e6, encoding='utf-8', loglevel=level)

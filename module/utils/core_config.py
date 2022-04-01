@@ -9,6 +9,7 @@ from module.utils.core_utils import project_root_path
 from module.utils.core_decoratir import debug_recode, timer, bench_time, singleton
 from func_timeout import func_set_timeout
 
+
 class CoreConfig:
 
     def __init__(self):

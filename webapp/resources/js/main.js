@@ -1,3 +1,4 @@
+console.info("init start")
 Neutralino.init();
 Neutralino.events.on('windowClose', (e) => {
         Neutralino.os.showMessageBox('Confirm',

@@ -16,6 +16,7 @@ import module.schedule.fightScheduler
 import module.schedule.dailyScheduler
 from module.utils.core_init import init
 from flask_cors import CORS
+from engineio.async_drivers import threading
 
 app = Flask(__name__, template_folder="webapp/resources", static_folder="webapp/resources", static_url_path="")
 CORS(app, supports_credentials=True)
@@ -23,8 +24,7 @@ app.jinja_env.variable_start_string = '<<'
 app.jinja_env.variable_end_string = '>>'
 app.jinja_env.auto_reload = True
 app.config['SECRET_KEY'] = 'secret_key'
-socketio = SocketIO()
-socketio.init_app(app, cors_allowed_origins='*')
+socketio = SocketIO(app, cors_allowed_origins='*', async_mode='threading')
 name_space = "/dcenter"
 init()
 
@@ -279,4 +279,4 @@ def send():
 
 
 if __name__ == '__main__':
-    socketio.run(app, debug=False)
+    socketio.run(app, host="0.0.0.0", debug=True)

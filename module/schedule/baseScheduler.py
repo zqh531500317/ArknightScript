@@ -50,6 +50,9 @@ def add_job(func, trigger, id, args=None, misfire_grace_time=7200):
     job = scheduler.get_job(id)
     if job is None:
         scheduler.add_job(func, args=args, trigger=trigger, id=id, name=id, misfire_grace_time=misfire_grace_time)
+        white_list = ["jijian_schedule"]
+        if id not in white_list:
+            pause(id)
 
 
 def get_jobs():
