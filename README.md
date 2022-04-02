@@ -28,6 +28,6 @@ pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 ### 3、对于手动安装：
 ####运行Arknight-Script.bat可启动图形界面
 ####运行start_flask.bat可启动web服务，浏览器访问127.0.0.1:5000访问
-### 4、对于下载可执行程序 ：
+### 4、对于下载可执行程序 ： 
 ####Arknight-Script.exe可启动web服务，浏览器访问127.0.0.1:5000访问
 ####.bat可启动图形界面
