@@ -23,14 +23,16 @@ def use_electricity():
 
 
 def jijian_schedule():
-    cron = cf.read_json(project_path + "/config/schedual.json")["Config"]["cron"]
-    hour = cron["hour"]
-    minute = cron["minute"]
     scheduler = module.schedule.baseScheduler.scheduler
     job = scheduler.get_job("jijian_schedule")
     if job is not None:
         scheduler.remove_job(job.id)
-    enable_jijian_schedule = configList["Config"]["Game"]["xinpian_1"]
+    enable_jijian_schedule = configList["Config"]["Game"]["enable_jijian_schedule"]
+    if not enable_jijian_schedule:
+        return
+    cron = cf.read_json(project_path + "/config/schedual.json")["Config"]["cron"]
+    hour = cron["hour"]
+    minute = cron["minute"]
     if enable_jijian_schedule:
         module.schedule.baseScheduler.add_job(module.task.jijian.schedual,
                                               trigger=CronTrigger(hour=hour, minute=minute),

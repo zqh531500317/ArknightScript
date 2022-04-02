@@ -1,3 +1,5 @@
+import shutil
+
 import yaml
 import os
 import psutil
@@ -15,6 +17,13 @@ class CoreConfig:
     def __init__(self):
         logger.info("初始化配置文件类")
         self.project_path = project_root_path()
+        root = project_root_path()
+        config = root + '/config/config.yaml'
+        templete = root + '/config/templete.yaml'
+        if not os.path.exists(config):
+            shutil.copy(templete, config)
+            print("file config.yaml not exist,copy templete.yaml=>config.yaml")
+
         self.screen_path = self.project_path + '/cache/screen.png'
         self.configList = {}
         self.read()

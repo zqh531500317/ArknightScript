@@ -24,7 +24,7 @@ Config:
     time: 3
   System:
     project_path: E:\project\arknight
-    pid: 15132
+    pid:
   Ocr:
     #cnocr
     use: cnocr
