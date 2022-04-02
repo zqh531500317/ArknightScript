@@ -22,12 +22,12 @@ pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 ## 1、调整模拟器分辨率为1280*720，确保模拟器已启动
 ## 2、
-###复制config/templete.yaml为config.yaml,修改config.yaml,注意修改serial、project_path
-###要使用基建换班，则复制config/schedual_templete.json为schedual.json，修改文件内容
+### 复制config/templete.yaml为config.yaml,修改config.yaml,注意修改serial、project_path
+### 要使用基建换班，则复制config/schedual_templete.json为schedual.json，修改文件内容
 
 ## 3、对于手动安装：
-###运行Arknight-Script.bat可启动图形界面
-###运行start_flask.bat可启动web服务，浏览器访问127.0.0.1:5000访问
+### 运行Arknight-Script.bat可启动图形界面
+### 运行start_flask.bat可启动web服务，浏览器访问127.0.0.1:5000访问
 ## 4、对于下载可执行程序 ： 
-###Arknight-Script.exe可启动web服务，浏览器访问127.0.0.1:5000访问
-###.bat可启动图形界面
+### Arknight-Script.exe可启动web服务，浏览器访问127.0.0.1:5000访问
+### .bat可启动图形界面
