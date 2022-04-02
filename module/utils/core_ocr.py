@@ -1,9 +1,7 @@
 import cnocr.utils
 from cnocr import CnOcr
-from module.utils.core_config import *
+from module.utils.core_config import cf, logger, cand_alphabet_officer
 from cnstd import CnStd
-
-use = configList["Config"]["Ocr"]["use"]
 
 ocr = CnOcr(model_name="densenet_lite_136-fc")
 cnstd = CnStd(rotated_bbox=False, resized_shape=(1280, 704))
@@ -17,7 +15,7 @@ number_ocr = CnOcr(model_name="densenet_lite_136-fc", cand_alphabet="1234567890/
 
 
 def ocr_without_position(uri, limit=None, cand_alphabet=None):
-    if use == "cnocr":
+    if cf.get("use") == "cnocr":
         res = cnocr_without_position(uri, limit, cand_alphabet)
         logger.info("cnocr result:" + str(res))
         return res
@@ -26,7 +24,7 @@ def ocr_without_position(uri, limit=None, cand_alphabet=None):
 
 
 def ocr_without_position_low(uri, limit=None):
-    if use == "cnocr":
+    if cf.get("use") == "cnocr":
         return cnocr_without_position(uri, limit)
     else:
         pass

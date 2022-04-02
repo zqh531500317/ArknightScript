@@ -5,9 +5,6 @@ import module.step.jijian_step
 from module.utils.core_template import *
 from module.utils.core_email import send
 
-a = configList["Config"]["Game"]["a"]
-b = configList["Config"]["Game"]["b"]
-
 
 # 基建一键收货
 @timer
@@ -33,7 +30,7 @@ def use_electricity():
         module.step.jijian_step.receive_notification()
         module.step.judge_step.ensureGameOpenAndInMain()
         module.step.click_step.into_jijian()
-    module.step.jijian_step.use_electricity(a, b)
+    module.step.jijian_step.use_electricity(cf.get("a"), cf.get("b"))
     module.step.judge_step.ensureGameOpenAndInMain()
 
 

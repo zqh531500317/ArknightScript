@@ -20,7 +20,7 @@ def yichenmanbu(name, max_fight_time, use_medicine, medicine_num, use_stone, sto
     v = ci["huodong"]
     module.step.gamepass_step.exec_by_clickLoader(v)
     randomClick((1049, 540, 1111, 555))
-    time.sleep(sleep_time)
+    time.sleep(cf.get("sleep_time"))
     # 移动到章节最右边
     module.step.gamepass_step.goto_behind_for_huodong()
     if name == "WD-6":
@@ -31,7 +31,7 @@ def yichenmanbu(name, max_fight_time, use_medicine, medicine_num, use_stone, sto
         randomClick((455, 461, 527, 481))
     else:
         return
-    time.sleep(sleep_time)
+    time.sleep(cf.get("sleep_time"))
     module.task.fight.cycleFight(max_fight_time, name, use_medicine, medicine_num, use_stone, stone_num)
 
 
@@ -41,7 +41,7 @@ def wudaoxianlu(name, max_fight_time, use_medicine, medicine_num, use_stone, sto
     v = ci["huodong"]
     module.step.gamepass_step.exec_by_clickLoader(v)
     randomClick((1114, 465, 1130, 482))
-    time.sleep(sleep_time)
+    time.sleep(cf.get("sleep_time"))
     # 移动到章节最右边
     module.step.gamepass_step.goto_behind_for_huodong()
     if name == "GA-6":
@@ -52,7 +52,7 @@ def wudaoxianlu(name, max_fight_time, use_medicine, medicine_num, use_stone, sto
         randomClick((612, 332, 678, 350))
     else:
         return
-    time.sleep(sleep_time)
+    time.sleep(cf.get("sleep_time"))
     module.task.fight.cycleFight(max_fight_time, name, use_medicine, medicine_num, use_stone, stone_num)
 
 

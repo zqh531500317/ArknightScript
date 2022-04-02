@@ -10,19 +10,18 @@ from module.utils.core_utils import recv_all, random_port
 
 os.system('chcp 65001')
 
-ADB = configList["Config"]["Control"]["ADB"]
-project_path = configList["Config"]["System"]["project_path"]
+ADB = cf.configList["Config"]["Control"]["ADB"]
+project_path = cf.configList["Config"]["System"]["project_path"]
 if ADB == "adb.exe":
     adb_path = "adb"
 else:
     adb_path = project_path + ADB
-connect_uri = configList["Config"]["Emulator"]["serial"]
-package_name = configList["Config"]['Emulator']['package_name']
-activity_name = configList["Config"]['Emulator']['activity_name']
-enable_screen = configList["Config"]['Screen']['enable']
-screen_debug = configList["Config"]['Screen']['debug']
+connect_uri = cf.configList["Config"]["Emulator"]["serial"]
+package_name = cf.configList["Config"]['Emulator']['package_name']
+activity_name = cf.configList["Config"]['Emulator']['activity_name']
+screen_debug = cf.configList["Config"]['Screen']['debug']
 port = " -s " + connect_uri + " "
-screen_time = configList["Config"]['Screen']['time']
+screen_time = cf.configList["Config"]['Screen']['sleep_time']
 
 
 @singleton
@@ -122,7 +121,7 @@ class Adb:
         if not os.path.exists(store_path):
             os.makedirs(store_path)
         f_copy = open(store_uri, 'wb')
-        if enable_screen:
+        if cf.get("enable_screen"):
             f_copy.write(f_src.read())
         f_src.close()
         f_copy.close()
@@ -136,7 +135,7 @@ class Adb:
         if not os.path.exists(store_path):
             os.makedirs(store_path)
         f_copy = open(store_uri, 'wb')
-        if enable_screen:
+        if cf.get("enable_screen"):
             f_copy.write(f_src.read())
         f_src.close()
         f_copy.close()
@@ -150,7 +149,7 @@ class Adb:
         if not os.path.exists(store_path):
             os.makedirs(store_path)
         f_copy = open(store_uri, 'wb')
-        if enable_screen:
+        if cf.get("enable_screen"):
             f_copy.write(f_src.read())
         f_src.close()
         f_copy.close()
@@ -252,9 +251,9 @@ class Adb:
         return project_path + path
 
     def __screen_memery(self):
-        if str(device_control_method).upper() == "ADB":
+        if str(cf.get("device_control_method")).upper() == "ADB":
             return self._screen_adb()
-        elif str(device_control_method).upper() == "ADB_NC":
+        elif str(cf.get("device_control_method")).upper() == "ADB_NC":
             return self._screen_adb_nc()
 
     def _screen_adb(self, timeout=10, chunk_size=262144):

@@ -1,6 +1,4 @@
 import os.path
-
-from logzero import logger
 import module.step.click_step
 from module.utils.core_template import *
 import shutil
@@ -12,12 +10,12 @@ def isInLogin():
 
 
 def isFightEnd(game):
-    time.sleep(sleep_time)
+    time.sleep(cf.get("sleep_time"))
     if game == "剿灭":
         b = compareSimilar("end_jiaomie")
         if b > 0.8:
             randomClick("end_jiaomie")
-            time.sleep(sleep_time)
+            time.sleep(cf.get("sleep_time"))
             logger.info("战斗已结束，存储结算图片")
             screen()
             path = save1("jiaomie", "get_items")
@@ -31,7 +29,7 @@ def isFightEnd(game):
         b = compareAllWhile("end_fight")
         if b:
             logger.info("战斗已结束，存储结算图片")
-            time.sleep(sleep_time*2)
+            time.sleep(cf.get("sleep_time")*2)
             screen()
             path = save1(game, "get_items")
             if not os.path.exists(endFight_path[:endFight_path.rfind("/")]):

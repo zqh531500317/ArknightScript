@@ -9,3 +9,5 @@ result.jpg
 asset/template/cache/
 dist
 build
+/webapp/test.txt
+/jobs.sqlite

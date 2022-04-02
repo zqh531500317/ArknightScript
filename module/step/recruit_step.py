@@ -15,17 +15,17 @@ def recruit():
         return
     if state == "finish":
         randomClick("recruit_state_finish")
-        time.sleep(5)
+        time.sleep(2*cf.get("sleep_time"))
         randomClick("recruit_finish_skip")
-        time.sleep(3)
+        time.sleep(cf.get("sleep_time"))
         screen()
         save1("recruit", "result")
         randomClick("recruit_finish_skip")
-        time.sleep(2)
+        time.sleep(cf.get("sleep_time"))
         state = "empty"
     if state == "empty":
         randomClick("recruit_state_empty")
-        time.sleep(2)
+        time.sleep(cf.get("sleep_time"))
         while True:
             r = best_choose()
             if r == -1:
@@ -45,14 +45,14 @@ def recruit():
                     return
                 elif b:
                     randomClick("recruit_flash")
-                    time.sleep(2)
+                    time.sleep(cf.get("sleep_time"))
                     randomClick("recruit_flash_ensure")
-                    time.sleep(2)
+                    time.sleep(cf.get("sleep_time"))
 
 
 def is_flashable():
     screen()
-    time.sleep(2)
+    time.sleep(cf.get("sleep_time"))
     rgb = getRGB(970, 408)
     if rgb[0] == 0 and rgb[1] == 152 and rgb[2] == 220:
         return True
@@ -70,7 +70,7 @@ def get_state():
 
 def get_recruit_num():
     screen()
-    time.sleep(2)
+    time.sleep(cf.get("sleep_time"))
     region = read(screen_path)
     x1 = 848
     y1 = 27
@@ -78,7 +78,7 @@ def get_recruit_num():
     y2 = 53
     cropped = cut(region, x1, y1, x2, y2)
     write(screen_path, cropped)
-    time.sleep(3)
+    time.sleep(cf.get("sleep_time"))
     result = ocr_without_position(screen_path)
     num = result[0]["words"]
     logger.debug("招聘许可数量：" + num)

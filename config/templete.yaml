@@ -17,11 +17,11 @@ Config:
     file: true
   Screen:
     #是否保存截图
-    enable: true
+    enable_screen: true
     #开启则会保存每一张图片
     debug: false
     #截图等待时间
-    time: 3
+    sleep_time: 3
   System:
     project_path: E:\project\arknight
     pid:
@@ -44,7 +44,7 @@ Config:
     xinpian_1: 6
     xinpian_2: 10
   Mail:
-    enable: false
+    enable_mail: false
     sender:
     authorization:
     receiver:

@@ -2,7 +2,7 @@ import subprocess
 import cv2
 import json
 import numpy as np
-from module.utils.core_config import project_path, screen_path
+from module.utils.core_config import project_path
 from module.utils.core_control import screen
 from logzero import logger
 from module.utils.core_ocr import ocr_without_position

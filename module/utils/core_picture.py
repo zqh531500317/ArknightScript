@@ -1,7 +1,4 @@
-import time
-
 from PIL import Image
-import cv2
 import numpy as np
 from module.utils.core_control import *
 
@@ -36,7 +33,7 @@ def write(uri, region):
 
 
 # 获取像素点的rgb值
-def getRGB(x, y, img_path=screen_path):
+def getRGB(x, y, img_path=cf.screen_path):
     image = Image.open(img_path)
     return image.getpixel((x, y))[:3]
 
@@ -165,7 +162,7 @@ def compareAllWhile(name):
     y2 = obj["area"][3]
     flag = True
     image1 = Image.open(templete_path)
-    image2 = Image.open(compared_path)
+    image2 = Image.open(cf.compared_path)
     for x in range(x1, x2):
         for y in range(y1, y2):
             data1 = image1.getpixel((x, y))[:3]

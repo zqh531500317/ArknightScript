@@ -225,8 +225,7 @@ def special_electricity():
 
 # 使用电力 a:第几行 b:第几列  example 1,1 表示电力使用与第一行第一列的建筑
 def use_electricity(a, b):
-    efficient = configList["Config"]["Game"]["efficient"]
-    if efficient:
+    if cf.configList["Config"]["Game"]["efficient"]:
         if special_electricity():
             return
     randomClick(ui["jijian_{}_{}".format(a, b)]["button"])

@@ -5,8 +5,9 @@ import time
 import cv2
 from logzero import logger
 from functools import wraps
+from module.utils.core_utils import project_root_path
 
-project_path = os.path.abspath('')
+project_path = project_root_path()
 
 
 def timer(func):

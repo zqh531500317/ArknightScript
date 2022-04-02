@@ -159,8 +159,8 @@ job_defaults = {
     'max_instances': 1,
     "misfire_grace_time": 60 * 60
 }
-flag = configList["Config"]["Game"]["closable"]
-minutes = configList["Config"]["Game"]["minutes"]
+flag = cf.get("closable")
+minutes = cf.get("minutes")
 start_time = datetime.datetime.now()
 end_time = datetime.datetime.now()
 scheduler = BackgroundScheduler(jobstores=jobstores,

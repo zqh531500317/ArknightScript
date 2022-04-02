@@ -71,6 +71,18 @@ class CoreConfig:
             f.close()
             return flag
 
+    # 查找单个键
+    def get(self, target) -> str:
+        queue = [self.configList]
+        while len(queue) > 0:
+            data = queue.pop()
+            for key, value in data.items():
+                if key == target:
+                    return value
+                elif type(value) == dict:
+                    queue.append(value)
+        return ""
+
     @staticmethod
     def read_json(path):
         with open(path, 'r', encoding='utf-8') as load_f:
@@ -88,7 +100,7 @@ configList = cf.configList
 project_path = cf.project_path
 compared_path = screen_path = cf.screen_path
 endFight_path = project_path + "/asset/template/cache/endFight.png"
-sleep_time = cf.configList["Config"]["Screen"]["time"]
+sleep_time = cf.configList["Config"]["Screen"]["sleep_time"]
 device_control_method = cf.configList["Config"]["Emulator"]["device_control_method"]
 device_screenshot_method = cf.configList["Config"]["Emulator"]["device_screenshot_method"]
 timeout_time = 60 * 20
