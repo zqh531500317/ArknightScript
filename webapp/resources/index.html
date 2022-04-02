@@ -93,8 +93,10 @@
                 <div v-if="page=='2'">
                     <h3>设置</h3>
                     <el-card class="box-card">
-                        <div v-for="o in 4" :key="o" style="">
-                            {{ '列表内容 ' + o }}
+                        <div>
+                            <el-button @click="alt_config">
+                                编辑设置
+                            </el-button>
                         </div>
                     </el-card>
                 </div>
@@ -597,6 +599,14 @@
             },
         },
         methods: {
+            alt_config() {
+                axios({
+                    method: 'get',
+                    url: base_url + "/alt_config"
+                }).then(e => {
+
+                })
+            },
             changeScheduleState(state) {
                 if (!state)
                     a = "/pause_scheduler"

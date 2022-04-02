@@ -250,6 +250,14 @@ def del_fight_job():
     return jsonify({'result': "success"})
 
 
+# 打开config.yaml
+@app.route('/alt_config', methods=['get'])
+def alt_config():
+    cmd = project_root_path() + '\\config\\config.yaml'
+    os.system(cmd)
+    return jsonify({'result': "success"})
+
+
 # websocket部分
 @socketio.on('connect', namespace=name_space)
 def connect():

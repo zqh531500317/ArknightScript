@@ -1,3 +1,5 @@
+import _thread
+
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 import time
@@ -15,7 +17,7 @@ class ConfigHandler(FileSystemEventHandler):
         print("creat file: %s" % event.src_path)
 
 
-def init():
+def watch():
     print("init_watchdog")
     root = project_root_path()
     watch_path = root + "/config"
@@ -33,6 +35,10 @@ def init():
     except KeyboardInterrupt:
         observer.stop()
     observer.join()
+
+
+def init():
+    _thread.start_new_thread(watch, ())
 
 
 if __name__ == "__main__":
