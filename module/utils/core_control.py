@@ -4,6 +4,8 @@ import random
 import numpy
 import cv2
 import adbutils
+from adbutils import AdbError
+from retrying import retry
 from module.utils.core_config import *
 from module.utils.core_assetLoader import ui
 from module.utils.core_utils import recv_all, random_port
@@ -37,6 +39,7 @@ class Adb:
         self.server = None
         logger.info("class Adb __init__")
 
+    @retry(stop_max_attempt_number=3)
     def connect(self):
         msg = self.adb_client.connect(self.serial)
         logger.info(msg)
