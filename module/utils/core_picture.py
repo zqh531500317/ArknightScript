@@ -162,7 +162,7 @@ def compareAllWhile(name):
     y2 = obj["area"][3]
     flag = True
     image1 = Image.open(templete_path)
-    image2 = Image.open(cf.compared_path)
+    image2 = Image.open(cf.screen_path)
     for x in range(x1, x2):
         for y in range(y1, y2):
             data1 = image1.getpixel((x, y))[:3]

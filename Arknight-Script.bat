@@ -4,4 +4,4 @@ mshta vbscript:createobject("wscript.shell").run("%~nx0 h",0)(window.close)&&exi
 :begin 
 set curdir=%~dp0
 cd /d %curdir%/webapp
-start start.bat
+start dist/Arknight-Script/Arknight-Script-win_x64.exe

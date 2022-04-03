@@ -7,7 +7,7 @@ from module.utils.core_utils import project_root_path
 
 
 def init_log():
-    print("init_log")
+    logger.info("nit_log")
     # 日志等级
     level = logging.INFO
     if cf.get("level") == "DEBUG":

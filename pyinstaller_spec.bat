@@ -1,3 +1,4 @@
+taskkill /F /IM adb.exe
 set curdir=%~dp0
 cd /d %curdir%
 cd  .\venv\ && cd  .\Scripts\

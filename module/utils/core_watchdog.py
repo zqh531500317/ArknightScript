@@ -5,20 +5,21 @@ from watchdog.events import FileSystemEventHandler
 import time
 from module.utils.core_utils import project_root_path
 import module.utils.core_config
+from logzero import logger
 
 
 class ConfigHandler(FileSystemEventHandler):
     def on_modified(self, event):
-        print("modify file:  %s" % event.src_path)
+        logger.info("modify file:  %s", event.src_path)
         if 'config.yaml' in event.src_path:
             module.utils.core_config.cf.read()
 
     def on_created(self, event):
-        print("creat file: %s" % event.src_path)
+        logger.info("creat file: %s", event.src_path)
 
 
 def watch():
-    print("init_watchdog")
+    logger.info("init_watchdog")
     root = project_root_path()
     watch_path = root + "/config"
     config_handler = ConfigHandler()

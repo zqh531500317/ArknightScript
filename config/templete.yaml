@@ -8,7 +8,10 @@ Config:
     device_screenshot_method: ADB
     # or com.hypergryph.arknights
     package_name: com.hypergryph.arknights.bilibili
-    serial: 127.0.0.1:7555
+    # mumu模拟器 127.0.0.1:7555
+    # blue stack 127.0.0.1:5555
+    # 夜神 127.0.0.1:62001
+    serial: 127.0.0.1:62001
   Log:
     level: DEBUG
     #是否在控制台输出日志
