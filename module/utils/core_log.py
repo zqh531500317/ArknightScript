@@ -7,7 +7,7 @@ from module.utils.core_utils import project_root_path
 
 
 def init_log():
-    logger.info("nit_log")
+    logger.info("init_log")
     # 日志等级
     level = logging.INFO
     if cf.get("level") == "DEBUG":
@@ -42,3 +42,5 @@ def init_log():
                 formatter=formatter,
                 maxBytes=1e6, encoding='utf-8', loglevel=level)
     logger.info("初始化日志配置")
+    # 控制台输出到logger
+

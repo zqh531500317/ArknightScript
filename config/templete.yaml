@@ -10,8 +10,8 @@ Config:
     package_name: com.hypergryph.arknights.bilibili
     # mumu模拟器 127.0.0.1:7555
     # blue stack 127.0.0.1:5555
-    # 夜神 127.0.0.1:62001
-    serial: 127.0.0.1:62001
+    # 夜神 127.0.0.1:62025
+    serial: 127.0.0.1:62025
   Log:
     level: DEBUG
     #是否在控制台输出日志

@@ -1,3 +1,6 @@
+from apscheduler.triggers.date import DateTrigger
+
+a = DateTrigger()
 from module.utils.core_config import *
 import os
 import sys
@@ -157,13 +160,18 @@ def get_jobs():
     jobs = module.schedule.baseScheduler.get_jobs()
     result = []
     for s in jobs:
-        if s.next_run_time is None:
-            next_run_time = "pause"
-        else:
-            next_run_time = s.next_run_time
-        temp = {"id": s.id, "name": s.name, "next_run_time": next_run_time,
-                "hour": str(s.trigger.fields[5]), "minute": str(s.trigger.fields[6])}
-        result.append(temp)
+        if isinstance(s.trigger, CronTrigger):
+            if s.next_run_time is None:
+                next_run_time = "pause"
+            else:
+                next_run_time = s.next_run_time
+            temp = {"id": s.id, "name": s.name, "next_run_time": next_run_time,
+                    "hour": str(s.trigger.fields[5]), "minute": str(s.trigger.fields[6])}
+            result.append(temp)
+        elif isinstance(s.trigger, DateTrigger):
+            temp = {"id": s.id, "name": s.name, "next_run_time": str(s.trigger.run_date),
+                    "hour": "None", "minute": "None"}
+            result.append(temp)
     return jsonify({'result': result})
 
 

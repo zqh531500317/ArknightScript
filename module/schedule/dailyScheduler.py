@@ -17,7 +17,7 @@ def add_all():
 
 
 def receive_renwu():
-    module.schedule.baseScheduler.add_job(module.task.daily.receive_renwu, trigger=CronTrigger(hour="12,20,23"),
+    module.schedule.baseScheduler.add_job(module.task.daily.receive_renwu, trigger=CronTrigger(hour="12,18,23"),
                                           id="receive_renwu")
 
 
@@ -36,12 +36,12 @@ def xinpian():
 
 
 def get_lizhi():
-    module.schedule.baseScheduler.add_job(module.task.state.get_lizhi, trigger=CronTrigger(hour="6,20"),
+    module.schedule.baseScheduler.add_job(module.task.state.get_lizhi, trigger=CronTrigger(hour="12"),
                                           id="get_lizhi")
 
 
 def buy_xinyong_shop():
-    module.schedule.baseScheduler.add_job(module.task.daily.buy_xinyong_shop, trigger=CronTrigger(hour="6", minute="5"),
+    module.schedule.baseScheduler.add_job(module.task.daily.buy_xinyong_shop, trigger=CronTrigger(hour="6"),
                                           id="buy_xinyong_shop")
 
 
