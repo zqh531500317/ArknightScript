@@ -186,6 +186,7 @@ def do_xinpian(xinpian_info, queshao_info):
                 else:
                     fightTime[game_name] += 1
                 logger.info("进行一场{}".format(game_name))
+                # 获取战斗掉落信息
                 data, display = analyse()
                 drop_name = ""
                 for drop in data["drops"]:
