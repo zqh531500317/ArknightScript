@@ -8,6 +8,8 @@ import copy
 from apscheduler.triggers.cron import CronTrigger
 
 from apscheduler.events import EVENT_JOB_ERROR, EVENT_JOB_EXECUTED, EVENT_JOB_SUBMITTED
+from apscheduler.triggers.date import DateTrigger
+
 import module.task.state
 from module.utils.core_email import send
 from module.utils.core_control import *
@@ -51,6 +53,8 @@ def add_job(func, trigger, id, args=None, misfire_grace_time=7200):
     if job is None:
         scheduler.add_job(func, args=args, trigger=trigger, id=id, name=id, misfire_grace_time=misfire_grace_time)
         white_list = ["jijian_schedule"]
+        if isinstance(trigger, DateTrigger):
+            return
         if id not in white_list:
             pause(id)
 
