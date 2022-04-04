@@ -19,5 +19,6 @@ def jiaomie(map_name, max_fight_time, use_medicine, medicine_num, use_stone, sto
         num = max_fight_time
     time.sleep(2)
     randomClick((744, 359, 979, 467))
+    time.sleep(sleep_time)
     # 开始作战
     module.task.fight.cycleFight(num, "剿灭", use_medicine, medicine_num, use_stone, stone_num)
