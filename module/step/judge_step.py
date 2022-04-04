@@ -2,6 +2,7 @@ import os.path
 import module.step.click_step
 from module.utils.core_template import *
 import shutil
+from module.utils.core_ocr import ocr_without_position
 
 
 def isInLogin():
@@ -29,7 +30,7 @@ def isFightEnd(game):
         b = compareAllWhile("end_fight")
         if b:
             logger.info("战斗已结束，存储结算图片")
-            time.sleep(cf.get("sleep_time")*2)
+            time.sleep(cf.get("sleep_time") * 2)
             screen()
             path = save1(game, "get_items")
             if not os.path.exists(endFight_path[:endFight_path.rfind("/")]):
@@ -46,11 +47,10 @@ def isFightFail():
 
 
 def isLevelUp():
-    rgb = getRGB(234, 414)
-    if rgb[0] == 255 and rgb[1] == 255 and rgb[2] == 255:
-        return True
-    else:
-        return False
+    img = screen(memery=True)
+    re = cut(img, 291, 351, 381, 398)
+    res = ocr_without_position(re, None, None)[0]["words"]
+    return res == "等级"
 
 
 def isInMain():
