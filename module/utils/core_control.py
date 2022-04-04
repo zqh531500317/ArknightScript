@@ -162,7 +162,7 @@ class Adb:
         if self.server is None:
             server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             # Create new reverse
-            _server_port = self.__adb_reverse(f'tcp:7903')
+            _server_port = self.__adb_reverse(f'tcp:7904')
 
             server.bind(('127.0.0.1', _server_port))
             server.listen(5)
@@ -270,7 +270,7 @@ class Adb:
 
     def _screen_adb_nc(self, timeout=5, chunk_size=262144):
         cmd = ['screencap']
-        cmd += ['|', 'nc', '127.0.0.1', 7903]
+        cmd += ['|', 'nc', '127.0.0.1', 7904]
         cmd = list(map(str, cmd))
         server = self.__reverse_server()
         server.settimeout(5)
