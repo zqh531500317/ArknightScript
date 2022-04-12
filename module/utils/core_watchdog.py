@@ -4,7 +4,7 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 import time
 from module.utils.core_utils import project_root_path
-import module.utils.core_config
+from module.utils.core_config import cf
 from logzero import logger
 
 
@@ -12,7 +12,7 @@ class ConfigHandler(FileSystemEventHandler):
     def on_modified(self, event):
         logger.info("modify file:  %s", event.src_path)
         if 'config.yaml' in event.src_path:
-            module.utils.core_config.cf.read()
+            cf.read()
 
     def on_created(self, event):
         logger.info("creat file: %s", event.src_path)
@@ -30,8 +30,6 @@ def watch():
     try:
         while True:
             time.sleep(5)
-            # print(module.utils.core_config.cf.get("efficient"))
-            # print(module.utils.core_config.cf.get("enable_mail"))
 
     except KeyboardInterrupt:
         observer.stop()

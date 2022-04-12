@@ -86,5 +86,5 @@ def test_jijian():
 
 
 if __name__ == '__main__':
-    # module.task.daily.xinpian()
     screen()
+

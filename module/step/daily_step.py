@@ -1,5 +1,6 @@
 import copy
-
+import time
+import module.error.game
 from module.utils.core_picture import *
 from module.utils.core_ocr import ocr_without_position, number_ocr
 from module.utils.core_template import template_match_best, is_template_match
@@ -9,6 +10,8 @@ from module.task.ziyuanshouji import findGame
 from module.task.fight import fight
 from module.inventory.demo import show_bag
 from module.penguin_stats.core import analyse, get_name_by_id
+from module.utils.core_control import *
+from module.utils.core_email import send
 
 
 def receive_daily_renwu():
@@ -31,21 +34,16 @@ def receive_weekly_renwu():
 
 def friend_home():
     time.sleep(2 * sleep_time)
-    screen()
-    region = read(screen_path)
+    region = screen(memery=True)
     cropped = cut(region, 1187, 28, 1277, 52)
-    write(screen_path, cropped)
-    time.sleep(2 * sleep_time)
-    result = ocr_without_position(screen_path, number_ocr)
+    result = ocr_without_position(cropped, number_ocr)
     pre = result[0]["words"]
     while True:
         randomClick("friend_home")
         time.sleep(3 * sleep_time)
-        screen()
-        region = read(screen_path)
+        region = screen(memery=True)
         cropped = cut(region, 1187, 28, 1277, 52)
-        write(screen_path, cropped)
-        result = ocr_without_position(screen_path)
+        result = ocr_without_position(cropped)
         later = result[0]["words"]
         if pre == later:
             return
@@ -201,12 +199,24 @@ def do_xinpian(xinpian_info, queshao_info):
                                    "3281", "3282", "3283"]:
                         drop_name = get_name_by_id(drop_id)
                         break
-                queshao_info[drop_name]['num'] -= 1
+                if queshao_info.get(drop_name):
+                    queshao_info[drop_name]['num'] -= 1
                 if not getTime.get(drop_name):
-                    getTime[drop_name] = 0
-                getTime[drop_name] += 1
-    except Exception as e:
-        pass
+                    getTime[drop_name] = 1
+                else:
+                    getTime[drop_name] += 1
+                time.sleep(sleep_time)
+    except module.error.game.CanNotChooseDaiLiZhiHui as e:
+        e.message()
+    except module.error.game.NotInPreFight as e:
+        e.message()
+    except module.error.game.GameFail as e:
+        e.message()
+    except module.error.game.NotReason as e:
+        e.message()
+    except module.error.game.ErrorPage as e:
+        e.message()
+        stop()
     finally:
         logger.info("=======刷图情况=======")
         for k, v in fightTime.items():
@@ -214,6 +224,8 @@ def do_xinpian(xinpian_info, queshao_info):
         logger.info("=======芯片获取情况=======")
         for k, v in getTime.items():
             logger.info("%s %s", k, v)
+        send('刷芯片完成', '刷图情况:' + str(fightTime) + "\r\n" +
+             '芯片获取情况:' + str(getTime))
 
 
 if __name__ == '__main__':

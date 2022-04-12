@@ -34,6 +34,9 @@ def bench_time(n):
             logger.info("%-20s cost: %-5ss,times: %-2s,avg time: %-4ss", func.__name__, round(end - start, 2), n,
                         round((end - start) / n, 2))
 
+            print("%-20s cost: %-5ss,times: %-2s,avg time: %-4ss" % (func.__name__, round(end - start, 2), n,
+                                                                     round((end - start) / n, 2)))
+
         return mywrap
 
     return decorate
@@ -68,16 +71,22 @@ def debug_recode(func):
 
 def __sr(kind):
     img_list = []
-    path = project_path + "/screenshots/debug/" + str(time.time_ns()) + " " + str(kind)
+    path = project_path + "/screenshots/debug/{}/{}".format(str(kind), str(int(time.time_ns() / 1000)))
     while True:
         import module.utils.core_control
         import module.task.state
         if not module.task.state.debug_run:
+            logger.info("debug_recode 开始存储记录")
+            i = 0
             for img in img_list:
-                logger.info(img[0])
                 cv2.imwrite(img[0], img[1])
+                i += 1
+            logger.info("总共存储照片%s张,存储至/screenshots/debug/%s/%s", i, str(kind), str(int(time.time_ns() / 1000)))
+            logger.info("debug_recode 存储记录完毕")
             return
         temp = module.utils.core_control.screen(memery=True)
+        x, y = temp.shape[0:2]
+        temp = cv2.resize(temp, (int(y / 2), int(x / 2)))
         if not os.path.exists(path):
             os.makedirs(path)
         img_list.append(

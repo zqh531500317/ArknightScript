@@ -1,5 +1,4 @@
 import shutil
-
 import yaml
 import os
 import psutil
@@ -12,22 +11,17 @@ from module.utils.core_decoratir import debug_recode, timer, bench_time, singlet
 from func_timeout import func_set_timeout
 
 
+@singleton
 class CoreConfig:
-
     def __init__(self):
         logger.info("初始化配置文件类")
-        self.project_path = project_root_path()
-        root = project_root_path()
-        config = root + '/config/config.yaml'
-        templete = root + '/config/templete.yaml'
+        config = self.project_path + '/config/config.yaml'
+        templete = self.project_path + '/config/templete.yaml'
         if not os.path.exists(config):
             shutil.copy(templete, config)
-            print("file config.yaml not exist,copy templete.yaml=>config.yaml")
-
-        self.screen_path = self.project_path + '/cache/screen.png'
+            logger.info("file config.yaml not exist,copy templete.yaml=>config.yaml")
         self.configList = {}
         self.read()
-        self.serial = self.configList["Config"]["Emulator"]["serial"]
         # 判断程序是否正在运行
         pid = self.configList["Config"]["System"]["pid"]
         if pid is not None:
@@ -38,6 +32,15 @@ class CoreConfig:
                     sys.exit()
         self.write("project_path", self.project_path)
         self.write("pid", os.getpid())
+        self.timeout_time = 60 * 20
+        self.timeout_time_max = 60 * 60
+        with open(self.project_path + "/asset/cand_alphabet/officer.txt", "r", encoding='utf-8') as f:
+            self.cand_alphabet_officer = f.read()
+        self.recruit_tag = "医疗干员远程位治新手高级资深近战先锋狙击" \
+                           "术师卫重装辅助特种支援输出群攻减速生存防护削弱" \
+                           "移控场爆发召唤快复活费用回机械"
+        self.number_tag = "1234567890/"
+        self.ziyuanshouji_tag = "空中威胁资源保障粉碎防御货物运送战术演习固若金汤势不可挡摧枯拉朽身先士卒"
 
     def read(self):
         # 直接打开读取
@@ -93,6 +96,72 @@ class CoreConfig:
     def write_json(load_dict, path):
         with open(path, "w", encoding='utf-8') as dump_f:
             json.dump(load_dict, dump_f, ensure_ascii=False, indent=2)
+
+    @property
+    def project_path(self):
+        return project_root_path()
+
+    @property
+    def screen_path(self):
+        return self.project_path + '/cache/screen.png'
+
+    @property
+    def compared_path(self):
+        return self.screen_path
+
+    @property
+    def endFight_path(self):
+        return self.project_path + "/asset/template/cache/endFight.png"
+
+    @property
+    def serial(self):
+        return self.get("serial")
+
+    @property
+    def sleep_time(self):
+        return self.get("sleep_time")
+
+    @property
+    def device_control_method(self):
+        return self.get("device_control_method")
+
+    @property
+    def device_screenshot_method(self):
+        return self.get("device_screenshot_method")
+
+    @property
+    def activity_name(self):
+        return self.get("activity_name")
+
+    @property
+    def package_name(self):
+        return self.get("package_name")
+
+    @property
+    def enable_mail(self):
+        return self.get("enable_mail")
+
+    @property
+    def sender(self):
+        return self.get("sender")
+
+    @property
+    def authorization(self):
+        return self.get("authorization")
+
+    @property
+    def host(self):
+        return self.get("host")
+
+    @property
+    def receiver(self):
+        return self.get("receiver")
+    @property
+    def xinpian_1(self):
+        return self.get("xinpian_1")
+    @property
+    def xinpian_2(self):
+        return self.get("xinpian_2")
 
 
 cf = CoreConfig()

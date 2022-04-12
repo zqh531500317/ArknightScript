@@ -28,7 +28,7 @@ ui["message_after_login"] = {"area": (366, 96, 509, 133), "button": (1225, 45, 1
                              "file": "/asset/ui/message_after_login.png"}
 ui["month_after_login"] = {"area": (1189, 63, 1215, 89), "button": (1189, 63, 1215, 89),
                            "file": "/asset/ui/month_after_login.png"}
-ui["terminal"] = {"area": (197, 21, 333, 54), "button": (238, 26, 294, 52), "file": "/asset/ui/terminal.png"}
+ui["terminal"] = {"area": (257, 30, 280, 42), "button": (257, 30, 280, 42), "file": "/asset/ui/terminal.png"}
 ui["main_jijian"] = {"area": (940, 580, 1058, 661), "button": (940, 580, 1058, 661),
                      "file": "/asset/ui/main_jijian.png"}
 ui["main_cangku"] = {"area": (1174, 619, 1218, 645), "button": (1174, 619, 1218, 645),

@@ -1,18 +1,12 @@
-from apscheduler.triggers.date import DateTrigger
-
-a = DateTrigger()
-from module.utils.core_config import *
 import os
 import sys
-
-# 禁用print语句,使后台执行不出错
-# sys.stdout = open(os.devnull, 'w')
-# sys.stderr = open(os.devnull, 'w')
 import _thread
 import time
+
+from apscheduler.triggers.date import DateTrigger
+from module.utils.core_config import *
 from apscheduler.triggers.cron import CronTrigger
 from flask import Flask, jsonify, render_template, request
-import module.task.state
 from flask_socketio import SocketIO
 import module.schedule.baseScheduler
 import module.schedule.fightScheduler
@@ -20,6 +14,9 @@ import module.schedule.dailyScheduler
 from module.utils.core_init import init
 from flask_cors import CORS
 from engineio.async_drivers import threading
+import module.task.state
+
+os.system('chcp 65001')
 
 app = Flask(__name__, template_folder="webapp/resources", static_folder="webapp/resources", static_url_path="")
 CORS(app, supports_credentials=True)

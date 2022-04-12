@@ -4,64 +4,23 @@ import random
 import numpy
 import cv2
 import adbutils
-from adbutils import AdbError
-from retrying import retry
+
+from module.utils.core_baseAdb import BaseAdb
 from module.utils.core_config import *
 from module.utils.core_assetLoader import ui
 from module.utils.core_utils import recv_all, random_port
-
-os.system('chcp 65001')
-
-ADB = cf.configList["Config"]["Control"]["ADB"]
-project_path = cf.configList["Config"]["System"]["project_path"]
-if ADB == "adb.exe":
-    adb_path = "adb"
-else:
-    adb_path = project_path + ADB
-connect_uri = cf.configList["Config"]["Emulator"]["serial"]
-package_name = cf.configList["Config"]['Emulator']['package_name']
-activity_name = cf.configList["Config"]['Emulator']['activity_name']
-screen_debug = cf.configList["Config"]['Screen']['debug']
-port = " -s " + connect_uri + " "
-screen_time = cf.configList["Config"]['Screen']['sleep_time']
+from retrying import retry
 
 
 @singleton
-class Adb:
+class Adb(BaseAdb):
     __screenshot_method = [0, 1, 2]
     __screenshot_method_fixed = [0, 1, 2]
 
     def __init__(self):
-        self.serial = cf.serial
-        self.adb_client = adbutils.AdbClient('127.0.0.1', 5037)
-        self.connect()
-        self.adb = adbutils.AdbDevice(self.adb_client, self.serial)
+        super().__init__()
         self.server = None
         logger.info("class Adb __init__")
-
-    @retry(stop_max_attempt_number=3)
-    def connect(self):
-        msg = self.adb_client.connect(self.serial)
-        logger.info(msg)
-
-    def disconnect(self):
-        msg = self.adb_client.disconnect(self.serial)
-        logger.info(msg)
-
-    def start(self):
-        self.stop()
-        self.adb.app_start(package_name, activity_name)
-        logger.info("启动应用%s", package_name)
-
-    def stop(self):
-        self.adb.app_stop(package_name)
-        logger.info("关闭应用%s", package_name)
-
-    def isLive(self):
-        text = self.adb.current_app()["package"]
-        if package_name == text:
-            return True
-        return False
 
     def randomClick(self, name):
         if isinstance(name, str):
@@ -117,46 +76,36 @@ class Adb:
         self.scroll(x1, y1, x2, y2, ctime)
 
     # 保存截图path 例如 /screenshots/test
-    def save(self, path: str) -> str:
-        f_src = open(project_path + "/cache/screen.png", 'rb')
-        store_path = project_path + path
+    def save(self, path: str, img_path=None) -> str:
+        if img_path is None:
+            f_src = open(cf.project_path + "/cache/screen.png", 'rb')
+            img = f_src.read()
+            f_src.close()
+        else:
+            img = img_path
+        store_path = cf.project_path + path
         store_uri = store_path + "/" + str(int(time.time())) + ".png"
         if not os.path.exists(store_path):
             os.makedirs(store_path)
-        f_copy = open(store_uri, 'wb')
-        if cf.get("enable_screen"):
-            f_copy.write(f_src.read())
-        f_src.close()
-        f_copy.close()
+        if img_path is None:
+            f_copy = open(store_uri, 'wb')
+            if cf.get("enable_screen"):
+                f_copy.write(img)
+            f_copy.close()
+        else:
+            cv2.imwrite(store_uri, img)
         return store_uri
 
     # 保存截图至/type1/type2/X.png
-    def save1(self, type1: str, type2: str) -> str:
-        f_src = open(project_path + "/cache/screen.png", 'rb')
-        store_path = project_path + "/screenshots/{}/{}".format(type1, type2)
-        store_uri = store_path + "/" + str(int(time.time())) + ".png"
-        if not os.path.exists(store_path):
-            os.makedirs(store_path)
-        f_copy = open(store_uri, 'wb')
-        if cf.get("enable_screen"):
-            f_copy.write(f_src.read())
-        f_src.close()
-        f_copy.close()
-        return store_uri
+    def save1(self, type1: str, type2: str, img_path=None) -> str:
+        path = "/screenshots/{}/{}".format(type1, type2)
+
+        return self.save(path, img_path=img_path)
 
     # 保存截图至/type/X.png
-    def save2(self, type: str) -> str:
-        f_src = open(project_path + "/cache/screen.png", 'rb')
-        store_path = project_path + "/screenshots/{}".format(type)
-        store_uri = store_path + "/" + str(int(time.time())) + ".png"
-        if not os.path.exists(store_path):
-            os.makedirs(store_path)
-        f_copy = open(store_uri, 'wb')
-        if cf.get("enable_screen"):
-            f_copy.write(f_src.read())
-        f_src.close()
-        f_copy.close()
-        return store_uri
+    def save2(self, type: str, img_path=None) -> str:
+        path = "/screenshots/{}".format(type)
+        return self.save(path, img_path=img_path)
 
     def __reverse_server(self):
         if self.server is None:
@@ -245,13 +194,14 @@ class Adb:
         raise OSError(f'cannot load screenshot')
 
     def __screen_disk(self, path):
-        i = (project_path + path).rindex("/")
-        dic_path = (project_path + path)[:i]
+        i = (cf.project_path + path).rindex("/")
+        dic_path = (cf.project_path + path)[:i]
         if not os.path.exists(dic_path):
             os.makedirs(dic_path)
         re = self.__screen_memery()
-        cv2.imwrite(project_path + path, re)
-        return project_path + path
+        cv2.imwrite(cf.project_path + path, re)
+        time.sleep(cf.sleep_time)
+        return cf.project_path + path
 
     def __screen_memery(self):
         if str(cf.get("device_control_method")).upper() == "ADB":
@@ -259,6 +209,7 @@ class Adb:
         elif str(cf.get("device_control_method")).upper() == "ADB_NC":
             return self._screen_adb_nc()
 
+    @retry(stop_max_attempt_number=3, wait_fixed=5000)
     def _screen_adb(self, timeout=10, chunk_size=262144):
         cmd = ['screencap', '-p']
         cmd = list(map(str, cmd))
@@ -268,6 +219,7 @@ class Adb:
         image = cv2.cvtColor(image, cv2.COLOR_BGRA2RGB)
         return image
 
+    @retry(stop_max_attempt_number=3, wait_fixed=5000)
     def _screen_adb_nc(self, timeout=5, chunk_size=262144):
         cmd = ['screencap']
         cmd += ['|', 'nc', '127.0.0.1', 7904]
@@ -281,6 +233,8 @@ class Adb:
         except socket.timeout:
             raise adbutils.AdbTimeout('reverse server accept timeout')
         data = recv_all(conn, chunk_size=chunk_size)
+        if len(data) < 100:
+            logger.warning(f'Unexpected screenshot: {data}')
         # Server close connection
         conn.close()
         # Load data
@@ -309,3 +263,11 @@ disconnect = adb_.disconnect
 save = adb_.save
 save1 = adb_.save1
 save2 = adb_.save2
+
+if __name__ == '__main__':
+    a = Adb()
+    b = Adb()
+    c = Adb()
+    print(a)
+    print(b)
+    print(c)

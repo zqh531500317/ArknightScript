@@ -1,14 +1,23 @@
+import time
+
+from module.utils.core_picture import *
 from module.utils.core_template import *
 from module.utils.core_ocr import ocr_without_position, jijian_ocr, cnstd, number_ocr
 from module.error.ocr import CharactersNotFound
 from module.utils.core_email import send
+from module.utils.core_control import *
+import module.step.judge_step
+import module.step.click_step
+from module.utils.core_log import OcrLogger
+
+ocr_logger = OcrLogger.ocr_logger
 
 
 def __pre_process(res):
-    logger.info(res)
+    ocr_logger.info(res)
     if res == "罗比拉塔":
         return "罗比菈塔"
-    elif res == "桑赛":
+    elif res == "桑赛" or res == "桑进":
         return "桑葚"
     else:
         return res
@@ -22,7 +31,8 @@ def pre_schedual(x, y, type):
         randomClick(ui["jijian_{}_{}".format(x, y)]["button"])
         time.sleep(sleep_time)
     # 点击 进驻信息  入住
-    if not is_template_match("jijian/jinzhuxinxi.png"):
+    if not is_template_match("/jijian/qingkong.png", template_threshold=0.9):
+        logger.debug("点击 进驻信息 入住")
         randomClick((40, 273, 70, 315))
         time.sleep(sleep_time)
     # 清空选择
@@ -47,6 +57,7 @@ def pre_schedual(x, y, type):
         click(974, 40)
         time.sleep(1)
         click(885, 39)
+    time.sleep(sleep_time)
 
 
 def later_schedual():
@@ -62,28 +73,23 @@ def later_schedual():
 
 
 # names干员名称 type设施名称
-def do_schedual(x, y, names, type):
-    pre_schedual(x, y, type)
-    screen()
+def do_schedual(x1, y1, names, type, retry_time=0):
+    pre_schedual(x1, y1, type)
     num = len(names)
     choosed_num = 0
     flag = False
     cyc_times = 5
     temp = []
     for index in range(cyc_times):
-        screen()
-        img = Image.open(screen_path)
-        img = img.convert("RGBA")
-        pixdata = img.load()
+        img = screen(memery=True)
         for i in range(398):
             for j in range(720):
-                pixdata[i, j] = (255, 255, 255, 255)
+                img[j, i] = (255, 255, 255)
         for i in range(398, 1280):
             for j in range(720):
                 if j < 321 or (348 < j < 603) or j > 629:
-                    pixdata[i, j] = (255, 255, 255, 255)
-        img.save(screen_path)
-        img = Image.open(screen_path)
+                    img[j, i] = (255, 255, 255)
+        save2("test", img)
         box_infos = cnstd.detect(img)
         for box_info in box_infos['detected_texts']:
             box = box_info["box"]
@@ -104,11 +110,20 @@ def do_schedual(x, y, names, type):
         if flag:
             break
         scroll(1275, 350, 465, 350, 3000)
-    msg = "x={},y={},name={},type={},选中干员={}".format(x, y, names, type, str(temp))
+    msg = "x={},y={},name={},type={},选中干员={}".format(x1, y1, names, type, str(temp))
     logger.info(msg)
-    if choosed_num < num and type != "宿舍":
-        send("排班可能出错", msg)
     later_schedual()
+    if choosed_num < num and type != "宿舍":
+        retry_time += 1
+        if retry_time == 3:
+            logger.error("排班可能出错%s,已重试次数%s", msg, retry_time)
+            send("排班可能出错", msg)
+            return msg
+        else:
+            logger.warning("换班异常,{%s},重新尝试第%s次", msg, retry_time)
+            module.step.judge_step.ensureGameOpenAndInMain()
+            module.step.click_step.into_jijian()
+            return do_schedual(x1, y1, names, type, retry_time)
     return msg
 
 
@@ -129,13 +144,9 @@ def receive_notification():
 # 判断充能上限以及当前进度
 # return [当前电力,总电力]
 def now_electricity(index=3):
-    screen()
-    time.sleep(sleep_time)
-    region = read(screen_path)
+    region = screen(memery=True)
     cropped = cut(region, 762, 23, 862, 48)
-    write(screen_path, cropped)
-    time.sleep(5)
-    result = ocr_without_position(screen_path, number_ocr)
+    result = ocr_without_position(cropped, number_ocr)
     print(result)
     num = []
     try:
@@ -169,8 +180,8 @@ def special_electricity():
     # 点击经验书或赤金
     randomClick((41, 570, 124, 650))
     time.sleep(sleep_time)
-    screen()
-    res = template_match_most("jijian/trade_list.png", x1=0, x2=240)
+    screen_re = screen(memery=True)[0: 720, 0: 240]
+    res = template_match_most("jijian/trade_list.png", screen_re=screen_re)
     for item in res:
         randomClick((
             int(item[0]),
@@ -181,25 +192,20 @@ def special_electricity():
         time.sleep(sleep_time)
         randomClick((395, 625, 460, 653))
         time.sleep(sleep_time)
-        screen()
-        img = Image.open(screen_path)
-        img = img.convert("RGBA")
-        pixdata = img.load()
+        img = screen(memery=True)
         for i in range(398):
             for j in range(720):
-                pixdata[i, j] = (255, 255, 255, 255)
+                img[j, i] = (255, 255, 255)
         for i in range(700, 1280):
             for j in range(720):
-                pixdata[i, j] = (255, 255, 255, 255)
+                img[j, i] = (255, 255, 255)
         for i in range(554, 700):
             for j in range(580, 650):
-                pixdata[i, j] = (255, 255, 255, 255)
+                img[j, i] = (255, 255, 255)
         for i in range(398, 1280):
             for j in range(720):
                 if j < 321 or (348 < j < 603) or j > 629:
-                    pixdata[i, j] = (255, 255, 255, 255)
-        img.save(screen_path)
-        img = Image.open(screen_path)
+                    img[j, i] = (255, 255, 255)
         box_infos = cnstd.detect(img)
         for box_info in box_infos['detected_texts']:
             box = box_info["box"]
@@ -303,16 +309,16 @@ def auto_sleep():
         cyc_times = 5
         pre_schedual(ss + 1, 4, "宿舍")
         for index in range(cyc_times):
-            screen()
-            working_dets = template_match_most("jijian/working.png")
-            sleeping_dets = template_match_most("jijian/sleeping.png")
-            emotion_dets = template_match_most("jijian/emotion.png")
+            screen_re = screen(memery=True)
+            working_dets = template_match_most("jijian/working.png", screen_re=screen_re)
+            sleeping_dets = template_match_most("jijian/sleeping.png", screen_re=screen_re)
+            emotion_dets = template_match_most("jijian/emotion.png", screen_re=screen_re)
             sleep_list = []
             for coord in emotion_dets:
-                _cut = cut_by_path(screen_path, int(coord[0]),
-                                   int(coord[1]),
-                                   int(coord[2]),
-                                   int(coord[3]))
+                _cut = cut(screen_re, int(coord[0]),
+                           int(coord[1]),
+                           int(coord[2]),
+                           int(coord[3]))
                 flag = False
                 for y in range(_cut.shape[0]):
                     if flag:
@@ -360,5 +366,58 @@ def auto_sleep():
     return sum
 
 
+def isClueCommunicating():
+    return is_template_match("/jijian/clue_communicate.png")
+
+
+def anyClubCard():
+    return template_match_best('/jijian/clue_any_card.png')
+
+
+# 接收线索
+def getClue():
+    # into
+    randomClick((1186, 170, 1216, 190))
+    time.sleep(2 * sleep_time)
+    # 全部收取
+    randomClick((770, 570, 850, 580))
+    time.sleep(3 * sleep_time)
+    # quit
+    randomClick((980, 94, 1000, 110))
+    time.sleep(sleep_time)
+
+
+# 接收线索
+def receiveClue():
+    # into
+    randomClick((1186, 270, 1216, 290))
+    time.sleep(2 * sleep_time)
+    # 全部收取
+    randomClick((1000, 670, 1100, 700))
+    time.sleep(3 * sleep_time)
+    # quit
+    randomClick((700, 570, 750, 590))
+    time.sleep(sleep_time)
+
+
+# 传递线索
+def sendClue():
+    # into
+    randomClick((1186, 371, 1216, 400))
+    time.sleep(2 * sleep_time)
+    while True:
+        res = anyClubCard()
+        if len(res) == 0:
+            break
+        x1, y1, x2, y2, s = res
+        randomClick((x1, y1, x2, y2))
+        time.sleep(1)
+        randomClick((1185, 117, 1201, 151))
+        time.sleep(sleep_time)
+    # quit sendClue
+    click(1244, 35)
+    time.sleep(2 * sleep_time)
+
+
 if __name__ == '__main__':
-    auto_sleep()
+    do_schedual(2, 5, ["sadsad"], "办公室")

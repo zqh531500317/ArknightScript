@@ -1,7 +1,7 @@
 import logging
 import os
 import sys
-from logzero import LogFormatter, setup_default_logger, logfile, logger
+from logzero import LogFormatter, setup_default_logger, logfile, logger, setup_logger
 from module.utils.core_config import cf
 from module.utils.core_utils import project_root_path
 
@@ -44,3 +44,26 @@ def init_log():
     logger.info("初始化日志配置")
     # 控制台输出到logger
 
+
+# 自定义ocr_logger
+class OcrLogger:
+    # 日志等级
+    level = logging.INFO
+    if cf.get("level") == "DEBUG":
+        level = logging.DEBUG
+    elif cf.get("level") == "INFO":
+        level = logging.INFO
+    elif cf.get("level") == "WARNING":
+        level = logging.WARNING
+    elif cf.get("level") == "ERROR":
+        level = logging.ERROR
+    elif cf.get("level") == "CRITICAL":
+        level = logging.CRITICAL
+    data_style = '%Y-%m-%d %H:%M:%S'
+    handler_format = '%(color)s[%(asctime)s| %(levelname)s |%(filename)s:%(lineno)d] %(message)s%(end_color)s'
+    hand_format = LogFormatter(fmt=handler_format, datefmt=data_style)
+    if cf.get("file"):
+        logfile = project_root_path() + "/log/" + 'ocr.log'
+    else:
+        logfile = None
+    ocr_logger = setup_logger(formatter=hand_format, logfile=logfile, level=level, disableStderrLogger=True)

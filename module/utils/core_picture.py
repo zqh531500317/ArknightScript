@@ -1,6 +1,9 @@
 from PIL import Image
 import numpy as np
-from module.utils.core_control import *
+import cv2
+from module.utils.core_config import *
+from module.utils.core_control import screen
+from module.utils.core_assetLoader import ui
 
 
 # 展示图片
@@ -20,13 +23,6 @@ def cut(region, x1, y1, x2, y2):
     return cropped
 
 
-# 裁剪图片  只保留(x1,y1) (x2,y2)之间的矩形区域
-def cut_by_path(path, x1, y1, x2, y2):
-    region = read(path)
-    cropped = region[y1: y2, x1:x2]
-    return cropped
-
-
 # 从内存保存图片到磁盘
 def write(uri, region):
     cv2.imwrite(uri, region)
@@ -34,8 +30,11 @@ def write(uri, region):
 
 # 获取像素点的rgb值
 def getRGB(x, y, img_path=cf.screen_path):
-    image = Image.open(img_path)
-    return image.getpixel((x, y))[:3]
+    if isinstance(img_path, str):
+        image = Image.open(img_path)
+        return image.getpixel((x, y))[:3]
+    else:
+        return img_path[y][x]
 
 
 # 均值哈希算法
@@ -149,29 +148,6 @@ def cmpHash(hash1, hash2):
         if hash1[i] != hash2[i]:
             n = n + 1
     return n
-
-
-# 比较图片部分区域纯白像素点(255,255,255)完全是否相同
-def compareAllWhile(name):
-    screen()
-    obj = ui[name]
-    templete_path = obj["file"]
-    x1 = obj["area"][0]
-    y1 = obj["area"][1]
-    x2 = obj["area"][2]
-    y2 = obj["area"][3]
-    flag = True
-    image1 = Image.open(templete_path)
-    image2 = Image.open(cf.screen_path)
-    for x in range(x1, x2):
-        for y in range(y1, y2):
-            data1 = image1.getpixel((x, y))[:3]
-            data2 = image2.getpixel((x, y))[:3]
-            if data1[0] == 255 and data1[1] == 255 and data1[2] == 255:
-                if data2[0] != 255 or data2[1] != 255 or data2[2] != 255:
-                    flag = False
-
-    return flag
 
 
 # 比较图片子区域是否完全相同

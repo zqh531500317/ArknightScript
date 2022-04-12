@@ -6,34 +6,40 @@ import requests
 def getList():
     data = requests.get('https://prts.wiki/w/干员一览').text
     res = re.findall("data-cn=\"(.*?)\"", data)
-    str = ""
+    str1 = ""
     for t in res:
-        str = str + t
+        str1 = str1 + t
     more = "见行者菲亚梅塔风丸"
-    print(str + more)
     res = ""
-    for i in range(len(str)):
-        if (str[i] not in res):
-            res = res + str[i]
-
-    print(res)
+    for i in range(len(str1)):
+        if str1[i] not in res:
+            res = res + str1[i]
     with open(r"..\..\asset\cand_alphabet\officer.txt", "w", encoding="utf-8") as f:
         f.write(res)
+    # 每行一
+    res2 = ''
+    for i in range(len(res)):
+        if i == len(res) - 1:
+            res2 += res[i]
+        else:
+            res2 += res[i] + "\n"
+    with open(r"..\..\asset\cand_alphabet\officer-paddle.txt", "w", encoding="utf-8") as f:
+        f.write(res2)
 
 
 getList()
 
-import sys
-import six
-
-
-def a():
-    i = 1 / 0
-
-
-try:
-    a()
-except Exception:
-    value = sys.exc_info()
-    # do something
-    six.reraise(*value)  # 借助six模块抛异常
+# import sys
+# import six
+#
+#
+# def a():
+#     i = 1 / 0
+#
+#
+# try:
+#     a()
+# except Exception:
+#     value = sys.exc_info()
+#     # do something
+#     six.reraise(*value)  # 借助six模块抛异常

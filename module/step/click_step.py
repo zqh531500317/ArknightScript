@@ -1,36 +1,41 @@
+import time
+
 from logzero import logger
 import module.step.judge_step
 import module.error.game
 from module.utils.core_template import *
+from module.utils.core_picture import *
+from module.utils.core_control import *
+from module.step.jijian_step import is_in_jijian_main
 
 
 def into_jijian():
-    module.step.judge_step.ensureGameOpen()
-    into_main()
+    module.step.judge_step.ensureGameOpenAndInMain()
     click(1000, 625)
+    while True:
+        if is_in_jijian_main():
+            break
+        time.sleep(sleep_time)
     logger.info("进入基建页面")
-    time.sleep(3 * sleep_time)
 
 
 def into_main():
-    time.sleep(sleep_time)
     if not module.step.judge_step.isInMain():
-
         randomClick("terminal")
-        time.sleep(sleep_time)
+        time.sleep(2 * sleep_time)
         randomClick("terminal_go_home")
-        screen()
+        time.sleep(3 * sleep_time)
         if compareSame("go_home_from_construction"):
             randomClick("go_home_from_construction")
+            time.sleep(3 * sleep_time)
         close_alert()
         # 等待直到进入主界面
         while True:
-            time.sleep(sleep_time)
-            screen()
             b = module.step.judge_step.isInMain()
             if b:
                 logger.info('到主界面')
                 break
+            time.sleep(sleep_time)
 
 
 # 登录:
@@ -80,7 +85,6 @@ def into_Fight():
     module.step.judge_step.ensureGameOpen()
     click(1150, 660)
     time.sleep(sleep_time)
-    screen()
     if module.step.judge_step.isInReason():
         return False
     else:
@@ -90,7 +94,6 @@ def into_Fight():
 
 
 def out_jijian():
-    module.step.judge_step.ensureGameOpen()
     click(90, 38)
     click(875, 495)
     logger.info("退出基建页面")
@@ -103,29 +106,26 @@ def out_Fight():
 
 def out_fight_fail():
     randomClick((1007, 316, 1056, 340))
-    time.sleep(3*sleep_time)
+    time.sleep(3 * sleep_time)
     click(600, 300)
 
 
 def choosedailizhihui(game):
-    module.step.judge_step.ensureGameOpen()
     logger.info("启用代理指挥")
-    screen()
-    rgb = getRGB(1060, 585)
-    if not (rgb[0] == 255 and rgb[1] == 255 and rgb[2] == 255):
+    img = screen(memery=True)
+    rgb = getRGB(1060, 585, img)
+    if not (rgb[0] >= 200 and rgb[1] >= 200 and rgb[2] >= 200):
         click(1060, 585)
-    time.sleep(2)
-    screen()
-    rgb = getRGB(1060, 585)
-    if not (rgb[0] == 255 and rgb[1] == 255 and rgb[2] == 255):
+    time.sleep(sleep_time)
+    img = screen(memery=True)
+    rgb = getRGB(1060, 585, img)
+    if not (rgb[0] >= 200 and rgb[1] >= 200 and rgb[2] >= 200):
         raise module.error.game.CanNotChooseDaiLiZhiHui(game)
 
 
 # return 1表示吃药 2表示碎石 todo 碎石
 def use_medicine_or_stone(use_medicine, medicine_num, use_stone, stone_num):
     if use_medicine and medicine_num > 0:
-        screen()
-        time.sleep(sleep_time)
         if compareSimilar("use_medicine_before_fight") < 0.9:
             raise module.error.game.ErrorPage()
         randomClick("use_medicine_before_fight")

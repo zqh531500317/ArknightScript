@@ -1,5 +1,9 @@
-from module.utils.core_picture import *
+import time
+import cv2
+import numpy as np
 import copy
+from module.utils.core_picture import screen
+from module.utils.core_config import cf
 
 
 # 模板匹配 返回所有结果 自动截图  入参：匹配图片  返回：匹配的坐标
@@ -11,7 +15,7 @@ def template_match_most(template_path, x1=0, y1=0, x2=1280, y2=720, screen_re=No
     else:
         cutted_gray_img = cv2.cvtColor(screen_re, cv2.COLOR_BGR2GRAY)  # 转化成灰色
     if isinstance(template_path, str):
-        template_path = project_path + '/asset/template/' + template_path
+        template_path = cf.project_path + '/asset/template/' + template_path
         template_path = cv2.imread(template_path, 1)  # 模板小图
         template_img = cv2.cvtColor(template_path, cv2.COLOR_BGR2GRAY)
 
@@ -24,7 +28,7 @@ def template_match_most(template_path, x1=0, y1=0, x2=1280, y2=720, screen_re=No
     dst = copy.deepcopy(screen_re)
     for coord in dets:
         cv2.rectangle(dst, (int(coord[0]), int(coord[1])), (int(coord[2]), int(coord[3])), (0, 0, 255), 2)
-    # cv2.imwrite(project_path + "cache/result.jpg", dst)
+    # cv2.imwrite(cf.project_path + "/cache/result.jpg", dst)
 
     return dets
 
@@ -45,9 +49,7 @@ def template_match_best(template_img, x1=0, y1=0, x2=1280, y2=720, screen_re=Non
 # 判断是否成功匹配模板
 def is_template_match(template_img, x1=0, y1=0, x2=1280, y2=720, screen_re=None, template_threshold=0.8):
     res = template_match_best(template_img, x1, y1, x2, y2, screen_re=screen_re, template_threshold=template_threshold)
-    if len(res) == 0:
-        return False
-    return True
+    return len(res) == 5
 
 
 # 用于模板匹配

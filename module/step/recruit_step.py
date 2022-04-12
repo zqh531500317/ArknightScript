@@ -4,6 +4,7 @@ from module.utils.core_picture import *
 from module.utils.core_ocr import ocr_without_position, recruit_ocr
 from module.utils.core_email import send
 import module.utils.core_recruitLoader
+from module.utils.core_control import *
 
 recruit_tag = ui["recruit_tag"]["area"]
 
@@ -15,11 +16,11 @@ def recruit():
         return
     if state == "finish":
         randomClick("recruit_state_finish")
-        time.sleep(2*cf.get("sleep_time"))
+        time.sleep(2 * cf.get("sleep_time"))
         randomClick("recruit_finish_skip")
         time.sleep(cf.get("sleep_time"))
-        screen()
-        save1("recruit", "result")
+        img = screen(memery=True)
+        save1("recruit", "result", img)
         randomClick("recruit_finish_skip")
         time.sleep(cf.get("sleep_time"))
         state = "empty"
@@ -31,16 +32,19 @@ def recruit():
             if r == -1:
                 return
             if r == 999:
-                save1("recruit", "tags")
+                img = screen(memery=True)
+                save1("recruit", "tags", img)
                 return
             elif r == 1:
-                save1("recruit", "tags")
+                img = screen(memery=True)
+                save1("recruit", "tags", img)
                 randomClick("recruit_do")
                 return
             elif r == 0:
                 b = is_flashable()
                 if not b:
-                    save1("recruit", "tags")
+                    img = screen(memery=True)
+                    save1("recruit", "tags", img)
                     randomClick("recruit_do")
                     return
                 elif b:
@@ -51,9 +55,8 @@ def recruit():
 
 
 def is_flashable():
-    screen()
-    time.sleep(cf.get("sleep_time"))
-    rgb = getRGB(970, 408)
+    img = screen(memery=True)
+    rgb = getRGB(970, 408, img_path=img)
     if rgb[0] == 0 and rgb[1] == 152 and rgb[2] == 220:
         return True
     return False
@@ -69,17 +72,14 @@ def get_state():
 
 
 def get_recruit_num():
-    screen()
-    time.sleep(cf.get("sleep_time"))
-    region = read(screen_path)
+    region = screen(memery=True)
     x1 = 848
     y1 = 27
     x2 = 906
     y2 = 53
     cropped = cut(region, x1, y1, x2, y2)
-    write(screen_path, cropped)
     time.sleep(cf.get("sleep_time"))
-    result = ocr_without_position(screen_path)
+    result = ocr_without_position(cropped)
     num = result[0]["words"]
     logger.debug("招聘许可数量：" + num)
     return int(num)
@@ -157,13 +157,11 @@ def _recruit_result1():
         (544, 442, 683, 467),
     ]
     result = []
-    screen()
-    r = cv2.imread(screen_path, 1)
+    r = screen(memery=True)
     for i in range(5):
         a = area[i]
         s = cut(r, a[0], a[1], a[2], a[3])
-        write(screen_path, s)
-        res = ocr_without_position(screen_path, recruit_ocr)
+        res = ocr_without_position(s, recruit_ocr)
         result.append({'flag': 1, 'words': res[0]["words"], 'location':
             {'x1': a[0], 'y1': a[1], 'x2': a[2], 'y2': a[3]}})
     logger.debug("词条内容是：" + str(result))
