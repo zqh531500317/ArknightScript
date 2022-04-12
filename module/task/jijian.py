@@ -12,6 +12,7 @@ from module.utils.core_email import send
 from module.utils.core_config import *
 
 
+@debug_recode
 @timer
 @func_set_timeout(timeout_time)
 def clue():
@@ -89,6 +90,7 @@ def clue():
 
 
 # 基建一键收货
+@debug_recode
 @timer
 @func_set_timeout(timeout_time)
 def jijian_receive():
@@ -100,6 +102,7 @@ def jijian_receive():
 
 
 # 基建使用电力
+@debug_recode
 @timer
 @func_set_timeout(timeout_time)
 def use_electricity():

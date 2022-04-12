@@ -16,7 +16,7 @@ debug_run = False
 # 获取当前理智
 # 返回[当前理智,最大理智]
 
-
+@debug_recode
 @func_set_timeout(timeout_time)
 @timer
 def get_lizhi():

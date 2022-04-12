@@ -156,12 +156,18 @@ class CoreConfig:
     @property
     def receiver(self):
         return self.get("receiver")
+
     @property
     def xinpian_1(self):
         return self.get("xinpian_1")
+
     @property
     def xinpian_2(self):
         return self.get("xinpian_2")
+
+    @property
+    def debug(self):
+        return self.get("debug")
 
 
 cf = CoreConfig()

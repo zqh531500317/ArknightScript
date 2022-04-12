@@ -26,15 +26,6 @@ def findGame(game):
     randomClick((706, 661, 732, 677))
     time.sleep(sleep_time)
     module.step.gamepass_step.find_game_position(game, "ziyuanshouji")
-    # try:
-    #     # 滑到最左侧寻找
-    #     module.step.gamepass_step.goto_ahead_for_ziyuanshouji()
-    #     module.step.gamepass_step.find_game_position(game, "ziyuanshouji")
-    # except module.error.game.GameNotFound as e:
-    #     # 滑到最右侧寻找
-    #     module.step.gamepass_step.goto_behind_for_ziyuanshouji()
-    #     module.step.gamepass_step.find_game_position(game, "ziyuanshouji")
-    # 已经进入界面  到作战前界面
     v = ci[game]
     module.step.gamepass_step.exec_by_clickLoader(v)
 

@@ -11,6 +11,7 @@ from module.utils.core_picture import cut, getRGB, compareSimilar
 
 
 # 收货每日任务和每周任务
+@debug_recode
 @timer
 @func_set_timeout(cf.timeout_time)
 def receive_renwu():
@@ -24,6 +25,7 @@ def receive_renwu():
 
 
 # 拜访好友获取信赖
+@debug_recode
 @timer
 @func_set_timeout(cf.timeout_time)
 def friend():
@@ -38,6 +40,7 @@ def friend():
 
 
 # 商店收取信用
+@debug_recode
 @timer
 @func_set_timeout(cf.timeout_time)
 def receive_xinyong():
@@ -53,6 +56,7 @@ def receive_xinyong():
 
 
 # 购买信用商店
+@debug_recode
 @timer
 @func_set_timeout(cf.timeout_time)
 def buy_xinyong_shop():
@@ -111,6 +115,7 @@ def buy_xinyong_shop():
 
 
 # 公开招募自动刷新、选择
+@debug_recode
 @timer
 @func_set_timeout(cf.timeout_time)
 def recruit_daily():
@@ -124,6 +129,7 @@ def recruit_daily():
 
 
 # 执行连续公招任务
+@debug_recode
 @timer
 def once_recruit(times):
     module.step.judge_step.ensureGameOpenAndInMain()

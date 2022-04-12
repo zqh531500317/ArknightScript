@@ -6,6 +6,7 @@ import cv2
 from logzero import logger
 from functools import wraps
 from module.utils.core_utils import project_root_path
+import module.utils.core_config
 
 project_path = project_root_path()
 
@@ -59,7 +60,8 @@ def debug_recode(func):
         import module.task.state
         logger.info("debug_recode is start:%s", func.__name__)
         module.task.state.debug_run = True
-        _thread.start_new_thread(__sr, (func.__name__,))
+        if module.utils.core_config.cf.debug:
+            _thread.start_new_thread(__sr, (func.__name__,))
         res = func(*args, **kwargs)
         module.task.state.debug_run = False
         logger.info("debug_recode is end:%s", func.__name__)

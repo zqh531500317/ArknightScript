@@ -1,7 +1,7 @@
-echo è¯·è¾“å…¥ç‰ˆæœ¬å·(ä¾‹å¦‚1.1.0)
+echo ÇëÊäÈë°æ±¾ºÅ(ÀıÈç1.1.0)
 set /p version=
 echo %version%
-echo è¯·è¾“å…¥æ›´æ–°è¯´æ˜
+echo ÇëÊäÈë¸üĞÂËµÃ÷
 set /p readme=
 echo %readme%
 md backup\v%version%
