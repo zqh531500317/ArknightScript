@@ -79,15 +79,16 @@ def close_alert():
 
 
 def into_Fight():
-    module.step.judge_step.ensureGameOpen()
     click(1150, 660)
-    time.sleep(sleep_time)
-    if module.step.judge_step.isInReason():
-        return False
-    else:
-        randomClick("ensure_fight")
-        logger.info("开始作战")
-        return True
+    while True:
+        if module.step.judge_step.isInReason():
+            return False
+        else:
+            if is_template_match("/ensure_fight.png"):
+                randomClick("ensure_fight")
+                logger.info("开始作战")
+                return True
+        time.sleep(sleep_time)
 
 
 def out_jijian():
