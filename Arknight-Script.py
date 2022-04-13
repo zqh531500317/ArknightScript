@@ -2,6 +2,8 @@ import os
 import sys
 import _thread
 import time
+from module.utils.core_init import init
+init()
 
 from apscheduler.triggers.date import DateTrigger
 from module.utils.core_config import *
@@ -11,7 +13,6 @@ from flask_socketio import SocketIO
 import module.schedule.baseScheduler
 import module.schedule.fightScheduler
 import module.schedule.dailyScheduler
-from module.utils.core_init import init
 from flask_cors import CORS
 from engineio.async_drivers import threading
 import module.task.state
@@ -26,7 +27,6 @@ app.jinja_env.auto_reload = True
 app.config['SECRET_KEY'] = 'secret_key'
 socketio = SocketIO(app, cors_allowed_origins='*', async_mode='threading')
 name_space = "/dcenter"
-init()
 
 
 # 首页
