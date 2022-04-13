@@ -20,9 +20,11 @@ def init_dir():
 
 def close_alert():
     import module.step.click_step
+    import module.utils.core_control
     while True:
         time.sleep(3)
-        module.step.click_step.close_alert()
+        if module.utils.core_control.Adb().isLive():
+            module.step.click_step.close_alert()
 
 
 def int_close_alerter():
