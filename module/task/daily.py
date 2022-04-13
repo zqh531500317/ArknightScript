@@ -8,6 +8,7 @@ from module.utils.core_config import timer, func_set_timeout, cf, logger, debug_
 from module.utils.core_template import template_match_best
 from module.utils.core_control import randomClick, screen, click
 from module.utils.core_picture import cut, getRGB, compareSimilar
+from module.step.click_step import dowait
 
 
 # 收货每日任务和每周任务
@@ -30,9 +31,8 @@ def receive_renwu():
 @func_set_timeout(cf.timeout_time)
 def friend():
     module.step.judge_step.ensureGameOpenAndInMain()
-    randomClick("main_friend")
-    time.sleep(cf.sleep_time)
-    randomClick("friend_list")
+    dowait("main_friend", "/friend/mingpian.png")
+    dowait("friend_list", "/friend/card.png")
     time.sleep(2 * cf.sleep_time)
     randomClick("into_friend")
     module.step.daily_step.friend_home()

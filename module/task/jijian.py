@@ -53,15 +53,17 @@ def clue():
             time.sleep(sleep_time)
             res = anyClubCard()
             if len(res) == 0:
+                randomClick((748, 564, 770, 600))
+                time.sleep(sleep_time)
                 continue
             elif len(res) == 5:
                 x1, y1, x2, y2, s = res
                 randomClick((x1, y1, x2, y2))
                 num += 1
                 time.sleep(sleep_time)
-            # 退出选择相应线索
-            randomClick((748, 564, 770, 600))
-            time.sleep(sleep_time)
+                # 退出选择相应线索
+                randomClick((748, 564, 770, 600))
+                time.sleep(sleep_time)
     # 判断能否解锁线索
     if num == 7:
         randomClick((633, 642, 693, 662))
@@ -76,15 +78,17 @@ def clue():
             time.sleep(sleep_time)
             res = anyClubCard()
             if len(res) == 0:
+                randomClick((748, 564, 770, 600))
+                time.sleep(sleep_time)
                 continue
             elif len(res) == 5:
                 x1, y1, x2, y2, s = res
                 randomClick((x1, y1, x2, y2))
                 num += 1
                 time.sleep(sleep_time)
-            # 退出选择相应线索
-            randomClick((748, 564, 770, 600))
-            time.sleep(sleep_time)
+                # 退出选择相应线索
+                randomClick((748, 564, 770, 600))
+                time.sleep(sleep_time)
     sendClue()
     module.step.judge_step.ensureGameOpenAndInMain()
 

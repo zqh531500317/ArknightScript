@@ -21,21 +21,18 @@ def into_jijian():
 
 def into_main():
     if not module.step.judge_step.isInMain():
-        randomClick("terminal")
-        time.sleep(2 * sleep_time)
+        dowait("terminal", "terminal_go_home.png")
         randomClick("terminal_go_home")
-        time.sleep(3 * sleep_time)
-        if compareSame("go_home_from_construction"):
-            randomClick("go_home_from_construction")
-            time.sleep(3 * sleep_time)
-        close_alert()
-        # 等待直到进入主界面
         while True:
-            b = module.step.judge_step.isInMain()
-            if b:
-                logger.info('到主界面')
+            if is_template_match("main.png"):
                 break
+            if is_template_match("/jijian/go_home_from_construction.png"):
+                randomClick("go_home_from_construction")
             time.sleep(sleep_time)
+        # 等待弹窗
+        time.sleep(3)
+        close_alert()
+        logger.info('到主界面')
 
 
 # 登录:
@@ -133,3 +130,15 @@ def use_medicine_or_stone(use_medicine, medicine_num, use_stone, stone_num):
         return 1
     # 随便点个地方退出理智补充界面
     click(1247, 500)
+
+
+def dowait(ck, templete: str):
+    randomClick(ck)
+    while True:
+        if is_template_match(templete):
+            return True
+        time.sleep(sleep_time)
+
+
+if __name__ == '__main__':
+    into_main()

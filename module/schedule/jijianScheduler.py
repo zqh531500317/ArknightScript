@@ -10,6 +10,7 @@ def add_all():
     jijian_receive()
     use_electricity()
     jijian_schedule()
+    clue()
 
 
 def jijian_receive():
@@ -20,6 +21,11 @@ def jijian_receive():
 def use_electricity():
     module.schedule.baseScheduler.add_job(module.task.jijian.use_electricity, trigger=CronTrigger(hour="7,15,18,23"),
                                           id="use_electricity")
+
+
+def clue():
+    module.schedule.baseScheduler.add_job(module.task.jijian.clue, trigger=CronTrigger(hour="7"),
+                                          id="clue")
 
 
 def jijian_schedule():

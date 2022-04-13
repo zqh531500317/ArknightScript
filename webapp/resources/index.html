@@ -366,6 +366,34 @@
                                 <template slot="prepend">分</template>
                             </el-input>
                         </el-row>
+                        <el-row>
+                            <div class="line"></div>
+                            <el-row class="pad">
+                                <el-switch
+                                        v-model="job.clue.state"
+                                        active-color="#13ce66"
+                                        inactive-color="#ff4949"
+                                        active-text="开启收获线索"
+                                        inactive-text="关闭收获线索"
+                                        @change="state_change($event,'clue')">
+                                </el-switch>
+                            </el-row>
+                        </el-row>
+                        <el-row class="pad">
+                            <span class="input">cron表达式：</span>
+                            <el-input @change="trigger_change($event,'hour','clue')"
+                                      v-model="job.clue.hour"
+                                      class="input"
+                                      placeholder="时">
+                                <template slot="prepend">时</template>
+                            </el-input>
+                            <el-input @change="trigger_change($event,'minute','clue')"
+                                      v-model="job.clue.minute"
+                                      class="input"
+                                      placeholder="分">
+                                <template slot="prepend">分</template>
+                            </el-input>
+                        </el-row>
                     </el-card>
                     <el-card class="box-card" style="margin-bottom: 10px">
                         <div slot="header">
@@ -517,8 +545,14 @@
 
 <script type="text/javascript">
     axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
-    console.log(window.location.protocol + "//"+window.location.host)
-    base_url = window.location.protocol + "//"+window.location.host
+    console.log(window.location.protocol + "//" + window.location.host)
+    if (window.location.host == 5000) {
+        base_url = window.location.protocol + "//" + window.location.host
+
+    } else {
+        base_url = 'http://127.0.0.1:5000'
+
+    }
     user = "user"
     const vue = new Vue({
         el: "#vue",
@@ -561,7 +595,8 @@
                         xinyong: false,
                         jijian: {
                             receive: false,
-                            use_electricity: false
+                            use_electricity: false,
+                            clue: false
                         }
                     },
                     jijian: {
@@ -937,6 +972,7 @@
                                 "buy_xinyong_shop": {},
                                 "recruit_daily": {},
                                 "xinpian": {},
+                                "clue": {},
                             }
                         },
                     })
