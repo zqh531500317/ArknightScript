@@ -52,8 +52,8 @@ def into_login():
             time.sleep(sleep_time)
             if module.step.judge_step.isInMain():
                 logger.info('到主界面')
+                time.sleep(5)
                 break
-            close_alert()
     else:
         into_main()
 

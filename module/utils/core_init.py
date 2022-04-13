@@ -1,3 +1,6 @@
+import _thread
+import time
+
 from module.utils.core_utils import project_root_path
 import os
 
@@ -15,6 +18,17 @@ def init_dir():
         os.makedirs(dic_path)
 
 
+def close_alert():
+    import module.step.click_step
+    while True:
+        time.sleep(3)
+        module.step.click_step.close_alert()
+
+
+def int_close_alerter():
+    _thread.start_new_thread(close_alert, ())
+
+
 def init():
     init_dir()
     import module.utils.core_log
@@ -26,3 +40,4 @@ def init():
     module.utils.core_watchdog.init()
     module.schedule.dailyScheduler.add_all()
     module.schedule.jijianScheduler.add_all()
+    int_close_alerter()

@@ -17,8 +17,6 @@ def zhuxian(name, max_fight_time, use_medicine, medicine_num, use_stone, stone_n
             break
 
     left = str(series) + "-X"
-    print(left)
-    print(ci)
     v = ci[left]
     module.step.judge_step.ensureGameOpenAndInMain()
     module.step.gamepass_step.exec_by_clickLoader(v)
