@@ -3,6 +3,7 @@ import time
 from logzero import logger
 import module.step.judge_step
 import module.error.game
+from module.error.retryError import RetryError
 from module.utils.core_template import *
 from module.utils.core_picture import *
 from module.utils.core_control import *
@@ -133,13 +134,23 @@ def use_medicine_or_stone(use_medicine, medicine_num, use_stone, stone_num):
     click(1247, 500)
 
 
-def dowait(ck, templete: str):
+def dowait(ck, templete: str, max_retry_times=3, retry_time=20.0):
+    retry_times = 0
+    start_time = time.time()
     randomClick(ck)
     while True:
         if is_template_match(templete):
             return True
         time.sleep(sleep_time)
+        now = time.time()
+        if (now - start_time) > retry_time:
+            if retry_times == max_retry_times:
+                raise RetryError(retry_times)
+            logger.warning("running time >%s,retry the %s times", retry_time, retry_times)
+            randomClick(ck)
+            retry_times += 1
+            start_time = now
 
 
 if __name__ == '__main__':
-    into_main()
+    dowait("main_friend", "/friend/mingpian.png")
