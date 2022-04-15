@@ -30,7 +30,7 @@ def isFightEnd(game):
         return b > 0.8
     else:
         img = screen(memery=True)
-        re = cut(img, 35, 582, 216, 674)
+        re = cut(img, 58, 180, 207, 256)
         res = ocr_without_position(re)[0]["words"]
         b = (res == '行动')
         if b:

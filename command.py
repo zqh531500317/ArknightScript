@@ -86,5 +86,7 @@ def test_jijian():
 
 
 if __name__ == '__main__':
-    screen()
-
+    # screen()
+    img = screen(memery=True)
+    re = cut(img, 58, 180, 207, 256)
+    res = ocr_without_position(re)[0]["words"]
