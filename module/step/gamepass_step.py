@@ -161,7 +161,7 @@ def find_game_position_with_template(name, type="zhuxian"):
     x2 = 0
     y1 = 0
     y2 = 0
-
+    flag = -1
     if type == "zhuxian" or type == "huodong":
         flag = 0
         times = 0

@@ -1,4 +1,5 @@
 import time
+from typing import List, Tuple
 
 from logzero import logger
 import module.step.judge_step
@@ -112,12 +113,12 @@ def out_fight_fail():
 def choosedailizhihui(game):
     logger.info("启用代理指挥")
     img = screen(memery=True)
-    rgb = getRGB(1060, 585, img)
+    rgb = getRGB(1066, 604, img)
     if not (rgb[0] >= 200 and rgb[1] >= 200 and rgb[2] >= 200):
-        click(1060, 585)
+        click(1066, 604)
     time.sleep(sleep_time)
     img = screen(memery=True)
-    rgb = getRGB(1060, 585, img)
+    rgb = getRGB(1066, 604, img)
     if not (rgb[0] >= 200 and rgb[1] >= 200 and rgb[2] >= 200):
         raise module.error.game.CanNotChooseDaiLiZhiHui(game)
 
@@ -134,7 +135,7 @@ def use_medicine_or_stone(use_medicine, medicine_num, use_stone, stone_num):
     click(1247, 500)
 
 
-def dowait(ck, templete: str, max_retry_times=3, retry_time=20.0):
+def dowait(ck: Union[str, tuple], templete: str, max_retry_times=3, retry_time=20.0):
     retry_times = 0
     start_time = time.time()
     randomClick(ck)
@@ -152,5 +153,12 @@ def dowait(ck, templete: str, max_retry_times=3, retry_time=20.0):
             start_time = now
 
 
+def dowaitlist(list: List[Tuple[Union[str, tuple], str]], delay_time=0.1, max_retry_times=3, retry_time=20.0):
+    for ck, templete in list:
+        dowait(ck, templete, max_retry_times=max_retry_times, retry_time=retry_time)
+        time.sleep(delay_time)
+
+
 if __name__ == '__main__':
-    dowait("main_friend", "/friend/mingpian.png")
+    choosedailizhihui("1-7")
+    # dowait("main_friend", "/friend/mingpian.png")

@@ -1,6 +1,8 @@
 import socket
 import time
 import random
+from typing import Union
+
 import numpy
 import cv2
 import adbutils
@@ -22,7 +24,7 @@ class Adb(BaseAdb):
         self.server = None
         logger.info("class Adb __init__")
 
-    def randomClick(self, name):
+    def randomClick(self, name: Union[str, tuple]):
         if isinstance(name, str):
             obj = ui[name]
             x1 = obj["button"][0]
