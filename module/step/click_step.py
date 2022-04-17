@@ -146,6 +146,7 @@ def dowait(ck: Union[str, tuple], templete: str, max_retry_times=3, retry_time=2
         now = time.time()
         if (now - start_time) > retry_time:
             if retry_times == max_retry_times:
+                logger.error("RetryError:times=%s", max_retry_times)
                 raise RetryError(retry_times)
             logger.warning("running time >%s,retry the %s times", retry_time, retry_times)
             randomClick(ck)
