@@ -32,9 +32,8 @@ def pre_schedual(x, y, type):
         time.sleep(sleep_time)
     # 点击 进驻信息  入住
     if not is_template_match("/jijian/qingkong.png", template_threshold=0.9):
+        module.step.click_step.dowait((40, 273, 70, 315), "/jijian/qingkong.png")
         logger.debug("点击 进驻信息 入住")
-        randomClick((40, 273, 70, 315))
-        time.sleep(sleep_time)
     # 清空选择
     randomClick((1175, 20, 1221, 42))
     time.sleep(sleep_time)
@@ -420,4 +419,4 @@ def sendClue():
 
 
 if __name__ == '__main__':
-    do_schedual(2, 5, ["sadsad"], "办公室")
+    do_schedual(1, 3, ["伊芙利特"], "发电站")

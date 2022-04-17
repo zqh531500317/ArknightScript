@@ -23,7 +23,6 @@ import os
 import sys
 from logzero import LogFormatter, setup_default_logger, logfile, logger
 from module.utils.core_config import cf
-from module.utils.core_tester import Tester
 
 
 def init_log():
