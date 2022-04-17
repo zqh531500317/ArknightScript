@@ -5,6 +5,7 @@ from module.utils.core_ocr import ocr_without_position, recruit_ocr
 from module.utils.core_email import send
 import module.utils.core_recruitLoader
 from module.utils.core_control import *
+from module.utils.core_template import *
 
 recruit_tag = ui["recruit_tag"]["area"]
 
@@ -56,8 +57,8 @@ def recruit():
 
 def is_flashable():
     img = screen(memery=True)
-    rgb = getRGB(970, 408, img_path=img)
-    if rgb[0] == 0 and rgb[1] == 152 and rgb[2] == 220:
+    rgb = getRGB(970, 405, img_path=img)
+    if rgb[0] <= 30 and 130 <= rgb[1] <= 170 and 200 <= rgb[2] <= 240:
         return True
     return False
 
@@ -222,3 +223,8 @@ def _all_match(ocr_items, template):
         v[2] = len(v[3])
     match_list = sorted(match_dict.items(), key=lambda x: x[1][1], reverse=True)
     return match_list
+
+
+if __name__ == '__main__':
+    b = is_flashable()
+    print(b)
