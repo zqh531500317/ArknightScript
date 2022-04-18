@@ -15,8 +15,8 @@ def isInLogin():
 def isFightEnd(game):
     time.sleep(cf.get("sleep_time"))
     if game == "剿灭":
-        b = compareSimilar("end_jiaomie")
-        if b > 0.8:
+        b = is_template_match("/fight/end_jiaomie.png")
+        if b:
             randomClick("end_jiaomie")
             time.sleep(cf.get("sleep_time"))
             logger.info("战斗已结束，存储结算图片")
