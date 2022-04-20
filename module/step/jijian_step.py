@@ -88,7 +88,6 @@ def do_schedual(x1, y1, names, type, retry_time=0):
             for j in range(720):
                 if j < 321 or (348 < j < 603) or j > 629:
                     img[j, i] = (255, 255, 255)
-        save2("test", img)
         box_infos = cnstd.detect(img)
         for box_info in box_infos['detected_texts']:
             box = box_info["box"]
