@@ -7,6 +7,8 @@ from logzero import logger
 from functools import wraps
 from module.utils.core_utils import project_root_path
 import module.utils.core_config
+import sys
+import six
 
 project_path = project_root_path()
 
@@ -14,9 +16,19 @@ project_path = project_root_path()
 def timer(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
+        global res
         logger.info("task %s is started", func.__name__)
         start = time.time()
-        res = func(*args, **kwargs)
+        try:
+            res = func(*args, **kwargs)
+        except Exception as e:
+            end = time.time()
+            logger.info("task running cost: %s minutes", end - start)
+            logger.exception(e)
+            logger.info("task %s is finished", func.__name__)
+            value = sys.exc_info()
+            # do something
+            six.reraise(*value)  # 借助six模块抛异常
         end = time.time()
         logger.info("task running cost: %s minutes", end - start)
         logger.info("task %s is finished", func.__name__)

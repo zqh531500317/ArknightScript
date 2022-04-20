@@ -33,12 +33,11 @@ def errorhandler(event):
              "jobid=" + str(event.job_id) + "\n " + str(event.exception) + "\n " + str(event.traceback))
         img = adb_.screen(memery=True)
         temp = random_time_str()
-        save1("error", temp, img)
-        logger.error(event.exception)
+        save('/log/error/{}'.format(temp), img)
         stop()
         # 保存日志
         save_last_lines(project_root_path() + "/log/log.log",
-                        project_root_path() + "/screenshots/error/{}/error.log".format(temp))
+                        project_root_path() + "/log/error/{}/error.log".format(temp))
 
 
 def finishListener(event):
