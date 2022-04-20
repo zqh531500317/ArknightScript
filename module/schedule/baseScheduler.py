@@ -34,9 +34,10 @@ def finishListener(event):
     end_time = datetime.datetime.now()
     jobid = str(event.job_id)
     if isinstance(event.exception, func_timeout.exceptions.FunctionTimedOut):
-        stop()
         img = adb_.screen(memery=True)
         save2("error", img)
+        logger.error(event.exception)
+        stop()
     if event.exception:
         send("任务调度出错",
              "jobid=" + str(event.job_id) + "\n " + str(event.exception) + "\n " + str(event.traceback))
