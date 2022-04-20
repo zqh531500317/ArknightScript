@@ -2,6 +2,10 @@ import os
 import random
 import socket
 import sys
+import time
+from collections import deque
+import re
+from logzero import logger
 
 from adbutils import _AdbStreamConnection, AdbTimeout
 
@@ -70,3 +74,44 @@ def is_port_using(port_num):
         return result == 0
     finally:
         s.close()
+
+
+def random_time_str():
+    return str(int(time.time_ns() / 1000))
+
+
+# 截取从task...started 到task...finished的日志
+def last_lines(filename):
+    # 初始:0  匹配到end_pattern:0->1  匹配到start_pattern:1->2
+    status = 0
+    res_log = deque()
+    start_pattern = '(.*?)task(.*?)started(.*?)'
+    end_pattern = '(.*?)task(.*?)finished(.*?)'
+    with open(filename, 'r', encoding='utf-8') as fb:
+        dq = deque(fb)
+        while dq:
+            last_row = dq.pop()
+            if status == 0:
+                match_res = re.match(end_pattern, last_row)
+                if match_res is not None:
+                    status = 1
+            if status == 1:
+                match_res = re.match(start_pattern, last_row)
+                if match_res is not None:
+                    status = 2
+            if status in (1, 2):
+                res_log.appendleft(last_row)
+            if status == 2:
+                break
+    return list(res_log)
+
+
+def saveFileByList(file: str, lines: list, encoding='utf-8'):
+    with open(file, 'w', encoding=encoding) as f:
+        f.writelines(lines)
+    logger.info("save file %s", file)
+
+
+def save_last_lines(src_filename, dst_filename):
+    res = last_lines(src_filename)
+    saveFileByList(dst_filename, res)

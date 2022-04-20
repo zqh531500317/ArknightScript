@@ -14,10 +14,10 @@ import module.task.state
 from module.utils.core_email import send
 from module.utils.core_control import *
 import func_timeout
+from module.utils.core_utils import random_time_str, save_last_lines
 
 
 def startListener(event):
-    # logger.info("scheduler %s is started", event.job_id)
     global start_time
     start_time = datetime.datetime.now()
     jobid = event.job_id
@@ -27,20 +27,35 @@ def startListener(event):
     module.task.state.running_task_num += 1
 
 
+def errorhandler(event):
+    if event.exception:
+        send("任务调度出错",
+             "jobid=" + str(event.job_id) + "\n " + str(event.exception) + "\n " + str(event.traceback))
+        img = adb_.screen(memery=True)
+        temp = random_time_str()
+        save1("error", temp, img)
+        logger.error(event.exception)
+        stop()
+        # 保存日志
+        save_last_lines(project_root_path() + "/log/log.log",
+                        project_root_path() + "/screenshots/error/{}/error.log".format(temp))
+
+
 def finishListener(event):
-    # logger.info("scheduler %s is finished", event.job_id)
     module.task.state.running_task_num -= 1
     global end_time
     end_time = datetime.datetime.now()
     jobid = str(event.job_id)
-    if isinstance(event.exception, func_timeout.exceptions.FunctionTimedOut):
-        img = adb_.screen(memery=True)
-        save2("error", img)
-        logger.error(event.exception)
-        stop()
-    if event.exception:
-        send("任务调度出错",
-             "jobid=" + str(event.job_id) + "\n " + str(event.exception) + "\n " + str(event.traceback))
+    # if isinstance(event.exception, func_timeout.exceptions.FunctionTimedOut):
+    #     img = adb_.screen(memery=True)
+    #     temp = random_time_str()
+    #     save1("error", temp, img)
+    #     logger.error(event.exception)
+    #     stop()
+    #     # 保存日志
+    #     save_last_lines(project_root_path() + "/log/log.log",
+    #                     project_root_path() + "/screenshots/error/{}/error.log".format(temp))
+    errorhandler(event)
     if "once_ziyuanshouji" in jobid or "once_jiaomie" in jobid or "once_unknown" in jobid or \
             "once_recently" in jobid or "once_zhuxian" in jobid or "fight" in jobid or \
             "zhuxian" in jobid or "ziyuanshouji" in jobid or "jiaomie" in jobid or "huodong" in jobid:
