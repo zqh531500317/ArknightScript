@@ -2,12 +2,35 @@ import cnocr.utils
 from cnocr import CnOcr
 from module.utils.core_config import cf, logger
 from cnstd import CnStd
+from module.entity.ocr_entity import OcrEntity
+
+from module.utils.core_decoratir import singleton
 
 ocr = CnOcr(model_name="densenet_lite_136-fc")
 cnstd = CnStd(rotated_bbox=False, resized_shape=(1280, 704))
 recruit_ocr = CnOcr(model_name="densenet_lite_136-gru", cand_alphabet=cf.recruit_tag)
 jijian_ocr = CnOcr(model_name="densenet_lite_136-fc", cand_alphabet=cf.cand_alphabet_officer)
 number_ocr = CnOcr(model_name="densenet_lite_136-fc", cand_alphabet=cf.number_tag)
+
+
+@singleton
+class OcrHandler:
+    def __int__(self):
+        self.ocr = CnOcr(model_name="densenet_lite_136-fc")
+
+    def ocr(self, ocr_entity: OcrEntity):
+        x1 = ocr_entity.x1
+        y1 = ocr_entity.y1
+        x2 = ocr_entity.x2
+        y2 = ocr_entity.y2
+        img = ocr_entity.input_img[y1: y2, x1:x2]
+        cand_alphabet = ocr_entity.cand_alphabet
+        self.ocr.set_cand_alphabet(cand_alphabet)
+        temp = self.ocr.ocr_for_single_line(img)
+        self.ocr.set_cand_alphabet(None)
+        result = [{'words': "".join(str(i) for i in temp[0])}]
+        ocr_entity.result = result
+        return ocr_entity
 
 
 def ocr_without_position(uri, limit=None, cand_alphabet=None):

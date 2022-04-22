@@ -59,22 +59,18 @@ def isLevelUp():
 
 
 def isInMain():
-    ensureGameOpen()
-    return compareSimilar("main") > 0.9
+    return is_template_match("/ui/main.png")
 
 
 def isInMessageAfterLogin():
-    ensureGameOpen()
     return compareSame("message_after_login")
 
 
 def isInMonthAfterLogin():
-    ensureGameOpen()
     return compareSimilar("month_after_login") > 0.9
 
 
 def isInTerminal():
-    ensureGameOpen()
     return compareSame("terminal")
 
 
@@ -100,5 +96,4 @@ def ensureGameOpenAndInMain():
 
 
 if __name__ == '__main__':
-    res = isInPreFight()
-    print(res)
+    ensureGameOpenAndInMain()

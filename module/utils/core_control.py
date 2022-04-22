@@ -26,6 +26,8 @@ class Adb(BaseAdb):
 
     def randomClick(self, name: Union[str, tuple]):
         if isinstance(name, str):
+            if name == "":
+                return
             obj = ui[name]
             x1 = obj["button"][0]
             y1 = obj["button"][1]

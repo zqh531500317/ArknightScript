@@ -17,8 +17,7 @@ from module.step.click_step import dowait
 @func_set_timeout(cf.timeout_time)
 def receive_renwu():
     module.step.judge_step.ensureGameOpenAndInMain()
-    randomClick("main_renwu")
-    time.sleep(cf.sleep_time)
+    dowait("main_renwu", "/ui/go_home.png", description="进入任务界面")
     module.step.daily_step.receive_daily_renwu()
     module.step.daily_step.receive_weekly_renwu()
     module.step.judge_step.ensureGameOpenAndInMain()
@@ -31,10 +30,11 @@ def receive_renwu():
 @func_set_timeout(cf.timeout_time)
 def friend():
     module.step.judge_step.ensureGameOpenAndInMain()
-    dowait("main_friend", "/friend/mingpian.png")
-    dowait("friend_list", "/friend/card.png")
-    time.sleep(2 * cf.sleep_time)
-    randomClick("into_friend")
+    dowait("main_friend", "/friend/mingpian.png", description="点击好友按钮")
+    dowait("friend_list", "/friend/card.png", description="点击好友列表")
+    # time.sleep(2 * cf.sleep_time)
+    # randomClick("into_friend")
+    dowait("into_friend", "/friend/in_friend_home.png", description="进入好友基建")
     module.step.daily_step.friend_home()
     module.step.judge_step.ensureGameOpenAndInMain()
 
@@ -159,4 +159,4 @@ def xinpian():
 
 
 if __name__ == '__main__':
-    xinpian()
+    friend()

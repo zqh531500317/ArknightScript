@@ -36,3 +36,12 @@ class BaseAdb:
         if self.cf.package_name == text:
             return True
         return False
+
+    # return (package,activity)
+    def getPackageNameAndActivityName(self) -> (str, str):
+        text = self.adb.current_app()
+        return text["package"], text["activity"]
+
+
+if __name__ == '__main__':
+    BaseAdb().getPackageNameAndActivityName()

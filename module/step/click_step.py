@@ -1,40 +1,37 @@
 import time
 from typing import List, Tuple
 
-from logzero import logger
-import module.step.judge_step
 import module.error.game
+import module.step.judge_step
+from module.entity.ocr_entity import OcrEntity
 from module.error.retryError import RetryError
-from module.utils.core_template import *
-from module.utils.core_picture import *
-from module.utils.core_control import *
 from module.step.jijian_step import is_in_jijian_main
+from module.utils.core_control import *
+from module.utils.core_ocr import OcrHandler
+from module.utils.core_picture import *
+from module.utils.core_template import *
 
 
 def into_jijian():
     module.step.judge_step.ensureGameOpenAndInMain()
-    click(1000, 625)
-    while True:
-        if is_in_jijian_main():
-            break
-        time.sleep(sleep_time)
-    logger.info("进入基建页面")
+    dowait((1000, 625, 1001, 626), "jijian/jijian_main.png", description="进入基建页面")
 
 
 def into_main():
-    if not module.step.judge_step.isInMain():
-        dowait("terminal", "terminal_go_home.png")
-        randomClick("terminal_go_home")
-        while True:
-            if is_template_match("main.png"):
-                break
-            if is_template_match("/jijian/go_home_from_construction.png"):
-                randomClick("go_home_from_construction")
-            time.sleep(sleep_time)
-        # 等待弹窗
-        time.sleep(3)
-        close_alert()
-        logger.info('到主界面')
+    if module.step.judge_step.isInMain():
+        return
+    dowait("terminal", "terminal_go_home.png")
+    randomClick("terminal_go_home")
+    while True:
+        if is_template_match("/ui/main.png"):
+            break
+        if is_template_match("/jijian/go_home_from_construction.png"):
+            randomClick("go_home_from_construction")
+        time.sleep(sleep_time)
+    # 等待弹窗
+    # time.sleep(3)
+    # close_alert()
+    logger.info('到主界面')
 
 
 # 登录:
@@ -42,20 +39,8 @@ def into_login():
     if not isLive():
         logger.info("尝试登陆游戏")
         start()
-        while True:
-            time.sleep(sleep_time)
-            b = module.step.judge_step.isInLogin()
-            if b:
-                logger.info('到登录界面')
-                break
-        randomClick("login")
-
-        while True:
-            time.sleep(sleep_time)
-            if module.step.judge_step.isInMain():
-                logger.info('到主界面')
-                time.sleep(5)
-                break
+        dowait("", "/ui/isLogining.png", description="到登录界面", retry_time=60)
+        dowait("login", "/ui/main.png", description="到主界面", retry_time=60)
     else:
         into_main()
 
@@ -135,13 +120,23 @@ def use_medicine_or_stone(use_medicine, medicine_num, use_stone, stone_num):
     click(1247, 500)
 
 
-def dowait(ck: Union[str, tuple], templete: str, max_retry_times=3, retry_time=20.0):
+# ck 点击   template 期望匹配的 模板匹配路径 或 ocr结果
+def dowait(ck: Union[str, tuple], template: Union[str, OcrEntity], max_retry_times=3,
+           retry_time=20.0, description=None):
     retry_times = 0
     start_time = time.time()
     randomClick(ck)
     while True:
-        if is_template_match(templete):
-            return True
+        if isinstance(template, str):
+            if is_template_match(template):
+                if description is not None:
+                    logger.info(description)
+                return True
+        elif isinstance(template, OcrEntity):
+            if OcrHandler().ocr(template).is_except():
+                if description is not None:
+                    logger.info(description)
+                return True
         time.sleep(sleep_time)
         now = time.time()
         if (now - start_time) > retry_time:
@@ -154,12 +149,13 @@ def dowait(ck: Union[str, tuple], templete: str, max_retry_times=3, retry_time=2
             start_time = now
 
 
-def dowaitlist(list: List[Tuple[Union[str, tuple], str]], delay_time=0.1, max_retry_times=3, retry_time=20.0):
-    for ck, templete in list:
-        dowait(ck, templete, max_retry_times=max_retry_times, retry_time=retry_time)
+def dowaitlist(list: List[Tuple[Union[str, tuple], Union[str, OcrEntity], Union[str, None]]],
+               delay_time=0.1, max_retry_times=3, retry_time=20.0):
+    for ck, templete, description in list:
+        dowait(ck, templete, max_retry_times=max_retry_times, retry_time=retry_time, description=description)
         time.sleep(delay_time)
 
 
 if __name__ == '__main__':
-    choosedailizhihui("1-7")
+    into_jijian()
     # dowait("main_friend", "/friend/mingpian.png")
