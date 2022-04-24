@@ -7,6 +7,14 @@ import module.step.click_step
 import module.step.judge_step
 import module.step.gamepass_step
 
+
+class State:
+    lizhi = {"time": "0", "lizhi": "0", "maxlizhi": "0"}
+    is_fight = "stop"
+    running_task_num = 0
+    debug_run = False
+
+
 lizhi = {"time": "0", "lizhi": "0", "maxlizhi": "0"}
 is_fight = "stop"
 running_task_num = 0

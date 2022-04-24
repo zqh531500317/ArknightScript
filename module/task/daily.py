@@ -4,7 +4,11 @@ import module.step.judge_step
 import module.step.daily_step
 import module.step.recruit_step
 import module.task.state
-from module.utils.core_config import timer, func_set_timeout, cf, logger, debug_recode
+from module.utils.core_assetLoader import ui
+from module.utils.core_clickLoader import ci
+from module.utils.core_config import timer, func_set_timeout, cf, logger, debug_recode, sleep_time, timeout_time, \
+    timeout_time_max
+from module.utils.core_ocr import ocr_without_position
 from module.utils.core_template import template_match_best
 from module.utils.core_control import randomClick, screen, click
 from module.utils.core_picture import cut, getRGB, compareSimilar
@@ -32,8 +36,6 @@ def friend():
     module.step.judge_step.ensureGameOpenAndInMain()
     dowait("main_friend", "/friend/mingpian.png", description="点击好友按钮")
     dowait("friend_list", "/friend/card.png", description="点击好友列表")
-    # time.sleep(2 * cf.sleep_time)
-    # randomClick("into_friend")
     dowait("into_friend", "/friend/in_friend_home.png", description="进入好友基建")
     module.step.daily_step.friend_home()
     module.step.judge_step.ensureGameOpenAndInMain()
@@ -132,8 +134,7 @@ def recruit_daily():
 @timer
 def once_recruit(times):
     module.step.judge_step.ensureGameOpenAndInMain()
-    randomClick("main_recruit")
-    time.sleep(cf.sleep_time)
+    dowait("main_recruit", "/recruit/main.png", description="进入公招界面")
     for i in range(times):
         module.step.recruit_step.recruit()
         time.sleep(cf.sleep_time)
@@ -154,6 +155,28 @@ def xinpian():
     data, res = module.step.daily_step.get_xinpian_info(xinpian_1, xinpian_2)
     module.step.judge_step.ensureGameOpenAndInMain()
     module.step.daily_step.do_xinpian(data, res)
+    module.step.judge_step.ensureGameOpenAndInMain()
+
+
+@debug_recode
+@func_set_timeout(timeout_time)
+@timer
+def get_lizhi():
+    module.step.judge_step.ensureGameOpenAndInMain()
+    time.sleep(1)
+    module.step.gamepass_step.exec_by_clickLoader(ci["lizhi"])
+    time.sleep(sleep_time)
+    region = screen(memery=True)
+    lizhi_before_fight = ui["lizhi_before_fight"]["area"]
+    x1, y1, x2, y2 = lizhi_before_fight
+    cropped = cut(region, x1, y1, x2, y2)
+    result = ocr_without_position(cropped, cand_alphabet=cf.number_tag)
+    logger.debug("获取理智内容是：" + str(result))
+    dic = result[0]["words"].split("/")
+    global lizhi
+    lizhi["time"] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+    lizhi["lizhi"] = dic[0]
+    lizhi["maxlizhi"] = dic[1]
     module.step.judge_step.ensureGameOpenAndInMain()
 
 

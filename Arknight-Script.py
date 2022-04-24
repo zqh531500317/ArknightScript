@@ -2,20 +2,20 @@ import os
 import sys
 import _thread
 import time
-from module.utils.core_init import init
-init()
+from module.base.base import base
 
+from logzero import logger
 from apscheduler.triggers.date import DateTrigger
-from module.utils.core_config import *
+from module.base.base import base
 from apscheduler.triggers.cron import CronTrigger
 from flask import Flask, jsonify, render_template, request
 from flask_socketio import SocketIO
-import module.schedule.baseScheduler
 import module.schedule.fightScheduler
 import module.schedule.dailyScheduler
 from flask_cors import CORS
 from engineio.async_drivers import threading
 import module.task.state
+from module.schedule.baseScheduler import base_scheduler
 
 os.system('chcp 65001')
 
@@ -38,7 +38,7 @@ def index():
 # 暂停调度器
 @app.route('/pause_scheduler', methods=['get'])
 def pause_scheduler():
-    module.schedule.baseScheduler.pause_scheduler()
+    base_scheduler.pause_scheduler()
     logger.info("暂停调度器")
     return jsonify({'result': "暂停中"})
 
@@ -46,7 +46,7 @@ def pause_scheduler():
 # 恢复调度器
 @app.route('/resume_scheduler', methods=['get'])
 def resume_scheduler():
-    module.schedule.baseScheduler.resume_scheduler()
+    base_scheduler.resume_scheduler()
     logger.info("恢复调度器")
     return jsonify({'result': "运行中"})
 
@@ -54,7 +54,7 @@ def resume_scheduler():
 # 获取调度器状态  运行中、暂停中
 @app.route('/is_scheduler_running', methods=['get'])
 def is_scheduler_running():
-    state = module.schedule.baseScheduler.is_scheduler_running()
+    state = base_scheduler.is_scheduler_running()
     # logger.debug("调度器状态为{}".format(state))
     return jsonify({'result': state})
 
@@ -118,7 +118,7 @@ def reschedule_job():
     hour = job["hour"]
     minute = job["minute"]
     trigger = CronTrigger(hour=hour, minute=minute)
-    b = module.schedule.baseScheduler.reschedule_job(id, trigger)
+    b = base_scheduler.reschedule_job(id, trigger)
     if b:
         return jsonify({'result': "success"})
     else:
@@ -130,9 +130,9 @@ def pause_or_resume():
     name = request.get_json()["name"]
     state = bool(request.get_json()["state"])
     if state:
-        module.schedule.baseScheduler.resume(name)
+        base_scheduler.resume(name)
     else:
-        module.schedule.baseScheduler.pause(name)
+        base_scheduler.pause(name)
     return jsonify({'result': "success"})
 
 
@@ -141,7 +141,7 @@ def trigger_change():
     name = request.get_json()["name"]
     kind = request.get_json()["kind"]
     value = request.get_json()["value"]
-    module.schedule.baseScheduler.reschedule_job_part(name, kind, value)
+    base_scheduler.reschedule_job_part(name, kind, value)
     return jsonify({'result': "success"})
 
 
@@ -154,7 +154,7 @@ def lizhi():
 
 @app.route('/get_jobs', methods=['get'])
 def get_jobs():
-    jobs = module.schedule.baseScheduler.get_jobs()
+    jobs = base_scheduler.get_jobs()
     result = []
     for s in jobs:
         if isinstance(s.trigger, CronTrigger):
@@ -176,7 +176,7 @@ def get_jobs():
 def get_job():
     ids = request.get_json()["ids"]
     for id in list(ids.keys()):
-        job = module.schedule.baseScheduler.get_job(id)
+        job = base_scheduler.get_job(id)
         if not job:
             return jsonify({'result': None})
         if job.next_run_time is None:
@@ -192,7 +192,7 @@ def get_job():
 
 @app.route('/get_fight_jobs', methods=['get'])
 def get_fight_jobs():
-    jobs = module.schedule.baseScheduler.get_jobs()
+    jobs = base_scheduler.get_jobs()
     result = []
     for s in jobs:
         if "fight_" not in s.id:
@@ -250,7 +250,7 @@ def add_fight_job():
 @app.route('/del_fight_job', methods=['post'])
 def del_fight_job():
     id = request.get_json()["id"]
-    module.schedule.baseScheduler.scheduler.remove_job(id)
+    base_scheduler.scheduler.remove_job(id)
 
     return jsonify({'result': "success"})
 
@@ -258,7 +258,7 @@ def del_fight_job():
 # 打开config.yaml
 @app.route('/alt_config', methods=['get'])
 def alt_config():
-    cmd = project_root_path() + '\\config\\config.yaml'
+    cmd = base.project_path + '\\config\\config.yaml'
     os.system(cmd)
     return jsonify({'result': "success"})
 
@@ -276,7 +276,7 @@ def disconnect():
 
 def send():
     event_name = "dcenter"
-    logfile = cf.project_path + "/log/log.log"
+    logfile = base.project_path + "/log/log.log"
     file = open(logfile, 'r', encoding='utf-8')
     file.read()
     socketio.emit(event_name, {'data': "连接到websocket"}, broadcast=False, namespace=name_space)
@@ -291,5 +291,11 @@ def send():
             socketio.emit(event_name, data, broadcast=False, namespace=name_space)
 
 
+def init():
+    module.schedule.dailyScheduler.add_all()
+    module.schedule.jijianScheduler.add_all()
+
+
 if __name__ == '__main__':
+    init()
     socketio.run(app, host="0.0.0.0", debug=False)

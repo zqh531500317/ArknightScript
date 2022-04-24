@@ -1,9 +1,8 @@
 from apscheduler.triggers.cron import CronTrigger
 
-import module.schedule.baseScheduler
-
 import module.task.jijian
 from module.utils.core_config import cf, project_path, configList
+from module.schedule.baseScheduler import base_scheduler
 
 
 def add_all():
@@ -14,22 +13,22 @@ def add_all():
 
 
 def jijian_receive():
-    module.schedule.baseScheduler.add_job(module.task.jijian.jijian_receive, trigger=CronTrigger(hour="7,15,18,23"),
-                                          id="jijian_receive")
+    base_scheduler.add_job(module.task.jijian.jijian_receive, trigger=CronTrigger(hour="7,15,18,23"),
+                           id="jijian_receive")
 
 
 def use_electricity():
-    module.schedule.baseScheduler.add_job(module.task.jijian.use_electricity, trigger=CronTrigger(hour="7,15,18,23"),
-                                          id="use_electricity")
+    base_scheduler.add_job(module.task.jijian.use_electricity, trigger=CronTrigger(hour="7,15,18,23"),
+                           id="use_electricity")
 
 
 def clue():
-    module.schedule.baseScheduler.add_job(module.task.jijian.clue, trigger=CronTrigger(hour="7"),
-                                          id="clue")
+    base_scheduler.add_job(module.task.jijian.clue, trigger=CronTrigger(hour="7"),
+                           id="clue")
 
 
 def jijian_schedule():
-    scheduler = module.schedule.baseScheduler.scheduler
+    scheduler = base_scheduler.scheduler
     job = scheduler.get_job("jijian_schedule")
     if job is not None:
         scheduler.remove_job(job.id)
@@ -40,6 +39,6 @@ def jijian_schedule():
     hour = cron["hour"]
     minute = cron["minute"]
     if enable_jijian_schedule:
-        module.schedule.baseScheduler.add_job(module.task.jijian.schedual,
-                                              trigger=CronTrigger(hour=hour, minute=minute),
-                                              id="jijian_schedule")
+        base_scheduler.add_job(module.task.jijian.schedual,
+                               trigger=CronTrigger(hour=hour, minute=minute),
+                               id="jijian_schedule")

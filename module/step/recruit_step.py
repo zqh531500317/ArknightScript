@@ -1,4 +1,5 @@
 import itertools
+import time
 
 from module.utils.core_picture import *
 from module.utils.core_ocr import ocr_without_position, recruit_ocr
@@ -36,14 +37,14 @@ def recruit():
             elif r == 1:
                 img = screen(memery=True)
                 save1("recruit", "tags", img)
-                randomClick("recruit_do")
+                dowait("recruit_do", "/recruit/main.png", description="完成选择,等待招募完成")
                 return
             elif r == 0:
                 b = is_flashable()
                 if not b:
                     img = screen(memery=True)
                     save1("recruit", "tags", img)
-                    randomClick("recruit_do")
+                    dowait("recruit_do", "/recruit/main.png", description="完成选择,等待招募完成")
                     return
                 elif b:
                     randomClick("recruit_flash")
@@ -114,6 +115,7 @@ def best_choose():
         if tag == "支援机械":
             _switch_time("min")
             randomClick((x1, y1, x2, y2))
+            time.sleep(0.2)
             logger.info("有支援机械tag,已选择时间至1小时")
             return 1
     match_list = _all_match(result, template)
@@ -136,7 +138,7 @@ def best_choose():
                     y2 = n["location"]["height"] + y1
                 randomClick((x1, y1, x2, y2))
                 str = str + n["words"] + " "
-                time.sleep(2)
+                time.sleep(cf.sleep_time)
 
         logger.info("选中干员%s————tag组合为%s", template_item[0], str)
         return 1
@@ -177,6 +179,7 @@ def _switch_time(mode):
         pass
 
 
+# 确保ocr识别的tag在tag库中
 def _ensure_ocr_correct(recruit_result):
     for n in recruit_result:
         if not n["words"] in module.utils.core_recruitLoader.tags:

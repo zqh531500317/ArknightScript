@@ -1,4 +1,5 @@
 import time
+import types
 from typing import List, Tuple
 
 import module.error.game
@@ -28,9 +29,6 @@ def into_main():
         if is_template_match("/jijian/go_home_from_construction.png"):
             randomClick("go_home_from_construction")
         time.sleep(sleep_time)
-    # 等待弹窗
-    # time.sleep(3)
-    # close_alert()
     logger.info('到主界面')
 
 
@@ -121,7 +119,8 @@ def use_medicine_or_stone(use_medicine, medicine_num, use_stone, stone_num):
 
 
 # ck 点击   template 期望匹配的 模板匹配路径 或 ocr结果
-def dowait(ck: Union[str, tuple], template: Union[str, OcrEntity], max_retry_times=3,
+def dowait(ck: Union[str, tuple], template: Union[str, OcrEntity, types.FunctionType, types.MethodType],
+           max_retry_times=3,
            retry_time=20.0, description=None):
     retry_times = 0
     start_time = time.time()
@@ -137,6 +136,12 @@ def dowait(ck: Union[str, tuple], template: Union[str, OcrEntity], max_retry_tim
                 if description is not None:
                     logger.info(description)
                 return True
+        elif isinstance(template, types.FunctionType) or isinstance(template, types.MethodType):
+            bs = template()
+            if bs:
+                if description is not None:
+                    logger.info(description)
+                return True
         time.sleep(sleep_time)
         now = time.time()
         if (now - start_time) > retry_time:
@@ -149,7 +154,8 @@ def dowait(ck: Union[str, tuple], template: Union[str, OcrEntity], max_retry_tim
             start_time = now
 
 
-def dowaitlist(list: List[Tuple[Union[str, tuple], Union[str, OcrEntity], Union[str, None]]],
+def dowaitlist(list: List[
+    Tuple[Union[str, tuple], Union[str, OcrEntity, types.FunctionType, types.MethodType], Union[str, None]]],
                delay_time=0.1, max_retry_times=3, retry_time=20.0):
     for ck, templete, description in list:
         dowait(ck, templete, max_retry_times=max_retry_times, retry_time=retry_time, description=description)

@@ -5,6 +5,7 @@ import sys
 import time
 from collections import deque
 import re
+import yagmail
 from logzero import logger
 
 from adbutils import _AdbStreamConnection, AdbTimeout
@@ -115,3 +116,10 @@ def saveFileByList(file: str, lines: list, encoding='utf-8'):
 def save_last_lines(src_filename, dst_filename):
     res = last_lines(src_filename)
     saveFileByList(dst_filename, res)
+
+
+def send(subject, contents, user, password, host, receiver):
+    yag = yagmail.SMTP(user=user,
+                       password=password,
+                       host=host)
+    yag.send(receiver, subject, contents)

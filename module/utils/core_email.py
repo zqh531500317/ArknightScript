@@ -1,7 +1,7 @@
 from module.utils.core_config import cf
 import yagmail
 
-
+# not use
 def send(subject, contents):
     if cf.enable_mail:
         yag = yagmail.SMTP(user=cf.sender,

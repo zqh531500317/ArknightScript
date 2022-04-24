@@ -2,7 +2,7 @@ import time
 import cv2
 import numpy as np
 import copy
-from module.utils.core_picture import screen
+from module.utils.core_control import screen
 from module.utils.core_config import cf
 
 

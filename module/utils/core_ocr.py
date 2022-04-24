@@ -32,6 +32,41 @@ class OcrHandler:
         ocr_entity.result = result
         return ocr_entity
 
+    @staticmethod
+    def ocr_without_position(uri, limit=None, cand_alphabet=None):
+        if cf.get("use") == "cnocr":
+            res = cnocr_without_position(uri, limit, cand_alphabet)
+            logger.debug("cnocr result:" + str(res))
+            return res
+        else:
+            pass
+
+    @staticmethod
+    def ocr_without_position_low(uri, limit=None):
+        if cf.get("use") == "cnocr":
+            return cnocr_without_position(uri, limit)
+        else:
+            pass
+
+    @staticmethod
+    def cnocr_without_position(uri, limit, cand_alphabet=None):
+        if isinstance(uri, str):
+            img = cnocr.utils.read_img(uri)
+        else:
+            img = uri
+        if cand_alphabet is not None and limit is None:
+            ocr.set_cand_alphabet(cand_alphabet)
+            # Returns tuple: (['你', '好'], 0.80)
+            res = ocr.ocr_for_single_line(img)
+            ocr.set_cand_alphabet(None)
+
+        elif limit is None:
+            res = ocr.ocr_for_single_line(img)
+        else:
+            res = limit.ocr_for_single_line(img)
+        logger.debug("cnocr :" + str(res))
+        return [{'words': "".join(str(i) for i in res[0])}]
+
 
 def ocr_without_position(uri, limit=None, cand_alphabet=None):
     if cf.get("use") == "cnocr":

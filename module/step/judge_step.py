@@ -76,14 +76,12 @@ def isInTerminal():
 
 # 是否在理智恢复界面
 def isInReason():
-    img = screen(memery=True)
-    return is_template_match("isInReason.png", screen_re=img)
+    return is_template_match("isInReason.png")
 
 
 # 是否在作战前界面
 def isInPreFight():
-    img = screen(memery=True)
-    return is_template_match("pre_fight.png", screen_re=img)
+    return is_template_match("pre_fight.png")
 
 
 def ensureGameOpen():

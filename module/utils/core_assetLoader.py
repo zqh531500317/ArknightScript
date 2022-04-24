@@ -1,4 +1,5 @@
-from module.utils.core_config import cf
+from module.utils.core_utils import project_root_path
+
 # 图片资源加载器  启动时会加载所有的图片资源及区域与其可点击有效区域的关系
 ui = {}
 
@@ -133,4 +134,4 @@ ui["recruit_do"] = {"area": (948, 565, 999, 599), "button": (948, 565, 999, 599)
                     "file": "/asset/ui/recruit_do.png"}
 # 将file转化为绝对路径
 for k, v in ui.items():
-    v["file"] = cf.project_path + v["file"]
+    v["file"] = project_root_path() + v["file"]
