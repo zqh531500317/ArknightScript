@@ -6,6 +6,7 @@ from module.utils.core_email import send
 import module.utils.core_recruitLoader
 from module.utils.core_control import *
 from module.utils.core_template import *
+from module.step.click_step import dowait
 
 recruit_tag = ui["recruit_tag"]["area"]
 
@@ -16,18 +17,14 @@ def recruit():
         logger.info("公开招募1号位正在招募中，跳过本次任务")
         return
     if state == "finish":
-        randomClick("recruit_state_finish")
-        time.sleep(2 * cf.get("sleep_time"))
-        randomClick("recruit_finish_skip")
-        time.sleep(cf.get("sleep_time"))
+        dowait("recruit_state_finish", "/recruit/unpack.png", description="点击完成招募")
+        dowait("recruit_finish_skip", "/recruit/result.png", description="点击skip")
         img = screen(memery=True)
         save1("recruit", "result", img)
-        randomClick("recruit_finish_skip")
-        time.sleep(cf.get("sleep_time"))
+        dowait("recruit_finish_skip", "/recruit/main.png", description="单次招募完成")
         state = "empty"
     if state == "empty":
-        randomClick("recruit_state_empty")
-        time.sleep(cf.get("sleep_time"))
+        dowait("recruit_state_empty", "/recruit/choose.png", description="点击开始招募")
         while True:
             r = best_choose()
             if r == -1:

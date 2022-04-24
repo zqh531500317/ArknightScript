@@ -28,7 +28,7 @@ def template_match_most(template_path, x1=0, y1=0, x2=1280, y2=720, screen_re=No
     dst = copy.deepcopy(screen_re)
     for coord in dets:
         cv2.rectangle(dst, (int(coord[0]), int(coord[1])), (int(coord[2]), int(coord[3])), (0, 0, 255), 2)
-    # cv2.imwrite(cf.project_path + "/cache/result.jpg", dst)
+    cv2.imwrite(cf.project_path + "/asset/template/cache/template_result.png", dst)
 
     return dets
 

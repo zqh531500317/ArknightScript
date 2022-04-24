@@ -120,8 +120,7 @@ def buy_xinyong_shop():
 @func_set_timeout(cf.timeout_time)
 def recruit_daily():
     module.step.judge_step.ensureGameOpenAndInMain()
-    randomClick("main_recruit")
-    time.sleep(cf.sleep_time)
+    dowait("main_recruit", "/recruit/main.png", description="进入公招界面")
     if module.step.recruit_step.get_recruit_num() <= 3:
         logger.warn("公招卷数量少于3张，本次跳过")
         return

@@ -23,7 +23,7 @@ ui["has_reason_before_fight"] = {"area": (654, 678, 753, 705), "button": (654, 6
 ui["login"] = {"area": (610, 654, 670, 708), "button": (610, 654, 670, 708), "file": "/asset/ui/login.png"}
 ui["main"] = {"area": (933, 435, 1016, 465), "button": (933, 435, 1016, 465), "file": "/asset/ui/main.png"}
 ui["main_recruit"] = {"area": (933, 435, 1016, 465), "button": (933, 435, 1016, 465),
-                      "file": "/asset/ui/main_recruit.png"}
+                      "file": "/asset/ui/main_ccruit.png"}
 ui["message_after_login"] = {"area": (366, 96, 509, 133), "button": (1225, 45, 1248, 68),
                              "file": "/asset/ui/message_after_login.png"}
 ui["month_after_login"] = {"area": (1189, 63, 1215, 89), "button": (1189, 63, 1215, 89),
