@@ -1,16 +1,14 @@
-from module.utils.core_control import Adb
-from module.utils.core_decoratir import bench_time
 import unittest
-import module.step.judge_step
-import module.step.click_step
 import warnings
 from logzero import setup_default_logger
+from module.base import *
+from module.step.common_step import CommonStep
 
 
 class TestScreen(unittest.TestCase):
     screen_n = 20
 
-    adb = Adb()
+    adb = base.adb
 
     def setUp(self) -> None:
         warnings.simplefilter("ignore", ResourceWarning)
@@ -33,10 +31,10 @@ class Testa(unittest.TestCase):
         setup_default_logger(disableStderrLogger=True)
 
     def test_jijian_backto_main(self):
-        module.step.judge_step.ensureGameOpenAndInMain()
-        module.step.click_step.into_jijian()
-        module.step.judge_step.ensureGameOpenAndInMain()
-        self.assertTrue(module.step.judge_step.isInMain())
+        CommonStep.ensureGameOpenAndInMain()
+        CommonStep.into_jijian()
+        CommonStep.ensureGameOpenAndInMain()
+        self.assertTrue(CommonStep.isInMain())
 
 
 if __name__ == '__main__':

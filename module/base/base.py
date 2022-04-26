@@ -4,13 +4,13 @@ import os
 import time
 
 from module.base.ocr import OcrHandler
-from module.base.picture import Picture
 from module.base.template import Template
 from module.base.decorator import singleton
+import module.utils.core_utils
 
 
 @singleton
-class Base(Picture, Template, OcrHandler):
+class Base(Template, OcrHandler):
     def __init__(self):
         super().__init__()
         logger.info("class Base __init__")
@@ -38,6 +38,13 @@ class Base(Picture, Template, OcrHandler):
 
     def init_close_alerter(self):
         _thread.start_new_thread(self.close_alert, ())
+
+    def send(self, subject, contents):
+        user = base.user
+        password = base.password
+        host = base.host
+        receiver = base.receiver
+        module.utils.core_utils.send(subject, contents, user, password, host, receiver)
 
 
 base = Base()

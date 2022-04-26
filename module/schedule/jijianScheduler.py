@@ -1,8 +1,8 @@
 from apscheduler.triggers.cron import CronTrigger
 
 import module.task.jijian
-from module.utils.core_config import cf, project_path, configList
 from module.schedule.baseScheduler import base_scheduler
+from module.base import *
 
 
 def add_all():
@@ -32,10 +32,10 @@ def jijian_schedule():
     job = scheduler.get_job("jijian_schedule")
     if job is not None:
         scheduler.remove_job(job.id)
-    enable_jijian_schedule = configList["Config"]["Game"]["enable_jijian_schedule"]
+    enable_jijian_schedule = base.get("enable_jijian_schedule")
     if not enable_jijian_schedule:
         return
-    cron = cf.read_json(project_path + "/config/schedual.json")["Config"]["cron"]
+    cron = base.read_json(base.project_path + "/config/schedual.json")["Config"]["cron"]
     hour = cron["hour"]
     minute = cron["minute"]
     if enable_jijian_schedule:

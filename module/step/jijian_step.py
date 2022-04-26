@@ -83,13 +83,13 @@ class JiJianStep:
                 for j in range(720):
                     if j < 321 or (348 < j < 603) or j > 629:
                         img[j, i] = (255, 255, 255)
-            box_infos = cnstd.detect(img)
+            box_infos = base.cnstd.detect(img)
             for box_info in box_infos['detected_texts']:
                 box = box_info["box"]
                 x = int((box[0] + box[2]) / 2)
                 y = int((box[1] + box[3]) / 2)
                 cropped_img = box_info['cropped_img']
-                ocr_res = jijian_ocr.ocr_for_single_line(cropped_img)
+                ocr_res = base.ocr_jijian(OcrEntity(input_img=cropped_img))
                 res = "".join(str(i) for i in ocr_res[0])
                 res = JiJianStep.__pre_process(res)
                 if res in names:
@@ -139,7 +139,7 @@ class JiJianStep:
     def now_electricity(index=3):
         region = base.screen(memery=True)
         cropped = base.cut(region, 762, 23, 862, 48)
-        result = base.ocr_number(OcrEntity(cropped))
+        result = base.ocr_number(OcrEntity(cropped)).result
         print(result)
         num = []
         try:
@@ -205,7 +205,7 @@ class JiJianStep:
                 x = int((box[0] + box[2]) / 2)
                 y = int((box[1] + box[3]) / 2)
                 cropped_img = box_info['cropped_img']
-                ocr_res = jijian_ocr.ocr_for_single_line(cropped_img)
+                ocr_res = base.ocr_jijian(OcrEntity(input_img=cropped_img))
                 res = "".join(str(i) for i in ocr_res[0])
                 res = JiJianStep.__pre_process(res)
                 if "巫恋" == res:

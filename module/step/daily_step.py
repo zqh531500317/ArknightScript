@@ -35,7 +35,7 @@ class DailyStep:
         region = base.screen(memery=True)
         cropped = base.cut(region, 1187, 28, 1277, 52)
         ocr_entity = OcrEntity(input_img=cropped, cand_alphabet=base.number_tag, except_result="")
-        result = base.ocr(ocr_entity)
+        result = base.ocr(ocr_entity).result
         pre = result[0]["words"]
         while True:
             base.randomClick("friend_home")
@@ -43,7 +43,7 @@ class DailyStep:
             region = base.screen(memery=True)
             cropped = base.cut(region, 1187, 28, 1277, 52)
             ocr_entity = OcrEntity(input_img=cropped, cand_alphabet=base.number_tag, except_result="")
-            result = base.ocr(ocr_entity)
+            result = base.ocr(ocr_entity).result
             later = result[0]["words"]
             if pre == later:
                 return

@@ -3,9 +3,7 @@ from module.step.base_step import BaseStep
 import module.error.game
 
 
-@singleton
 class CommonStep(BaseStep):
-
     @staticmethod
     def isInLogin():
         return base.is_template_match("isLogining.png", template_threshold=0.9)
@@ -72,6 +70,10 @@ class CommonStep(BaseStep):
     def isInTerminal():
         return base.compareSame("terminal")
 
+    @staticmethod
+    def is_in_jijian_main():
+        return base.is_template_match("jijian/jijian_main.png")
+
     # 是否在理智恢复界面
     @staticmethod
     def isInReason():
@@ -81,6 +83,10 @@ class CommonStep(BaseStep):
     @staticmethod
     def isInPreFight():
         return base.is_template_match("pre_fight.png")
+
+    @staticmethod
+    def isInShop():
+        return base.is_template_match("/shop/main.png")
 
     @staticmethod
     def ensureGameOpen():

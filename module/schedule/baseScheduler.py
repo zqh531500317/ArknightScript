@@ -1,25 +1,18 @@
 import datetime
-import time
-
 from apscheduler.executors.pool import ThreadPoolExecutor
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 from apscheduler.schedulers.background import BackgroundScheduler
 import copy
-
 from apscheduler.triggers.cron import CronTrigger
-
 from apscheduler.events import EVENT_JOB_ERROR, EVENT_JOB_EXECUTED, EVENT_JOB_SUBMITTED
 from apscheduler.triggers.date import DateTrigger
-from logzero import logger
-from module.base.base import base
+from module.base import *
 from module.utils.core_utils import random_time_str, save_last_lines
 import module.task.daily
-from module.base.decorator import singleton
 
 
 @singleton
 class BaseScheduler:
-
     def __init__(self):
         logger.info("class BaseScheduler __init__")
         jobstores = {
@@ -155,11 +148,11 @@ class BaseScheduler:
         if base.state.running_task_num > 0:
             should_close = False
         logger.debug("当前队列任务数:%s", base.state.running_task_num)
-        if should_close and base.control.isLive():
+        if should_close and base.isLive():
             for i in range(0, 5):
                 logger.info("在%s分钟内无任务,将在%s秒后关闭游戏", base.minutes, str(10 - 2 * i))
                 time.sleep(2)
-            base.control.stop()
+            base.stop()
         time.sleep(2)
 
     def pause_scheduler(self):

@@ -1,13 +1,13 @@
 import _thread
-import shutil
-import time
-
-import yaml
-import os
-import psutil
-import sys
 import json
+import os
+import shutil
+import sys
+import time
 from collections import OrderedDict
+
+import psutil
+import yaml
 from logzero import logger
 
 from module.base.state import State
@@ -15,6 +15,10 @@ from module.utils.core_utils import project_root_path
 
 
 class CoreConfig:
+    ONE_MINUTES = 1
+    TWO_MINUTES = 2
+    THREE_MINUTES = 3
+
     def __init__(self):
         logger.info("class CoreConfig __init__")
         config = self.project_path + '/config/config.yaml'
@@ -183,3 +187,11 @@ class CoreConfig:
     @property
     def minutes(self):
         return self.get("minutes")
+
+    @property
+    def user(self):
+        return self.get("sender")
+
+    @property
+    def password(self):
+        return self.get("authorization")

@@ -7,10 +7,18 @@ from flask import Flask, jsonify, render_template, request
 from flask_socketio import SocketIO
 import module.schedule.fightScheduler
 import module.schedule.dailyScheduler
+import module.schedule.jijianScheduler
 from flask_cors import CORS
 from engineio.async_drivers import threading
-import module.task.state
 from module.schedule.baseScheduler import base_scheduler
+
+
+def init():
+    module.schedule.dailyScheduler.add_all()
+    module.schedule.jijianScheduler.add_all()
+
+
+init()
 
 os.system('chcp 65001')
 app = Flask(__name__, template_folder="webapp/resources", static_folder="webapp/resources", static_url_path="")
@@ -57,7 +65,7 @@ def is_scheduler_running():
 @app.route('/fight', methods=['post'])
 def fight():
     # stop：停止状态可执行，start：正在作战
-    is_fight = module.task.state.is_fight
+    is_fight = base.state.is_fight
     use_medicine = use_stone = False
     medicine_num = stone_num = 0
     if is_fight == "stop":
@@ -92,10 +100,10 @@ def fight():
 
 @app.route('/recruit', methods=['post'])
 def recruit():
-    is_fight = module.task.state.is_fight
+    is_fight = base.state.is_fight
 
     if is_fight == "stop":
-        module.task.state.is_fight = "fight"
+        base.state.is_fight = "fight"
         recruit = request.get_json()["recruit"]
         times = int(recruit["times"])
         module.schedule.dailyScheduler.once_recruit(times)
@@ -142,7 +150,7 @@ def trigger_change():
 # 获取状态
 @app.route('/lizhi', methods=['get'])
 def lizhi():
-    result = module.task.state.lizhi
+    result = base.state.lizhi
     return jsonify({'result': result})
 
 
@@ -204,6 +212,11 @@ def get_fight_jobs():
                 }
         result.append(temp)
     return jsonify({'result': result})
+
+
+@app.route('/running_task', methods=['get'])
+def running_task():
+    return jsonify({'result': base.state.running_task_name})
 
 
 # 添加任务
@@ -285,11 +298,5 @@ def send():
             socketio.emit(event_name, data, broadcast=False, namespace=name_space)
 
 
-def init():
-    module.schedule.dailyScheduler.add_all()
-    module.schedule.jijianScheduler.add_all()
-
-
 if __name__ == '__main__':
-    init()
     socketio.run(app, host="0.0.0.0", debug=False)

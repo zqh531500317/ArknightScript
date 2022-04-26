@@ -22,6 +22,8 @@ def singleton(cls):
 def timer(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
+        from module.base.base import base
+        base.state.running_task_name = func.__name__
         global res
         logger.info("task %s is started", func.__name__)
         start = time.time()
@@ -32,12 +34,14 @@ def timer(func):
             logger.info("task running cost: %s minutes", end - start)
             logger.exception(e)
             logger.info("task %s is finished", func.__name__)
+            base.state.running_task_name = ""
             value = sys.exc_info()
             # do something
             six.reraise(*value)  # 借助six模块抛异常
         end = time.time()
         logger.info("task running cost: %s minutes", end - start)
         logger.info("task %s is finished", func.__name__)
+        base.state.running_task_name = "暂无"
         return res
 
     return wrapper
@@ -64,14 +68,13 @@ def bench_time(n):
 def debug_recode(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
-        import module.base.state
-        import module.base.base
+        from module.base.base import base
         logger.info("debug_recode is start:%s", func.__name__)
-        module.base.state.debug_run = True
-        if module.base.base.debug:
+        base.state.debug_run = True
+        if base.debug:
             _thread.start_new_thread(__sr, (func.__name__,))
         res = func(*args, **kwargs)
-        module.base.state.debug_run = False
+        base.state.debug_run = False
         logger.info("debug_recode is end:%s", func.__name__)
 
         return res
@@ -80,13 +83,11 @@ def debug_recode(func):
 
 
 def __sr(kind):
-    import module.base.base
+    from module.base.base import base
     img_list = []
-    path = module.base.base.project_path + "/screenshots/debug/{}/{}".format(str(kind), str(int(time.time_ns() / 1000)))
+    path = base.project_path + "/screenshots/debug/{}/{}".format(str(kind), str(int(time.time_ns() / 1000)))
     while True:
-        import module.utils.core_control
-        import module.task.state
-        if not module.task.state.debug_run:
+        if not base.state.debug_run:
             logger.info("debug_recode 开始存储记录")
             i = 0
             for img in img_list:
@@ -95,7 +96,7 @@ def __sr(kind):
             logger.info("总共存储照片%s张,存储至/screenshots/debug/%s/%s", i, str(kind), str(int(time.time_ns() / 1000)))
             logger.info("debug_recode 存储记录完毕")
             return
-        temp = module.utils.core_control.screen(memery=True)
+        temp = base.screen(memery=True)
         x, y = temp.shape[0:2]
         temp = cv2.resize(temp, (int(y / 2), int(x / 2)))
         if not os.path.exists(path):

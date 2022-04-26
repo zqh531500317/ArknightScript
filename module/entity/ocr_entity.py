@@ -8,6 +8,11 @@ class OcrEntity:
         self.y2 = y2
         self.cand_alphabet = cand_alphabet
         self.result = ""
+        self.string = ""
 
     def is_except(self):
         return self.result == self.except_result
+
+    def set_res(self, result):
+        self.result = result
+        self.string = result[0]["words"]

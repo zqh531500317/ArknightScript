@@ -6,36 +6,40 @@ from module.error.retryError import RetryError
 class BaseStep:
     # ck 点击   template 期望匹配的 模板匹配路径 或 ocr结果
     @staticmethod
-    def dowait(ck: Union[str, tuple], template: Union[str, OcrEntity, types.FunctionType, types.MethodType],
+    def dowait(ck: Union[str, tuple], template: Union[str, OcrEntity, types.FunctionType, types.MethodType,],
                max_retry_times=3,
-               retry_time=20.0, description=None):
+               retry_time=20.0, description=None, sleep_time=None):
+        def log_msg(msg):
+            if msg is not None:
+                logger.info(msg)
+
+        if sleep_time is None:
+            sleep_time = base.sleep_time
         retry_times = 0
         start_time = time.time()
         base.randomClick(ck)
         while True:
             if isinstance(template, str):
                 if base.is_template_match(template):
-                    if description is not None:
-                        logger.info(description)
+                    log_msg(description)
                     return True
             elif isinstance(template, OcrEntity):
                 if base.ocr(template).is_except():
-                    if description is not None:
-                        logger.info(description)
+                    log_msg(description)
                     return True
             elif isinstance(template, types.FunctionType) or isinstance(template, types.MethodType):
                 bs = template()
                 if bs:
-                    if description is not None:
-                        logger.info(description)
+                    log_msg(description)
                     return True
-            time.sleep(base.sleep_time)
+            time.sleep(sleep_time)
             now = time.time()
             if (now - start_time) > retry_time:
                 if retry_times == max_retry_times:
                     logger.error("RetryError:times=%s", max_retry_times)
                     raise RetryError(retry_times)
-                logger.warning("running time >%s,retry the %s times", retry_time, retry_times)
+                logger.warning("running time >%s,retry the %s times,description=%s", retry_time, retry_times,
+                               description)
                 base.randomClick(ck)
                 retry_times += 1
                 start_time = now

@@ -7,7 +7,7 @@ import numpy as np
 from cnocr import CnOcr
 
 from module.penguin_stats.gui_preload import item_index, stage_index, droptype_index
-from module.utils.core_config import endFight_path
+from module.base import *
 
 TOP = 0
 BOTTOM = 1
@@ -432,7 +432,7 @@ class Result:
 
 def analyse() -> (dict, str):
     async def test():
-        img = Img.read(endFight_path)
+        img = Img.read(base.endFight_path)
         if result := await Result.analyse(img):
             data, display = result
             return data, display

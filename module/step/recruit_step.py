@@ -15,7 +15,7 @@ class RecruitStep:
         state = RecruitStep.get_state()
         if state == "waiting":
             logger.info("公开招募1号位正在招募中，跳过本次任务")
-            return
+            return -2
         if state == "finish":
             CommonStep.dowait("recruit_state_finish", "/recruit/unpack.png", description="点击完成招募")
             CommonStep.dowait("recruit_finish_skip", "/recruit/result.png", description="点击skip")
@@ -28,34 +28,33 @@ class RecruitStep:
             while True:
                 r = RecruitStep.best_choose()
                 if r == -1:
-                    return
+                    return r
                 if r == 999:
                     img = base.screen(memery=True)
                     base.save1("recruit", "tags", img)
-                    return
+                    return r
                 elif r == 1:
                     img = base.screen(memery=True)
                     base.save1("recruit", "tags", img)
                     CommonStep.dowait("recruit_do", "/recruit/main.png", description="完成选择,等待招募完成")
-                    return
+                    return r
                 elif r == 0:
                     b = RecruitStep.is_flashable()
                     if not b:
                         img = base.screen(memery=True)
                         base.save1("recruit", "tags", img)
                         CommonStep.dowait("recruit_do", "/recruit/main.png", description="完成选择,等待招募完成")
-                        return
+                        return r
                     elif b:
-                        base.randomClick("recruit_flash")
-                        time.sleep(base.get("sleep_time"))
-                        base.randomClick("recruit_flash_ensure")
-                        time.sleep(base.get("sleep_time"))
+                        CommonStep.dowait("recruit_flash", "/recruit/ensure_flash.png", description="点击刷新")
+                        CommonStep.dowait("recruit_flash_ensure", "/recruit/choose.png", description="确认刷新")
+                        return r
 
     @staticmethod
     def is_flashable():
         img = base.screen(memery=True)
-        rgb = base.get_rgb(970, 405, img_path=img)
-        if rgb[0] <= 30 and 130 <= rgb[1] <= 170 and 200 <= rgb[2] <= 240:
+        rgb = base.get_rgb(969, 406, img_path=img)
+        if rgb[2] <= 30 and 130 <= rgb[1] <= 170 and 200 <= rgb[0] <= 240:
             return True
         return False
 
@@ -76,7 +75,6 @@ class RecruitStep:
         x2 = 906
         y2 = 53
         cropped = base.cut(region, x1, y1, x2, y2)
-        time.sleep(base.get("sleep_time"))
         result = base.ocr_without_position(cropped)
         num = result[0]["words"]
         logger.debug("招聘许可数量：" + num)
@@ -160,7 +158,7 @@ class RecruitStep:
         for i in range(5):
             a = area[i]
             s = base.cut(r, a[0], a[1], a[2], a[3])
-            res = base.ocr_(OcrEntity(input_img=s, cand_alphabet=base.recruit_tag))
+            res = base.ocr(OcrEntity(input_img=s, cand_alphabet=base.recruit_tag)).result
             result.append({'flag': 1, 'words': res[0]["words"], 'location':
                 {'x1': a[0], 'y1': a[1], 'x2': a[2], 'y2': a[3]}})
         logger.debug("词条内容是：" + str(result))
@@ -222,3 +220,9 @@ class RecruitStep:
             v[2] = len(v[3])
         match_list = sorted(match_dict.items(), key=lambda x: x[1][1], reverse=True)
         return match_list
+
+
+if __name__ == '__main__':
+    base.screen()
+    b = base.is_template_match("/recruit/ensure_flash.png")
+    print(b)

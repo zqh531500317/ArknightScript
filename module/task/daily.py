@@ -1,13 +1,13 @@
-from module.base import *
+import time
+
 from module.step.common_step import CommonStep
+from module.step.daily_step import DailyStep
+from module.step.gamepass_step import GamePassStep
+from module.step.recruit_step import RecruitStep
+from module.base import *
+
 
 # 收货每日任务和每周任务
-from module.step.daily_step import DailyStep
-from module.step.recruit_step import RecruitStep
-from module.utils.core_assetLoader import ui
-from module.utils.core_clickLoader import ci
-
-
 @debug_recode
 @timer
 @func_set_timeout(base.timeout_time)
@@ -56,10 +56,9 @@ def receive_xinyong():
 def buy_xinyong_shop():
     # 筛选出能买的  1、没卖掉 2、不是家具零件和碳
     CommonStep.ensureGameOpenAndInMain()
-    base.randomClick("main_shop")
-    time.sleep(base.sleep_time)
-    base.randomClick((1125, 93, 1257, 115))
-    time.sleep(base.sleep_time)
+    CommonStep.dowait("main_shop", CommonStep.isInShop, "进入商店")
+    CommonStep.dowait((1125, 93, 1257, 115), "/shop/main_xinyong.png", "进入信用商店")
+    time.sleep(base.ONE_MINUTES)
     buy = [(129, 266), (382, 266), (636, 266), (888, 266), (1135, 266),
            (129, 522), (382, 522), (636, 522), (888, 522), (1135, 522)]
     color = [(208, 243), (457, 242), (706, 243), (953, 237), (1211, 244),
@@ -83,28 +82,26 @@ def buy_xinyong_shop():
     for i in range(10):
         img = base.screen(memery=True)
         # 买过的跳过
-        rgb = base.get_rgb(color[i][0], color[i][1], img_path=img)
-        if 100 < rgb[0] < 200 and rgb[1] < 120 and rgb[2] < 120:
-            continue
-        # 不买家具零件和碳
         a = area[i]
         s = base.cut(img, a[0], a[1], a[2], a[3])
+        if base.is_template_match("/shop/sold.png", screen_re=s):
+            logger.info("skip the %sst item because of sold", i + 1)
+            continue
+        # 不买家具零件和碳
         if len(base.template_match_best("shop/tan.png", screen_re=s)) != 0 or \
                 len(base.template_match_best("shop/tansu.png", screen_re=s)) != 0 or \
                 len(base.template_match_best("shop/lingjian.png", screen_re=s)) != 0:
+            logger.info("skip the %sst item because of in black list", i + 1)
             continue
-        base.click(buy[i][0], buy[i][1])
-        time.sleep(base.sleep_time)
+        ck = (buy[i][0], buy[i][1], buy[i][0] + 1, buy[i][1] + 1)
+        CommonStep.dowait(ck, "/shop/buy.png", "选择购买")
         base.randomClick(mai)
-        time.sleep(base.sleep_time)
-        b = base.compareSimilar("buy_error") > 0.9
-        if b:
-            base.randomClick(bumai)
-            logger.info("信用點數不足")
+        time.sleep(base.TWO_MINUTES)
+        if base.is_template_match("/shop/buy.png"):
+            CommonStep.dowait(bumai, "/shop/main_xinyong.png", description="无法购买:信用点数不足")
             break
         else:
-            base.randomClick(bumai)
-            logger.info("购买信用商店中的:%s", "物品")
+            CommonStep.dowait(bumai, "/shop/main_xinyong.png", description="购买信用商店中的:{}".format("物品"))
     CommonStep.ensureGameOpenAndInMain()
 
 
@@ -127,14 +124,16 @@ def recruit_daily():
 def once_recruit(times):
     CommonStep.ensureGameOpenAndInMain()
     CommonStep.dowait("main_recruit", "/recruit/main.png", description="进入公招界面")
+    r = -3
     for i in range(times):
-        RecruitStep.recruit()
-        time.sleep(base.sleep_time)
-        base.randomClick("recruit_immediately")
-        time.sleep(base.sleep_time)
-        base.randomClick("recruit_flash_ensure")
-        time.sleep(base.sleep_time)
+        r = RecruitStep.recruit()
+        if r == -2:
+            break
+        CommonStep.dowait("recruit_immediately", "/recruit/ensure_flash.png", description="立即招募")
+        CommonStep.dowait("recruit_flash_ensure", "/recruit/main.png", description="确认招募")
+
     base.state.is_fight = "stop"
+    return r
 
 
 @debug_recode
@@ -155,7 +154,7 @@ def xinpian():
 def get_lizhi():
     CommonStep.ensureGameOpenAndInMain()
     time.sleep(1)
-    CommonStep.exec_by_clickLoader(ci["lizhi"])
+    GamePassStep.exec_by_clickLoader(ci["lizhi"])
     time.sleep(base.sleep_time)
     region = base.screen(memery=True)
     lizhi_before_fight = ui["lizhi_before_fight"]["area"]

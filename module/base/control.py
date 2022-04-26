@@ -2,9 +2,9 @@ import os
 import random
 import socket
 import time
+import typing
 
 import adbutils
-from adbutils.errors import AdbError
 from retrying import retry
 import numpy
 import cv2
@@ -13,6 +13,7 @@ from module.base.config import CoreConfig
 from module.utils.core_utils import recv_all, random_port
 from logzero import logger
 from typing import Union
+from module.error.control_error import AcceptDataError
 
 
 class BaseAdb(CoreConfig):
@@ -52,7 +53,7 @@ class BaseAdb(CoreConfig):
         return False
 
     # return (package,activity)
-    def getPackageNameAndActivityName(self) -> (str, str):
+    def getPackageNameAndActivityName(self) -> typing.Tuple[str, str]:
         text = self.adb.current_app()
         return text["package"], text["activity"]
 
@@ -237,6 +238,7 @@ class Adb(BaseAdb):
         self.__screenshot_method_fixed = self.__screenshot_method
         if len(screenshot) < 100:
             logger.warning(f'Unexpected screenshot: {screenshot}')
+            raise AcceptDataError(len(screenshot))
         raise OSError(f'cannot load screenshot')
 
     def __screen_disk(self, path):
@@ -281,6 +283,7 @@ class Adb(BaseAdb):
         data = recv_all(conn, chunk_size=chunk_size)
         if len(data) < 100:
             logger.warning(f'Unexpected screenshot: {data}')
+            raise AcceptDataError(len(data))
         # Server close connection
         conn.close()
         # Load data
