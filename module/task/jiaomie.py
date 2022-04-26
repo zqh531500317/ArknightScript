@@ -1,24 +1,20 @@
-import time
-
-import module.step.gamepass_step
-import module.step.click_step
-import module.step.judge_step
-import module.task.fight
-from module.utils.core_clickLoader import ci
-from module.utils.core_control import *
+from module.step.gamepass_step import GamePassStep
+from module.step.common_step import CommonStep
+from module.step.fight_step import FightStep
+from module.base import *
 
 
 @timer
 def jiaomie(map_name, max_fight_time, use_medicine, medicine_num, use_stone, stone_num):
-    module.step.judge_step.ensureGameOpenAndInMain()
+    CommonStep.ensureGameOpenAndInMain()
 
-    module.step.gamepass_step.exec_by_clickLoader(ci["jiaomie"])
-    num = module.step.gamepass_step.jiaomieIsFinish()
+    GamePassStep.exec_by_clickLoader(ci["jiaomie"])
+    num = GamePassStep.jiaomieIsFinish()
 
     if num > max_fight_time:
         num = max_fight_time
     time.sleep(2)
-    randomClick((744, 359, 979, 467))
-    time.sleep(sleep_time)
+    base.randomClick((744, 359, 979, 467))
+    time.sleep(base.sleep_time)
     # 开始作战
-    module.task.fight.cycleFight(num, "剿灭", use_medicine, medicine_num, use_stone, stone_num)
+    FightStep.cycleFight(num, "剿灭", use_medicine, medicine_num, use_stone, stone_num)

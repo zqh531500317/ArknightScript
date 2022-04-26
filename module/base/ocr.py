@@ -1,5 +1,7 @@
 from cnocr import CnOcr
 import cnocr.utils
+from cnstd import CnStd
+
 from module.base.config import CoreConfig
 from logzero import logger
 
@@ -10,6 +12,7 @@ class OcrHandler(CoreConfig):
     def __init__(self):
         super().__init__()
         self.ocr = CnOcr(model_name="densenet_lite_136-fc")
+        self.cnstd = CnStd(rotated_bbox=False, resized_shape=(1280, 704))
 
     def ocr(self, ocr_entity: OcrEntity):
         x1 = ocr_entity.x1
@@ -18,6 +21,34 @@ class OcrHandler(CoreConfig):
         y2 = ocr_entity.y2
         img = ocr_entity.input_img[y1: y2, x1:x2]
         cand_alphabet = ocr_entity.cand_alphabet
+        self.ocr.set_cand_alphabet(cand_alphabet)
+        temp = self.ocr.ocr_for_single_line(img)
+        self.ocr.set_cand_alphabet(None)
+        result = [{'words': "".join(str(i) for i in temp[0])}]
+        ocr_entity.result = result
+        return ocr_entity
+
+    def ocr_number(self, ocr_entity: OcrEntity):
+        x1 = ocr_entity.x1
+        y1 = ocr_entity.y1
+        x2 = ocr_entity.x2
+        y2 = ocr_entity.y2
+        img = ocr_entity.input_img[y1: y2, x1:x2]
+        cand_alphabet = self.number_tag
+        self.ocr.set_cand_alphabet(cand_alphabet)
+        temp = self.ocr.ocr_for_single_line(img)
+        self.ocr.set_cand_alphabet(None)
+        result = [{'words': "".join(str(i) for i in temp[0])}]
+        ocr_entity.result = result
+        return ocr_entity
+
+    def ocr_jijian(self, ocr_entity: OcrEntity):
+        x1 = ocr_entity.x1
+        y1 = ocr_entity.y1
+        x2 = ocr_entity.x2
+        y2 = ocr_entity.y2
+        img = ocr_entity.input_img[y1: y2, x1:x2]
+        cand_alphabet = self.cand_alphabet_officer
         self.ocr.set_cand_alphabet(cand_alphabet)
         temp = self.ocr.ocr_for_single_line(img)
         self.ocr.set_cand_alphabet(None)

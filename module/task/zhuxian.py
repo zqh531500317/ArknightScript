@@ -1,9 +1,7 @@
-import module.step.gamepass_step
-import module.step.click_step
-import module.step.judge_step
-import module.task.fight
-from module.utils.core_clickLoader import ci
-from module.utils.core_decoratir import timer
+from module.step.fight_step import FightStep
+from module.step.gamepass_step import GamePassStep
+from module.step.common_step import CommonStep
+from module.base import *
 
 
 # name 主线名称    fight_time最大次数
@@ -18,10 +16,10 @@ def zhuxian(name, max_fight_time, use_medicine, medicine_num, use_stone, stone_n
 
     left = str(series) + "-X"
     v = ci[left]
-    module.step.judge_step.ensureGameOpenAndInMain()
-    module.step.gamepass_step.exec_by_clickLoader(v)
+    CommonStep.ensureGameOpenAndInMain()
+    GamePassStep.exec_by_clickLoader(v)
     # 移动到章节最左边
-    module.step.gamepass_step.goto_ahead_for_zhuxian()
+    GamePassStep.goto_ahead_for_zhuxian()
 
-    module.step.gamepass_step.find_game_position(name)
-    module.task.fight.cycleFight(max_fight_time, name, use_medicine, medicine_num, use_stone, stone_num)
+    GamePassStep.find_game_position(name)
+    FightStep.cycleFight(max_fight_time, name, use_medicine, medicine_num, use_stone, stone_num)

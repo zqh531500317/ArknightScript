@@ -1,12 +1,7 @@
-import os
-import sys
 import _thread
-import time
-from module.base.base import base
 
-from logzero import logger
+from module.base import *
 from apscheduler.triggers.date import DateTrigger
-from module.base.base import base
 from apscheduler.triggers.cron import CronTrigger
 from flask import Flask, jsonify, render_template, request
 from flask_socketio import SocketIO
@@ -18,7 +13,6 @@ import module.task.state
 from module.schedule.baseScheduler import base_scheduler
 
 os.system('chcp 65001')
-
 app = Flask(__name__, template_folder="webapp/resources", static_folder="webapp/resources", static_url_path="")
 CORS(app, supports_credentials=True)
 app.jinja_env.variable_start_string = '<<'

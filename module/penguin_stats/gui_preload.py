@@ -1,7 +1,7 @@
 import json
 import cv2
 import requests
-from module.utils.core_config import project_path
+from module.base import *
 
 
 def get_stageindex():
@@ -32,7 +32,7 @@ def get_itemindex():
     for item in item_table:
         itemId = item["itemId"]
         name_i18n = item["name_i18n"]
-        path = project_path + "/asset/" + "resource/items2/{}.png".format(itemId)
+        path = base.project_path + "/asset/" + "resource/items2/{}.png".format(itemId)
         img = cv2.imread(path)
         if img is not None:
             item_index[itemId] = {"name_i18n": name_i18n, "img": img}

@@ -2,16 +2,14 @@ import subprocess
 import cv2
 import json
 import numpy as np
-from module.utils.core_config import project_path
-from module.utils.core_control import screen
+from module.base import *
 from logzero import logger
-from module.utils.core_ocr import ocr_without_position
 
 item_circle_radius = 64
 itemreco_box_size = 142
 half_box = itemreco_box_size // 2
 
-path = project_path + "/module/inventory/"
+path = base.project_path + "/module/inventory/"
 
 
 def load_net_data():
@@ -105,7 +103,7 @@ def get_item_info(cv_img, box_size=137):
 def get_quantity_ppocr(ori_img):
     img_h, img_w = ori_img.shape[:2]
     half_img = ori_img[int(img_h * 0.68):int(img_h * 0.89), int(img_w * 0.2):int(img_w * 0.95)]
-    res = ocr_without_position(half_img, None, cand_alphabet='.0123456789万')[0]["words"]
+    res = base.ocr_without_position(half_img, None, cand_alphabet='.0123456789万')[0]["words"]
     if "万" in res:
         try:
             number = float(res[:len(res) - 1])
@@ -124,7 +122,7 @@ def screenshot():
 
 def show_bag(with_quantity=True):
     items = {}
-    img = screen(memery=True)
+    img = base.screen(memery=True)
     item_images = get_all_item_img_in_screen(img)
     for item_img in item_images:
         # prob 识别结果置信度

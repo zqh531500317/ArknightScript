@@ -1,5 +1,5 @@
 class OcrEntity:
-    def __init__(self, except_result, input_img=None, x1=0, y1=0, x2=1280, y2=720, cand_alphabet=None):
+    def __init__(self, except_result="", input_img=None, x1=0, y1=0, x2=1280, y2=720, cand_alphabet=None):
         self.input_img = input_img
         self.except_result = except_result
         self.x1 = x1
