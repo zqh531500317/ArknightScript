@@ -21,44 +21,44 @@ class GamePassStep:
                 base.randomClick(action[1])
             elif action[0] == "scroll":
                 base.scroll_by_tuple(action[1])
-            time.sleep(base.sleep_time)
+            time.sleep(base.THREE_MINUTES)
 
     # 为主线 滑动到最左边
     @staticmethod
     def goto_ahead_for_zhuxian():
         for i in range(5):
             base.scroll(520, 40, 1400, 43, 150)
-            time.sleep(base.sleep_time)
+            time.sleep(base.ONE_MINUTES)
 
     # 为活动 滑动到最左边
     @staticmethod
     def goto_ahead_for_huodong():
         for i in range(3):
             base.scroll(520, 40, 1400, 43, 150)
-            time.sleep(base.sleep_time)
+            time.sleep(base.ONE_MINUTES)
 
     # 为资源本 滑动到最左边
     @staticmethod
     def goto_ahead_for_ziyuanshouji():
         base.scroll(200, 300, 1000, 300, 150)
-        time.sleep(base.sleep_time)
+        time.sleep(base.ONE_MINUTES)
         base.scroll(200, 300, 1000, 300, 150)
 
     # 为资源本 滑动到最右边
     @staticmethod
     def goto_behind_for_ziyuanshouji():
         base.scroll(1000, 300, 200, 300, 150)
-        time.sleep(base.sleep_time)
+        time.sleep(base.ONE_MINUTES)
         base.scroll(1000, 300, 200, 300, 150)
 
     @staticmethod
     def goto_behind_for_huodong():
         base.scroll(1000, 300, 200, 300, 150)
-        time.sleep(base.sleep_time)
+        time.sleep(base.ONE_MINUTES)
         base.scroll(1000, 300, 200, 300, 150)
-        time.sleep(base.sleep_time)
+        time.sleep(base.ONE_MINUTES)
         base.scroll(1000, 300, 200, 300, 150)
-        time.sleep(base.sleep_time)
+        time.sleep(base.ONE_MINUTES)
 
     # 判断剿灭是否打完 return num 表示还要打num把才能打完
     @staticmethod

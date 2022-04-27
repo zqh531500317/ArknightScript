@@ -26,7 +26,7 @@ def receive_renwu():
 @func_set_timeout(base.timeout_time)
 def friend():
     CommonStep.ensureGameOpenAndInMain()
-    CommonStep.dowait("main_friend", "/friend/mingpian.png", description="点击好友按钮")
+    CommonStep.dowait("main_friend", "/friend/mingpian.png", description="点击好友按钮", retry_time=10)
     CommonStep.dowait("friend_list", "/friend/card.png", description="点击好友列表")
     CommonStep.dowait("into_friend", "/friend/in_friend_home.png", description="进入好友基建")
     DailyStep.friend_home()
@@ -39,7 +39,7 @@ def friend():
 @func_set_timeout(base.timeout_time)
 def receive_xinyong():
     CommonStep.ensureGameOpenAndInMain()
-    base.randomClick("main_shop")
+    base.randomClick("main_shop", description="进入商店", retry_time=10)
     time.sleep(base.sleep_time)
     base.randomClick((1125, 93, 1257, 115))
     time.sleep(base.sleep_time)
@@ -56,7 +56,7 @@ def receive_xinyong():
 def buy_xinyong_shop():
     # 筛选出能买的  1、没卖掉 2、不是家具零件和碳
     CommonStep.ensureGameOpenAndInMain()
-    CommonStep.dowait("main_shop", CommonStep.isInShop, "进入商店")
+    CommonStep.dowait("main_shop", CommonStep.isInShop, description="进入商店", retry_time=10)
     CommonStep.dowait((1125, 93, 1257, 115), "/shop/main_xinyong.png", "进入信用商店")
     time.sleep(base.ONE_MINUTES)
     buy = [(129, 266), (382, 266), (636, 266), (888, 266), (1135, 266),
@@ -153,7 +153,6 @@ def xinpian():
 @timer
 def get_lizhi():
     CommonStep.ensureGameOpenAndInMain()
-    time.sleep(1)
     GamePassStep.exec_by_clickLoader(ci["lizhi"])
     time.sleep(base.sleep_time)
     region = base.screen(memery=True)

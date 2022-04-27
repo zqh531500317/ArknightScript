@@ -24,6 +24,7 @@ class BaseAdb(CoreConfig):
         self.connect()
         self.adb = adbutils.AdbDevice(self.adb_client, self.serial)
         logger.info("class BaseAdb __init__")
+        self.recent_img = None
 
     def connect(self):
         try:
@@ -253,9 +254,13 @@ class Adb(BaseAdb):
 
     def __screen_memery(self):
         if str(self.get("device_control_method")).upper() == "ADB":
-            return self._screen_adb()
+            image = self._screen_adb()
         elif str(self.get("device_control_method")).upper() == "ADB_NC":
-            return self._screen_adb_nc()
+            image = self._screen_adb_nc()
+        else:
+            image = None
+        self.recent_img = image
+        return image
 
     @retry(stop_max_attempt_number=3, wait_fixed=5000)
     def _screen_adb(self, timeout=10, chunk_size=262144):

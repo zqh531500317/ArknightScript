@@ -1,12 +1,15 @@
 from module.base import *
 from module.entity.ocr_entity import OcrEntity
+from module.entity.template_entity import TemplateEntity
 from module.error.retryError import RetryError
 
 
 class BaseStep:
     # ck 点击   template 期望匹配的 模板匹配路径 或 ocr结果
+    # ck 1、str 2、(x1,y1,x2,y2)
+    # template  1、str :template 2、OcrrEntity 3、function or method
     @staticmethod
-    def dowait(ck: Union[str, tuple], template: Union[str, OcrEntity, types.FunctionType, types.MethodType,],
+    def dowait(ck, template,
                max_retry_times=3,
                retry_time=20.0, description=None, sleep_time=None):
         def log_msg(msg):
@@ -21,6 +24,10 @@ class BaseStep:
         while True:
             if isinstance(template, str):
                 if base.is_template_match(template):
+                    log_msg(description)
+                    return True
+            elif isinstance(template, TemplateEntity):
+                if template.is_match():
                     log_msg(description)
                     return True
             elif isinstance(template, OcrEntity):

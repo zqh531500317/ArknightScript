@@ -7,7 +7,9 @@ from module.inventory.demo import show_bag
 from module.penguin_stats.core import analyse, get_name_by_id
 from module.base import *
 from module.step.fight_step import FightStep
+from module.step.common_step import CommonStep
 from module.step.gamepass_step import GamePassStep
+from module.task.ziyuanshouji import findGame
 
 
 class DailyStep:
@@ -31,23 +33,32 @@ class DailyStep:
 
     @staticmethod
     def friend_home():
-        time.sleep(2 * base.sleep_time)
         region = base.screen(memery=True)
-        cropped = base.cut(region, 1187, 28, 1277, 52)
-        ocr_entity = OcrEntity(input_img=cropped, cand_alphabet=base.number_tag, except_result="")
-        result = base.ocr(ocr_entity).result
-        pre = result[0]["words"]
+        frind_name = DailyStep.get_frind_name(region)
+        pre = DailyStep.get_frind_xinyong_num(region)
         while True:
-            base.randomClick("friend_home")
-            time.sleep(3 * base.sleep_time)
-            region = base.screen(memery=True)
-            cropped = base.cut(region, 1187, 28, 1277, 52)
-            ocr_entity = OcrEntity(input_img=cropped, cand_alphabet=base.number_tag, except_result="")
-            result = base.ocr(ocr_entity).result
-            later = result[0]["words"]
+            while True:
+                base.randomClick("friend_home")
+                time.sleep(base.THREE_MINUTES)
+                region = base.screen(memery=True)
+                frind_name_temp = DailyStep.get_frind_name(region)
+                if frind_name_temp != frind_name:
+                    # print(frind_name + "==" + frind_name_temp)
+                    frind_name = frind_name_temp
+                    break
+            later = DailyStep.get_frind_xinyong_num(region)
+            # print(pre + "==" + later)
             if pre == later:
                 return
             pre = later
+
+    @staticmethod
+    def get_frind_name(input_img=None):
+        return base.ocr(OcrEntity(input_img=input_img, x1=426, y1=22, x2=633, y2=52)).string
+
+    @staticmethod
+    def get_frind_xinyong_num(input_img=None):
+        return base.ocr_number(OcrEntity(input_img=input_img, x1=1218, y1=29, x2=1269, y2=50)).string
 
     @staticmethod
     def __get_map_name(name: str):
@@ -226,3 +237,8 @@ class DailyStep:
                 logger.info("%s %s", k, v)
             base.send('刷芯片完成', '刷图情况:' + str(fightTime) + "\r\n" +
                       '芯片获取情况:' + str(getTime))
+
+
+if __name__ == '__main__':
+    s = DailyStep.get_frind_xinyong_num()
+    print(s)

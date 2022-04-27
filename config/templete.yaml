@@ -25,6 +25,7 @@ Config:
     debug: false
     #截图等待时间
     sleep_time: 3
+    fight_sleep_time: 8
   System:
     project_path: E:\project\arknight
     pid:

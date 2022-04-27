@@ -1,5 +1,6 @@
 from module.step.common_step import CommonStep
 from module.step.fight_step import FightStep
+from module.step.gamepass_step import GamePassStep
 from module.utils.core_clickLoader import ci
 from module.base import *
 
@@ -10,7 +11,7 @@ from module.base import *
 def recently(name, max_fight_time, use_medicine, medicine_num, use_stone, stone_num):
     CommonStep.ensureGameOpenAndInMain()
     v = ci["recently"]
-    CommonStep.exec_by_clickLoader(v)
+    GamePassStep.exec_by_clickLoader(v)
     FightStep.cycleFight(max_fight_time, name, use_medicine, medicine_num, use_stone, stone_num)
 
 

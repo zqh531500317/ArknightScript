@@ -27,7 +27,7 @@ class FightStep:
             if r == 1 or r == 2:
                 CommonStep.into_Fight()
         while True:
-            time.sleep(10)
+            time.sleep(base.fight_sleep_time)
             if CommonStep.isFightEnd(game):
                 break
             # 若关卡失败
@@ -49,7 +49,7 @@ class FightStep:
         fight_time = 0
         try:
             for index in range(max_fight_time):
-                time.sleep(8)
+                time.sleep(base.fight_sleep_time)
                 r = FightStep.fight(game, use_medicine, medicine_num, use_stone, stone_num)
                 fight_time = fight_time + 1
                 if r == 1:

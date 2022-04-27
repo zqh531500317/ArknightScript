@@ -40,10 +40,10 @@ class Base(Template, OcrHandler):
         _thread.start_new_thread(self.close_alert, ())
 
     def send(self, subject, contents):
-        user = base.user
-        password = base.password
-        host = base.host
-        receiver = base.receiver
+        user = self.user
+        password = self.password
+        host = self.host
+        receiver = self.receiver
         module.utils.core_utils.send(subject, contents, user, password, host, receiver)
 
 

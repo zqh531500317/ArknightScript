@@ -184,7 +184,7 @@ class CommonStep(BaseStep):
         rgb = base.getRGB(1066, 604, img)
         if not (rgb[0] >= 200 and rgb[1] >= 200 and rgb[2] >= 200):
             base.click(1066, 604)
-        time.sleep(base.sleep_time)
+        time.sleep(base.ONE_MINUTES)
         img = base.screen(memery=True)
         rgb = base.getRGB(1066, 604, img)
         if not (rgb[0] >= 200 and rgb[1] >= 200 and rgb[2] >= 200):

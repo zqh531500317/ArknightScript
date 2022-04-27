@@ -3,6 +3,8 @@ import os
 import time
 
 from logzero import LogFormatter, setup_default_logger, logfile, logger
+
+import module.task.daily
 from module.base.base import base
 
 
@@ -70,3 +72,4 @@ def test_jijian():
 
 if __name__ == '__main__':
     base.screen()
+    module.task.daily.friend()

@@ -137,6 +137,10 @@ class CoreConfig:
         return self.get("sleep_time")
 
     @property
+    def fight_sleep_time(self):
+        return self.get("fight_sleep_time")
+
+    @property
     def device_control_method(self):
         return self.get("device_control_method")
 
