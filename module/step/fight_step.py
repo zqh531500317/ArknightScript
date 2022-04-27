@@ -8,7 +8,7 @@ class FightStep:
     # 单次作战
     # return 1表示吃药 2表示碎石
     @staticmethod
-    def fight(game, use_medicine, medicine_num, use_stone, stone_num):
+    def fight(game, use_medicine=False, medicine_num=0, use_stone=False, stone_num=0):
         if not CommonStep.isInPreFight():
             raise module.error.game.NotInPreFight(game)
         CommonStep.choosedailizhihui(game)
@@ -45,7 +45,7 @@ class FightStep:
 
     # 循环作战
     @staticmethod
-    def cycleFight(max_fight_time, game, use_medicine, medicine_num, use_stone, stone_num):
+    def cycleFight(max_fight_time, game, use_medicine=False, medicine_num=0, use_stone=False, stone_num=0):
         fight_time = 0
         try:
             for index in range(max_fight_time):

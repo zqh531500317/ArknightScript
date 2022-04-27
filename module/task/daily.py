@@ -39,10 +39,8 @@ def friend():
 @func_set_timeout(base.timeout_time)
 def receive_xinyong():
     CommonStep.ensureGameOpenAndInMain()
-    base.randomClick("main_shop", description="进入商店", retry_time=10)
-    time.sleep(base.sleep_time)
-    base.randomClick((1125, 93, 1257, 115))
-    time.sleep(base.sleep_time)
+    CommonStep.dowait("main_shop", CommonStep.isInShop, description="进入商店", retry_time=10)
+    CommonStep.dowait((1125, 93, 1257, 115), "/shop/main_xinyong.png", "进入信用商店")
     base.randomClick("shop_xinyong")
     time.sleep(base.sleep_time)
     base.randomClick((686, 34, 745, 56))

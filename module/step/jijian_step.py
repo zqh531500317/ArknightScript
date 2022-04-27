@@ -139,11 +139,11 @@ class JiJianStep:
     def now_electricity(index=3):
         region = base.screen(memery=True)
         cropped = base.cut(region, 762, 23, 862, 48)
-        result = base.ocr_number(OcrEntity(cropped)).result
+        result = base.ocr_number(OcrEntity(input_img=cropped)).string
         print(result)
         num = []
         try:
-            num = result[0]["words"].split("/")
+            num = result.split("/")
         except CharactersNotFound as e:
             if index > 0:
                 e.message(index)
@@ -205,8 +205,7 @@ class JiJianStep:
                 x = int((box[0] + box[2]) / 2)
                 y = int((box[1] + box[3]) / 2)
                 cropped_img = box_info['cropped_img']
-                ocr_res = base.ocr_jijian(OcrEntity(input_img=cropped_img))
-                res = "".join(str(i) for i in ocr_res[0])
+                ocr_res = base.ocr_jijian(OcrEntity(input_img=cropped_img)).string
                 res = JiJianStep.__pre_process(res)
                 if "巫恋" == res:
                     base.click(41, 39)

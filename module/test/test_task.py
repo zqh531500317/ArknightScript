@@ -6,6 +6,9 @@ from module.entity.ocr_entity import OcrEntity
 from module.step.common_step import CommonStep
 import module.task.daily
 from module.step.recruit_step import RecruitStep
+import module.task.fight
+import module.task.jijian
+import module.task.zhuxian
 
 
 class TestTask(unittest.TestCase):
@@ -43,3 +46,23 @@ class TestTask(unittest.TestCase):
         logger.info("res2=%s", res2)
         self.assertTrue(int(res2) < 300)
 
+    def test_friend(self):
+        module.task.daily.friend()
+
+    def test_receive_renwu(self):
+        module.task.daily.receive_renwu()
+
+    def test_receive_xinyong(self):
+        module.task.daily.receive_xinyong()
+
+    def test_zhuxian(self):
+        module.task.zhuxian.zhuxian("1-7", 1)
+
+    def test_clue(self):
+        module.task.jijian.clue()
+
+    def test_jijian_receive(self):
+        module.task.jijian.jijian_receive()
+
+    def test_use_electricity(self):
+        module.task.jijian.use_electricity()

@@ -6,6 +6,7 @@ from logzero import LogFormatter, setup_default_logger, logfile, logger
 
 import module.task.daily
 from module.base.base import base
+from module.entity.ocr_entity import OcrEntity
 
 
 def init_log():
@@ -71,5 +72,7 @@ def test_jijian():
 
 
 if __name__ == '__main__':
-    base.screen()
-    module.task.daily.friend()
+    # base.screen()
+    img=base.read_pic(base.screen_path)
+    a=base.ocr_number(OcrEntity(input_img=img))
+    pass

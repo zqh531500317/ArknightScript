@@ -181,12 +181,12 @@ class CommonStep(BaseStep):
     def choosedailizhihui(game):
         logger.info("启用代理指挥")
         img = base.screen(memery=True)
-        rgb = base.getRGB(1066, 604, img)
+        rgb = base.get_rgb(1066, 604, img)
         if not (rgb[0] >= 200 and rgb[1] >= 200 and rgb[2] >= 200):
             base.click(1066, 604)
         time.sleep(base.ONE_MINUTES)
         img = base.screen(memery=True)
-        rgb = base.getRGB(1066, 604, img)
+        rgb = base.get_rgb(1066, 604, img)
         if not (rgb[0] >= 200 and rgb[1] >= 200 and rgb[2] >= 200):
             raise module.error.game.CanNotChooseDaiLiZhiHui(game)
 

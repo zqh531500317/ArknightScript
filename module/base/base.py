@@ -3,6 +3,7 @@ import _thread
 import os
 import time
 
+from module.base.log import Log
 from module.base.ocr import OcrHandler
 from module.base.template import Template
 from module.base.decorator import singleton
@@ -10,7 +11,7 @@ import module.utils.core_utils
 
 
 @singleton
-class Base(Template, OcrHandler):
+class Base(Template, OcrHandler, Log):
     def __init__(self):
         super().__init__()
         logger.info("class Base __init__")

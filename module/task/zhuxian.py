@@ -6,7 +6,7 @@ from module.base import *
 
 # name 主线名称    fight_time最大次数
 @timer
-def zhuxian(name, max_fight_time, use_medicine, medicine_num, use_stone, stone_num):
+def zhuxian(name, max_fight_time, use_medicine=False, medicine_num=0, use_stone=False, stone_num=0):
     # 将主线格式固定到 章节数-X  其中章节=实际章节 如1-X
     series = name[0]
     for i, c in enumerate(name):

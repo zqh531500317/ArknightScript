@@ -17,7 +17,7 @@ def clue():
         base.randomClick(ui["jijian_{}_{}".format(0, 5)]["button"])
         time.sleep(base.sleep_time)
     # 若线索交流开启中,则跳过任务
-    if base.isClueCommunicating():
+    if JiJianStep.isClueCommunicating():
         logger.info("线索交流开启中,跳过任务")
         return
     # 进入线索交流界面
