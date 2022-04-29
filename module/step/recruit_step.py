@@ -48,7 +48,6 @@ class RecruitStep:
                     elif b:
                         CommonStep.dowait("recruit_flash", "/recruit/ensure_flash.png", description="点击刷新")
                         CommonStep.dowait("recruit_flash_ensure", "/recruit/choose.png", description="确认刷新")
-                        return r
 
     @staticmethod
     def is_flashable():

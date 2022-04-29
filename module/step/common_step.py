@@ -106,7 +106,7 @@ class CommonStep(BaseStep):
     def into_main():
         if CommonStep.isInMain():
             return
-        CommonStep.dowait("terminal", "terminal_go_home.png")
+        CommonStep.dowait("terminal", "terminal_go_home.png", description="点击home")
         base.randomClick("terminal_go_home")
         while True:
             if base.is_template_match("/ui/main.png"):

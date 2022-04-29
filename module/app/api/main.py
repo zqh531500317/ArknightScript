@@ -1,6 +1,5 @@
 from flask import Blueprint, jsonify, request, render_template, flash, redirect, url_for
 from flask_login import login_required, login_user, logout_user
-from module.base import *
 from module.entity.user import query_user, User, add_user
 
 app_main = Blueprint("app_main", __name__)
@@ -25,7 +24,6 @@ def login():
         flash('Wrong username or password!')
     # GET 请求
     ip = request.remote_addr
-    logger.info(ip)
     if "192.168.1.1" == ip:
         return render_template('login.html')
     if "192.168.1" in ip or "127.0.0.1" in ip:
