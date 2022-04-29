@@ -56,7 +56,7 @@ class TestTask(unittest.TestCase):
         module.task.daily.receive_xinyong()
 
     def test_zhuxian(self):
-        module.task.zhuxian.zhuxian("1-7", 1)
+        module.task.zhuxian.zhuxian("1-7", 2)
 
     def test_clue(self):
         module.task.jijian.clue()

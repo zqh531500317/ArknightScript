@@ -24,3 +24,4 @@ retry~=0.9.2
 watchdog==2.1.7
 pyinstaller==4.10
 pip-tools==6.6.0
+Flask-Login==0.6.0

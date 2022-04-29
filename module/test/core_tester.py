@@ -17,24 +17,12 @@ class TestScreen(unittest.TestCase):
     @bench_time(screen_n)
     def test_screen_adb(self):
         for i in range(self.screen_n):
-            TestScreen.adb._screen_adb()
+            base._screen_adb()
 
     @bench_time(screen_n)
     def test_screen_adb_nc(self):
         for i in range(self.screen_n):
-            TestScreen.adb._screen_adb_nc()
-
-
-class Testa(unittest.TestCase):
-    def setUp(self) -> None:
-        warnings.simplefilter("ignore", ResourceWarning)
-        setup_default_logger(disableStderrLogger=True)
-
-    def test_jijian_backto_main(self):
-        CommonStep.ensureGameOpenAndInMain()
-        CommonStep.into_jijian()
-        CommonStep.ensureGameOpenAndInMain()
-        self.assertTrue(CommonStep.isInMain())
+            base._screen_adb_nc()
 
 
 if __name__ == '__main__':

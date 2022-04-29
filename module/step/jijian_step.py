@@ -27,7 +27,7 @@ class JiJianStep:
             time.sleep(base.sleep_time)
         # 点击 进驻信息  入住
         if not base.is_template_match("/jijian/qingkong.png", template_threshold=0.9):
-            base.dowait((40, 273, 70, 315), "/jijian/qingkong.png")
+            CommonStep.dowait((40, 273, 70, 315), "/jijian/qingkong.png")
             logger.debug("点击 进驻信息 入住")
         # 清空选择
         base.randomClick((1175, 20, 1221, 42))
@@ -89,8 +89,7 @@ class JiJianStep:
                 x = int((box[0] + box[2]) / 2)
                 y = int((box[1] + box[3]) / 2)
                 cropped_img = box_info['cropped_img']
-                ocr_res = base.ocr_jijian(OcrEntity(input_img=cropped_img))
-                res = "".join(str(i) for i in ocr_res[0])
+                res = base.ocr_jijian(OcrEntity(input_img=cropped_img)).string
                 res = JiJianStep.__pre_process(res)
                 if res in names:
                     temp.append(res)
@@ -205,7 +204,7 @@ class JiJianStep:
                 x = int((box[0] + box[2]) / 2)
                 y = int((box[1] + box[3]) / 2)
                 cropped_img = box_info['cropped_img']
-                ocr_res = base.ocr_jijian(OcrEntity(input_img=cropped_img)).string
+                res = base.ocr_jijian(OcrEntity(input_img=cropped_img)).string
                 res = JiJianStep.__pre_process(res)
                 if "巫恋" == res:
                     base.click(41, 39)
