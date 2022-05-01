@@ -1,6 +1,8 @@
 import unittest
 import warnings
-from logzero import setup_default_logger
+
+import yagmail
+from logzero import setup_default_logger, logger
 from module.base import *
 from module.entity.ocr_entity import OcrEntity
 from module.step.common_step import CommonStep

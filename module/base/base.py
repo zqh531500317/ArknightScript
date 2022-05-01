@@ -40,12 +40,14 @@ class Base(Template, OcrHandler, Log):
     def init_close_alerter(self):
         _thread.start_new_thread(self.close_alert, ())
 
-    def send(self, subject, contents):
-        user = self.user
-        password = self.password
-        host = self.host
-        receiver = self.receiver
-        module.utils.core_utils.send(subject, contents, user, password, host, receiver)
+    def send(self, subject, contents, attachments=None):
+        if self.enable_mail:
+            user = self.user
+            password = self.password
+            host = self.host
+            receiver = self.receiver
+            logger.info("send email to %s", receiver)
+            module.utils.core_utils.send(subject, contents, user, password, host, receiver, attachments)
 
 
 base = Base()

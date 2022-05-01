@@ -1,4 +1,6 @@
 import datetime
+
+import yagmail
 from apscheduler.executors.pool import ThreadPoolExecutor
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -67,8 +69,6 @@ class BaseScheduler:
 
     def errorhandler(self, event):
         if event.exception:
-            base.send("任务调度出错",
-                      "jobid=" + str(event.job_id) + "\n " + str(event.exception) + "\n " + str(event.traceback))
             img = base.screen(memery=True)
             temp = random_time_str()
             base.save('/log/error/{}'.format(temp), img)
@@ -76,6 +76,16 @@ class BaseScheduler:
             # 保存日志
             save_last_lines(base.project_path + "/log/log.log",
                             base.project_path + "/log/error/{}/error.log".format(temp))
+            # 发送邮件
+            path = base.project_path + "/cache/email.png"
+            base.write_pic(path, img)
+            content = [
+                "jobid=" + str(event.job_id) + "\n " + str(event.exception) + "\n " + str(event.traceback),
+                yagmail.inline(path)
+            ]
+            base.send("任务调度出错",
+                      contents=content
+                      )
 
     def add_job(self, func, trigger, id, args=None, misfire_grace_time=7200):
         job = self.scheduler.get_job(id)

@@ -7,3 +7,6 @@ class RetryError(Exception):
 
     def message(self):
         logger.error("RetryError:times=%s", self.times)
+
+    def __str__(self):
+        return "RetryError:times={}".format(self.times)

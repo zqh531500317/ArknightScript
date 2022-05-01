@@ -118,8 +118,8 @@ def save_last_lines(src_filename, dst_filename):
     saveFileByList(dst_filename, res)
 
 
-def send(subject, contents, user, password, host, receiver):
+def send(subject, contents, user, password, host, receiver, attachments=None):
     yag = yagmail.SMTP(user=user,
                        password=password,
                        host=host)
-    yag.send(receiver, subject, contents)
+    yag.send(receiver, subject, contents, attachments)
