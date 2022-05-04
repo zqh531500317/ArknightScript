@@ -3,8 +3,8 @@ import module.error.game
 from datetime import datetime
 
 from module.entity.ocr_entity import OcrEntity
-from module.inventory.demo import show_bag
-from module.penguin_stats.core import analyse, get_name_by_id
+from module.inventory import show_bag
+from module.penguin_stats import analyse, get_name_by_id
 from module.base import *
 from module.step.fight_step import FightStep
 from module.step.common_step import CommonStep

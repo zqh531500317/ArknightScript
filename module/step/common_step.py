@@ -1,6 +1,73 @@
 from module.base import *
-from module.step.base_step import BaseStep
 import module.error.game
+from module.entity.ocr_entity import OcrEntity
+from module.error.retryError import RetryError
+from module.entity.template_entity import TemplateEntity
+
+
+class BaseStep:
+    # ck 点击   template 期望匹配的 模板匹配路径 或 ocr结果
+    # ck 1、str 2、(x1,y1,x2,y2)
+    # template  1、str :template 2、OcrrEntity 3、function or method
+    @staticmethod
+    def dowait(ck, template,
+               max_retry_times=3,
+               retry_time=20.0, description=None, sleep_time=None):
+        def log_msg(msg):
+            if msg is not None:
+                logger.info(msg)
+
+        if sleep_time is None:
+            sleep_time = base.sleep_time
+        retry_times = 0
+        start_time = time.time()
+        base.randomClick(ck)
+        while True:
+            # 将template转化为1大小的元组
+            if not isinstance(template, tuple) and not isinstance(template, list):
+                template = (template,)
+            for index in range(len(template)):
+                item = template[index]
+                if isinstance(item, str):
+                    if base.is_template_match(item):
+                        log_msg(description)
+                        return index
+                elif isinstance(item, TemplateEntity):
+                    if item.is_match():
+                        log_msg(description)
+                        return index
+                elif isinstance(item, OcrEntity):
+                    if base.ocr(item).is_except():
+                        log_msg(description)
+                        return index
+                elif isinstance(item, types.FunctionType) or isinstance(item, types.MethodType):
+                    bs = item()
+                    if bs:
+                        log_msg(description)
+                        return index
+                elif isinstance(item, bool):
+                    log_msg(description)
+                    return index
+            time.sleep(sleep_time)
+            now = time.time()
+            if (now - start_time) > retry_time:
+                if retry_times == max_retry_times:
+                    logger.error("RetryError:times=%s", max_retry_times)
+                    raise RetryError(retry_times)
+                logger.warning("running time >%s,retry the %s times,description=%s", retry_time, retry_times,
+                               description)
+                base.randomClick(ck)
+                retry_times += 1
+                start_time = now
+
+    @staticmethod
+    def dowaitlist(list: List[
+        Tuple[Union[str, tuple], Union[str, OcrEntity, types.FunctionType, types.MethodType], Union[str, None]]],
+                   delay_time=0.1, max_retry_times=3, retry_time=20.0):
+        for ck, templete, description in list:
+            BaseStep.dowait(ck, templete, max_retry_times=max_retry_times, retry_time=retry_time,
+                            description=description)
+            time.sleep(delay_time)
 
 
 class CommonStep(BaseStep):

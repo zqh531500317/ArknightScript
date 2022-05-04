@@ -2,7 +2,7 @@ from retrying import retry
 
 import module.error.game
 from module.base import *
-from module.stage.demo import recognize_all_screen_stage_tags
+from module.stage import recognize_all_screen_stage_tags
 from module.utils.core_clickLoader import dic
 
 
@@ -79,7 +79,7 @@ class GamePassStep:
             if 0 <= temp <= 1:
                 break
             temp = temp - 1
-        if temp < 0.9:
+        if temp < 0.8:
             re = math.floor(num)
         else:
             re = math.ceil(num)
@@ -116,8 +116,9 @@ class GamePassStep:
                     res = base.ocr_without_position(temp, None, base.ziyuanshouji_tag)[0]["words"]
                     if res == ch_names:
                         logger.info("识别到关卡%s", name)
-                        base.randomClick((item[0], 460, item[1], 494))
-                        return
+                        ck = (item[0], 460, item[1], 494)
+                        base.randomClick(ck)
+                        return ck
                 GamePassStep.goto_behind_for_ziyuanshouji()
                 re = base.screen(memery=True)
                 list = list2
@@ -149,7 +150,9 @@ class GamePassStep:
                     time.sleep(base.sleep_time)
 
                 raise module.error.game.GameNotFound(name)
-            base.randomClick((x1, y1, x2, y2))
+            ck = (x1, y1, x2, y2)
+            base.randomClick(ck)
+            return ck
 
     # 利用模板匹配寻找关卡位置
     @staticmethod

@@ -2,7 +2,7 @@
 
 ci = {}
 a_zhongduan = ["click", (920, 142, 1021, 182)]
-
+b_huodong = ["click", (157, 560, 220, 600)]
 b_zhutiqu = ["click", (220, 656, 260, 680)]
 b_chaqu = ["click", (383, 660, 411, 682)]
 b_biezhuan = ["click", (543, 655, 574, 682)]
@@ -20,7 +20,8 @@ d_ep8_to_ep7 = ["click", (960, 635, 1000, 700)]
 d_ep7_to_ep6 = ["click", (960, 635, 1000, 700)]
 d_ep6_to_ep5 = ["click", (960, 635, 1000, 700)]
 d_ep5_to_ep4 = ["click", (960, 635, 1000, 700)]
-d_ep9 = ["click", (850, 300, 1000, 450)]
+d_ep10 = ["click", (850, 300, 1000, 450)]
+d_ep10_to_ep9 = ["click", (960, 635, 1000, 700)]
 # 资源收集部分
 dic = {}
 dic["CA"] = ["空中威胁"]
@@ -46,7 +47,8 @@ ci["5-X"] = [a_zhongduan, b_zhutiqu, c_act2_to_act1, d_ep8, d_ep8_to_ep7, d_ep7_
 ci["6-X"] = [a_zhongduan, b_zhutiqu, c_act2_to_act1, d_ep8, d_ep8_to_ep7, d_ep7_to_ep6]
 ci["7-X"] = [a_zhongduan, b_zhutiqu, c_act2_to_act1, d_ep8, d_ep8_to_ep7]
 ci["8-X"] = [a_zhongduan, b_zhutiqu, c_act2_to_act1, d_ep8]
-ci["9-X"] = [a_zhongduan, b_zhutiqu, d_ep9]
+ci["9-X"] = [a_zhongduan, b_zhutiqu, d_ep10, d_ep10_to_ep9]
+ci["10-X"] = [a_zhongduan, b_zhutiqu, d_ep10]
 # 资源收集部分
 ci["CA-1"] = [["click", (158, 561, 234, 584)]]
 ci["CA-2"] = [["click", (440, 510, 510, 538)]]

@@ -24,6 +24,9 @@ class TestScreen(unittest.TestCase):
         for i in range(self.screen_n):
             base._screen_adb_nc()
 
+    def test_screen(self):
+        base.screen()
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -11,7 +11,9 @@ from func_timeout import func_set_timeout
 from module.utils.core_clickLoader import ci
 from module.utils.core_recruitLoader import recruit
 from module.utils.core_assetLoader import ui
+from module.entity.ocr_entity import OcrEntity
+from module.entity.template_entity import TemplateEntity
 
 __all__ = ["base", "singleton", "timer", "bench_time", "debug_recode", "logger",
            "time", "os", "shutil", "Union", "List", "Tuple", "types", "math",
-           "func_set_timeout", "ci", "recruit", "ui"]
+           "func_set_timeout", "ci", "recruit", "ui", "OcrEntity", "TemplateEntity"]

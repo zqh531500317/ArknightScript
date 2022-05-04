@@ -23,7 +23,7 @@ def use_electricity():
 
 
 def clue():
-    base_scheduler.add_job(module.task.jijian.clue, trigger=CronTrigger(hour="7"),
+    base_scheduler.add_job(module.task.jijian.clue, trigger=CronTrigger(hour="7,18"),
                            id="clue")
 
 

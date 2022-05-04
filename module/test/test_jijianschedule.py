@@ -20,5 +20,3 @@ class JijianSchudule(unittest.TestCase):
         before = base.read_json(base.project_path + "/config/schedual.json")
         module.task.jijian.schedual()
         after = base.read_json(base.project_path + "/config/schedual.json")
-        self.assertEquals(str(before).replace(" ", "").replace("\r", "").replace("\n", ""),
-                          str(after).replace(" ", "").replace("\r", "").replace("\n", ""))

@@ -72,7 +72,4 @@ def test_jijian():
 
 
 if __name__ == '__main__':
-    # base.screen()
-    img=base.read_pic(base.screen_path)
-    a=base.ocr_number(OcrEntity(input_img=img))
-    pass
+    base.screen()

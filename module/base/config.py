@@ -40,6 +40,7 @@ class CoreConfig:
         self.write("pid", os.getpid())
         self.timeout_time = 60 * 20
         self.timeout_time_max = 60 * 60
+        self.fight_waite_time = 60 * 60
         with open(self.project_path + "/asset/cand_alphabet/officer.txt", "r", encoding='utf-8') as f:
             self.cand_alphabet_officer = f.read()
         self.recruit_tag = "医疗干员远程位治新手高级资深近战先锋狙击" \

@@ -11,7 +11,7 @@ class OcrEntity:
         self.string = ""
 
     def is_except(self):
-        return self.result == self.except_result
+        return self.string == self.except_result
 
     def set_res(self, result):
         self.result = result

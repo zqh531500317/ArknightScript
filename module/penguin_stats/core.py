@@ -7,7 +7,6 @@ import numpy as np
 from cnocr import CnOcr
 
 from module.penguin_stats.gui_preload import item_index, stage_index, droptype_index
-from module.base import *
 
 TOP = 0
 BOTTOM = 1
@@ -429,33 +428,3 @@ class Result:
                             self.drops_display[name] = quantity
         self.drops = drops
 
-
-def analyse() -> (dict, str):
-    async def test():
-        img = Img.read(base.endFight_path)
-        if result := await Result.analyse(img):
-            data, display = result
-            return data, display
-
-    data, display = asyncio.run(test())
-    return data, display
-
-
-def get_name_by_id(id):
-    return item_index[id]['name_i18n']['zh']
-
-
-if __name__ == "__main__":
-    data, display = analyse()
-    print(data)
-    print(display)
-    # async def test():
-    #     img = Img.read(project_path + "/cache/test.png")
-    #     if result := await Result.analyse(img):
-    #         data, display = result
-    #         print(data)
-    #         print(display)
-    #         pass
-    #
-    #
-    # asyncio.run(test())

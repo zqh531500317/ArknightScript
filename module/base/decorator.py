@@ -41,7 +41,7 @@ def timer(func):
         end = time.time()
         logger.info("task running cost: %s minutes", end - start)
         logger.info("task %s is finished", func.__name__)
-        base.state.running_task_name = "暂无"
+        base.state.running_task_name = ""
         return res
 
     return wrapper
@@ -70,14 +70,20 @@ def debug_recode(func):
     def wrapper(*args, **kwargs):
         from module.base.base import base
         logger.info("debug_recode is start:%s", func.__name__)
-        base.state.debug_run = True
-        if base.debug:
-            _thread.start_new_thread(__sr, (func.__name__,))
-        res = func(*args, **kwargs)
-        base.state.debug_run = False
-        logger.info("debug_recode is end:%s", func.__name__)
-
-        return res
+        try:
+            base.state.debug_run = True
+            if base.debug:
+                _thread.start_new_thread(__sr, (func.__name__,))
+            res = func(*args, **kwargs)
+            base.state.debug_run = False
+            logger.info("debug_recode is end:%s", func.__name__)
+            return res
+        except Exception as e:
+            base.state.debug_run = False
+            value = sys.exc_info()
+            # do something
+            six.reraise(*value)  # 借助six模块抛异常
+            logger.info("debug_recode is end:%s", func.__name__)
 
     return wrapper
 

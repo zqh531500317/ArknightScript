@@ -1,15 +1,48 @@
+from module.entity.ocr_entity import OcrEntity
 from module.step.gamepass_step import GamePassStep
 from module.step.common_step import CommonStep
 from module.step.fight_step import FightStep
 from module.base import *
+from module.utils.core_clickLoader import *
 
 
 @timer
 def huodong(name, max_fight_time, use_medicine, medicine_num, use_stone, stone_num):
-    now = "yichenmanbu"
+    now = "yurenhao"
     eval(now)(name, max_fight_time, use_medicine, medicine_num, use_stone, stone_num)
 
-#
+
+def yurenhao(name: str, max_fight_time, use_medicine, medicine_num, use_stone, stone_num):
+    func_name = "yurenhao"
+    CommonStep.ensureGameOpenAndInMain()
+    CommonStep.dowait(a_zhongduan[1], "/ui/a_zhongduan.png", description="进入终端")
+    CommonStep.dowait(b_huodong[1], OcrEntity(except_result="作战", x1=913, y1=19, x2=952, y2=38), description="进入活动")
+    huodong_click = (336, 563, 369, 570)
+    CommonStep.dowait(huodong_click, "/huodong/main_{}.png".format(func_name), description="进入活动界面")
+    GamePassStep.goto_ahead_for_huodong()
+    SN_9 = (687, 404, 712, 428)
+    SN_10 = (750, 297, 779, 322)
+
+    if name.upper() == "SN-9":
+        ck = SN_9
+    elif name.upper() == "SN-10":
+        ck = SN_10
+    else:
+        return
+    CommonStep.dowait(ck, "/huodong/map_choosed_{}.png".format(func_name), description="选中关卡")
+
+    def prefunc(*parem):
+        func_name_ = parem[0]
+        ck1 = parem[1]
+        # 选择代理
+        if not base.is_template_match("/huodong/map_daili_{}.png".format(func_name_)):
+            CommonStep.dowait((1085, 582, 1086, 583),
+                              "/huodong/map_daili_{}.png".format(func_name_),
+                              description="选中代理")
+
+    FightStep.cycleFight(max_fight_time, name, use_medicine, medicine_num, use_stone, stone_num,
+                         True, True, prefunc, func_name, ck)
+    #
 # # name 名称    fight_time最大次数
 # def yichenmanbu(name, max_fight_time, use_medicine, medicine_num, use_stone, stone_num):
 #     CommonStep.ensureGameOpenAndInMain()

@@ -141,8 +141,9 @@ def schedual():
         msgList.append(msg)
         logger.info("安排：" + str(names) + " 入住：" + type + " ({},{})".format(x, y))
         # 修改index为下一位
-        index = (index + 1) % num
-        item["next_index"] = index
+        new_index = (index + 1) % num
+        item["next_index"] = new_index
+        logger.debug("set index:%s -> %s", index, new_index)
     base.write_json(temp, base.project_path + "/config/schedual.json")
     sum = JiJianStep.auto_sleep()
     msgList.append("宿舍安排{}为干员进行休息".format(sum))

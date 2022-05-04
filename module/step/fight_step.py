@@ -8,10 +8,15 @@ class FightStep:
     # 单次作战
     # return 1表示吃药 2表示碎石
     @staticmethod
-    def fight(game, use_medicine=False, medicine_num=0, use_stone=False, stone_num=0):
-        if not CommonStep.isInPreFight():
-            raise module.error.game.NotInPreFight(game)
-        CommonStep.choosedailizhihui(game)
+    def fight(game, use_medicine=False, medicine_num=0, use_stone=False, stone_num=0,
+              ignore_prefight=False, ignore_daili=False, prefunc=None, *parem):
+        if prefunc is not None:
+            prefunc(*parem)
+        if not ignore_prefight:
+            if not CommonStep.isInPreFight():
+                raise module.error.game.NotInPreFight(game)
+        if not ignore_daili:
+            CommonStep.choosedailizhihui(game)
         r = 0
         # todo 碎石
         b = CommonStep.into_Fight()
@@ -45,12 +50,15 @@ class FightStep:
 
     # 循环作战
     @staticmethod
-    def cycleFight(max_fight_time, game, use_medicine=False, medicine_num=0, use_stone=False, stone_num=0):
+    def cycleFight(max_fight_time, game, use_medicine=False, medicine_num=0,
+                   use_stone=False, stone_num=0, ignore_prefight=False,
+                   ignore_daili=False, prefunc=None, *parem):
         fight_time = 0
         try:
             for index in range(max_fight_time):
                 time.sleep(base.fight_sleep_time)
-                r = FightStep.fight(game, use_medicine, medicine_num, use_stone, stone_num)
+                r = FightStep.fight(game, use_medicine, medicine_num, use_stone,
+                                    stone_num, ignore_prefight, ignore_daili, prefunc, *parem)
                 fight_time = fight_time + 1
                 if r == 1:
                     medicine_num = medicine_num - 1

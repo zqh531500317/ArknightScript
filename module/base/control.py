@@ -82,14 +82,19 @@ class Adb(BaseAdb):
             self.adb.click(x, y)
             logger.info("randomClick(%s,%s)", x, y)
         elif isinstance(name, tuple):
-            x1 = name[0]
-            y1 = name[1]
-            x2 = name[2]
-            y2 = name[3]
-            x = random.randint(x1, x2)
-            y = random.randint(y1, y2)
-            self.adb.click(x, y)
-            logger.info("randomClick(%s,%s)", x, y)
+            if len(name) == 2:
+                x = name[0]
+                y = name[1]
+                self.click(x, y)
+            elif len(name) == 4:
+                x1 = name[0]
+                y1 = name[1]
+                x2 = name[2]
+                y2 = name[3]
+                x = random.randint(x1, x2)
+                y = random.randint(y1, y2)
+                self.click(x, y)
+                logger.info("randomClick(%s,%s)", x, y)
 
     def click(self, x, y):
         self.adb.click(x, y)
@@ -240,6 +245,8 @@ class Adb(BaseAdb):
         if len(screenshot) < 100:
             logger.warning(f'Unexpected screenshot: {screenshot}')
             raise AcceptDataError(len(screenshot))
+        if len(screenshot) < 3680000:
+            raise AcceptDataError(len(screenshot))
         raise OSError(f'cannot load screenshot')
 
     def __screen_disk(self, path):
@@ -288,6 +295,8 @@ class Adb(BaseAdb):
         data = recv_all(conn, chunk_size=chunk_size)
         if len(data) < 100:
             logger.warning(f'Unexpected screenshot: {data}')
+            raise AcceptDataError(len(data))
+        if len(data) < 3680000:
             raise AcceptDataError(len(data))
         # Server close connection
         conn.close()

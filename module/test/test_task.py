@@ -34,6 +34,12 @@ class TestTask(unittest.TestCase):
         else:
             self.assertEquals(num - 1, num1)
 
+    def test_friend(self):
+        module.task.daily.friend()
+
+    def test_receive_xinyong(self):
+        module.task.daily.receive_xinyong()
+
     def test_buy_xinyong_shop(self):
         CommonStep.ensureGameOpenAndInMain()
         CommonStep.dowait("main_shop", CommonStep.isInShop, "进入商店")
@@ -48,17 +54,11 @@ class TestTask(unittest.TestCase):
         logger.info("res2=%s", res2)
         self.assertTrue(int(res2) < 300)
 
-    def test_friend(self):
-        module.task.daily.friend()
-
     def test_receive_renwu(self):
         module.task.daily.receive_renwu()
 
-    def test_receive_xinyong(self):
-        module.task.daily.receive_xinyong()
-
-    def test_zhuxian(self):
-        module.task.zhuxian.zhuxian("1-7", 2)
+    # def test_zhuxian(self):
+    #     module.task.zhuxian.zhuxian("1-7", 2)
 
     def test_clue(self):
         module.task.jijian.clue()

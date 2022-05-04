@@ -190,8 +190,3 @@ def screenshot():
     content = subprocess.check_output('adb exec-out "screencap -p"', shell=True)
     img_array = np.asarray(bytearray(content), dtype=np.uint8)
     return cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-
-
-if __name__ == '__main__':
-    stage_map = recognize_all_screen_stage_tags(base.screen(memery=True))
-    # stage_map = recognize_all_screen_stage_tags(screenshot())
