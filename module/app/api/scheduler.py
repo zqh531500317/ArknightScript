@@ -26,8 +26,7 @@ def resume_scheduler():
 
 
 # 获取调度器状态  运行中、暂停中
-@app_scheduler.route('/is_scheduler_running', methods=['get'])
-@login_required
+@app_scheduler.route('/is_scheduler_running', methods=['get', 'post'])
 def is_scheduler_running():
     state = base_scheduler.is_scheduler_running()
     # logger.debug("调度器状态为{}".format(state))

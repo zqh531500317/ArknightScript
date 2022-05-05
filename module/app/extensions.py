@@ -5,7 +5,6 @@ from flask_socketio import SocketIO
 from flask_login import LoginManager
 from module.base import *
 
-cors = CORS(supports_credentials=True)
 name_space = "/dcenter"
 socketio = SocketIO(cors_allowed_origins='*', async_mode='threading')
 login_manager = LoginManager()
@@ -41,7 +40,7 @@ def send():
 
 # 初始化
 def config_extensions(app):
-    cors.init_app(app)
+    CORS(app, supports_credentials=True)
     socketio.init_app(app)
     login_manager.init_app(app)
     login_manager.login_view = 'app_main.login'

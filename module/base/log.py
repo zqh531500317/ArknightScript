@@ -29,7 +29,7 @@ class Log(CoreConfig):
         elif self.get("level") == "CRITICAL":
             level = logging.CRITICAL
         # 时间格式
-        data_style = '%Y-%m-%d %H:%M:%S'
+        data_style = '%m-%d %H:%M:%S'
 
         # 控制台输出格式
         handler_format = '%(color)s[%(asctime)s| %(levelname)s |%(filename)s:%(lineno)d] %(message)s%(end_color)s'
@@ -52,7 +52,6 @@ class Log(CoreConfig):
 
     def init_ocr_logger(self):
         # 日志等级
-        super().__init__()
         level = logging.INFO
         if self.get("level") == "DEBUG":
             level = logging.DEBUG
@@ -64,7 +63,7 @@ class Log(CoreConfig):
             level = logging.ERROR
         elif self.get("level") == "CRITICAL":
             level = logging.CRITICAL
-        data_style = '%Y-%m-%d %H:%M:%S'
+        data_style = '%m-%d %H:%M:%S'
         handler_format = '%(color)s[%(asctime)s| %(levelname)s |%(filename)s:%(lineno)d] %(message)s%(end_color)s'
         hand_format = LogFormatter(fmt=handler_format, datefmt=data_style)
         if self.get("file"):

@@ -1,3 +1,4 @@
 set curdir=%~dp0
 cd /d %curdir%
-start venv/Scripts/python.exe Arknight-Script.py
+set FLASK_APP=Arknight-Script.py
+start venv/Scripts/python.exe -m flask run --host 0.0.0.0

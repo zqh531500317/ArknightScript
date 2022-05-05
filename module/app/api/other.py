@@ -1,4 +1,5 @@
-from flask import Blueprint, jsonify
+import os
+from flask import Blueprint, jsonify, Response
 from flask_login import login_required
 from module.base import *
 
@@ -12,3 +13,11 @@ def alt_config():
     cmd = base.project_path + '\\config\\config.yaml'
     os.system(cmd)
     return jsonify({'result': "success"})
+
+
+@app_other.route('/shutdown', methods=['get'])
+@login_required
+def shutdown():
+    logger.info("shutdown App")
+    logger.info("==============================")
+    os._exit(0)

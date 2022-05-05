@@ -1,7 +1,7 @@
+from module.fight.base import BaseFight
 from module.step.common_step import CommonStep
 from module.step.fight_step import FightStep
 from module.step.gamepass_step import GamePassStep
-from module.utils.core_clickLoader import ci
 from module.base import *
 
 
@@ -15,10 +15,7 @@ def recently(name, max_fight_time, use_medicine=False, medicine_num=0, use_stone
     FightStep.cycleFight(max_fight_time, name, use_medicine, medicine_num, use_stone, stone_num)
 
 
-def fight(game, use_medicine=False, medicine_num=0, use_stone=False, stone_num=0):
-    return FightStep.fight(game, use_medicine, medicine_num, use_stone, stone_num)
-
-
 # 循环作战
 def cycleFight(max_fight_time, game, use_medicine=False, medicine_num=0, use_stone=False, stone_num=0):
-    return FightStep.cycleFight(max_fight_time, game, use_medicine, medicine_num, use_stone, stone_num)
+    task = BaseFight(max_fight_time, game, use_medicine, medicine_num, use_stone, stone_num)
+    task.cycleFight()

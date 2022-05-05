@@ -1,15 +1,12 @@
 import copy
 import module.error.game
 from datetime import datetime
-
-from module.entity.ocr_entity import OcrEntity
 from module.inventory import show_bag
 from module.penguin_stats import analyse, get_name_by_id
 from module.base import *
 from module.step.fight_step import FightStep
 from module.step.common_step import CommonStep
 from module.step.gamepass_step import GamePassStep
-from module.task.ziyuanshouji import findGame
 
 
 class DailyStep:
@@ -51,6 +48,19 @@ class DailyStep:
             if pre == later:
                 return
             pre = later
+
+    @staticmethod
+    def findGame(game):
+        CommonStep.ensureGameOpenAndInMain()
+        # 进入资源收集区域
+        time.sleep(base.sleep_time)
+        base.randomClick((920, 142, 1021, 182))
+        time.sleep(base.sleep_time)
+        base.randomClick((706, 661, 732, 677))
+        time.sleep(base.sleep_time)
+        GamePassStep.find_game_position(game, "ziyuanshouji")
+        v = ci[game]
+        GamePassStep.exec_by_clickLoader(v)
 
     @staticmethod
     def get_frind_name(input_img=None):
@@ -185,7 +195,7 @@ class DailyStep:
                 if dayOfWeek not in openTime[game_name]:
                     logger.info("目标:{},但是{}未开放，跳过".format(k, game_name))
                     continue
-                findGame(game_name)
+                xinpian_info.findGame(game_name)
                 while True:
                     if v["num"] <= 0:
                         break
