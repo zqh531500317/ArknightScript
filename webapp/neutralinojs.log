@@ -1,0 +1,276 @@
+INFO 2022-05-06 00:51:27,127 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-06 00:52:43,018 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-06 00:54:32,730 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-06 01:17:46,899 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-06 15:42:12,907 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-06 15:45:54,366 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-06 15:50:36,477 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-08 00:59:31,345 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-08 01:00:40,080 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-08 19:05:00,790 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-08 19:06:50,759 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 00:16:05,349 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 08:45:00,224 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 08:55:42,444 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 08:57:54,739 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 09:12:27,279 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 09:12:38,498 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 09:44:18,167 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 09:45:14,750 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 09:46:25,110 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 09:48:15,934 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 09:48:30,050 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 09:52:26,273 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+ERROR 2022-05-11 09:52:27,587 Unable to open ./resources/lizhi/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 09:52:27,636 Unable to open ./resources/is_scheduler_running/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 09:52:27,637 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 09:52:27,637 Unable to open ./resources/get_fight_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 09:52:27,637 Unable to open ./resources/is_fight/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 09:52:27,949 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 09:52:37,639 Unable to open ./resources/lizhi/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 09:52:37,639 Unable to open ./resources/is_scheduler_running/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 09:52:37,639 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 09:52:37,640 Unable to open ./resources/get_fight_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 09:52:37,640 Unable to open ./resources/is_fight/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 09:52:37,889 Unable to open ./resources/lizhi/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 09:52:37,948 Unable to open ./resources/is_fight/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 09:52:37,948 Unable to open ./resources/get_fight_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 09:52:37,948 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 09:52:37,949 Unable to open ./resources/is_scheduler_running/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 09:52:38,253 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 09:52:42,585 Unable to open ./resources/get_job/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 09:52:42,585 Unable to open ./resources/get_job/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 09:52:42,585 Unable to open ./resources/get_job/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 09:52:43,976 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+INFO 2022-05-11 09:54:47,579 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 09:55:58,166 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+ERROR 2022-05-11 09:55:59,463 Unable to open ./resources/lizhi/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 09:55:59,507 Unable to open ./resources/is_scheduler_running/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 09:55:59,507 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 09:55:59,507 Unable to open ./resources/get_fight_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 09:55:59,507 Unable to open ./resources/is_fight/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 09:55:59,812 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+INFO 2022-05-11 09:56:31,592 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+ERROR 2022-05-11 09:56:32,572 Unable to open ./resources/neutralino.js api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 09:56:32,740 Unable to open ./resources/lizhi/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 09:56:33,042 Unable to open ./resources/is_scheduler_running/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 09:56:33,042 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 09:56:33,043 Unable to open ./resources/get_fight_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 09:56:33,043 Unable to open ./resources/is_fight/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 09:56:33,655 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+INFO 2022-05-11 10:45:10,105 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+ERROR 2022-05-11 10:45:11,242 Unable to open ./resources/lizhi/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:45:11,480 Unable to open ./resources/is_scheduler_running/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:45:11,480 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:45:11,480 Unable to open ./resources/get_fight_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:45:11,480 Unable to open ./resources/is_fight/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:45:11,785 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:45:21,482 Unable to open ./resources/lizhi/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:45:21,483 Unable to open ./resources/is_scheduler_running/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:45:21,483 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:45:21,483 Unable to open ./resources/get_fight_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:45:21,483 Unable to open ./resources/is_fight/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:45:21,733 Unable to open ./resources/lizhi/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:45:21,787 Unable to open ./resources/is_scheduler_running/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:45:21,787 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:45:21,787 Unable to open ./resources/get_fight_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:45:21,788 Unable to open ./resources/is_fight/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:45:22,091 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+INFO 2022-05-11 10:45:34,909 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+ERROR 2022-05-11 10:45:36,212 Unable to open ./resources/lizhi/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:45:36,212 Unable to open ./resources/is_scheduler_running/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:45:36,212 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:45:36,213 Unable to open ./resources/get_fight_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:45:36,213 Unable to open ./resources/is_fight/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:45:36,517 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+INFO 2022-05-11 10:46:01,566 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+ERROR 2022-05-11 10:46:02,634 Unable to open ./resources/lizhi/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:46:02,853 Unable to open ./resources/is_scheduler_running/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:46:02,854 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:46:02,854 Unable to open ./resources/get_fight_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:46:02,854 Unable to open ./resources/is_fight/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:46:03,159 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+INFO 2022-05-11 10:46:37,074 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+ERROR 2022-05-11 10:46:38,149 Unable to open ./resources/lizhi/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:46:38,373 Unable to open ./resources/is_scheduler_running/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:46:38,373 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:46:38,373 Unable to open ./resources/get_fight_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:46:38,373 Unable to open ./resources/is_fight/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:46:38,677 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+INFO 2022-05-11 10:47:57,453 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+ERROR 2022-05-11 10:47:58,820 Unable to open ./resources/lizhi/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:47:58,821 Unable to open ./resources/is_scheduler_running/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:47:58,821 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:47:58,824 Unable to open ./resources/get_fight_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:47:58,825 Unable to open ./resources/is_fight/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:47:59,129 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:48:08,823 Unable to open ./resources/lizhi/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:48:08,823 Unable to open ./resources/is_scheduler_running/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:48:08,825 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:48:08,826 Unable to open ./resources/get_fight_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:48:08,827 Unable to open ./resources/is_fight/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:48:09,074 Unable to open ./resources/lizhi/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:48:09,127 Unable to open ./resources/is_scheduler_running/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:48:09,127 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:48:09,128 Unable to open ./resources/get_fight_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:48:09,129 Unable to open ./resources/is_fight/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:48:09,133 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:48:18,824 Unable to open ./resources/lizhi/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:48:18,824 Unable to open ./resources/is_scheduler_running/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:48:18,825 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:48:18,826 Unable to open ./resources/get_fight_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:48:18,826 Unable to open ./resources/is_fight/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:48:19,075 Unable to open ./resources/lizhi/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:48:19,130 Unable to open ./resources/is_scheduler_running/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:48:19,131 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:48:19,133 Unable to open ./resources/get_fight_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:48:19,133 Unable to open ./resources/is_fight/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:48:19,133 Unable to open ./resources/lizhi/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:48:19,378 Unable to open ./resources/is_scheduler_running/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:48:19,434 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:48:19,435 Unable to open ./resources/get_fight_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:48:19,436 Unable to open ./resources/is_fight/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:48:19,738 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+INFO 2022-05-11 10:49:14,221 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+ERROR 2022-05-11 10:49:15,349 Unable to open ./resources/lizhi/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:49:15,602 Unable to open ./resources/is_scheduler_running/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:49:15,604 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:49:15,605 Unable to open ./resources/get_fight_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:49:15,606 Unable to open ./resources/is_fight/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:49:15,909 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:49:25,607 Unable to open ./resources/lizhi/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:49:25,608 Unable to open ./resources/is_scheduler_running/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:49:25,608 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:49:25,608 Unable to open ./resources/get_fight_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:49:25,609 Unable to open ./resources/is_fight/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:49:25,859 Unable to open ./resources/lizhi/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:49:25,912 Unable to open ./resources/is_scheduler_running/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:49:25,913 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:49:25,913 Unable to open ./resources/get_fight_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:49:25,913 Unable to open ./resources/is_fight/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:49:25,913 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+INFO 2022-05-11 10:50:07,714 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+ERROR 2022-05-11 10:50:08,823 Unable to open ./resources/lizhi/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:50:09,073 Unable to open ./resources/is_scheduler_running/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:50:09,073 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:50:09,075 Unable to open ./resources/get_fight_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:50:09,075 Unable to open ./resources/is_fight/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:50:09,380 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:50:19,077 Unable to open ./resources/lizhi/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:50:19,077 Unable to open ./resources/is_scheduler_running/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:50:19,077 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:50:19,079 Unable to open ./resources/get_fight_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:50:19,080 Unable to open ./resources/is_fight/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:50:19,328 Unable to open ./resources/lizhi/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:50:19,381 Unable to open ./resources/is_scheduler_running/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:50:19,381 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:50:19,382 Unable to open ./resources/get_fight_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:50:19,382 Unable to open ./resources/is_fight/index.html api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 10:50:19,383 Unable to open ./resources/get_jobs/index.html api\debug\debug.cpp:16 zqh@ZQH
+INFO 2022-05-11 10:51:43,092 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:03:10,182 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:07:20,599 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:07:47,703 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:09:41,065 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:34:35,024 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:34:56,217 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:43:38,098 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:44:08,459 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:44:08,470 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:44:08,471 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:44:08,472 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:44:08,472 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:44:08,473 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:44:08,474 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:44:08,475 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:44:08,478 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:44:08,480 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:44:08,499 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:44:08,502 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:44:08,503 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:44:08,506 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:44:08,507 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:44:08,507 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:44:08,508 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:44:08,508 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:44:08,509 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:44:08,509 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:44:08,510 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:44:08,510 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:44:08,511 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+ERROR 2022-05-11 11:44:08,777 Unable to open ./resources/neutralino.js api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 11:44:09,143 Unable to open ./resources/favicon.ico api\debug\debug.cpp:16 zqh@ZQH
+INFO 2022-05-11 11:46:01,877 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:47:09,382 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:47:09,392 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:47:09,392 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:47:09,393 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:47:09,396 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:47:09,396 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:47:09,397 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:47:09,398 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:47:09,401 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:47:09,402 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:47:09,424 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:47:09,425 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:47:09,425 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:47:09,428 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:47:09,428 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:47:09,430 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:47:09,430 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:47:09,431 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:47:09,431 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:47:09,432 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:47:09,432 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:47:09,432 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:47:09,432 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+ERROR 2022-05-11 11:47:09,699 Unable to open ./resources/neutralino.js api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 11:47:10,636 Unable to open ./resources/favicon.ico api\debug\debug.cpp:16 zqh@ZQH
+INFO 2022-05-11 11:47:31,993 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:49:48,824 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:52:20,225 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 11:54:11,604 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 14:37:59,648 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 14:39:55,480 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 14:41:05,385 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 14:41:43,707 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 14:50:35,564 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 14:51:24,360 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 14:52:32,292 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 14:53:20,235 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 14:56:56,277 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 15:02:46,949 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 17:18:28,968 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 17:18:48,175 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 17:24:31,995 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 17:24:32,004 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 17:24:32,005 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 17:24:32,006 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 17:24:32,007 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 17:24:32,007 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 17:24:32,008 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 17:24:32,009 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 17:24:32,012 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 17:24:32,013 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 17:24:32,031 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 17:24:32,031 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 17:24:32,034 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 17:24:32,035 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 17:24:32,036 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 17:24:32,037 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 17:24:32,038 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 17:24:32,038 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 17:24:32,038 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 17:24:32,039 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 17:24:32,039 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 17:24:32,041 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 17:24:32,042 Reloading the application... api\debug\debug.cpp:14 zqh@ZQH
+ERROR 2022-05-11 17:24:32,310 Unable to open ./resources/neutralino.js api\debug\debug.cpp:16 zqh@ZQH
+ERROR 2022-05-11 17:24:37,070 Unable to open ./resources/favicon.ico api\debug\debug.cpp:16 zqh@ZQH
+INFO 2022-05-11 17:26:40,868 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 17:32:21,988 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 17:34:35,253 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 17:35:57,500 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 17:46:33,249 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 23:36:27,086 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH
+INFO 2022-05-11 23:41:29,142 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:14 zqh@ZQH

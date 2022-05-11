@@ -1,12 +1,11 @@
 {
-  "applicationId": "Script.Arknight",
-  "version": "1.0.0",
+  "applicationId": "js.neutralino.sample",
   "defaultMode": "window",
-  "port": 8080,
-  "documentRoot": "/resources/",
-  "url": "/",
+  "port": 8081,
   "enableServer": true,
   "enableNativeAPI": true,
+  "url": "/",
+  "documentRoot": "/resources/",
   "tokenSecurity": "none",
   "logging": {
     "enabled": true,
@@ -25,6 +24,16 @@
     "extensions.*"
   ],
   "globalVariables": {
+    "TEST1": "Hello",
+    "TEST2": [
+      2,
+      4,
+      5
+    ],
+    "TEST3": {
+      "value1": 10,
+      "value2": {}
+    }
   },
   "modes": {
     "window": {
@@ -35,7 +44,7 @@
       "minHeight": 400,
       "fullScreen": false,
       "alwaysOnTop": false,
-      "icon": "/resources/icons/appIcon.png",
+      "icon": "/icons/appIcon.png",
       "enableInspector": true,
       "borderless": false,
       "maximize": false,
@@ -56,14 +65,23 @@
       "nativeAllowList": [
         "app.*"
       ]
+    },
+    "chrome": {
+      "width": 800,
+      "height": 500,
+      "args": "--user-agent=\"Neutralinojs chrome mode\"",
+      "nativeBlockList": [
+        "filesystem.*",
+        "os.*"
+      ]
     }
   },
   "cli": {
     "binaryName": "Arknight-Script",
     "resourcesPath": "/resources/",
     "extensionsPath": "/extensions/",
-    "clientLibrary": "/resources/js/main.js",
-    "binaryVersion": "4.3.0",
-    "clientVersion": "3.2.0"
+    "clientLibrary": "/arknight-vue/public/neutralino.js",
+    "binaryVersion": "4.5.0",
+    "clientVersion": "3.4.0"
   }
 }

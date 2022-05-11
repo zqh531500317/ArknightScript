@@ -44,6 +44,12 @@ class YuRenHao(BaseHuoDong):
                           )
         self.fight_time = self.fight_time + 1
 
+    def use_medicine_fc(self):
+        CommonStep.dowait(self.ckmap["use_medicine_before_fight"],
+                          TemplateEntity("/huodong/map_daili_yurenhao.png"),
+                          description="当前已使用理智药{}次,最大次数为{}次".
+                          format(self.medicine_num_used, self.medicine_num))
+
 
 if __name__ == '__main__':
     task = YuRenHao(99, "SN-9")

@@ -70,27 +70,35 @@ class BaseFight:
     def isInPreFight():
         return base.is_template_match("/fight/pre_fight.png")
 
+    def use_medicine_fc(self):
+        CommonStep.dowait(self.ckmap["use_medicine_before_fight"],
+                          TemplateEntity("/fight/map_daili_choosed.png"),
+                          description="当前已使用理智药{}次,最大次数为{}次".
+                          format(self.medicine_num_used, self.medicine_num))
+
+    def use_stone_fc(self):
+        CommonStep.dowait(self.ckmap["use_stone_before_fight"],
+                          TemplateEntity("/fight/map_daili_choosed.png"),
+                          description="当前已使用源石{}次,最大次数为{}次".
+                          format(self.stone_num_used, self.stone_num))
+
     def __use_medicine_and_use_stone(self):
         if not (self.use_medicine or self.use_stone):
             base.randomClick(self.ckmap["quit_reason"])
             raise module.error.game.NotReason(self.game)
-        if self.medicine_num == 0 and self.stone_num == 0:
+        if self.medicine_num == self.medicine_num_used and self.stone_num == self.stone_num_used:
             base.randomClick(self.ckmap["quit_reason"])
             raise module.error.game.NotReason(self.game)
-        if self.use_medicine and self.medicine_num > 0:
+        if self.use_medicine:
             if base.is_template_match("/fight/medicine_page.png"):
-                CommonStep.dowait(self.ckmap["use_medicine_before_fight"],
-                                  TemplateEntity("/fight/map_daili_choosed.png"),
-                                  description="使用理智药")
                 self.medicine_num_used += 1
+                self.use_medicine_fc()
                 return
         # todo 碎石
-        if self.use_stone and self.stone_num > 0:
+        if self.use_stone:
             if base.is_template_match("/fight/stone_page.png"):
-                CommonStep.dowait(self.ckmap["use_stone_before_fight"],
-                                  TemplateEntity("/fight/map_daili_choosed.png"),
-                                  description="使用源石")
                 self.stone_num_used += 1
+                self.use_stone_fc()
                 return
         raise module.error.game.NotReason(self.game)
 
@@ -143,7 +151,7 @@ class BaseFight:
 
     def quit_fight(self):
         CommonStep.dowait(self.ckmap["quit_game"],
-                          TemplateEntity("/fight/map_daili_choosed.png"),
+                          TemplateEntity("/fight/pre_fight.png"),
                           description="完成一次{}作战".format(self.game)
                           )
         self.fight_time = self.fight_time + 1

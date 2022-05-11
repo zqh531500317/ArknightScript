@@ -1,6 +1,6 @@
 config/schedual.json
 config/config.yaml
-webapp/neutralinojs.log
+webapp1/neutralinojs.log
 /log/stderr.txt
 /log/stdout.txt
 /log/log.log
@@ -9,5 +9,11 @@ result.jpg
 asset/template/cache/
 dist
 build
-/webapp/test.txt
+/webapp1/test.txt
 /jobs.sqlite
+/webapp/arknight-vue/node_modules/
+/webapp.old/
+/screenshots/
+/venv/
+/cache/
+/log/

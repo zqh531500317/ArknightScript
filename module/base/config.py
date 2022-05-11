@@ -20,6 +20,10 @@ class CoreConfig:
     THREE_MINUTES = 3
 
     def __init__(self):
+        root = project_root_path()
+        dic_path = root + "/log/"
+        if not os.path.exists(dic_path):
+            os.makedirs(dic_path)
         logger.info("class CoreConfig __init__")
         config = self.project_path + '/config/config.yaml'
         templete = self.project_path + '/config/templete.yaml'

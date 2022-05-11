@@ -1,19 +1,21 @@
-import _thread
-
 from flask_cors import CORS
 from flask_socketio import SocketIO
 from flask_login import LoginManager
 from module.base import *
+from engineio.async_drivers import threading
 
 name_space = "/dcenter"
 socketio = SocketIO(cors_allowed_origins='*', async_mode='threading')
 login_manager = LoginManager()
+thread = None
 
 
 # websocket部分
 @socketio.on('connect', namespace=name_space)
 def connect():
-    _thread.start_new_thread(send, ())
+    global thread
+    if thread is None:
+        thread = socketio.start_background_task(target=send)
 
 
 @socketio.on('disconnect', namespace=name_space)
@@ -26,7 +28,7 @@ def send():
     logfile = base.project_path + "/log/log.log"
     file = open(logfile, 'r', encoding='utf-8')
     file.read()
-    socketio.emit(event_name, {'data': "连接到websocket"}, broadcast=False, namespace=name_space)
+    socketio.emit(event_name, {'data': "连接到websocket"}, broadcast=True, namespace=name_space)
     while True:
         where = file.tell()
         line = file.readline()
@@ -35,7 +37,7 @@ def send():
             file.seek(where)
         else:
             data = {'data': line}
-            socketio.emit(event_name, data, broadcast=False, namespace=name_space)
+            socketio.emit(event_name, data, broadcast=True, namespace=name_space)
 
 
 # 初始化

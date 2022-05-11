@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request, render_template, flash, redirect, url_for
-from flask_login import login_required, login_user, logout_user,current_user
+from flask_login import login_required, login_user, logout_user, current_user
 
 from module.app.extensions import login_manager
 from module.entity.user import query_user, User, add_user
@@ -37,13 +37,17 @@ def index():
 @app_main.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        user_id = request.form.get('userid')
+        l1 = request.get_json()["user"]
+        user_id = l1('userid')
         user = query_user(user_id)
-        if user is not None and request.form['password'] == user['password']:
+
+        if user is not None and l1['password'] == user['password']:
             # 通过Flask-Login的login_user方法登录用户
             login_user(User(user_id))
-            return redirect(url_for('app_main.index'))
-        flash('Wrong username or password!')
+            return jsonify({'result': True})
+        else:
+            flash('Wrong username or password!')
+            return jsonify({'result': False})
     # GET 请求
     ip = request.remote_addr
     if "192.168.1.1" == ip:
@@ -61,3 +65,10 @@ def logout():
     print("logout")
     logout_user()
     return jsonify({'result': 'Logged out successfully!'})
+
+
+@app_main.route('/isLogin', methods=['get'])
+def isLogin():
+    ip = request.remote_addr
+    user = User(ip)
+    return jsonify({'result': user.is_authenticated})

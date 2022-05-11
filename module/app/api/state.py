@@ -89,3 +89,9 @@ def running_task():
 @login_required
 def waiting_task_list():
     return jsonify({'result': "todo"})
+
+
+@app_state.route('/is_fight', methods=['get'])
+@login_required
+def is_fighting():
+    return jsonify({'result': base.state.is_fight})

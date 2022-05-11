@@ -20,9 +20,6 @@ class Base(Template, OcrHandler, Log):
 
     def init_dir(self):
         root = self.project_path
-        dic_path = root + "/log/"
-        if not os.path.exists(dic_path):
-            os.makedirs(dic_path)
         dic_path = root + '/cache/'
         if not os.path.exists(dic_path):
             os.makedirs(dic_path)

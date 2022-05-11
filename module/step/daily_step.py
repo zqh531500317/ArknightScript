@@ -1,6 +1,8 @@
 import copy
 import module.error.game
 from datetime import datetime
+
+from module.error.ocr import OcrErr
 from module.inventory import show_bag
 from module.penguin_stats import analyse, get_name_by_id
 from module.base import *
@@ -10,6 +12,24 @@ from module.step.gamepass_step import GamePassStep
 
 
 class DailyStep:
+    @staticmethod
+    def get_lizhi():
+        CommonStep.ensureGameOpenAndInMain()
+        GamePassStep.exec_by_clickLoader(ci["jiaomie"])
+        time.sleep(base.sleep_time)
+        CommonStep.dowait((700, 350, 750, 400), "/fight/pre_fight.png")
+        lizhi_before_fight = ui["lizhi_before_fight"]["area"]
+        x1, y1, x2, y2 = lizhi_before_fight
+        result = base.ocr_number(OcrEntity(x1=x1, y1=y1, x2=x2, y2=y2)).string
+        logger.debug("获取理智内容是：" + str(result))
+        if '/' not in result or result[0] == '/':
+            raise OcrErr(result)
+        dic = result.split("/")
+        base.state.lizhi["time"] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        base.state.lizhi["lizhi"] = dic[0]
+        base.state.lizhi["maxlizhi"] = dic[1]
+        CommonStep.ensureGameOpenAndInMain()
+
     @staticmethod
     def receive_daily_renwu():
         if base.compareSimilar("daily_renwu") >= 0.9:

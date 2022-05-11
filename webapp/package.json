@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "nue run": "neu run",
+    "nue build":"neu build"
+  }
+}

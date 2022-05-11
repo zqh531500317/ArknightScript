@@ -1,5 +1,8 @@
 import time
 
+from retrying import retry
+
+from module.error.ocr import OcrErr
 from module.step.common_step import CommonStep
 from module.step.daily_step import DailyStep
 from module.step.gamepass_step import GamePassStep
@@ -149,22 +152,10 @@ def xinpian():
 @debug_recode
 @func_set_timeout(base.timeout_time)
 @timer
+@retry
 def get_lizhi():
-    CommonStep.ensureGameOpenAndInMain()
-    GamePassStep.exec_by_clickLoader(ci["lizhi"])
-    time.sleep(base.sleep_time)
-    region = base.screen(memery=True)
-    lizhi_before_fight = ui["lizhi_before_fight"]["area"]
-    x1, y1, x2, y2 = lizhi_before_fight
-    cropped = base.cut(region, x1, y1, x2, y2)
-    result = base.ocr_without_position(cropped, cand_alphabet=base.number_tag)
-    logger.debug("获取理智内容是：" + str(result))
-    dic = result[0]["words"].split("/")
-    base.state.lizhi["time"] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-    base.state.lizhi["lizhi"] = dic[0]
-    base.state.lizhi["maxlizhi"] = dic[1]
-    CommonStep.ensureGameOpenAndInMain()
+    DailyStep.get_lizhi()
 
 
 if __name__ == '__main__':
-    friend()
+    get_lizhi()

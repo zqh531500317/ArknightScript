@@ -52,12 +52,11 @@ def fight():
 @login_required
 def recruit():
     is_fight = base.state.is_fight
-
+    recruitEntity = request.get_json()["recruitEntity"]
     if is_fight == "stop":
-        base.state.is_fight = "fight"
-        recruit = request.get_json()["recruit"]
-        times = int(recruit["times"])
-        module.schedule.dailyScheduler.once_recruit(times)
+        base.state.is_fight = "task"
+        num = int(recruitEntity["num"])
+        module.schedule.dailyScheduler.once_recruit(num)
         return jsonify({'result': "success"})
 
     logger.warn("正在进行任务")

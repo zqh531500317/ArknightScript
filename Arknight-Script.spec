@@ -2,6 +2,7 @@
 
 
 block_cipher = None
+hiddenimports=['engineio.async_drivers.threading']
 a = Analysis(['Arknight-Script.py'],
              pathex=[],
              binaries=[],
@@ -33,7 +34,11 @@ a = Analysis(['Arknight-Script.py'],
              hookspath=[],
              hooksconfig={},
              runtime_hooks=[],
-             excludes=[],
+             excludes=[
+             'webapp/arknight-vue',
+             'webapp/bin',
+             'webapp/neutralinojs.log',
+             ],
              win_no_prefer_redirects=False,
              win_private_assemblies=False,
              cipher=block_cipher,

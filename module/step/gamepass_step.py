@@ -83,8 +83,7 @@ class GamePassStep:
             re = math.floor(num)
         else:
             re = math.ceil(num)
-        logger.info("当前剿灭进度为：%s,即将进行最多%s次剿灭作战", now, re)
-        return re
+        return now ,re
 
     # 利用ocr寻找关卡位置
     @staticmethod
