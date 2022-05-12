@@ -2,6 +2,7 @@ from flask_cors import CORS
 from flask_socketio import SocketIO
 from flask_login import LoginManager
 from module.base import *
+# 防止py installer打包后运行报错
 from engineio.async_drivers import threading
 
 name_space = "/dcenter"
