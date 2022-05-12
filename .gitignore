@@ -18,3 +18,4 @@ build
 /cache/
 /log/
 /webapp/neutralinojs.log
+/.idea
