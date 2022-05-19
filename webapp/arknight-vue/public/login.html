@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title>登录</title>
+</head>
+<script src="https://unpkg.zhimg.com/vue@2.6.14/dist/vue.min.js"></script>
+<script src="https://unpkg.zhimg.com/axios/dist/axios.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.zhimg.com/element-ui/lib/theme-chalk/index.css">
+<script src="https://unpkg.zhimg.com/element-ui/lib/index.js"></script>
+<body>
+<div id="app">
+    <el-form :model="user" ref="user">
+        <el-form-item label="账号">
+            <el-input v-model="user.userid"></el-input>
+
+        </el-form-item>
+        <el-form-item label="密码">
+            <el-input v-model="user.password" type="password"></el-input>
+
+        </el-form-item>
+        <el-button @click="dologin">登录</el-button>
+    </el-form>
+</div>
+</body>
+<script>
+
+    axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+    let app = new Vue({
+        el: '#app',
+        data: {
+            user: {
+                userid: "",
+                password: ""
+            }
+        },
+        methods: {
+            dologin() {
+                console.log(this.user.userid, this.user.password)
+                axios.post('/login', {user: this.user}).then((res) => {
+                    console.log(res.data.result)
+                    if (res.data.result) {
+                        console.log(window.location.protocol)
+                        console.log(window.location.hostname)
+                        console.log(window.location.port)
+                        window.location.href = window.location.protocol + "//" + window.location.hostname + window.location.port
+                    }
+                }).catch((err) => {
+                    console.log(err)
+
+                })
+            }
+        }
+    })
+</script>
+</html>
