@@ -41,3 +41,5 @@ class State:
             cls.running_job['name'] = job.name
         else:
             cls.running_job_num -= 1
+            cls.running_job['id'] = ""
+            cls.running_job['name'] = ""
