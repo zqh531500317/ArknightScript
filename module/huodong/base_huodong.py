@@ -20,10 +20,15 @@ class BaseHuoDong(BaseFight):
     def huodong_click(self):
         return None
 
+    @property
+    def enter_huodong(self):
+        return b_huodong[1]
+
     def enter_gamepass(self):
         CommonStep.ensureGameOpenAndInMain()
         CommonStep.dowait(a_zhongduan[1], "/ui/a_zhongduan.png", description="进入终端")
-        CommonStep.dowait(b_huodong[1], OcrEntity(except_result="作战", x1=913, y1=19, x2=952, y2=38), description="进入活动")
+        CommonStep.dowait(self.enter_huodong, OcrEntity(except_result="作战", x1=913, y1=19, x2=952, y2=38),
+                          description="进入活动")
         CommonStep.dowait(self.huodong_click,
                           "/huodong/main_{}.png".format(self.huodong_name),
                           description="进入活动界面")
