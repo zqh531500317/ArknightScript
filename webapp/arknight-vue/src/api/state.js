@@ -21,3 +21,6 @@ export const isLogin = () => {
 export const login = (form) => {
     return post('login',{form:form})
 }
+export const state_info = () => {
+    return get('state_info',)
+}

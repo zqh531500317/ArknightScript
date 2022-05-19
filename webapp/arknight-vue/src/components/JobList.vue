@@ -1,5 +1,9 @@
 <template>
   <el-card class="box-card" style="margin-bottom: 10px;">
+    <p>{{ running_job_num }}</p>
+    <p>{{ running_job }}</p>
+    <p>{{ blocking_jobs }}</p>
+    <p>{{ blocking_jobs_num }}</p>
     <p>时间:{{ lizhi.time }}: 理智状态:{{ lizhi.lizhi }}/{{ lizhi.maxlizhi }}</p>
     <div class="line"></div>
     <p>任务总数:{{ this.$store.getters.jobs_num }}</p>
@@ -21,7 +25,7 @@ export default {
     return {}
   },
   computed: {
-    ...mapState(['jobs', 'lizhi']),
+    ...mapState(['jobs', 'lizhi', 'running_job_num', 'running_job', 'blocking_jobs', 'blocking_jobs_num']),
   },
   methods: {
     ...mapMutations(['set_jobs', 'set_lizhi']),

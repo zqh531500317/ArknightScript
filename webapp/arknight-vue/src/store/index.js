@@ -6,9 +6,9 @@ import mutations from '@/store/mutations'
 
 Vue.use(Vuex)
 const state = {
-    isLogin:false,
-    fight_state:'stop',
-    scheduleState:"暂停中",
+    isLogin: false,
+    fight_state: 'stop',
+    scheduleState: "暂停中",
     lizhi: {
         time: "未获取",
         lizhi: "未获取",
@@ -18,7 +18,15 @@ const state = {
         {name: "任务名称", next_run_time: Date()}
     ],
     fight_jobs: [],
-    logList: []
+    logList: [],
+    running_job_num: 0,
+    running_job: {
+        id: "",
+        name: ""
+    },
+    blocking_jobs: [],
+    blocking_jobs_num: 0,
+
 }
 
 export default new Vuex.Store({

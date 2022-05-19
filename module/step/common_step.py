@@ -1,3 +1,5 @@
+from retrying import retry
+
 from module.base import *
 import module.error.game
 from module.entity.ocr_entity import OcrEntity
@@ -187,12 +189,22 @@ class CommonStep(BaseStep):
     @staticmethod
     def into_login():
         if not base.isLive():
-            logger.info("尝试登陆游戏")
-            base.start()
-            CommonStep.dowait("", "/ui/isLogining.png", description="到登录界面", retry_time=60)
-            CommonStep.dowait("login", "/ui/main.png", description="到主界面", retry_time=60)
+            CommonStep.dologin()
         else:
             CommonStep.into_main()
+
+    @staticmethod
+    # 登录触发dowait异常时,直到base.state.if_continue()==False
+    @retry(retry_on_exception=lambda e: (
+            logger.info("登录异常,将关闭重试"),
+            base.stop(),
+            base.state.if_continue(max_retry_time=3)
+    )[-1])
+    def dologin():
+        logger.info("尝试登陆游戏")
+        base.start()
+        CommonStep.dowait("", "/ui/isLogining.png", description="到登录界面", retry_time=60)
+        CommonStep.dowait("login", "/ui/main.png", description="到主界面", retry_time=60)
 
     # 关闭游戏弹框
     @staticmethod

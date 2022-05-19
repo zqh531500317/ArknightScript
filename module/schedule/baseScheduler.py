@@ -9,6 +9,7 @@ from apscheduler.triggers.cron import CronTrigger
 from apscheduler.events import EVENT_JOB_ERROR, EVENT_JOB_EXECUTED, EVENT_JOB_SUBMITTED
 from apscheduler.triggers.date import DateTrigger
 from module.base import *
+from module.entity.job_entity import JobEntity
 from module.utils.core_utils import random_time_str, save_last_lines
 import module.task.daily
 
@@ -30,6 +31,7 @@ class BaseScheduler:
             "misfire_grace_time": 60 * 60
         }
         self.start_time = datetime.datetime.now()
+        self.except_start_time = datetime.datetime.now()
         self.end_time = datetime.datetime.now()
         self.scheduler = BackgroundScheduler(jobstores=jobstores,
                                              executors=executors,
@@ -47,8 +49,13 @@ class BaseScheduler:
             self.reschedule_job("quick_lizhi", trigger=DateTrigger())
 
     def startListener(self, event):
+        self.except_start_time = event.scheduled_run_times[0]
         self.start_time = datetime.datetime.now()
         jobid = event.job_id
+        job = self.scheduler.get_job(jobid)
+        if job is None:
+            job = JobEntity(jobid, jobid, self.except_start_time)
+        base.state.job_start(job)
         if "once" in jobid or "fight" in jobid or "zhuxian" in jobid \
                 or "ziyuanshouji" in jobid or "jiaomie" in jobid or "huodong" in jobid:
             base.state.is_fight = "running"
@@ -58,6 +65,7 @@ class BaseScheduler:
         base.state.running_task_num -= 1
         self.end_time = datetime.datetime.now()
         jobid = str(event.job_id)
+        base.state.job_finish()
         self.errorhandler(event)
         if "once_ziyuanshouji" in jobid or "once_jiaomie" in jobid or "once_unknown" in jobid or \
                 "once_recently" in jobid or "once_zhuxian" in jobid or "fight" in jobid or \

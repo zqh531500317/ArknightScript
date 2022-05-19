@@ -20,7 +20,14 @@ export default {
     set_fight_state(state, fight_state) {
         state.fight_state = fight_state
     },
-    set_login_state(state,login_flag){
-        state.isLogin=login_flag
+    set_login_state(state, login_flag) {
+        state.isLogin = login_flag
+    },
+    set_state_info(state, state_info) {
+        state.running_job_num = state_info.running_job_num
+        state.running_job.id = state_info.running_job.id
+        state.running_job.name = state_info.running_job.name
+        state.blocking_jobs = state_info.blocking_jobs
+        state.blocking_jobs_num = state_info.blocking_jobs.length
     }
 }

@@ -38,7 +38,7 @@ def index():
 def login():
     if request.method == 'POST':
         l1 = request.get_json()["user"]
-        user_id = l1('userid')
+        user_id = l1['userid']
         user = query_user(user_id)
 
         if user is not None and l1['password'] == user['password']:
@@ -51,12 +51,12 @@ def login():
     # GET 请求
     ip = request.remote_addr
     if "192.168.1.1" == ip:
-        return render_template('login.html')
+        return redirect(url_for('app_main.index'))
     if "192.168.1" in ip or "127.0.0.1" in ip or "localhost" in ip:
         # add_user(ip)
         # login_user(User(ip))
         return redirect(url_for('app_main.index'))
-    return render_template('login.html')
+    return redirect(url_for('app_main.index'))
 
 
 @app_main.route('/logout')

@@ -95,3 +95,22 @@ def waiting_task_list():
 @login_required
 def is_fighting():
     return jsonify({'result': base.state.is_fight})
+
+
+@app_state.route('/state_info', methods=['get'])
+@login_required
+def state_info():
+    state = base.state
+    # print(state.running_job_num)
+    # print(state.running_job)
+    # print(state.blocking_jobs)
+    # print(len(state.blocking_jobs))
+    blocking_jobs_json = []
+    for job in state.blocking_jobs:
+        blocking_jobs_json.append({"id ": job.id, "name": job.name, "next_run_time": job.next_run_time})
+    return jsonify({'result': {
+        "running_job_num": state.running_job_num,
+        "running_job": state.running_job,
+        "blocking_jobs": blocking_jobs_json,
+        "blocking_jobs_num": len(state.blocking_jobs)
+    }})
