@@ -7,7 +7,7 @@ webapp1/neutralinojs.log
 result.jpg
 /cache/screen.png
 asset/template/cache/
-dist
+/dist
 build
 /webapp1/test.txt
 /jobs.sqlite
@@ -18,3 +18,6 @@ build
 /cache/
 /log/
 /webapp/neutralinojs.log
+/backup/
+/webapp/dist/Arknight-Script/Arknight-Script-mac_x64
+/webapp/dist/Arknight-Script/Arknight-Script-linux_x64

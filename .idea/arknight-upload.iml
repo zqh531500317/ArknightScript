@@ -12,6 +12,10 @@
       <excludeFolder url="file://$MODULE_DIR$/build" />
       <excludeFolder url="file://$MODULE_DIR$/dist" />
       <excludeFolder url="file://$MODULE_DIR$/backup" />
+      <excludeFolder url="file://$MODULE_DIR$/.mypy_cache/3.9" />
+      <excludeFolder url="file://$MODULE_DIR$/log" />
+      <excludeFolder url="file://$MODULE_DIR$/screenshots" />
+      <excludeFolder url="file://$MODULE_DIR$/webapp.old" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.9 (arknight-upload)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
