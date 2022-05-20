@@ -3,7 +3,7 @@ import StateService from '@/service/StateService'
 import FightService from "@/service/FightService";
 import RecruitService from "@/service/RecruitService";
 import JobService from "@/service/JobService";
-import {interval_num,setMode} from "@/config";
+import {interval_num, setMode} from "@/config";
 import {get, axiosInstance} from '@/api/http'
 
 export function update() {
@@ -51,8 +51,14 @@ function init_Neutralino() {
     }
 }
 
+import vuex from '@/store/index'
+
+window.test = function () {
+    console.log(JSON.stringify(vuex.state))
+}
 export default function init() {
     init_Neutralino()
+
     StateService()
     setInterval(StateService, interval_num)
     JobService()
