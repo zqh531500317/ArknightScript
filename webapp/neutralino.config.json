@@ -12,7 +12,6 @@
     "writeToLogFile": true
   },
   "nativeAllowList": [
-    "*",
     "app.*",
     "os.*",
     "filesystem.*",
@@ -20,8 +19,7 @@
     "computer.*",
     "storage.*",
     "debug.*",
-    "events.*",
-    "extensions.*"
+    "events.*"
   ],
   "globalVariables": {
     "TEST1": "Hello",
