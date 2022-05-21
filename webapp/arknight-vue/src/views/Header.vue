@@ -80,7 +80,7 @@ export default {
           console.log("try check update")
           let url = 'https://raw.githubusercontent.com/zqh531500317/arknight-script/master/webapp/update_manifest.json'
           let manifest = await window.Neutralino.updater.checkForUpdates(url);
-          this.set_updatable([neu_version, manifest.version,neu_version!==manifest.version])
+          this.set_updatable([neu_version, manifest.version, neu_version !== manifest.version])
         } catch (err) {
           console.log("check update error")
         }
@@ -117,6 +117,7 @@ export default {
     this.scheduleStateMap[this.hashCode('运行中')] = {"speed": 1, "color": "#2a6e3f"}
     this.scheduleStateMap[this.hashCode('暂停中')] = {"speed": 99999, "color": "#ffa502"}
     this.checkupdate()
+    setInterval(this.checkupdate, 1000 * 60 * 10)
   }
 }
 </script>
