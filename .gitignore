@@ -21,3 +21,5 @@ build
 /backup/
 /webapp/dist/Arknight-Script/Arknight-Script-mac_x64
 /webapp/dist/Arknight-Script/Arknight-Script-linux_x64
+/webapp/dist/Arknight-Script/neutralinojs.log
+/webapp/dist/Arknight-Script/test.txt
