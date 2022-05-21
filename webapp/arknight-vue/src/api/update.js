@@ -3,7 +3,7 @@ import {myMessage} from "@/util/utils";
 
 export const checkupdate = async () => {
     try {
-        let url = 'https://raw.githubusercontent.com/zqh531500317/arknight-script/ff5d331b068882da8143df11235f865515a11b81/webapp/%20update_manifest.json'
+        let url = 'https://raw.githubusercontent.com/zqh531500317/arknight-script/master/webapp/%20update_manifest.json'
         let manifest = await window.Neutralino.updater.checkForUpdates(url);
         if (manifest.version !== neu_version) {
             myMessage("有新的更新,当前版本:" + neu_version + "最新版本:" + manifest.version)
