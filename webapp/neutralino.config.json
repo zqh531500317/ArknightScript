@@ -1,12 +1,13 @@
 {
-  "applicationId": "js.neutralino.sample",
-  "defaultMode": "window",
+  "applicationId": "neutralino.arknight",
+  "defaultMode": "chrome",
   "port": 8081,
   "enableServer": true,
   "enableNativeAPI": true,
   "url": "/",
   "documentRoot": "/resources/",
   "tokenSecurity": "none",
+  "version": "2.0",
   "logging": {
     "enabled": true,
     "writeToLogFile": true
@@ -55,7 +56,6 @@
         "TEST": "Test value browser"
       },
       "nativeBlockList": [
-        "filesystem.*"
       ]
     },
     "cloud": {
@@ -65,12 +65,10 @@
       ]
     },
     "chrome": {
-      "width": 800,
-      "height": 500,
+      "width": 1200,
+      "height": 800,
       "args": "--user-agent=\"Neutralinojs chrome mode\"",
       "nativeBlockList": [
-        "filesystem.*",
-        "os.*"
       ]
     }
   },

@@ -3,7 +3,7 @@ import StateService from '@/service/StateService'
 import FightService from "@/service/FightService";
 import RecruitService from "@/service/RecruitService";
 import JobService from "@/service/JobService";
-import {interval_num, setMode} from "@/config";
+import {interval_num, setMode, set_neu_version} from "@/config";
 import {get, axiosInstance} from '@/api/http'
 
 export function update() {
@@ -20,6 +20,7 @@ function init_Neutralino() {
     } else {
         window.Neutralino.init()
         setMode(NL_MODE)
+        set_neu_version(NL_APPVERSION)
         console.log(NL_MODE)
         console.log(NL_CWD)
         window.Neutralino.events.on('windowClose', () => {
