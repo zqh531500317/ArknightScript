@@ -21,6 +21,7 @@ function init_Neutralino() {
         window.Neutralino.init()
         setMode(NL_MODE)
         set_neu_version(NL_APPVERSION)
+        console.log(NL_APPVERSION)
         console.log(NL_MODE)
         console.log(NL_CWD)
         window.Neutralino.events.on('windowClose', () => {
@@ -45,8 +46,10 @@ function init_Neutralino() {
                 console.log("back is running")
             }
         ).catch((err) => {
+            let webpath = NL_CWD + ""
+            webpath = webpath.replace('dist/Arknight-Script', '')
             console.log("back is not running,start back")
-            window.Neutralino.os.execCommand('..\\..\\start_flask.py', {background: true})
+            window.Neutralino.os.execCommand(webpath + 'start_flask.py', {background: true})
         })
 
     }

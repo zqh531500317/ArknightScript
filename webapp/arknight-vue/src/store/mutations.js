@@ -35,7 +35,7 @@ export default {
         const latest_version = t[1]
         state.version = version
         state.latest_version = latest_version
-        state.updatable = (version !== latest_version)
+        state.updatable = t[2]
         console.log(version, "=====", latest_version, "=======", state.updatable)
     }
 }

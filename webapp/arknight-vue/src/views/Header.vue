@@ -77,11 +77,10 @@ export default {
     async checkupdate() {
       if (mode === 'window' || mode === 'chrome') {
         try {
+          console.log("try check update")
           let url = 'https://raw.githubusercontent.com/zqh531500317/arknight-script/master/webapp/update_manifest.json'
           let manifest = await window.Neutralino.updater.checkForUpdates(url);
-          if (manifest.version !== neu_version) {
-            this.set_updatable([neu_version, manifest.version])
-          }
+          this.set_updatable([neu_version, manifest.version,neu_version!==manifest.version])
         } catch (err) {
           console.log("check update error")
         }
@@ -91,6 +90,7 @@ export default {
     async update() {
       if (mode === "window" || mode === "chrome") {
         try {
+          console.log("try update")
           await window.Neutralino.updater.install();
           await window.Neutralino.app.restartProcess();
         } catch (err) {
