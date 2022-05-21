@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>总览</h3>
+    <b>总览</b>
     <el-row :gutter="20">
       <el-col :span="12">
         <job-list></job-list>

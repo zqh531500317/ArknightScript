@@ -62,7 +62,6 @@ window.test = function () {
 }
 export default function init() {
     init_Neutralino()
-
     StateService()
     setInterval(StateService, interval_num)
     JobService()

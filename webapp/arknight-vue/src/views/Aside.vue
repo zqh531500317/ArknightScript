@@ -1,12 +1,8 @@
 <template>
-  <el-aside style="width:auto">
-    <el-row class="tac">
-      <el-col :span="23">
+  <el-aside width="200px">
         <h5>默认颜色</h5>
-
         <el-menu
             :default-active="page"
-            class="el-menu-vertical-demo"
             :default-openeds="openeds"
             :collapse="isCollapse"
             router>
@@ -37,16 +33,13 @@
             <span slot="title">公开招募</span>
           </el-menu-item>
         </el-menu>
-      </el-col>
-    </el-row>
   </el-aside>
 
 </template>
 
 <script>
-/* eslint-disable */
 export default {
-  name: "Aside",
+  name: "AsideView",
   data() {
     return {
       isCollapse: false,
@@ -58,8 +51,5 @@ export default {
 </script>
 
 <style scoped>
-.el-menu-vertical-demo:not(.el-menu--collapse) {
-  width: 200px;
-  min-height: 400px;
-}
+
 </style>

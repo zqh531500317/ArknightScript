@@ -1,15 +1,15 @@
 <template>
   <div>
-    <el-card class="box-card" style="margin-bottom: 10px;min-height: 20px">
+    <el-card class="box-card" :body-style="card_body_style">
       <p>时间:{{ lizhi.time }}: 理智状态:{{ lizhi.lizhi }}/{{ lizhi.maxlizhi }}</p>
     </el-card>
-    <el-card class="box-card" style="margin-bottom: 10px;min-height: 20px">
+    <el-card class="box-card" :body-style="card_body_style">
       <div slot="header">
         <span>运行中</span>
       </div>
       <p v-if="running_job_num===1">任务名称:{{ running_job.name }}</p>
     </el-card>
-    <el-card class="box-card" style="margin-bottom: 10px;min-height: 20px">
+    <el-card class="box-card" :body-style="card_body_style">
       <div slot="header">
         <span>等待中---阻塞数量:{{ blocking_jobs_num }}</span>
       </div>
@@ -17,7 +17,7 @@
         <p>任务名称:{{ job.name }}. 下次执行时间:{{ job.next_run_time }}</p>
       </div>
     </el-card>
-    <el-card class="box-card" style="margin-bottom: 10px;">
+    <el-card class="box-card" :body-style="card_body_style">
       <div slot="header">
         <span>任务列表---数量:{{ this.$store.getters.jobs_num }}</span>
       </div>
@@ -37,7 +37,9 @@ import {mapMutations, mapState} from 'vuex'
 export default {
   name: "JobList",
   data() {
-    return {}
+    return {
+      card_body_style: {padding: '10px'}
+    }
   },
   computed: {
     ...mapState(['jobs', 'lizhi', 'running_job_num', 'running_job', 'blocking_jobs', 'blocking_jobs_num']),
@@ -58,5 +60,7 @@ export default {
 </script>
 
 <style scoped>
-
+.el-card {
+  margin-bottom: 10px
+}
 </style>

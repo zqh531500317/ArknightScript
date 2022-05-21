@@ -18,16 +18,6 @@ import my_main from '@/views/Main.vue'
 import init from "@/service/init"
 init()
 
-function placeholderPic() {
-  document.documentElement.style.fontSize =
-      document.documentElement.offsetWidth / 120 + "px"; //同上
-}
-
-placeholderPic();
-window.onresize = function () { //窗口改变时再次执行一次函数便可
-  placeholderPic();
-}
-
 export default {
   name: 'App',
   components: {my_header, my_aside, my_main},
@@ -66,5 +56,8 @@ export default {
   margin: 10px;
   border-bottom: 1px solid #ccc
 
+}
+body{
+  font-size: 1vw;
 }
 </style>

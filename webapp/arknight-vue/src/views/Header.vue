@@ -1,10 +1,10 @@
 <template>
-  <el-header style="text-align: left; font-size: 12px;height:auto">
+  <el-header style="text-align: left; height:auto">
     <el-row>
-      <el-col :span="2" style="height: auto">
+      <el-col :xs="1" :sm="1" :md="1" :lg="1" :xl="2" style="padding-top: 8px">
         <el-tag color="#ffffff">当前模式：{{ mode }}</el-tag>
       </el-col>
-      <el-col :span="2">
+      <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1" style="padding-top: 8px">
         <spinner size="10"
                  :message="scheduleState"
                  :line-fg-color="scheduleStateMap[hashCode(scheduleState)].color"
@@ -12,7 +12,7 @@
         </spinner>
 
       </el-col>
-      <el-col :span="4" style="padding-top: 10px">
+      <el-col :xs="15" :sm="6" :md="5" :lg="4" :xl="3" style="padding-top: 11px">
         调度器:
         <el-switch
             v-model="scheduleState"
@@ -25,17 +25,22 @@
             @change="changeScheduleState($event)">
         </el-switch>
       </el-col>
-      <el-col :span="3" v-if="(mode === 'window' || mode === 'chrome') ">
+      <el-col :xs="8" :sm="8" :md="5" :lg="4" :xl="3" style="padding-top: 8px">
         <span class="tag-group__title">前端当前版本：</span>
         <el-tag color="#ffffff">{{ version }}</el-tag>
 
       </el-col>
-      <el-col :span="3" v-if="(mode === 'window' || mode === 'chrome') ">
+      <el-col :xs="8" :sm="8" :md="5" :lg="4" :xl="3" style="padding-top: 8px">
         <span class="tag-group__title">前端最新版本：</span>
         <el-tag color="#ffffff">{{ latest_version }}</el-tag>
       </el-col>
-      <el-col :span="2" style="padding-top: 10px" v-if="(mode === 'window' || mode === 'chrome') && updatable">
+      <el-col :xs="4" :sm="2" :md="1" :lg="1" :xl="1" style="padding-top: 10px"
+              v-if="(mode === 'window' || mode === 'chrome') && updatable">
         <el-button @click="update" size="mini">更新</el-button>
+      </el-col>
+      <el-col v-if="false" :xs="8" :sm="8" :md="5" :lg="5" :xl="3" style="padding-top: 10px">
+        屏幕宽度{{ windowWidth }}
+        屏幕高度{{ windowHeight }}
       </el-col>
     </el-row>
   </el-header>
@@ -55,7 +60,10 @@ export default {
       active_value: "运行中",
       inactive_value: "暂停中",
       mode: mode,
-      scheduleStateMap: {}
+      scheduleStateMap: {},
+      windowWidth: document.documentElement.clientWidth,  //实时屏幕宽度
+      windowHeight: document.documentElement.clientHeight,   //实时屏幕高度
+
     }
   },
   methods: {
@@ -112,6 +120,14 @@ export default {
   },
   components: {
     Spinner
+  },
+  mounted() {
+    window.onresize = () => {
+      return (() => {
+        this.windowWidth = document.documentElement.clientWidth; //实时宽度
+        this.windowHeight = document.documentElement.clientHeight; //实时高度
+      })();
+    };
   },
   created() {
     this.scheduleStateMap[this.hashCode('运行中')] = {"speed": 1, "color": "#2a6e3f"}

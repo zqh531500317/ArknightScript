@@ -6,8 +6,8 @@ import mutations from '@/store/mutations'
 
 Vue.use(Vuex)
 const state = {
-    version: "",
-    latest_version: "",
+    version: "unsupport.1",
+    latest_version: "unsupport.2",
     updatable: false,
     isLogin: false,
     fight_state: 'stop',
