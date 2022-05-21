@@ -11,9 +11,9 @@ if os.path.isdir(basedir + "/cv2"):
 else:
     file = open('test.txt', 'w')
 
-    dir1 = basedir + '\\venv\\Scripts\\python.exe '
+    dir1 = os.path.abspath(basedir + os.path.sep + ".." + os.path.sep + "..") + '\\venv\\Scripts\\python.exe '
     str_ff = "-m flask run --host 0.0.0.0"
-    cmd = "cd ../&set FLASK_APP=Arknight-Script.py&" + dir1 + str_ff
+    cmd = "cd ../../../&set FLASK_APP=Arknight-Script.py&" + dir1 + str_ff
     file.write(cmd)
     file.close()
     os.system(cmd)

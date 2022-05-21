@@ -1,1 +1,0 @@
-cd ../&set FLASK_APP=Arknight-Script.py&E:\project\arknight-upload\venv\Scripts\python.exe -m flask run --host 0.0.0.0

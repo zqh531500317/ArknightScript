@@ -46,7 +46,7 @@ function init_Neutralino() {
             }
         ).catch((err) => {
             console.log("back is not running,start back")
-            window.Neutralino.os.execCommand('start_flask.py', {background: true})
+            window.Neutralino.os.execCommand('..\\..\\start_flask.py', {background: true})
         })
 
     }
