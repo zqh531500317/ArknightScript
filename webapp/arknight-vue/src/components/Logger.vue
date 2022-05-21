@@ -1,5 +1,8 @@
 <template>
   <el-card class="box-card">
+    <div slot="header">
+      <span>日志</span>
+    </div>
     <div style="height:500px;overflow:auto;" ref="logContent">
       <div v-for="(i,index) in logList" :key="index">
         {{ i }}
