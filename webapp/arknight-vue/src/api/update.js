@@ -7,8 +7,8 @@ export const checkupdate = async () => {
         let manifest = await window.Neutralino.updater.checkForUpdates(url);
         if (manifest.version !== neu_version) {
             myMessage("有新的更新,当前版本:" + neu_version + "最新版本:" + manifest.version)
-            await window.Neutralino.updater.install();
-            await window.Neutralino.app.restartProcess();
+            //await window.Neutralino.updater.install();
+            //await window.Neutralino.app.restartProcess();
         }
     } catch (err) {
         // Handle errors
