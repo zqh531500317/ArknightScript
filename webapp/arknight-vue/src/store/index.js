@@ -6,6 +6,9 @@ import mutations from '@/store/mutations'
 
 Vue.use(Vuex)
 const state = {
+    version: "",
+    latest_version: "",
+    updatable: false,
     isLogin: false,
     fight_state: 'stop',
     scheduleState: "暂停中",

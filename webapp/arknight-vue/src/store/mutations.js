@@ -29,5 +29,10 @@ export default {
         state.running_job.name = state_info.running_job.name
         state.blocking_jobs = state_info.blocking_jobs
         state.blocking_jobs_num = state_info.blocking_jobs.length
+    },
+    set_updatable(state, version, latest_version) {
+        state.version = version
+        state.latest_version = latest_version
+        state.updatable = (version === latest_version)
     }
 }

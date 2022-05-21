@@ -1,7 +1,7 @@
 {
     "applicationId": "neutralino.arknight",
     "version": "2.2",
-    "resourcesURL": "http://localhost:90/neu_app/resources.neu",
+    "resourcesURL": "https://raw.githubusercontent.com/zqh531500317/arknight-script/master/webapp/dist/Arknight-Script/resources.neu",
     "data": {
     }
 }

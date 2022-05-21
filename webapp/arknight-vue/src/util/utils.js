@@ -77,5 +77,5 @@ export function message_warning(msg = '操作异常') {
 }
 
 export function myMessage(msg = "example", duration = 0) {
-    Message.info({showClose: true, message: msg, duration: duration})
+    Message.info({showClose: true, message: msg, duration: duration, dangerouslyUseHTMLString: true})
 }
