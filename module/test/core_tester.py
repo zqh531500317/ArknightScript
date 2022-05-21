@@ -30,8 +30,7 @@ class TestScreen(unittest.TestCase):
     def test_a(self):
         import requests
 
-        url = 'https://raw.githubusercontent.com/zqh531500317/arknight-script' \
-              '/ff5d331b068882da8143df11235f865515a11b81/webapp/%20update_manifest.json'
+        url = 'https://raw.githubusercontent.com/zqh531500317/arknight-script/master/webapp/update_manifest.json'
         resp = requests.get(url)
         print(resp.text)
 
