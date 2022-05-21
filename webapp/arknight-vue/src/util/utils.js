@@ -75,3 +75,7 @@ export function message_success(msg = '操作成功') {
 export function message_warning(msg = '操作异常') {
     Message.warning(msg)
 }
+
+export function myMessage(msg = "example", duration = 0) {
+    Message.info({showClose: true, message: msg, duration: duration})
+}
