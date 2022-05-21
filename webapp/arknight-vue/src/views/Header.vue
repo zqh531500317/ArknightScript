@@ -25,7 +25,13 @@
             @change="changeScheduleState($event)">
         </el-switch>
       </el-col>
-      <el-col :span="2" style="padding-top: 10px" v-if="mode === 'window' || mode === 'chrome'">
+      <el-col :span="2" style="padding-top: 10px" v-if="(mode === 'window' || mode === 'chrome') ">
+        前端当前版本：
+        <el-tag color="#ffffff">{{ version }}</el-tag>
+        前端最新版本：
+        <el-tag color="#ffffff">{{ latest_version }}</el-tag>
+      </el-col>
+      <el-col :span="2" style="padding-top: 10px" v-if="(mode === 'window' || mode === 'chrome') && updatable">
         <el-button @click="update">更新</el-button>
       </el-col>
     </el-row>
@@ -39,6 +45,7 @@ import {pause_scheduler_s, resume_scheduler_s} from '@/service/StateService'
 import {mode, neu_version} from "@/config";
 import Spinner from 'vue-simple-spinner'
 import {mapMutations} from "vuex";
+import {mapState} from "vuex";
 
 export default {
   name: "HeaderView",
@@ -94,6 +101,7 @@ export default {
     }
   },
   computed: {
+    ...mapState(["version", 'latest_version', "updatable"]),
     scheduleState: {
       get() {
         return this.$store.state.scheduleState
