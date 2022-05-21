@@ -41,6 +41,9 @@ function init_Neutralino() {
                 });
             }
         );
+        checkupdate().then(r => {
+
+        })
         axiosInstance.get('/ping').then((response) => {
                 console.log("back is running")
             }
@@ -53,6 +56,7 @@ function init_Neutralino() {
 }
 
 import vuex from '@/store/index'
+import {checkupdate} from "@/api/update";
 
 window.test = function () {
     console.log(JSON.stringify(vuex.state))

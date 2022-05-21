@@ -1,6 +1,6 @@
 {
   "applicationId": "neutralino.arknight",
-  "defaultMode": "chrome",
+  "defaultMode": "window",
   "port": 8081,
   "enableServer": true,
   "enableNativeAPI": true,
@@ -20,7 +20,8 @@
     "computer.*",
     "storage.*",
     "debug.*",
-    "events.*"
+    "events.*",
+    "updater.*"
   ],
   "globalVariables": {
     "TEST1": "Hello",
