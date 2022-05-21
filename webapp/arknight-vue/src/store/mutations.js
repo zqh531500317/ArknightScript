@@ -30,9 +30,12 @@ export default {
         state.blocking_jobs = state_info.blocking_jobs
         state.blocking_jobs_num = state_info.blocking_jobs.length
     },
-    set_updatable(state, version, latest_version) {
+    set_updatable(state, t) {
+        const version = t[0]
+        const latest_version = t[1]
         state.version = version
         state.latest_version = latest_version
-        state.updatable = (version === latest_version)
+        state.updatable = (version !== latest_version)
+        console.log(version, "=====", latest_version, "=======", state.updatable)
     }
 }

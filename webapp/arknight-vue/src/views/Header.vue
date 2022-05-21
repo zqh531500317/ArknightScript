@@ -25,18 +25,19 @@
             @change="changeScheduleState($event)">
         </el-switch>
       </el-col>
-      <el-col :span="2" style="padding-top: 10px" v-if="(mode === 'window' || mode === 'chrome') ">
-        前端当前版本：
+      <el-col :span="3" v-if="(mode === 'window' || mode === 'chrome') ">
+        <span class="tag-group__title">前端当前版本：</span>
         <el-tag color="#ffffff">{{ version }}</el-tag>
-        前端最新版本：
+
+      </el-col>
+      <el-col :span="3" v-if="(mode === 'window' || mode === 'chrome') ">
+        <span class="tag-group__title">前端最新版本：</span>
         <el-tag color="#ffffff">{{ latest_version }}</el-tag>
       </el-col>
       <el-col :span="2" style="padding-top: 10px" v-if="(mode === 'window' || mode === 'chrome') && updatable">
-        <el-button @click="update">更新</el-button>
+        <el-button @click="update" size="mini">更新</el-button>
       </el-col>
     </el-row>
-
-
   </el-header>
 </template>
 <script>
@@ -78,10 +79,8 @@ export default {
         try {
           let url = 'https://raw.githubusercontent.com/zqh531500317/arknight-script/master/webapp/update_manifest.json'
           let manifest = await window.Neutralino.updater.checkForUpdates(url);
-          console.log(manifest.version, "=====", neu_version)
           if (manifest.version !== neu_version) {
-            //myMessage("有新的更新,当前版本:" + neu_version + " 最新版本:" + manifest.version)
-            this.set_updatable(neu_version, manifest.version)
+            this.set_updatable([neu_version, manifest.version])
           }
         } catch (err) {
           console.log("check update error")
