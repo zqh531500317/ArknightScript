@@ -1,17 +1,32 @@
 <template>
-  <el-card class="box-card" style="margin-bottom: 10px;">
-    <p>{{ running_job_num }}</p>
-    <p>{{ running_job }}</p>
-    <p>{{ blocking_jobs }}</p>
-    <p>{{ blocking_jobs_num }}</p>
-    <p>时间:{{ lizhi.time }}: 理智状态:{{ lizhi.lizhi }}/{{ lizhi.maxlizhi }}</p>
-    <div class="line"></div>
-    <p>任务总数:{{ this.$store.getters.jobs_num }}</p>
-    <div class="line"></div>
-    <div v-for="job in jobs" :key="job.name">
-      <p>任务名称:{{ job.name }}. 下次执行时间:{{ job.next_run_time }}</p>
-    </div>
-  </el-card>
+  <div>
+    <el-card class="box-card" style="margin-bottom: 10px;min-height: 20px">
+      <p>时间:{{ lizhi.time }}: 理智状态:{{ lizhi.lizhi }}/{{ lizhi.maxlizhi }}</p>
+    </el-card>
+    <el-card class="box-card" style="margin-bottom: 10px;min-height: 20px">
+      <div slot="header">
+        <span>运行中</span>
+      </div>
+      <p v-if="running_job_num===1">任务名称:{{ running_job.name }}</p>
+    </el-card>
+    <el-card class="box-card" style="margin-bottom: 10px;min-height: 20px">
+      <div slot="header">
+        <span>等待中---阻塞数量:{{ blocking_jobs_num }}</span>
+      </div>
+      <div v-for="(job,index) in blocking_jobs" :key="index">
+        <p>任务名称:{{ job.name }}. 下次执行时间:{{ job.next_run_time }}</p>
+      </div>
+    </el-card>
+    <el-card class="box-card" style="margin-bottom: 10px;">
+      <div slot="header">
+        <span>任务列表---数量:{{ this.$store.getters.jobs_num }}</span>
+      </div>
+      <div v-for="(job,index) in jobs" :key="index">
+        <p>任务名称:{{ job.name }}. 下次执行时间:{{ job.next_run_time }}</p>
+      </div>
+    </el-card>
+  </div>
+
 </template>
 
 <script>
