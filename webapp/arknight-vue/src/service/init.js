@@ -41,9 +41,7 @@ function init_Neutralino() {
                 });
             }
         );
-        checkupdate().then(r => {
-
-        })
+        checkupdate()
         axiosInstance.get('/ping').then((response) => {
                 console.log("back is running")
             }
