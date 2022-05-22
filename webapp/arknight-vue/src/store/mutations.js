@@ -36,6 +36,7 @@ export default {
         state.version = version
         state.latest_version = latest_version
         state.updatable = t[2]
-        console.log(version, "=====", latest_version, "=======", state.updatable)
+        state.update_desc = t[3]
+        console.log(version, "=====", latest_version, "=======", state.updatable, "======", state.update_desc)
     }
 }

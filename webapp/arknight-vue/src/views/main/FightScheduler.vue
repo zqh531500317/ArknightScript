@@ -8,7 +8,6 @@
       </el-row>
     </div>
     <fightSchedulerAdd></fightSchedulerAdd>
-
   </div>
 </template>
 
@@ -25,9 +24,7 @@ export default {
   computed: {
     ...mapState(['fight_jobs']),
   },
-  methods: {
-
-  },
+  methods: {},
   components: {
     fightSchedulerCard, fightSchedulerAdd
   }

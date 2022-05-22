@@ -9,6 +9,7 @@ const state = {
     version: "unsupport.1",
     latest_version: "unsupport.2",
     updatable: false,
+    update_desc:"",
     isLogin: false,
     fight_state: 'stop',
     scheduleState: "暂停中",

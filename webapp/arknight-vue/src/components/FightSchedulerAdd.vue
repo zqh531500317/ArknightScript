@@ -30,13 +30,13 @@
         <el-input v-model="temp.times"></el-input>
       </el-form-item>
       <el-form-item label="cron表达式">
-        <el-input class="input" v-model="temp.day_of_week">
+        <el-input class="input space" v-model="temp.day_of_week">
           <template slot="prepend">星期(0-6)</template>
         </el-input>
-        <el-input class="input" v-model="temp.hour">
+        <el-input class="input space" v-model="temp.hour">
           <template slot="prepend">时</template>
         </el-input>
-        <el-input class="input" v-model="temp.minute">
+        <el-input class="input space" v-model="temp.minute">
           <template slot="prepend">分</template>
         </el-input>
       </el-form-item>

@@ -60,4 +60,7 @@ export default {
 body{
   font-size: 1vw;
 }
+.space{
+  margin-bottom: 10px;
+}
 </style>

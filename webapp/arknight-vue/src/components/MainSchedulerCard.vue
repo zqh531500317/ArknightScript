@@ -1,38 +1,44 @@
 <template>
-  <el-card class="box-card" style="margin-bottom: 10px">
-    <div slot="header">
-      <span>{{ type }}</span>
-    </div>
-    <div v-for="(job) in jobList" :key="job.id">
-      <el-row>
-        <el-row class="pad">
-          <el-switch
-              v-model="job.state"
-              active-color="#13ce66"
-              inactive-color="#ff4949"
-              :active-text="`开启${job.name}`"
-              :inactive-text="`关闭${job.name}`"
-              @change="state_change($event,job.id)">
-          </el-switch>
-        </el-row>
-      </el-row>
-      <el-row class="pad">
-        <span class="input">cron表达式：</span>
-        <el-input @change="trigger_change_m($event,'hour',job.id)"
-                  v-model="job.hour"
-                  class="input"
-                  placeholder="时">
-          <template slot="prepend">时</template>
-        </el-input>
-        <el-input @change="trigger_change_m($event,'minute',job.id)"
-                  v-model="job.minute"
-                  class="input"
-                  placeholder="分">
-          <template slot="prepend">分</template>
-        </el-input>
-      </el-row>
-    </div>
-  </el-card>
+  <div>
+    <p>{{ type }}</p>
+    <span class="line"></span>
+    <el-row :gutter="10">
+      <el-col :span="8" v-for="(job) in jobList" :key="job.id">
+        <el-card class="box-card" style="margin-bottom: 10px">
+          <div slot="header">
+            <span>任务名称：{{ job.name }}</span>
+          </div>
+          <div>
+            <el-switch
+                class="space"
+                v-model="job.state"
+                active-color="#13ce66"
+                inactive-color="#ff4949"
+                :active-text="`开启`"
+                :inactive-text="`关闭`"
+                @change="state_change($event,job.id)">
+            </el-switch>
+          </div>
+          <el-input @change="trigger_change_m($event,'hour',job.id)"
+                    v-model="job.hour"
+                    class="input space"
+                    placeholder="时"
+                    style="width: 180px">
+            <template slot="prepend">h</template>
+          </el-input>
+
+          <el-input @change="trigger_change_m($event,'minute',job.id)"
+                    v-model="job.minute"
+                    class="input space"
+                    placeholder="分"
+                    style="width: 180px">
+            <template slot="prepend">m</template>
+          </el-input>
+        </el-card>
+      </el-col>
+    </el-row>
+  </div>
+
 </template>
 
 <script>

@@ -37,6 +37,11 @@
       <el-col :xs="4" :sm="2" :md="1" :lg="1" :xl="1" style="padding-top: 10px"
               v-if="(mode === 'window' || mode === 'chrome') && updatable">
         <el-button @click="update" size="mini">更新</el-button>
+        <el-alert
+            :title="update_desc"
+            type="info"
+            show-icon>
+        </el-alert>
       </el-col>
       <el-col v-if="false" :xs="8" :sm="8" :md="5" :lg="5" :xl="3" style="padding-top: 10px">
         屏幕宽度{{ windowWidth }}
@@ -88,7 +93,7 @@ export default {
           console.log("try check update")
           let url = 'https://raw.githubusercontent.com/zqh531500317/arknight-script/master/webapp/update_manifest.json'
           let manifest = await window.Neutralino.updater.checkForUpdates(url);
-          this.set_updatable([neu_version, manifest.version, neu_version !== manifest.version])
+          this.set_updatable([neu_version, manifest.version, neu_version !== manifest.version, manifest.data.desc])
         } catch (err) {
           console.log("check update error")
         }
@@ -99,7 +104,9 @@ export default {
       if (mode === "window" || mode === "chrome") {
         try {
           console.log("try update")
-          await window.Neutralino.updater.install();
+          let res = await window.Neutralino.updater.install();
+          console.log(res)
+
           await window.Neutralino.app.restartProcess();
         } catch (err) {
           console.log("update error")
@@ -108,7 +115,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(["version", 'latest_version', "updatable"]),
+    ...mapState(["version", 'latest_version', "updatable", 'update_desc']),
     scheduleState: {
       get() {
         return this.$store.state.scheduleState
@@ -134,6 +141,7 @@ export default {
     this.scheduleStateMap[this.hashCode('暂停中')] = {"speed": 99999, "color": "#ffa502"}
     this.checkupdate()
     setInterval(this.checkupdate, 1000 * 60 * 10)
+
   }
 }
 </script>
