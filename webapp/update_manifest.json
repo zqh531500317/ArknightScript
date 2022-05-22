@@ -1,6 +1,6 @@
 {
   "applicationId": "neutralino.arknight",
-  "version": "2.5",
+  "version": "2.6",
   "resourcesURL": "https://raw.githubusercontent.com/zqh531500317/arknight-script/master/webapp/dist/Arknight-Script/resources.neu",
   "data": {
     "desc": "优化ui布局"
