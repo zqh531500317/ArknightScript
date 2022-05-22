@@ -106,8 +106,8 @@ export default {
           console.log("try update")
           let res = await window.Neutralino.updater.install();
           console.log(res)
-
-          await window.Neutralino.app.restartProcess();
+          console.log('安装完毕')
+          //await window.Neutralino.app.restartProcess();
         } catch (err) {
           console.log("update error")
         }
