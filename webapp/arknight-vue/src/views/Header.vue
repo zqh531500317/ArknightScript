@@ -37,6 +37,10 @@
       <el-col :xs="4" :sm="2" :md="1" :lg="1" :xl="1" style="padding-top: 10px"
               v-if="(mode === 'window' || mode === 'chrome') && updatable">
         <el-button @click="update" size="mini">更新</el-button>
+
+      </el-col>
+      <el-col :xs="8" :sm="6" :md="3" :lg="3" :xl="3" style="padding-top: 10px"
+              v-if="(mode === 'window' || mode === 'chrome') && updatable">
         <el-alert
             :title="update_desc"
             type="info"
