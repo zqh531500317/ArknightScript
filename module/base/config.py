@@ -204,3 +204,11 @@ class CoreConfig:
     @property
     def password(self):
         return self.get("authorization")
+
+    @property
+    def limit_dayofweek(self):
+        return self.get("limit_dayofweek")
+
+    @property
+    def analyse_item(self):
+        return self.get("analyse_item")

@@ -186,7 +186,8 @@ class DailyStep:
 
     # res 缺少芯片信息
     @staticmethod
-    def do_xinpian(xinpian_info, queshao_info):
+    def do_xinpian(xinpian_info, queshao_info,
+                   limit_dayofweek=base.limit_dayofweek, analyse_item=base.analyse_item):
         dayOfWeek = datetime.now().isoweekday()
         hour = datetime.now().hour
         if 0 <= hour <= 3:
@@ -212,9 +213,10 @@ class DailyStep:
         try:
             for k, v in queshao_info.items():
                 game_name = v["map_name"]
-                if dayOfWeek not in openTime[game_name]:
-                    logger.info("目标:{},但是{}未开放，跳过".format(k, game_name))
-                    continue
+                if limit_dayofweek:
+                    if dayOfWeek not in openTime[game_name]:
+                        logger.info("目标:{},但是{}未开放，跳过".format(k, game_name))
+                        continue
                 xinpian_info.findGame(game_name)
                 while True:
                     if v["num"] <= 0:
@@ -226,26 +228,29 @@ class DailyStep:
                         fightTime[game_name] += 1
                     logger.info("进行一场{}".format(game_name))
                     # 获取战斗掉落信息
-                    data, display = analyse()
-                    drop_name = ""
-                    for drop in data["drops"]:
-                        drop_id = drop["itemId"]
-                        if drop_id in ["3211", "3212", "3213",
-                                       "3221", "3222", "3223",
-                                       "3231", "3232", "3233",
-                                       "3241", "3242", "3243",
-                                       "3251", "3252", "3253",
-                                       "3261", "3262", "3263",
-                                       "3271", "3272", "3273",
-                                       "3281", "3282", "3283"]:
-                            drop_name = get_name_by_id(drop_id)
-                            break
-                    if queshao_info.get(drop_name):
-                        queshao_info[drop_name]['num'] -= 1
-                    if not getTime.get(drop_name):
-                        getTime[drop_name] = 1
+                    if analyse_item:
+                        data, display = analyse()
+                        drop_name = ""
+                        for drop in data["drops"]:
+                            drop_id = drop["itemId"]
+                            if drop_id in ["3211", "3212", "3213",
+                                           "3221", "3222", "3223",
+                                           "3231", "3232", "3233",
+                                           "3241", "3242", "3243",
+                                           "3251", "3252", "3253",
+                                           "3261", "3262", "3263",
+                                           "3271", "3272", "3273",
+                                           "3281", "3282", "3283"]:
+                                drop_name = get_name_by_id(drop_id)
+                                break
+                        if queshao_info.get(drop_name):
+                            queshao_info[drop_name]['num'] -= 1
+                        if not getTime.get(drop_name):
+                            getTime[drop_name] = 1
+                        else:
+                            getTime[drop_name] += 1
                     else:
-                        getTime[drop_name] += 1
+                        ...
                     time.sleep(base.sleep_time)
         except module.error.game.CanNotChooseDaiLiZhiHui as e:
             e.message()
