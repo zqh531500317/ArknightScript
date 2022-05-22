@@ -36,7 +36,7 @@
       </el-col>
       <el-col :xs="4" :sm="2" :md="1" :lg="1" :xl="1" style="padding-top: 10px"
               v-if="(mode === 'window' || mode === 'chrome') && updatable">
-        <el-button @click="update" size="mini">更新</el-button>
+        <el-button @click="update" size="mini">{{ installdata }}</el-button>
 
       </el-col>
       <el-col :xs="8" :sm="6" :md="3" :lg="3" :xl="3" style="padding-top: 10px"
@@ -72,7 +72,7 @@ export default {
       scheduleStateMap: {},
       windowWidth: document.documentElement.clientWidth,  //实时屏幕宽度
       windowHeight: document.documentElement.clientHeight,   //实时屏幕高度
-
+      installdata: "获取更新"
     }
   },
   methods: {
@@ -107,11 +107,17 @@ export default {
     async update() {
       if (mode === "window" || mode === "chrome") {
         try {
-          console.log("try update")
-          let res = await window.Neutralino.updater.install();
-          console.log(res)
-          console.log('安装完毕')
-          //await window.Neutralino.app.restartProcess();
+          if (this.installdata === "获取更新") {
+            console.log("try update")
+            let res = await window.Neutralino.updater.install();
+            console.log(res)
+            console.log('安装完毕')
+            if (res.success === true) {
+              this.installdata = "立即重启更新"
+            }
+          } else if (this.installdata === "立即重启更新") {
+            await window.Neutralino.app.restartProcess();
+          }
         } catch (err) {
           console.log("update error")
         }
