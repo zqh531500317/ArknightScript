@@ -7,7 +7,7 @@
   "url": "/",
   "documentRoot": "/resources/",
   "tokenSecurity": "none",
-  "version": "2.5",
+  "version": "2.6",
   "logging": {
     "enabled": true,
     "writeToLogFile": true
