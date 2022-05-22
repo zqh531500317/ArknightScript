@@ -20,3 +20,6 @@ class JijianSchudule(unittest.TestCase):
         before = base.read_json(base.project_path + "/config/schedual.json")
         module.task.jijian.schedual()
         after = base.read_json(base.project_path + "/config/schedual.json")
+
+    def test_xinpian(self):
+        module.task.daily.xinpian()

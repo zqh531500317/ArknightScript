@@ -1,11 +1,6 @@
-import time
-
 from retrying import retry
-
-from module.error.ocr import OcrErr
 from module.step.common_step import CommonStep
 from module.step.daily_step import DailyStep
-from module.step.gamepass_step import GamePassStep
 from module.step.recruit_step import RecruitStep
 from module.base import *
 

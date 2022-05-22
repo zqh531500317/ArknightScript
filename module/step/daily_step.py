@@ -217,7 +217,7 @@ class DailyStep:
                     if dayOfWeek not in openTime[game_name]:
                         logger.info("目标:{},但是{}未开放，跳过".format(k, game_name))
                         continue
-                xinpian_info.findGame(game_name)
+                DailyStep.findGame(game_name)
                 while True:
                     if v["num"] <= 0:
                         break
