@@ -159,7 +159,7 @@ class DailyStep:
             if map_name is None:
                 continue
             xinpian_info[name] = {"num": num, "map_name": map_name}
-        logger.debug("精二芯片每种目标数量:%s 精一芯片每种目标数量:%s", xinpian_2, xinpian_2)
+        logger.debug("精二芯片每种目标数量:%s 精一芯片每种目标数量:%s", xinpian_2, xinpian_1)
         logger.debug("=======仓库芯片信息=======")
         for k, v in xinpian_info.items():
             logger.debug("  %s  %s", k, str(v))
