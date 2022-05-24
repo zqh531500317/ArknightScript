@@ -7,7 +7,6 @@ from module.base import *
 
 # 收货每日任务和每周任务
 @debug_recode
-@timer
 @func_set_timeout(base.timeout_time)
 def receive_renwu():
     CommonStep.ensureGameOpenAndInMain()
@@ -20,7 +19,6 @@ def receive_renwu():
 
 # 拜访好友获取信赖
 @debug_recode
-@timer
 @func_set_timeout(base.timeout_time)
 def friend():
     CommonStep.ensureGameOpenAndInMain()
@@ -33,7 +31,6 @@ def friend():
 
 # 商店收取信用
 @debug_recode
-@timer
 @func_set_timeout(base.timeout_time)
 def receive_xinyong():
     CommonStep.ensureGameOpenAndInMain()
@@ -47,7 +44,6 @@ def receive_xinyong():
 
 # 购买信用商店
 @debug_recode
-@timer
 @func_set_timeout(base.timeout_time)
 def buy_xinyong_shop():
     # 筛选出能买的  1、没卖掉 2、不是家具零件和碳
@@ -103,7 +99,6 @@ def buy_xinyong_shop():
 
 # 公开招募自动刷新、选择
 @debug_recode
-@timer
 @func_set_timeout(base.timeout_time)
 def recruit_daily():
     CommonStep.ensureGameOpenAndInMain()
@@ -116,7 +111,6 @@ def recruit_daily():
 
 # 执行连续公招任务
 @debug_recode
-@timer
 def once_recruit(times):
     CommonStep.ensureGameOpenAndInMain()
     CommonStep.dowait("main_recruit", "/recruit/main.png", description="进入公招界面")
@@ -133,7 +127,6 @@ def once_recruit(times):
 
 
 @debug_recode
-@timer
 def xinpian():
     CommonStep.ensureGameOpenAndInMain()
     xinpian_1 = base.xinpian_1
@@ -146,7 +139,6 @@ def xinpian():
 
 @debug_recode
 @func_set_timeout(base.timeout_time)
-@timer
 @retry
 def get_lizhi():
     DailyStep.get_lizhi()

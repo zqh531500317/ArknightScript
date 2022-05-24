@@ -6,7 +6,6 @@ from module.base import *
 
 
 @debug_recode
-@timer
 @func_set_timeout(base.timeout_time)
 def clue():
     CommonStep.ensureGameOpenAndInMain()
@@ -88,7 +87,6 @@ def clue():
 
 # 基建一键收货
 @debug_recode
-@timer
 @func_set_timeout(base.timeout_time)
 def jijian_receive():
     CommonStep.ensureGameOpenAndInMain()
@@ -100,7 +98,6 @@ def jijian_receive():
 
 # 基建使用电力
 @debug_recode
-@timer
 @func_set_timeout(base.timeout_time)
 def use_electricity():
     CommonStep.ensureGameOpenAndInMain()
@@ -114,7 +111,6 @@ def use_electricity():
 
 # 基建排班
 @debug_recode
-@timer
 @func_set_timeout(base.timeout_time_max)
 def schedual():
     msgList = []

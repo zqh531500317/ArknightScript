@@ -1,8 +1,6 @@
 from module.huodong.yurenhao import YuRenHao
-from module.base import *
 
 
-@timer
 def huodong(name, max_fight_time, use_medicine, medicine_num, use_stone, stone_num):
     now = "yurenhao"
     eval(now)(name, max_fight_time, use_medicine, medicine_num, use_stone, stone_num)

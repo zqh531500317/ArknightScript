@@ -49,8 +49,8 @@ class BaseScheduler:
             self.reschedule_job("quick_lizhi", trigger=DateTrigger())
 
     def startListener(self, event):
-        self.except_start_time = event.scheduled_run_times[0]
-        self.start_time = datetime.datetime.now()
+        self.except_start_time = str(event.scheduled_run_times[0]).split("+")[0]
+        self.start_time = datetime.datetime.now().replace(microsecond=0)
         jobid = event.job_id
         job = self.scheduler.get_job(jobid)
         if job is None:
