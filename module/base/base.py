@@ -2,16 +2,15 @@ from logzero import logger
 import _thread
 import os
 import time
-
-from module.base.log import Log
 from module.base.ocr import OcrHandler
 from module.base.template import Template
 from module.base.decorator import singleton
 import module.utils.core_utils
+from module.base.watcher import Watcher
 
 
 @singleton
-class Base(Template, OcrHandler, Log):
+class Base(Template, OcrHandler,Watcher):
     def __init__(self):
         super().__init__()
         logger.info("class Base __init__")
