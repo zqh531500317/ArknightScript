@@ -15,7 +15,7 @@ class Base(Template, OcrHandler,Watcher):
         super().__init__()
         logger.info("class Base __init__")
         self.init_dir()
-        self.init_close_alerter()
+        # self.init_close_alerter()
 
     def init_dir(self):
         root = self.project_path

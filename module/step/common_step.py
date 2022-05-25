@@ -183,6 +183,8 @@ class CommonStep(BaseStep):
             if base.is_template_match("/jijian/go_home_from_construction.png"):
                 base.randomClick("go_home_from_construction")
             time.sleep(base.sleep_time)
+            time.sleep(base.THREE_MINUTES)
+        CommonStep.close_alert()
         logger.info('到主界面')
 
     # 登录:
@@ -204,29 +206,42 @@ class CommonStep(BaseStep):
         logger.info("尝试登陆游戏")
         base.start()
         CommonStep.dowait("", "/ui/isLogining.png", description="到登录界面", retry_time=60)
-        CommonStep.dowait("login", "/ui/main.png", description="到主界面", retry_time=60)
+        CommonStep.dowait("login",
+                          [TemplateEntity("/ui/main.png"),
+                           TemplateEntity("get_items.png", 514, 0, 758, 720),
+                           TemplateEntity("close_ui.png")
+                           ],
+                          description="到主界面", retry_time=60)
+        time.sleep(base.sleep_time)
+        time.sleep(base.ONE_MINUTES)
+        CommonStep.close_alert()
 
     # 关闭游戏弹框
     @staticmethod
     def close_alert():
-        det = base.template_match_best('close_ui.png')
-        if len(det) != 0 and det[4] >= 0.95:
-            logger.info("close_ui")
-            x1 = det[0]
-            y1 = det[1]
-            x2 = det[2]
-            y2 = det[3]
-            base.randomClick((x1, y1, x2, y2))
-            time.sleep(base.sleep_time)
-
         det = base.template_match_best('get_items.png', 514, 0, 758, 720)
-        if len(det) != 0 and det[4] >= 0.8:
+        if len(det) != 0 and det[4] >= 0.9:
             logger.info("confirm_ui")
             x1 = det[0]
             y1 = det[1]
             x2 = det[2]
             y2 = det[3]
+            # logger.info(det[4])
             base.randomClick((x1, y1, x2, y2))
+            time.sleep(base.sleep_time)
+            time.sleep(base.ONE_MINUTES)
+        for i in range(3):
+            det = base.template_match_best('close_ui.png')
+            if len(det) != 0 and det[4] >= 0.95:
+                logger.info("close_ui")
+                x1 = det[0]
+                y1 = det[1]
+                x2 = det[2]
+                y2 = det[3]
+                base.randomClick((x1, y1, x2, y2))
+                time.sleep(base.sleep_time)
+            else:
+                break
 
     @staticmethod
     def into_Fight():
