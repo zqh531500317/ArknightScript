@@ -225,6 +225,7 @@ class DailyStep:
                 while True:
                     if v["num"] <= 0:
                         break
+                    logger.info("剩余缺少%s", v["num"])
                     FightStep.fight(game_name, False, 0, False, 0)
                     if not fightTime.get(game_name):
                         fightTime[game_name] = 1
