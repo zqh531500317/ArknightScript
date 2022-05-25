@@ -7,7 +7,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
 from apscheduler.triggers.date import DateTrigger
 from module.base import *
-from module.schedule.listener import Listener
+from module.schedule.listener import listener
 
 
 @singleton
@@ -16,7 +16,6 @@ class BaseScheduler:
         logger.info("class BaseScheduler __init__")
         jobstores = {
             'default': SQLAlchemyJobStore(url='sqlite:///jobs.sqlite')
-            # 'default': MemoryJobStore()  # 使用内存作为作业存储
         }
         executors = {
             'default': ThreadPoolExecutor(1)
@@ -31,7 +30,7 @@ class BaseScheduler:
                                              job_defaults=job_defaults)
         self.scheduler.start()
         # 添加监听器
-        self.listener = Listener(self.scheduler)
+        self.listener = listener.init_listener(self.scheduler)
 
     def add_job(self, func, trigger, id, args=None, misfire_grace_time=7200):
         job = self.scheduler.get_job(id)

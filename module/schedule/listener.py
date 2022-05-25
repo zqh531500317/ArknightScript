@@ -7,16 +7,21 @@ import module.schedule.dailyScheduler
 from module.base import *
 
 
+@singleton
 class Listener:
-    def __init__(self, scheduler: BaseScheduler):
-        self.scheduler = scheduler
+    def __init__(self):
+        self.scheduler = None
         # 用于计算task运行时间
         # key job_id value:{'job':job , 'except_start_time':  'start_time':     ,}
         self.caltimemap = dict()
+        # 存储运行中图片
+        self.taskimgstore = dict()
 
-    def init_listener(self):
+    def init_listener(self, scheduler: BaseScheduler):
+        self.scheduler = scheduler
         self.scheduler.add_listener(self.start_listener, EVENT_JOB_SUBMITTED)
         self.scheduler.add_listener(self.finish_listener, EVENT_JOB_ERROR | EVENT_JOB_EXECUTED)
+        return self.scheduler
 
     def start_listener(self, event):
         self.caltime_start(event)
@@ -36,7 +41,6 @@ class Listener:
             logger.warning("task %s is exist,skip caltime", job_id)
             return
         self.caltimemap[job_id]['except_start_time'] = str(event.scheduled_run_times[0]).split("+")[0]
-        self.caltimemap[job_id]['start_time'] = datetime.datetime.now().replace(microsecond=0)
 
     def caltime_finish(self, event):
         job_id = event.job_id
@@ -110,3 +114,6 @@ class Listener:
                 time.sleep(2)
             base.stop()
         time.sleep(2)
+
+
+listener = Listener()

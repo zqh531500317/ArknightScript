@@ -14,7 +14,6 @@ class State:
     running_task_name = ""
     running_job_num = 0
     running_job = {"id": "", "name": ""}
-    running_job_start = None
     # 队列 [job]
     blocking_jobs = []
     retry_time = 0
@@ -31,7 +30,6 @@ class State:
     @classmethod
     def job_start(cls, job):
         logger.info("task %s is started", job.name)
-        cls.running_job_start = time.time()
         if cls.running_job_num == 0:
             cls.running_job['id'] = job.id
             cls.running_job['name'] = job.name
@@ -41,10 +39,6 @@ class State:
 
     @classmethod
     def job_finish(cls):
-        job_name = cls.running_job['name']
-        logger.info("task running cost: %s minutes", time.time() - cls.running_job_start)
-        logger.info("task %s is finished", job_name)
-
         if len(cls.blocking_jobs) != 0:
             job = cls.blocking_jobs.pop(0)
             cls.running_job['id'] = job.id

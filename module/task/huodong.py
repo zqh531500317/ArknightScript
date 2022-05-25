@@ -1,6 +1,8 @@
+from module.base import before
 from module.huodong.yurenhao import YuRenHao
 
 
+@before
 def huodong(name, max_fight_time, use_medicine, medicine_num, use_stone, stone_num):
     now = "yurenhao"
     eval(now)(name, max_fight_time, use_medicine, medicine_num, use_stone, stone_num)

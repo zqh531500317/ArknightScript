@@ -6,6 +6,7 @@ from module.base import *
 
 
 # 收货每日任务和每周任务
+@before
 @debug_recode
 @func_set_timeout(base.timeout_time)
 def receive_renwu():
@@ -18,6 +19,7 @@ def receive_renwu():
 
 
 # 拜访好友获取信赖
+@before
 @debug_recode
 @func_set_timeout(base.timeout_time)
 def friend():
@@ -30,6 +32,7 @@ def friend():
 
 
 # 商店收取信用
+@before
 @debug_recode
 @func_set_timeout(base.timeout_time)
 def receive_xinyong():
@@ -43,6 +46,7 @@ def receive_xinyong():
 
 
 # 购买信用商店
+@before
 @debug_recode
 @func_set_timeout(base.timeout_time)
 def buy_xinyong_shop():
@@ -98,6 +102,7 @@ def buy_xinyong_shop():
 
 
 # 公开招募自动刷新、选择
+@before
 @debug_recode
 @func_set_timeout(base.timeout_time)
 def recruit_daily():
@@ -110,6 +115,7 @@ def recruit_daily():
 
 
 # 执行连续公招任务
+@before
 @debug_recode
 def once_recruit(times):
     CommonStep.ensureGameOpenAndInMain()
@@ -126,6 +132,7 @@ def once_recruit(times):
     return r
 
 
+@before
 @debug_recode
 def xinpian():
     CommonStep.ensureGameOpenAndInMain()
@@ -137,6 +144,7 @@ def xinpian():
     CommonStep.ensureGameOpenAndInMain()
 
 
+@before
 @debug_recode
 @func_set_timeout(base.timeout_time)
 @retry

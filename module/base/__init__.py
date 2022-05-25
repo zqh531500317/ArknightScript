@@ -1,5 +1,5 @@
 from module.base.base import base
-from module.base.decorator import singleton, bench_time, debug_recode
+from module.base.decorator import singleton, bench_time, debug_recode, before
 from logzero import logger
 import time
 import os
@@ -16,4 +16,4 @@ from module.entity.template_entity import TemplateEntity
 
 __all__ = ["base", "singleton", "bench_time", "debug_recode", "logger",
            "time", "os", "shutil", "Union", "List", "Tuple", "types", "math",
-           "func_set_timeout", "ci", "recruit", "ui", "OcrEntity", "TemplateEntity"]
+           "func_set_timeout", "ci", "recruit", "ui", "OcrEntity", "TemplateEntity", 'before']

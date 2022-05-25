@@ -1,3 +1,4 @@
+import datetime
 import sys
 import cv2
 import six
@@ -6,6 +7,8 @@ from logzero import logger
 import _thread
 import os
 import time
+
+from module.schedule.listener import listener
 
 
 def singleton(cls):
@@ -17,6 +20,16 @@ def singleton(cls):
         return _instance[cls]
 
     return inner
+
+
+def before(func):
+    @wraps(func)
+    def wrapper():
+        task_name = func.__name__
+        listener.caltimemap[task_name]['start_time'] = datetime.datetime.now().replace(microsecond=0)
+        logger.info("task %s is started", func.__name__)
+
+    return wrapper
 
 
 def bench_time(n):

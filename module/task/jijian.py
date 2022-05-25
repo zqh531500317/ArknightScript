@@ -5,6 +5,7 @@ from module.step.jijian_step import JiJianStep
 from module.base import *
 
 
+@before
 @debug_recode
 @func_set_timeout(base.timeout_time)
 def clue():
@@ -86,6 +87,7 @@ def clue():
 
 
 # 基建一键收货
+@before
 @debug_recode
 @func_set_timeout(base.timeout_time)
 def jijian_receive():
@@ -97,6 +99,7 @@ def jijian_receive():
 
 
 # 基建使用电力
+@before
 @debug_recode
 @func_set_timeout(base.timeout_time)
 def use_electricity():
@@ -110,6 +113,7 @@ def use_electricity():
 
 
 # 基建排班
+@before
 @debug_recode
 @func_set_timeout(base.timeout_time_max)
 def schedual():
