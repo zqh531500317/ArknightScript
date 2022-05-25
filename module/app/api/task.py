@@ -68,8 +68,8 @@ def recruit():
 def reschedule_job():
     job = request.get_json()["job"]
     id = job["id"]
-    hour = job["hour"]
-    minute = job["minute"]
+    hour = str(job["hour"]).replace("，", ",")
+    minute = str(job["minute"]).replace("，", ",")
     trigger = CronTrigger(hour=hour, minute=minute)
     b = base_scheduler.reschedule_job(id, trigger)
     if b:
