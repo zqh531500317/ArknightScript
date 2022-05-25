@@ -72,4 +72,4 @@ def test_jijian():
 
 
 if __name__ == '__main__':
-    base.screen()
+    base.screen(memery=False)

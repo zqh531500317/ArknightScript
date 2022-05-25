@@ -99,7 +99,7 @@ class Adb(BaseAdb):
         self.adb.click(x, y)
         logger.info("click(%s,%s)", x, y)
 
-    def screen(self, path="/cache/screen.png", memery=False):
+    def screen(self, path="/cache/screen.png", memery=True):
         if memery:
             return self.__screen_memery()
         else:

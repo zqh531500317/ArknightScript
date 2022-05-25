@@ -222,6 +222,6 @@ class RecruitStep:
 
 
 if __name__ == '__main__':
-    base.screen()
+    base.screen(memery=False)
     b = base.is_template_match("/recruit/ensure_flash.png")
     print(b)

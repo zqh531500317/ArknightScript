@@ -25,7 +25,7 @@ class TestScreen(unittest.TestCase):
             base._screen_adb_nc()
 
     def test_screen(self):
-        base.screen()
+        base.screen(memery=False)
 
     def test_a(self):
         import requests
