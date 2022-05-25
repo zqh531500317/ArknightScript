@@ -211,6 +211,7 @@ class CommonStep(BaseStep):
     def close_alert():
         det = base.template_match_best('close_ui.png')
         if len(det) != 0 and det[4] >= 0.95:
+            logger.info("close_ui")
             x1 = det[0]
             y1 = det[1]
             x2 = det[2]
@@ -220,6 +221,7 @@ class CommonStep(BaseStep):
 
         det = base.template_match_best('get_items.png', 514, 0, 758, 720)
         if len(det) != 0 and det[4] >= 0.8:
+            logger.info("confirm_ui")
             x1 = det[0]
             y1 = det[1]
             x2 = det[2]
