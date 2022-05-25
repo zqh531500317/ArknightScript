@@ -1,4 +1,6 @@
 import copy
+import time
+
 import module.error.game
 from datetime import datetime
 
@@ -57,14 +59,15 @@ class DailyStep:
             while True:
                 base.randomClick("friend_home")
                 time.sleep(base.THREE_MINUTES)
+                time.sleep(base.sleep_time)
                 region = base.screen(memery=True)
                 frind_name_temp = DailyStep.get_frind_name(region)
                 if frind_name_temp != frind_name:
-                    # print(frind_name + "==" + frind_name_temp)
+                    logger.info("frind_name:" + frind_name + "=>" + frind_name_temp)
                     frind_name = frind_name_temp
                     break
             later = DailyStep.get_frind_xinyong_num(region)
-            # print(pre + "==" + later)
+            logger.info("xinyong_num:" + pre + "=>" + later)
             if pre == later:
                 return
             pre = later
