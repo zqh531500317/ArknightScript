@@ -215,6 +215,7 @@ class DailyStep:
         openTime["PR-D-2"] = [2, 3, 6, 7]
         try:
             for k, v in queshao_info.items():
+                CommonStep.ensureGameOpenAndInMain()
                 game_name = v["map_name"]
                 if limit_dayofweek:
                     if dayOfWeek not in openTime[game_name]:
