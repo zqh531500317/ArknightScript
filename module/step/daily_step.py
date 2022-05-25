@@ -254,6 +254,7 @@ class DailyStep:
                         else:
                             getTime[drop_name] += 1
                     else:
+                        v["num"] = v["num"] - 1
                         ...
                     time.sleep(base.sleep_time)
         except module.error.game.CanNotChooseDaiLiZhiHui as e:
