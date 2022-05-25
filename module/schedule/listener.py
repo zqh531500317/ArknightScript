@@ -14,8 +14,6 @@ class Listener:
         # 用于计算task运行时间
         # key job_id value:{'job':job , 'except_start_time':  'start_time':     ,}
         self.caltimemap = dict()
-        # 存储运行中图片
-        self.taskimgstore = dict()
 
     def init_listener(self, scheduler: BaseScheduler):
         self.scheduler = scheduler
