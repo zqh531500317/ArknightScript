@@ -1,17 +1,13 @@
 import datetime
+import copy
 
-import yagmail
 from apscheduler.executors.pool import ThreadPoolExecutor
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 from apscheduler.schedulers.background import BackgroundScheduler
-import copy
 from apscheduler.triggers.cron import CronTrigger
-from apscheduler.events import EVENT_JOB_ERROR, EVENT_JOB_EXECUTED, EVENT_JOB_SUBMITTED
 from apscheduler.triggers.date import DateTrigger
 from module.base import *
-from module.entity.job_entity import JobEntity
-from module.utils.core_utils import random_time_str, save_last_lines
-import module.task.daily
+from module.schedule.listener import Listener
 
 
 @singleton
@@ -30,70 +26,12 @@ class BaseScheduler:
             'max_instances': 1,
             "misfire_grace_time": 60 * 60
         }
-        self.start_time = datetime.datetime.now()
-        self.except_start_time = datetime.datetime.now()
-        self.end_time = datetime.datetime.now()
         self.scheduler = BackgroundScheduler(jobstores=jobstores,
                                              executors=executors,
                                              job_defaults=job_defaults)
         self.scheduler.start()
-        self.scheduler.add_listener(self.finishListener, EVENT_JOB_ERROR | EVENT_JOB_EXECUTED)
-        self.scheduler.add_listener(self.startListener, EVENT_JOB_SUBMITTED)
-
-    def quick_lizhi(self):
-        job = self.scheduler.get_job("quick_lizhi")
-        if job is None:
-            self.add_job(module.task.daily.get_lizhi, trigger=DateTrigger(),
-                         id="quick_lizhi")
-        else:
-            self.reschedule_job("quick_lizhi", trigger=DateTrigger())
-
-    def startListener(self, event):
-        self.except_start_time = str(event.scheduled_run_times[0]).split("+")[0]
-        self.start_time = datetime.datetime.now().replace(microsecond=0)
-        jobid = event.job_id
-        job = self.scheduler.get_job(jobid)
-        if job is None:
-            job = JobEntity(jobid, jobid, self.except_start_time)
-        base.state.job_start(job)
-        if "once" in jobid or "fight" in jobid or "zhuxian" in jobid \
-                or "ziyuanshouji" in jobid or "jiaomie" in jobid or "huodong" in jobid:
-            base.state.is_fight = "running"
-        base.state.running_task_num += 1
-
-    def finishListener(self, event):
-        base.state.running_task_num -= 1
-        self.end_time = datetime.datetime.now()
-        jobid = str(event.job_id)
-        base.state.job_finish()
-        self.errorhandler(event)
-        if "once_ziyuanshouji" in jobid or "once_jiaomie" in jobid or "once_unknown" in jobid or \
-                "once_recently" in jobid or "once_zhuxian" in jobid or "fight" in jobid or \
-                "zhuxian" in jobid or "ziyuanshouji" in jobid or "jiaomie" in jobid or "huodong" in jobid:
-            base.state.is_fight = "stop"
-            module.schedule.dailyScheduler.quick_lizhi()
-            return
-        self.__close_game()
-
-    def errorhandler(self, event):
-        if event.exception:
-            img = base.screen(memery=True)
-            temp = random_time_str()
-            base.save('/log/error/{}'.format(temp), img)
-            base.stop()
-            # 保存日志
-            save_last_lines(base.project_path + "/log/log.log",
-                            base.project_path + "/log/error/{}/error.log".format(temp))
-            # 发送邮件
-            path = base.project_path + "/cache/email.png"
-            base.write_pic(path, img)
-            content = [
-                "jobid=" + str(event.job_id) + "\n " + str(event.exception) + "\n " + str(event.traceback),
-                yagmail.inline(path)
-            ]
-            base.send("任务调度出错",
-                      contents=content
-                      )
+        # 添加监听器
+        self.listener = Listener(self.scheduler)
 
     def add_job(self, func, trigger, id, args=None, misfire_grace_time=7200):
         job = self.scheduler.get_job(id)
@@ -149,29 +87,6 @@ class BaseScheduler:
         elif kind == "day_of_week":
             day_of_week = value
         self.reschedule_job(id, CronTrigger(hour=hour, minute=minute, day_of_week=day_of_week))
-
-    # 关闭游戏
-    def __close_game(self):
-        should_close = True
-        jobs = self.scheduler.get_jobs()
-        after = datetime.datetime.now() + datetime.timedelta(minutes=base.minutes)
-        logger.info("比较时间为%s", after)
-        for job in jobs:
-            if job.next_run_time is None:
-                continue
-            next_time = job.next_run_time.replace(tzinfo=None)
-            logger.info("任务%s将在%s执行", job.name, next_time)
-            if after > next_time:
-                should_close = False
-        if base.state.running_task_num > 0:
-            should_close = False
-        logger.debug("当前队列任务数:%s", base.state.running_task_num)
-        if should_close and base.isLive():
-            for i in range(0, 5):
-                logger.info("在%s分钟内无任务,将在%s秒后关闭游戏", base.minutes, str(10 - 2 * i))
-                time.sleep(2)
-            base.stop()
-        time.sleep(2)
 
     def pause_scheduler(self):
         self.scheduler.pause()
