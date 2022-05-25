@@ -27,6 +27,8 @@ class Listener:
         self.system_start(event)
 
     def finish_listener(self, event):
+        # store img
+        base.store_save_imgs()
         self.caltime_finish(event)
         self.handle_error(event)
         self.state_finish(event)

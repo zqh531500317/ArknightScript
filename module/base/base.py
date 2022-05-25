@@ -10,7 +10,7 @@ from module.base.watcher import Watcher
 
 
 @singleton
-class Base(Template, OcrHandler,Watcher):
+class Base(Template, OcrHandler, Watcher):
     def __init__(self):
         super().__init__()
         logger.info("class Base __init__")

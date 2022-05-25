@@ -8,6 +8,7 @@ from retrying import retry
 import numpy
 import cv2
 from module.base.log import Log
+from module.base.store import Store
 from module.utils.core_assetLoader import ui
 from module.utils.core_utils import recv_all, random_port
 from logzero import logger
@@ -15,7 +16,7 @@ from typing import Union
 from module.error.control_error import AcceptDataError
 
 
-class BaseAdb(Log):
+class BaseAdb(Log, Store):
     def __init__(self):
         super().__init__()
         logger.debug("初始化BaseAdb")
@@ -101,7 +102,9 @@ class Adb(BaseAdb):
 
     def screen(self, path="/cache/screen.png", memery=True):
         if memery:
-            return self.__screen_memery()
+            img = self.__screen_memery()
+            self.store_add_img(img)
+            return img
         else:
             return self.__screen_disk(path)
 

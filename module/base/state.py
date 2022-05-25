@@ -1,5 +1,3 @@
-import time
-
 from module.base.decorator import singleton
 from logzero import logger
 
