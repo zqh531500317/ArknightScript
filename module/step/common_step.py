@@ -62,15 +62,6 @@ class BaseStep:
                 retry_times += 1
                 start_time = now
 
-    @staticmethod
-    def dowaitlist(list: List[
-        Tuple[Union[str, tuple], Union[str, OcrEntity, types.FunctionType, types.MethodType], Union[str, None]]],
-                   delay_time=0.1, max_retry_times=3, retry_time=20.0):
-        for ck, templete, description in list:
-            BaseStep.dowait(ck, templete, max_retry_times=max_retry_times, retry_time=retry_time,
-                            description=description)
-            time.sleep(delay_time)
-
 
 class CommonStep(BaseStep):
     @staticmethod
