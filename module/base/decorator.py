@@ -8,8 +8,6 @@ import _thread
 import os
 import time
 
-from module.schedule.listener import listener
-
 
 def singleton(cls):
     _instance = {}
@@ -23,6 +21,8 @@ def singleton(cls):
 
 
 def before(func):
+    from module.schedule.listener import listener
+
     @wraps(func)
     def wrapper():
         task_name = func.__name__

@@ -2,7 +2,6 @@ import datetime
 from apscheduler.schedulers.base import BaseScheduler
 from apscheduler.events import EVENT_JOB_ERROR, EVENT_JOB_EXECUTED, EVENT_JOB_SUBMITTED, JobSubmissionEvent
 from module.utils.core_utils import *
-import module.schedule.dailyScheduler
 
 from module.base import *
 
@@ -91,6 +90,7 @@ class Listener:
                 "once_recently" in jobid or "once_zhuxian" in jobid or "fight" in jobid or \
                 "zhuxian" in jobid or "ziyuanshouji" in jobid or "jiaomie" in jobid or "huodong" in jobid:
             base.state.is_fight = "stop"
+            import module.schedule.dailyScheduler
             module.schedule.dailyScheduler.quick_lizhi()
             return
         # close game
