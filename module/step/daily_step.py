@@ -231,7 +231,6 @@ class DailyStep:
                         fightTime[game_name] = 1
                     else:
                         fightTime[game_name] += 1
-                    logger.info("进行一场{}".format(game_name))
                     # 获取战斗掉落信息
                     if analyse_item:
                         data, display = analyse()
@@ -258,7 +257,6 @@ class DailyStep:
                         v["num"] = v["num"] - 1
                         ...
                     CommonStep.dowait("", TemplateEntity("/fight/pre_fight.png"))
-                    # time.sleep(base.sleep_time)
         except module.error.game.CanNotChooseDaiLiZhiHui as e:
             e.message()
         except module.error.game.NotInPreFight as e:
