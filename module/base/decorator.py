@@ -18,11 +18,11 @@ def singleton(cls):
 def before(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
+        from module.base.base import base
         from module.schedule.listener import listener
-        logger.info("debug_recode is start:%s", func.__name__)
-        task_name = func.__name__
+        task_name = base.state.running_job['name']
         listener.caltimemap[task_name]['start_time'] = datetime.datetime.now().replace(microsecond=0)
-        logger.info("task %s is started", func.__name__)
+        logger.info("task %s is started", task_name)
         func(*args, **kwargs)
 
     return wrapper

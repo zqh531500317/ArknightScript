@@ -30,10 +30,10 @@ class Listener:
     def finish_listener(self, event):
         # store img
         base.store_save_imgs()
-        self.caltime_finish(event)
         self.handle_error(event)
         self.state_finish(event)
         self.system_finish(event)
+        self.caltime_finish(event)
 
     def caltime_start(self, event: JobSubmissionEvent):
         job_id = event.job_id

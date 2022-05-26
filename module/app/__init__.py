@@ -1,4 +1,5 @@
 from flask import Flask
+
 from module.app.config import Config
 from module.app.extensions import config_extensions
 from module.app.api import config_blueprint
