@@ -75,6 +75,7 @@ class Log(CoreConfig):
         self.ocr_logger = setup_logger(formatter=hand_format, logfile=logfile, level=level, disableStderrLogger=True)
 
     def init_hr_logger(self):
+
         data_style = '%m-%d %H:%M:%S'
         handler_format = '%(color)s[%(asctime)s] %(message)s%(end_color)s'
         hand_format = LogFormatter(fmt=handler_format, datefmt=data_style)
@@ -82,4 +83,4 @@ class Log(CoreConfig):
             logfile = project_root_path() + "/log/" + 'log.log'
         else:
             logfile = None
-        self.ocr_logger = setup_logger(formatter=hand_format, logfile=logfile)
+        self.hr_logger = setup_logger(formatter=hand_format, logfile=logfile)
