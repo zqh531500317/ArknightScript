@@ -35,11 +35,10 @@ def bench_time(n):
             start = time.time()
             func(*args, **kwargs)
             end = time.time()
-            logger.info("%-20s cost: %-5ss,times: %-2s,avg time: %-4ss", func.__name__, round(end - start, 2), n,
-                        round((end - start) / n, 2))
-
-            print("%-20s cost: %-5ss,times: %-2s,avg time: %-4ss" % (func.__name__, round(end - start, 2), n,
-                                                                     round((end - start) / n, 2)))
+            res = "%-20s cost: %-5ss,times: %-2s,avg time: %-4ss" % (func.__name__, round(end - start, 2), n,
+                                                                     round((end - start) / n, 2))
+            logger.info(res)
+            return res
 
         return mywrap
 

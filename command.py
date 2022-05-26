@@ -7,6 +7,7 @@ from logzero import LogFormatter, setup_default_logger, logfile, logger
 import module.task.daily
 from module.base.base import base
 from module.entity.ocr_entity import OcrEntity
+from module.test.core_tester import TestScreen
 
 
 def init_log():

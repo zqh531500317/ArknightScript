@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import store from '@/store/index';
 import {isLogin_service} from "@/service/StateService";
 import {loading} from "@/util/utils";
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -51,6 +52,13 @@ const routes = [
             auth: true
         },
         component: () => import('@/views/main/MainScheduler')
+    },
+    {
+        path: '/test',
+        meta: {
+            auth: true
+        },
+        component: () => import('@/views/main/Test')
     },
 ]
 
