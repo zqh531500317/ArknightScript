@@ -77,7 +77,7 @@ class Log(CoreConfig):
     def init_hr_logger(self):
 
         data_style = '%m-%d %H:%M:%S'
-        handler_format = '%(color)s[%(asctime)s] %(message)s%(end_color)s'
+        handler_format = '[%(asctime)s] %(message)s'
         hand_format = LogFormatter(fmt=handler_format, datefmt=data_style)
         if self.get("file"):
             logfile = project_root_path() + "/log/" + 'log.log'
