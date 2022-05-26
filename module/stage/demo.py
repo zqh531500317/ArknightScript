@@ -1,14 +1,13 @@
 import subprocess
 import cv2
 import numpy as np
-from module.base import *
-
+from module.utils.core_utils import project_root_path
 idx2id = ['-', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
           'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
 
 def load_onnx_model():
-    path = base.project_path + "/module/stage/"
+    path = project_root_path() + "/module/stage/"
     with open(path + 'chars.onnx', 'rb') as f:
         data = f.read()
         net = cv2.dnn.readNetFromONNX(data)
@@ -166,7 +165,7 @@ def do_tag_ocr(img, noise_size=None):
     return predict_cv(img, noise_size)
 
 
-path = base.project_path + "/module/stage/"
+path = project_root_path() + "/module/stage/"
 stage_icon1 = cv2.imread(path + 'images/stage_icon1.png', cv2.IMREAD_GRAYSCALE)
 stage_icon2 = cv2.imread(path + 'images/stage_icon2.png', cv2.IMREAD_GRAYSCALE)
 stage_icon_ex1 = cv2.imread(path + 'images/stage_icon_ex1.png', cv2.IMREAD_GRAYSCALE)
