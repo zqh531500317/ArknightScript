@@ -11,8 +11,10 @@ class Log(CoreConfig):
         super().__init__()
         self.ocr_logger = None
         self.logger = None
+        self.hr_logger = None
         self.init_logger()
         self.init_ocr_logger()
+        self.init_hr_logger()
 
     def init_logger(self):
         logger.info("init_log")
@@ -71,3 +73,13 @@ class Log(CoreConfig):
         else:
             logfile = None
         self.ocr_logger = setup_logger(formatter=hand_format, logfile=logfile, level=level, disableStderrLogger=True)
+
+    def init_hr_logger(self):
+        data_style = '%m-%d %H:%M:%S'
+        handler_format = '%(color)s[%(asctime)s] %(message)s%(end_color)s'
+        hand_format = LogFormatter(fmt=handler_format, datefmt=data_style)
+        if self.get("file"):
+            logfile = project_root_path() + "/log/" + 'log.log'
+        else:
+            logfile = None
+        self.ocr_logger = setup_logger(formatter=hand_format, logfile=logfile)
