@@ -1,6 +1,8 @@
 import json
 import cv2
 import requests
+from requests.exceptions import SSLError
+
 from module.base import *
 
 
@@ -39,8 +41,13 @@ def get_itemindex():
     return item_index
 
 
-stage_index = get_stageindex()
-item_index = get_itemindex()
+stage_index = None
+item_index = None
+try:
+    stage_index = get_stageindex()
+    item_index = get_itemindex()
+except SSLError as e:
+    logger.error(e)
 droptype_index = {
     "常规掉落": "NORMAL_DROP",
     "特殊掉落": "SPECIAL_DROP",

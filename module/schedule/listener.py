@@ -1,3 +1,4 @@
+import collections
 import datetime
 from apscheduler.schedulers.base import BaseScheduler
 from apscheduler.events import EVENT_JOB_ERROR, EVENT_JOB_EXECUTED, EVENT_JOB_SUBMITTED, JobSubmissionEvent
@@ -12,7 +13,8 @@ class Listener:
         self.scheduler = None
         # 用于计算task运行时间
         # key job_id value:{'job':job , 'except_start_time':  'start_time':     ,}
-        self.caltimemap = dict()
+        temp = lambda: collections.defaultdict(temp)
+        self.caltimemap = temp()
 
     def init_listener(self, scheduler: BaseScheduler):
         self.scheduler = scheduler
@@ -35,10 +37,10 @@ class Listener:
 
     def caltime_start(self, event: JobSubmissionEvent):
         job_id = event.job_id
-        job = self.scheduler.get_job(job_id)
-        if job is not None:
-            logger.warning("task %s is exist,skip caltime", job_id)
-            return
+        # job = self.caltimemap.get(job_id)
+        # if job is not None:
+        #     logger.warning("task %s is exist,skip caltime", job_id)
+        #     return
         self.caltimemap[job_id]['except_start_time'] = str(event.scheduled_run_times[0]).split("+")[0]
 
     def caltime_finish(self, event):
@@ -46,7 +48,7 @@ class Listener:
         job = self.scheduler.get_job(job_id)
         job_name = job.name
         start_time = self.caltimemap[job_id]['start_time']
-        end_time = time.time()
+        end_time = datetime.datetime.now().replace(microsecond=0)
         self.caltimemap.pop(job_id, None)
         logger.info("task running cost: %s minutes", end_time - start_time)
         logger.info("task %s is finished", job_name)
@@ -85,6 +87,7 @@ class Listener:
         base.state.running_task_num += 1
 
     def system_finish(self, event):
+        base.state.running_task_num -= 1
         jobid = event.job_id
         if "once_ziyuanshouji" in jobid or "once_jiaomie" in jobid or "once_unknown" in jobid or \
                 "once_recently" in jobid or "once_zhuxian" in jobid or "fight" in jobid or \
