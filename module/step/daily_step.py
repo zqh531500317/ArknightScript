@@ -257,7 +257,8 @@ class DailyStep:
                     else:
                         v["num"] = v["num"] - 1
                         ...
-                    time.sleep(base.sleep_time)
+                    CommonStep.dowait("", TemplateEntity("/fight/pre_fight.png"))
+                    # time.sleep(base.sleep_time)
         except module.error.game.CanNotChooseDaiLiZhiHui as e:
             e.message()
         except module.error.game.NotInPreFight as e:
