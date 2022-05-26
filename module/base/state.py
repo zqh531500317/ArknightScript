@@ -27,7 +27,6 @@ class State:
 
     @classmethod
     def job_start(cls, job):
-        logger.info("task %s is started", job.name)
         if cls.running_job_num == 0:
             cls.running_job['id'] = job.id
             cls.running_job['name'] = job.name
