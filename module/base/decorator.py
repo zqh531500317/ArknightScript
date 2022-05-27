@@ -22,8 +22,7 @@ def before(func):
         task_name = base.state.running_job['name']
         listener.caltimemap[task_name]['start_time'] = datetime.datetime.now().replace(microsecond=0)
         logger.info("task %s is started", task_name)
-        func()
-
+        return func()
     return wrapper
 
 
