@@ -49,6 +49,7 @@ class Listener:
         self.caltimemap[job_id]['except_start_time'] = str(event.scheduled_run_times[0]).split("+")[0]
 
     def caltime_finish(self, event):
+        logger.debug("======caltime_finish=====")
         job_id = event.job_id
         job_name = base.state.running_job.name
         start_time = self.caltimemap[job_id]['start_time']
@@ -85,6 +86,7 @@ class Listener:
         base.state.job_start(job)
 
     def state_finish(self, event):
+        logger.debug("======state_finish=====")
         base.state.job_finish()
 
     def system_start(self, event):
@@ -95,6 +97,7 @@ class Listener:
             base.state.is_fight = "running"
 
     def system_finish(self, event):
+        logger.debug("======system_finish=====")
         jobid = event.job_id
         if "once_ziyuanshouji" in jobid or "once_jiaomie" in jobid or "once_unknown" in jobid or \
                 "once_recently" in jobid or "once_zhuxian" in jobid or "fight" in jobid or \
