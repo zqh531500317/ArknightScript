@@ -46,16 +46,12 @@ class Listener:
     def caltime_start(self, event: JobSubmissionEvent):
         logger.debug("======caltime_start=====")
         job_id = event.job_id
-        # job = self.caltimemap.get(job_id)
-        # if job is not None:
-        #     logger.warning("task %s is exist,skip caltime", job_id)
-        #     return
         self.caltimemap[job_id]['except_start_time'] = str(event.scheduled_run_times[0]).split("+")[0]
 
     def caltime_finish(self, event):
         logger.debug("======caltime_finish=====")
         job_id = event.job_id
-        job_name = base.state.running_job.name
+        job_name = base.state.running_job['name']
         start_time = self.caltimemap[job_id]['start_time']
         end_time = datetime.datetime.now().replace(microsecond=0)
         self.caltimemap.pop(job_id, None)
