@@ -77,11 +77,10 @@ class Listener:
     def state_start(self, event):
         logger.debug("======state_start=====")
         jobid = event.job_id
-        logger.debug('1')
         job = self.scheduler.get_job(jobid)
-        logger.debug(jobid)
-        logger.debug(job)
-
+        # 立即执行的任务取不到job
+        if job is None:
+            job = {"id": jobid, "name": jobid}
         base.state.job_start(job)
 
     def state_finish(self, event):
