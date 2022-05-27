@@ -1,4 +1,7 @@
+import copy
 import datetime
+import os.path
+import time
 
 from module.step.common_step import CommonStep
 from module.step.jijian_step import JiJianStep
@@ -115,6 +118,7 @@ def use_electricity():
 def schedual():
     msgList = []
     temp = base.read_json(base.project_path + "/config/schedual.json")
+    back = copy.deepcopy(temp)
     schedual_dict = temp["Config"]
     data = schedual_dict["data"]
     CommonStep.ensureGameOpenAndInMain()
@@ -141,6 +145,11 @@ def schedual():
         item["next_index"] = new_index
         logger.debug("set index:%s -> %s", index, new_index)
     base.write_json(temp, base.project_path + "/config/schedual.json")
+    backpath = base.project_path + "/config/backup/"
+    if not os.path.exists(backpath):
+        os.makedirs(backpath)
+    now = datetime.datetime.now()
+    base.write_json(back, backpath + "schedual.json.{}.{}.{}.{}".format(now.month, now.day, now.hour, now.minute))
     sum = JiJianStep.auto_sleep()
     msgList.append("宿舍安排{}为干员进行休息".format(sum))
     base.send("排班完成", '\n'.join(msgList))
