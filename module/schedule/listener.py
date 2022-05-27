@@ -77,7 +77,10 @@ class Listener:
     def state_start(self, event):
         logger.debug("======state_start=====")
         jobid = event.job_id
+        logger.debug('1')
         job = self.scheduler.get_job(jobid)
+        logger.debug('2')
+
         logger.debug("job:"+str(job.id))
         base.state.job_start(job)
 
