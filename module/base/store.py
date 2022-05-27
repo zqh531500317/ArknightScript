@@ -33,14 +33,24 @@ class Store(CoreConfig):
         self.img_store[job_id].append(
             ["/" + str(time.time_ns()) + ".jpg", temp]
         )
+        # 超过50张图片 立即存储
+        if len(self.img_store[job_id]) > 50:
+            quilk_list = []
+            path = self.img_store[job_id][0]
+            for key in list(self.img_store[job_id]):
+                quilk_list.append(key)
+            self.img_store[job_id].clear()
+            self.img_store[job_id].append(path)
+            self.store_save_imgs(quilk_list)
 
-    def store_save_imgs(self):
+    def store_save_imgs(self, temp=None):
         job_id = self.state.running_job["id"]
         if (job_id == "") or (not self.debug):
             return
         logger.info("debug_recode 开始存储记录")
         i = 0
-        temp = self.img_store.pop(job_id)
+        if temp is None:
+            temp = self.img_store.pop(job_id)
         path = temp[0]
         for img in temp[1:]:
             cv2.imwrite(path + img[0], img[1])
