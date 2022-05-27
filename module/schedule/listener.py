@@ -80,6 +80,7 @@ class Listener:
         logger.debug('1')
         job = self.scheduler.get_job(jobid)
         logger.debug(jobid)
+        logger.debug(job)
 
         base.state.job_start(job)
 
