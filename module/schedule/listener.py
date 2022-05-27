@@ -25,12 +25,16 @@ class Listener:
         return self.scheduler
 
     def start_listener(self, event):
+        if "test_" in event.job_id:
+            return
         logger.debug("======start_listener=====")
         self.caltime_start(event)
         self.state_start(event)
         self.system_start(event)
 
     def finish_listener(self, event):
+        if "test_" in event.job_id:
+            return
         logger.debug("======finish_listener=====")
         # store img
         base.store_save_imgs()

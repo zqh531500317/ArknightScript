@@ -32,7 +32,6 @@ class BaseScheduler:
             executors=executors,
             job_defaults=job_defaults)
         self.test_scheduler.start()
-
         self.scheduler = BackgroundScheduler(jobstores=jobstores,
                                              executors=executors,
                                              job_defaults=job_defaults)
