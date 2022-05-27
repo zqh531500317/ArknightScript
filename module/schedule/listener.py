@@ -23,11 +23,13 @@ class Listener:
         return self.scheduler
 
     def start_listener(self, event):
+        logger.debug("======start_listener=====")
         self.caltime_start(event)
         self.state_start(event)
         self.system_start(event)
 
     def finish_listener(self, event):
+        logger.debug("======finish_listener=====")
         # store img
         base.store_save_imgs()
         self.handle_error(event)
