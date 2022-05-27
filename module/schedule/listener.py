@@ -24,8 +24,11 @@ class Listener:
         self.scheduler.add_listener(self.finish_listener, EVENT_JOB_ERROR | EVENT_JOB_EXECUTED)
         return self.scheduler
 
+    def is_test_scheduler(self, event):
+        return 'test_' in event.job_id
+
     def start_listener(self, event):
-        if "test_" in event.job_id:
+        if self.is_test_scheduler(event):
             return
         logger.debug("======start_listener=====")
         self.caltime_start(event)
@@ -33,7 +36,7 @@ class Listener:
         self.system_start(event)
 
     def finish_listener(self, event):
-        if "test_" in event.job_id:
+        if self.is_test_scheduler(event):
             return
         logger.debug("======finish_listener=====")
         # store img
