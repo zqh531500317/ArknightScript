@@ -110,7 +110,6 @@ def recruit_daily():
 
 
 # 执行连续公招任务
-@before
 def once_recruit(times):
     CommonStep.ensureGameOpenAndInMain()
     CommonStep.dowait("main_recruit", "/recruit/main.png", description="进入公招界面")
