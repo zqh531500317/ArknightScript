@@ -78,6 +78,7 @@ class Listener:
         logger.debug("======state_start=====")
         jobid = event.job_id
         job = self.scheduler.get_job(jobid)
+        logger.debug("job:"+str(job.id))
         base.state.job_start(job)
 
     def state_finish(self, event):
