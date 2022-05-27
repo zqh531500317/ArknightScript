@@ -123,6 +123,7 @@ def once_recruit(times):
         CommonStep.dowait("recruit_flash_ensure", "/recruit/main.png", description="确认招募")
 
     base.state.is_fight = "stop"
+    CommonStep.ensureGameOpenAndInMain()
     return r
 
 
