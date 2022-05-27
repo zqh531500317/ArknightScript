@@ -32,10 +32,10 @@ class BaseScheduler:
         # 添加监听器
         self.listener = listener.init_listener(self.scheduler)
 
-        self.test_scheduler = BackgroundScheduler(jobstores=jobstores,
-                                                  executors=executors,
-                                                  job_defaults=job_defaults)
-        self.test_scheduler.start()
+        # self.test_scheduler = BackgroundScheduler(jobstores=jobstores,
+        #                                           executors=executors,
+        #                                           job_defaults=job_defaults)
+        # self.test_scheduler.start()
 
     def test_add_job(self, func, trigger, id, args=None, ):
         job = self.test_scheduler.get_job(id)
