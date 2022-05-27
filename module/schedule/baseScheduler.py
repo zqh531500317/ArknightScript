@@ -26,19 +26,19 @@ class BaseScheduler:
             'max_instances': 1,
             "misfire_grace_time": 60 * 60
         }
-        self.scheduler = BackgroundScheduler(jobstores=jobstores,
-                                             executors=executors,
-                                             job_defaults=job_defaults)
-        self.scheduler.start()
-        # 添加监听器
-        listener.init_listener(self.scheduler)
-
         self.test_scheduler = BackgroundScheduler(jobstores={
             'test': MemoryJobStore()  # 使用内存作为作业存储
         },
             executors=executors,
             job_defaults=job_defaults)
         self.test_scheduler.start()
+
+        self.scheduler = BackgroundScheduler(jobstores=jobstores,
+                                             executors=executors,
+                                             job_defaults=job_defaults)
+        self.scheduler.start()
+        # 添加监听器
+        listener.init_listener(self.scheduler)
 
     def test_add_job(self, func, trigger, id, args=None, ):
         job = self.test_scheduler.get_job(id)
