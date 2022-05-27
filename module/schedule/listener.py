@@ -12,15 +12,17 @@ from module.base import *
 @singleton
 class Listener:
     def __init__(self):
+        self.scheduler = None
         # 用于计算task运行时间
         # key job_id value:{'job':job , 'except_start_time':  'start_time':     ,}
         temp = lambda: collections.defaultdict(temp)
         self.caltimemap = temp()
 
     def init_listener(self, scheduler: BaseScheduler):
-        scheduler.add_listener(self.start_listener, EVENT_JOB_SUBMITTED)
-        scheduler.add_listener(self.finish_listener, EVENT_JOB_ERROR | EVENT_JOB_EXECUTED)
-        return scheduler
+        self.scheduler = scheduler
+        self.scheduler.add_listener(self.start_listener, EVENT_JOB_SUBMITTED)
+        self.scheduler.add_listener(self.finish_listener, EVENT_JOB_ERROR | EVENT_JOB_EXECUTED)
+        return self.scheduler
 
     def start_listener(self, event):
         logger.debug("======start_listener=====")
