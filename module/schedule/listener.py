@@ -2,6 +2,8 @@ import collections
 import datetime
 from apscheduler.schedulers.base import BaseScheduler
 from apscheduler.events import EVENT_JOB_ERROR, EVENT_JOB_EXECUTED, EVENT_JOB_SUBMITTED, JobSubmissionEvent
+
+from module.entity.job import OnceJob
 from module.utils.core_utils import *
 
 from module.base import *
@@ -79,7 +81,7 @@ class Listener:
         job = self.scheduler.get_job(jobid)
         # 立即执行的任务取不到job
         if job is None:
-            job = {"id": jobid, "name": jobid}
+            job = OnceJob(jobid, jobid)
         base.state.job_start(job)
 
     def state_finish(self, event):
