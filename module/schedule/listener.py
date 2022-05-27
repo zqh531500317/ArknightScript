@@ -48,8 +48,7 @@ class Listener:
 
     def caltime_finish(self, event):
         job_id = event.job_id
-        job = self.scheduler.get_job(job_id)
-        job_name = job.name
+        job_name = base.state.running_job.name
         start_time = self.caltimemap[job_id]['start_time']
         end_time = datetime.datetime.now().replace(microsecond=0)
         self.caltimemap.pop(job_id, None)
