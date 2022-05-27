@@ -38,6 +38,7 @@ class Listener:
         self.caltime_finish(event)
 
     def caltime_start(self, event: JobSubmissionEvent):
+        logger.debug("======caltime_start=====")
         job_id = event.job_id
         # job = self.caltimemap.get(job_id)
         # if job is not None:
@@ -74,6 +75,7 @@ class Listener:
             base.send("任务调度出错", contents=content)
 
     def state_start(self, event):
+        logger.debug("======state_start=====")
         jobid = event.job_id
         job = self.scheduler.get_job(jobid)
         base.state.job_start(job)
@@ -82,6 +84,7 @@ class Listener:
         base.state.job_finish()
 
     def system_start(self, event):
+        logger.debug("======system_start=====")
         jobid = event.job_id
         if "once" in jobid or "fight" in jobid or "zhuxian" in jobid \
                 or "ziyuanshouji" in jobid or "jiaomie" in jobid or "huodong" in jobid:
