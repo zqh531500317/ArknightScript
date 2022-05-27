@@ -36,8 +36,8 @@ class Listener:
         base.store_save_imgs()
         self.handle_error(event)
         self.state_finish(event)
-        self.system_finish(event)
         self.caltime_finish(event)
+        self.system_finish(event)
 
     def caltime_start(self, event: JobSubmissionEvent):
         logger.debug("======caltime_start=====")
