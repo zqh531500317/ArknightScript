@@ -11,9 +11,9 @@ class Log(CoreConfig):
         super().__init__()
         self.ocr_logger = None
         self.logger = None
-        self.hr_logger = None
+        self.hr_logger = self.logger
         self.init_ocr_logger()
-        self.init_hr_logger()
+        # self.init_hr_logger()
         self.init_logger()
 
     def init_logger(self):
