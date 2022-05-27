@@ -84,10 +84,8 @@ class Listener:
         if "once" in jobid or "fight" in jobid or "zhuxian" in jobid \
                 or "ziyuanshouji" in jobid or "jiaomie" in jobid or "huodong" in jobid:
             base.state.is_fight = "running"
-        base.state.running_task_num += 1
 
     def system_finish(self, event):
-        base.state.running_task_num -= 1
         jobid = event.job_id
         if "once_ziyuanshouji" in jobid or "once_jiaomie" in jobid or "once_unknown" in jobid or \
                 "once_recently" in jobid or "once_zhuxian" in jobid or "fight" in jobid or \
@@ -108,9 +106,9 @@ class Listener:
             logger.info("任务%s将在%s执行", job.name, next_time)
             if after > next_time:
                 should_close = False
-        if base.state.running_task_num > 0:
+        if base.state.running_job_num > 0:
             should_close = False
-        logger.debug("当前队列任务数:%s", base.state.running_task_num)
+        logger.debug("当前队列任务数:%s", len(base.state.blocking_jobs))
         if should_close and base.isLive():
             for i in range(0, 5):
                 logger.info("在%s分钟内无任务,将在%s秒后关闭游戏", base.minutes, str(10 - 2 * i))
