@@ -51,6 +51,9 @@ Config:
     limit_dayofweek: true
     #芯片任务 是否分析掉落产物
     analyse_item: false
+    # 重启时间
+    restart_hour: 4
+    restart_minute: 0
   Mail:
     enable_mail: false
     sender:

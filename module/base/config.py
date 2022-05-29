@@ -212,3 +212,10 @@ class CoreConfig:
     @property
     def analyse_item(self):
         return self.get("analyse_item")
+
+    @property
+    def restart_hour(self):
+        return self.get("restart_hour")
+    @property
+    def restart_minute(self):
+        return self.get("restart_minute")

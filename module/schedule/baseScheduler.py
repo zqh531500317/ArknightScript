@@ -49,7 +49,7 @@ class BaseScheduler:
         if job is None:
             self.scheduler.add_job(func, args=args, trigger=trigger, id=id, name=id,
                                    misfire_grace_time=misfire_grace_time)
-            white_list = ["jijian_schedule"]
+            white_list = ["jijian_schedule", "restart"]
             if isinstance(trigger, DateTrigger):
                 return
             if id not in white_list:
