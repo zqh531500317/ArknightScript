@@ -3,17 +3,6 @@ import warnings
 from module.base import *
 
 
-def my_annotation(**kwds):
-    def decorate(fn):
-        for item in kwds.items():
-            key = item[0]
-            value = item[1]
-            fn.__annotations__[key] = value
-        return fn
-
-    return decorate
-
-
 class TestScreen(unittest.TestCase):
     screen_n = 20
 

@@ -6,6 +6,7 @@ from module.base import *
 
 
 # 收货每日任务和每周任务
+@my_annotation(desc="收获任务")
 @before
 @func_set_timeout(base.timeout_time)
 def receive_renwu():
@@ -18,6 +19,7 @@ def receive_renwu():
 
 
 # 拜访好友获取信赖
+@my_annotation(desc="拜访好友")
 @before
 @func_set_timeout(base.timeout_time)
 def friend():
@@ -30,6 +32,7 @@ def friend():
 
 
 # 商店收取信用
+@my_annotation(desc="商店收取信用")
 @before
 @func_set_timeout(base.timeout_time)
 def receive_xinyong():
@@ -43,6 +46,7 @@ def receive_xinyong():
 
 
 # 购买信用商店
+@my_annotation(desc="购买信用商店")
 @before
 @func_set_timeout(base.timeout_time)
 def buy_xinyong_shop():
@@ -98,6 +102,7 @@ def buy_xinyong_shop():
 
 
 # 公开招募自动刷新、选择
+@my_annotation(desc="公开招募")
 @before
 @func_set_timeout(base.timeout_time)
 def recruit_daily():
@@ -110,6 +115,7 @@ def recruit_daily():
 
 
 # 执行连续公招任务
+@my_annotation(desc="单次公开招募")
 @before
 def once_recruit(times):
     CommonStep.ensureGameOpenAndInMain()
@@ -128,6 +134,7 @@ def once_recruit(times):
 
 
 @before
+@my_annotation(desc="刷芯片")
 def xinpian():
     CommonStep.ensureGameOpenAndInMain()
     xinpian_1 = base.xinpian_1
@@ -138,6 +145,7 @@ def xinpian():
     CommonStep.ensureGameOpenAndInMain()
 
 
+@my_annotation(desc="获取理智")
 @before
 @func_set_timeout(base.timeout_time)
 @retry

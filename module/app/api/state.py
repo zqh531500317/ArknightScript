@@ -4,6 +4,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from module.base import *
 from module.schedule.baseScheduler import base_scheduler
+from module.utils.core_utils import get_announce_by_str
 
 app_state = Blueprint("app_state", __name__)
 
@@ -22,17 +23,20 @@ def get_jobs():
     jobs = base_scheduler.get_jobs()
     result = []
     for s in jobs:
+        str_fc = s.func_ref
+        desc = get_announce_by_str(str_fc, 'desc')
         if isinstance(s.trigger, CronTrigger):
             if s.next_run_time is None:
                 next_run_time = "pause"
             else:
                 next_run_time = s.next_run_time
             temp = {"id": s.id, "name": s.name, "next_run_time": next_run_time,
-                    "hour": str(s.trigger.fields[5]), "minute": str(s.trigger.fields[6])}
+                    "hour": str(s.trigger.fields[5]), "minute": str(s.trigger.fields[6]),
+                    "desc": desc}
             result.append(temp)
         elif isinstance(s.trigger, DateTrigger):
             temp = {"id": s.id, "name": s.name, "next_run_time": str(s.trigger.run_date),
-                    "hour": "None", "minute": "None"}
+                    "hour": "None", "minute": "None", "desc": desc}
             result.append(temp)
     return jsonify({'result': result})
 
@@ -68,12 +72,15 @@ def get_fight_jobs():
             state = False
         else:
             state = True
+        str_fc = s.func_ref
+        desc = get_announce_by_str(str_fc, 'desc')
         temp = {"id": s.id, "state": state, "name": s.name,
                 "hour": str(s.trigger.fields[5]),
                 "minute": str(s.trigger.fields[6]),
                 "day_of_week": str(s.trigger.fields[4]),
                 "map_name": s.args[0],
-                "times": s.args[1]
+                "times": s.args[1],
+                "desc": desc
                 }
         result.append(temp)
     return jsonify({'result': result})
@@ -107,7 +114,14 @@ def state_info():
     # print(len(state.blocking_jobs))
     blocking_jobs_json = []
     for job in state.blocking_jobs:
-        blocking_jobs_json.append({"id ": job.id, "name": job.name, "next_run_time": job.next_run_time})
+        str_fc = job.func_ref
+        desc = get_announce_by_str(str_fc, 'desc')
+        blocking_jobs_json.append(
+            {"id ": job.id,
+             "name": job.name,
+             "desc": desc,
+             "next_run_time": job.next_run_time}
+        )
     return jsonify({'result': {
         "running_job_num": state.running_job_num,
         "running_job": state.running_job,

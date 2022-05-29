@@ -1,3 +1,4 @@
+import inspect
 import os
 import random
 import socket
@@ -6,8 +7,8 @@ import time
 from collections import deque
 import re
 import yagmail
+import importlib
 from logzero import logger
-
 from adbutils import _AdbStreamConnection, AdbTimeout
 
 path = None
@@ -123,3 +124,34 @@ def send(subject, contents, user, password, host, receiver, attachments=None):
                        password=password,
                        host=host)
     yag.send(receiver, subject, contents, attachments)
+
+
+# 通过str 获取函数
+# input module.dir1.dir2:function
+def get_func_by_str(str_fc: str):
+    module_name, function_name = tuple(str_fc.split(":"))
+    file_name = module_name.split(".")[-1]
+    moduleInstance = __import__(module_name, fromlist=(file_name,))
+    fc = None
+    try:
+        fc = getattr(moduleInstance, function_name)
+    except AttributeError as e:
+        logger.error(e)
+    finally:
+        return fc
+
+
+# 通过函数 获取注解
+# input module.dir1.dir2:function
+def get_announce_by_fc(fc, key):
+    return fc.__annotations__.get(key)
+
+
+# 通过函数str 获取注解
+# input module.dir1.dir2:function
+def get_announce_by_str(fc_name, key):
+    value = None
+    fc = get_func_by_str(fc_name)
+    if fc is not None:
+        value = get_announce_by_fc(fc, key)
+    return value

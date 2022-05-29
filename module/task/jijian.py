@@ -8,6 +8,7 @@ from module.step.jijian_step import JiJianStep
 from module.base import *
 
 
+@my_annotation(desc="线索交流")
 @before
 @func_set_timeout(base.timeout_time)
 def clue():
@@ -89,6 +90,7 @@ def clue():
 
 
 # 基建一键收货
+@my_annotation(desc="基建一键收货")
 @before
 @func_set_timeout(base.timeout_time)
 def jijian_receive():
@@ -99,7 +101,8 @@ def jijian_receive():
     CommonStep.ensureGameOpenAndInMain()
 
 
-# 基建使用电力
+# 基建使用无人机
+@my_annotation(desc="基建使用无人机")
 @before
 @func_set_timeout(base.timeout_time)
 def use_electricity():
@@ -113,6 +116,7 @@ def use_electricity():
 
 
 # 基建排班
+@my_annotation(desc="基建排班")
 @before
 @func_set_timeout(base.timeout_time_max)
 def schedual():

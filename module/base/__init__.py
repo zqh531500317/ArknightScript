@@ -1,5 +1,5 @@
 from module.base.base import base
-from module.base.decorator import singleton, bench_time, before
+from module.base.decorator import singleton, bench_time, before, my_annotation
 from logzero import logger
 import time
 import os
@@ -14,6 +14,6 @@ from module.utils.core_assetLoader import ui
 from module.entity.ocr_entity import OcrEntity
 from module.entity.template_entity import TemplateEntity
 
-__all__ = ["base", "singleton", "bench_time", "logger",
-           "time", "os", "shutil", "Union", "List", "Tuple", "types", "math",
-           "func_set_timeout", "ci", "recruit", "ui", "OcrEntity", "TemplateEntity", 'before']
+__all__ = ["base", "singleton", "bench_time", "logger", "time", "os", "shutil",
+           "Union", "List", "Tuple", "types", "math", "func_set_timeout", "ci",
+           "recruit", "ui", "OcrEntity", "TemplateEntity", 'before', 'my_annotation']

@@ -1,8 +1,8 @@
 {
   "applicationId": "neutralino.arknight",
-  "version": "3.0",
+  "version": "3.1",
   "resourcesURL": "https://raw.githubusercontent.com/zqh531500317/arknight-script/master/webapp/dist/Arknight-Script/resources.neu",
   "data": {
-    "desc": "支持性能测试"
+    "desc": "任务添加中文描述"
   }
 }

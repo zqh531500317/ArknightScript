@@ -14,7 +14,7 @@
         <span>等待中---阻塞数量:{{ blocking_jobs_num }}</span>
       </div>
       <div v-for="(job,index) in blocking_jobs" :key="index">
-        <p>任务名称:{{ job.name }}. 下次执行时间:{{ job.next_run_time }}</p>
+        <p>任务id:{{ job.name }}. 任务名称:{{ job.desc }}.下次执行时间:{{ job.next_run_time }}</p>
       </div>
     </el-card>
     <el-card class="box-card" :body-style="card_body_style">
@@ -22,7 +22,7 @@
         <span>任务列表---数量:{{ this.$store.getters.jobs_num }}</span>
       </div>
       <div v-for="(job,index) in jobs" :key="index">
-        <p>任务名称:{{ job.name }}. 下次执行时间:{{ job.next_run_time }}</p>
+        <p>任务id:{{ job.name }}.任务名称:{{ job.desc }}. 下次执行时间:{{ job.next_run_time }}</p>
       </div>
     </el-card>
   </div>
