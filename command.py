@@ -6,6 +6,7 @@ import time
 from logzero import LogFormatter, setup_default_logger, logfile, logger
 
 import module.task.daily
+import module.task.huodong
 from module.base.base import base
 from module.entity.ocr_entity import OcrEntity
 from module.test.core_tester import TestScreen
@@ -75,3 +76,4 @@ def test_jijian():
 
 if __name__ == '__main__':
     base.screen(memery=False)
+    module.task.huodong.huodong("SV-9", 2, False, 0, False, 0)

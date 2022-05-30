@@ -23,6 +23,10 @@ class YuRenHao(BaseHuoDong):
     def huodong_click(self):
         return 336, 563, 369, 570
 
+    @property
+    def huodongmain(self):
+        return 913, 19, 952, 38
+
     def find_gamepass(self):
         SN_9 = (687, 404, 712, 428)
         SN_10 = (750, 297, 779, 322)
