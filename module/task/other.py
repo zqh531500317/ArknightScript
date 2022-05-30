@@ -1,5 +1,5 @@
 from module.step.common_step import CommonStep
-from module.base import my_annotation
+from module.base import my_annotation, before
 
 
 def test(fc_name):
@@ -10,6 +10,7 @@ def test(fc_name):
     return res
 
 
+@before
 @my_annotation(desc="重启")
 def restart():
     CommonStep.ensureGameOpenAndInMain()
