@@ -124,7 +124,7 @@
         "type": "控制中枢",
         "schedual": [
           {
-            "hour": 19,
+            "hour": 8,
             "minute": 30,
             "names": [
               "阿米娅",
@@ -135,7 +135,7 @@
             ]
           },
           {
-            "hour": 19,
+            "hour": 8,
             "minute": 30,
             "names": [
               "诗怀雅",
