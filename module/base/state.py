@@ -18,6 +18,7 @@ class State:
 
     @classmethod
     def if_continue(cls, max_retry_time=3):
+        logger.info("login:retry_time=%s", cls.retry_time)
         if cls.retry_time < max_retry_time:
             cls.retry_time += 1
             return True
