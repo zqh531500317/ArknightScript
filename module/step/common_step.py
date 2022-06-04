@@ -182,6 +182,7 @@ class CommonStep(BaseStep):
     @staticmethod
     def into_login():
         if not base.isLive():
+            base.state.new_login_retry_instance()
             CommonStep.dologin()
         else:
             CommonStep.into_main()
@@ -191,12 +192,12 @@ class CommonStep(BaseStep):
     @retry(retry_on_exception=lambda e: (
             logger.info("登录异常,将关闭重试"),
             base.stop(),
-            base.state.if_continue(max_retry_time=3)
+            base.state.login_retry_instance.if_continue()
     )[-1])
     def dologin():
         logger.info("尝试登陆游戏")
         base.start()
-        CommonStep.dowait("", "/ui/isLogining.png", description="到登录界面", retry_time=60)
+        CommonStep.dowait("", "/ui/isLogining.png", description="到登录界面", retry_time=5)
         CommonStep.dowait("login",
                           [TemplateEntity("/ui/main.png"),
                            TemplateEntity("get_items.png", 514, 0, 758, 720),

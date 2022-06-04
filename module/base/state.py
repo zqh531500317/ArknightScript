@@ -14,17 +14,25 @@ class State:
     running_job = {"id": "", "name": ""}
     # 队列 [job]
     blocking_jobs = []
-    retry_time = 0
+
+    class LoginRetry:
+        def __init__(self, max_retry_time=3):
+            logger.info("new login_retry_instance")
+            self.retry_time = 0
+            self.max_retry_time = max_retry_time
+
+        def if_continue(self):
+            logger.info("login:retry_time=%s", self.retry_time)
+            if self.retry_time < self.max_retry_time:
+                self.retry_time += 1
+                return True
+
+    login_retry_instance = None
 
     @classmethod
-    def if_continue(cls, max_retry_time=3):
-        logger.info("login:retry_time=%s", cls.retry_time)
-        if cls.retry_time < max_retry_time:
-            cls.retry_time += 1
-            return True
-        else:
-            cls.retry_time = 0
-            return False
+    def new_login_retry_instance(cls):
+        cls.login_retry_instance = cls.LoginRetry()
+        return cls.login_retry_instance
 
     @classmethod
     def job_start(cls, job):

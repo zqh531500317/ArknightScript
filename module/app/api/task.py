@@ -51,16 +51,11 @@ def fight():
 @app_task.route('/recruit', methods=['post'])
 @login_required
 def recruit():
-    is_fight = base.state.is_fight
     recruitEntity = request.get_json()["recruitEntity"]
-    if is_fight == "stop":
-        base.state.is_fight = "task"
-        num = int(recruitEntity["num"])
-        module.schedule.dailyScheduler.once_recruit(num)
-        return jsonify({'result': "success"})
-
-    logger.warn("正在进行任务")
-    return jsonify({'result': "正在进行任务请勿执行"})
+    base.state.is_fight = "task"
+    num = int(recruitEntity["num"])
+    module.schedule.dailyScheduler.once_recruit(num)
+    return jsonify({'result': "success"})
 
 
 @app_task.route("/reschedule_job", methods=['post'])
