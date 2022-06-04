@@ -26,6 +26,8 @@ class State:
             if self.retry_time < self.max_retry_time:
                 self.retry_time += 1
                 return True
+            else:
+                return False
 
     login_retry_instance = None
 
