@@ -46,7 +46,7 @@ class Jiaomie(BaseFight):
                               description="点击全权委托")
         for i in range(self.max_fight_time):
             self.fight()
-
+        base.send("剿灭作战完成%s次".format(self.max_fight_time), "剿灭作战完成%s次".format(self.max_fight_time))
 
     def __init__(self, max_fight_time, game="jiaomie", use_medicine=False,
                  medicine_num=0, use_stone=False, stone_num=0):
