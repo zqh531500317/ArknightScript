@@ -9,7 +9,7 @@ from module.step.common_step import CommonStep
 class BaseFight:
     def __init__(self, max_fight_time, game="unknown", use_medicine=False, medicine_num=0, use_stone=False,
                  stone_num=0):
-        self.game = game
+        self.game = game.upper()
         self.game_pos = None
         self.max_fight_time = max_fight_time
         self.fight_time = 0

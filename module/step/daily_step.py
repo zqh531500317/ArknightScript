@@ -19,7 +19,7 @@ class DailyStep:
         CommonStep.ensureGameOpenAndInMain()
         GamePassStep.exec_by_clickLoader(ci["jiaomie"])
         time.sleep(base.sleep_time)
-        CommonStep.dowait((700, 350, 750, 400), "/fight/pre_fight.png")
+        CommonStep.dowait((550, 450, 650, 480), "/fight/pre_fight.png")
         lizhi_before_fight = ui["lizhi_before_fight"]["area"]
         x1, y1, x2, y2 = lizhi_before_fight
         result = base.ocr_number(OcrEntity(x1=x1, y1=y1, x2=x2, y2=y2)).string

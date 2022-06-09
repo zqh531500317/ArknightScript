@@ -16,4 +16,4 @@ class FuChaoZhiXia(BaseHuoDong):
 
     @property
     def huodongmain(self):
-        return 892, 83, 932, 105
+        return 892, 83, 932, 105, "作战"

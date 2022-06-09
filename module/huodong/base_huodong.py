@@ -1,4 +1,6 @@
 import abc
+import os.path
+
 from module.fight.base import BaseFight
 from module.base import *
 from module.step.common_step import CommonStep
@@ -32,14 +34,19 @@ class BaseHuoDong(BaseFight):
         CommonStep.ensureGameOpenAndInMain()
         CommonStep.dowait(a_zhongduan[1], "/ui/a_zhongduan.png", description="进入终端")
         CommonStep.dowait(self.enter_huodong,
-                          OcrEntity(except_result="作战",
+                          OcrEntity(except_result=self.huodongmain[4],
                                     x1=self.huodongmain[0],
                                     y1=self.huodongmain[1],
                                     x2=self.huodongmain[2],
                                     y2=self.huodongmain[3]),
                           description="进入活动")
+        path = base.project_path + '/asset/template/huodong/main_{}.png'.format(self.huodong_name)
+        if os.path.exists(path):
+            path = "/huodong/main_{}.png".format(self.huodong_name)
+        else:
+            path = "/huodong/main_{}.png".format("default")
         CommonStep.dowait(self.huodong_click,
-                          "/huodong/main_{}.png".format(self.huodong_name),
+                          path,
                           description="进入活动界面")
         GamePassStep.goto_ahead_for_huodong()
 
@@ -76,6 +83,11 @@ class BaseHuoDong(BaseFight):
         self.game_pos = (x1, y1, x2, y2)
 
     def choose_gamepass(self):
+        path = base.project_path + '/asset/template/huodong/map_choosed_.png'.format(self.huodong_name)
+        if os.path.exists(path):
+            path = "/huodong/map_choosed_{}.png".format(self.huodong_name)
+        else:
+            path = "/huodong/map_choosed_{}.png".format("default")
         CommonStep.dowait(self.game_pos,
-                          "/huodong/map_choosed_{}.png".format(self.huodong_name),
+                          path,
                           description="选中关卡")

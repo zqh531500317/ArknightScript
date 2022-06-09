@@ -76,4 +76,3 @@ def test_jijian():
 
 if __name__ == '__main__':
     base.screen(memery=False)
-    module.task.huodong.huodong("SV-9", 2, False, 0, False, 0)

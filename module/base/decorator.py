@@ -40,7 +40,7 @@ def bench_time(n):
             end = time.time()
             res = "%-20s cost: %-5ss,times: %-2s,avg time: %-4ss" % (func.__name__, round(end - start, 2), n,
                                                                      round((end - start) / n, 2))
-            base.hr_logger.info(res)
+            base.logger.info(res)
             return res
 
         return mywrap
