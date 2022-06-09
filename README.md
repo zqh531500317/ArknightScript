@@ -1,3 +1,4 @@
+#明日方舟自动化脚本
 ![image](https://github.com/zqh531500317/arknight-script/blob/master/asset/demo/demo1.png)
 # 一、安装
 ## 方案(1)手动安装 
