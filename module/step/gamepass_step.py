@@ -65,7 +65,7 @@ class GamePassStep:
     def jiaomieIsFinish():
         time.sleep(base.sleep_time)
         region = base.screen(memery=True)
-        cropped = base.cut(region, 585, 193, 687, 225)
+        cropped = base.cut(region, 104, 640, 279, 675)
         result = base.ocr_without_position(cropped, limit=None, cand_alphabet="1234567890/")
         x = result[len(result) - 1]["words"]
         if x[0] == "/":
@@ -83,7 +83,7 @@ class GamePassStep:
             re = math.floor(num)
         else:
             re = math.ceil(num)
-        return now ,re
+        return now, re
 
     # 利用ocr寻找关卡位置
     @staticmethod
@@ -194,3 +194,7 @@ class GamePassStep:
 
             raise module.error.game.GameNotFound(name)
         base.randomClick((x1, y1, x2, y2))
+
+
+if __name__ == '__main__':
+    GamePassStep.jiaomieIsFinish()

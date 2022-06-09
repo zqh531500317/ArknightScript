@@ -19,10 +19,10 @@ class Jiaomie(BaseFight):
 
         CommonStep.ensureGameOpenAndInMain()
         GamePassStep.exec_by_clickLoader(ci["jiaomie"])
+        time.sleep(2)
+        base.randomClick((550, 450, 650, 480))
         now, num = GamePassStep.jiaomieIsFinish()
         self.max_fight_time = min(self.max_fight_time, num)
-        time.sleep(2)
-        base.randomClick((744, 359, 979, 467))
         time.sleep(base.sleep_time)
         logger.info("当前有%s理智,剿灭进度%s,将进行%s把剿灭", lizhi, now, self.max_fight_time)
 
