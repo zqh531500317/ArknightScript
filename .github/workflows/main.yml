@@ -27,10 +27,10 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Install and Build Vue
-        run: cd webapp && cd arknight-vue && npm install && vue build:web
+        run: cd webapp && cd arknight-vue && npm install && vue-cli-service build --mode --dest ../resources
         
       - name: Install and Build Neutralino
-        run: cd webapp && npm install && nue build
+        run: cd webapp && npm install && neu build
 
       - name: Upload File
         # 使用预制action：上传文件，可以将执行路径打包成zip上传
