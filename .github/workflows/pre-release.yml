@@ -40,8 +40,9 @@ jobs:
       - name: Install and Build Neutralino
         run: cd webapp && npm install && npm run neu-build
       - name: build pyinstaller
-        run: |
-          pyinstaller .\Arknight-Script.spec --noconfirm
+        run: pyinstaller .\Arknight-Script.spec --noconfirm
+      - name: creat 7z from pyinstaller dist
+        run: python 7z.py
       - name: Creat Releases
         uses: marvinpinto/action-automatic-releases@v1.2.1
         with:
@@ -54,4 +55,6 @@ jobs:
           # Release title (for automatic releases)
           title: "Development Build" # optional
           # Assets to upload to the release
-          files: webapp/dist/Arknight-Script/*.exe # optional
+          files: |
+            webapp/dist/Arknight-Script/*.exe
+            Arknight-Script.7z

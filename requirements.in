@@ -25,3 +25,4 @@ watchdog==2.1.7
 pyinstaller==4.10
 pip-tools==6.6.0
 Flask-Login==0.6.0
+py7zr==0.18.9
