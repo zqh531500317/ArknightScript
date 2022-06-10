@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "vue serve": "vue-cli-service serve ",
-    "vue build:web": "vue-cli-service build --mode --dest ../resources",
-    "vue lint": "vue-cli-service lint"
+    "vue-serve": "vue-cli-service serve ",
+    "vue-build:web": "vue-cli-service build --mode --dest ../resources",
+    "vue-lint": "vue-cli-service lint"
   },
   "dependencies": {
     "axios": "^0.27.2",
