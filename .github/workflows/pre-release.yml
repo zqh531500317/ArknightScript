@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: "pre-release"
 
 # Controls when the workflow will run
 on:
@@ -32,11 +32,16 @@ jobs:
       - name: Install and Build Neutralino
         run: cd webapp && npm install && npm run neu-build
 
-      - name: Upload File
-        # 使用预制action：上传文件，可以将执行路径打包成zip上传
-        uses: actions/upload-artifact@v3.1.0
+      - name: Creat Releases
+        uses: marvinpinto/action-automatic-releases@v1.2.1
         with:
-          # 上传后文件的名称
-          name: test
-          # 打包的路径以及文件过滤，此为仅打包dist目录下的exe文件
-          path: webapp/dist/Arknight-Script/
+          # GitHub secret token
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          # Git tag (for automatic releases)
+          automatic_release_tag: "latest" # optional
+          # Should this release be marked as a pre-release?
+          prerelease: true # optional, default is true
+          # Release title (for automatic releases)
+          title: "Development Build" # optional
+          # Assets to upload to the release
+          files: webapp/dist/Arknight-Script/*.exe # optional
