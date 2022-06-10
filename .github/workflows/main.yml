@@ -27,7 +27,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Install and Build Vue
-        run: cd webapp && cd arknight-vue && npm install && vue-cli-service build --mode --dest ../resources
+        run: cd webapp && cd arknight-vue && npm install && vue-build:web
         
       - name: Install and Build Neutralino
         run: cd webapp && npm install && neu build
