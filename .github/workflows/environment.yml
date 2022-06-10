@@ -20,3 +20,5 @@ jobs:
       - name: Install VueCli
         run: npm install -g @vue/cli
 
+      - name: Install neutralinojs
+        run: npm install -g @neutralinojs/neu
