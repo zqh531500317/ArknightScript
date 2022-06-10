@@ -31,7 +31,16 @@ jobs:
         
       - name: Install and Build Neutralino
         run: cd webapp && npm install && npm run neu-build
-
+      - name: creat python
+        run: |
+          python -m venv venv,
+          .\venv\Scripts\activate,
+          .\venv\scripts\python.exe -m pip install --upgrade pip,
+          pip install .\tookit\Polygon3-3.0.9.1-cp39-cp39-win_amd64.whl,
+          pip install .\tookit\python_Levenshtein-0.12.2-cp39-cp39-win_amd64.whl,
+          pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+      - name: build pyinstaller
+        run: pyinstaller_spec.bat
       - name: Creat Releases
         uses: marvinpinto/action-automatic-releases@v1.2.1
         with:
