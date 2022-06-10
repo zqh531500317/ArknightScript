@@ -22,16 +22,11 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-      - name: Install VueCli
-        run: npm install -g @vue/cli
-      - name: Install Neutralino
-        run: npm install -g @neutralinojs/neu
-      - name: Install and Build Vue
-        run: cd webapp && cd arknight-vue && npm install && npm run vue-build:web
-        
-      - name: Install and Build Neutralino
-        run: cd webapp && npm install && npm run neu-build
-      - name: creat python
+      - name: Setup Python 3.9
+        uses: actions/setup-python@v4.0.0
+        with:
+          python-version: 3.9 # optional
+      - name: creat venv
         run: |
           python -m venv venv,
           .\venv\Scripts\activate,
@@ -39,6 +34,15 @@ jobs:
           pip install .\tookit\Polygon3-3.0.9.1-cp39-cp39-win_amd64.whl,
           pip install .\tookit\python_Levenshtein-0.12.2-cp39-cp39-win_amd64.whl,
           pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+      - name: Install VueCli
+        run: npm install -g @vue/cli
+      - name: Install Neutralino
+        run: npm install -g @neutralinojs/neu
+      - name: Install and Build Vue
+        run: cd webapp && cd arknight-vue && npm install && npm run vue-build:web
+
+      - name: Install and Build Neutralino
+        run: cd webapp && npm install && npm run neu-build
       - name: build pyinstaller
         run: pyinstaller_spec.bat
       - name: Creat Releases
