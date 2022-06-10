@@ -24,7 +24,10 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-        
+      - name: Install VueCli
+        run: npm install -g @vue/cli
+      - name: Install Neutralino
+        run: npm install -g @neutralinojs/neu
       - name: Install and Build Vue
         run: cd webapp && cd arknight-vue && npm install && npm run vue-build:web
         
