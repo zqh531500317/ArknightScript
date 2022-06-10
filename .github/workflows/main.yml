@@ -7,8 +7,6 @@ on:
   # Triggers the workflow on push or pull request events but only for the "master" branch
   push:
     branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -41,4 +39,4 @@ jobs:
           # 上传后文件的名称
           name: test
           # 打包的路径以及文件过滤，此为仅打包dist目录下的exe文件
-          path: webapp/dist/Arknight-Script/*exe
+          path: webapp/dist/Arknight-Script/
