@@ -40,7 +40,8 @@ jobs:
       - name: Install and Build Neutralino
         run: cd webapp && npm install && npm run neu-build
       - name: build pyinstaller
-        run: pyinstaller_spec.bat
+        run: |
+          pyinstaller .\Arknight-Script.spec --noconfirm
       - name: Creat Releases
         uses: marvinpinto/action-automatic-releases@v1.2.1
         with:
