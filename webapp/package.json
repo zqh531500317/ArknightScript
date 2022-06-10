@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "nue run": "neu run",
-    "nue build":"neu build"
+    "neu-run": "neu run",
+    "neu-build":"neu build"
   }
 }
