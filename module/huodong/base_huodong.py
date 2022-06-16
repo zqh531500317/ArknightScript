@@ -13,6 +13,10 @@ class BaseHuoDong(BaseFight):
     def __init__(self, max_fight_time, game, use_medicine=False, medicine_num=0,
                  use_stone=False, stone_num=0):
         super().__init__(max_fight_time, game, use_medicine, medicine_num, use_stone, stone_num)
+        self.enter_huodong_template = dict()
+        self.enter_huodong_template["left"] = b_huodong[1]
+        self.enter_huodong_template["center_one"] = (680, 168, 800, 200)
+        self.enter_huodong_template["center_two"] = (680, 320, 800, 400)
 
     @abc.abstractmethod
     def huodong_name(self):
