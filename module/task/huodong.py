@@ -1,4 +1,5 @@
 from module.base import before
+from module.huodong.changxiakuanghuanji import ChangXiaKuangHuanJi
 from module.huodong.chenyingyuyin import ChenYingYuYin
 from module.huodong.fuchaozhixia import FuChaoZhiXia
 from module.huodong.lvyehuanmeng import LvYeHuanMeng
@@ -8,8 +9,13 @@ from module.huodong.duosuoleisi import DuoSuoLeiSi
 
 @before
 def huodong(name, max_fight_time, use_medicine, medicine_num, use_stone, stone_num):
-    now = "duosuoleisi"
+    now = "changxiakuanghuanji"
     eval(now)(name, max_fight_time, use_medicine, medicine_num, use_stone, stone_num)
+
+
+def changxiakuanghuanji(name: str, max_fight_time, use_medicine, medicine_num, use_stone, stone_num):
+    task = ChangXiaKuangHuanJi(max_fight_time, name, use_medicine, medicine_num, use_stone, stone_num)
+    task.cycleFight()
 
 
 def yurenhao(name: str, max_fight_time, use_medicine, medicine_num, use_stone, stone_num):

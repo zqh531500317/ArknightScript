@@ -40,7 +40,8 @@ class TestScreen(unittest.TestCase):
     @bench_time(screen_n)
     def test_ocr(self):
         for i in range(self.screen_n):
-            base.ocr(OcrEntity(input_img=TestScreen.img))
+            a = base.ocr(OcrEntity(input_img=TestScreen.img, x1=605, y1=690, x2=625, y2=710))
+            # print(a.string)
 
 
 if __name__ == '__main__':
