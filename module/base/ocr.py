@@ -8,6 +8,7 @@ from logzero import logger
 from module.entity.ocr_entity import OcrEntity
 
 
+# todo update cnocr
 class OcrHandler(Picture):
     def __init__(self):
         super().__init__()
