@@ -55,6 +55,7 @@ class Listener:
         logger.debug("======caltime_finish=====")
         job_id = event.job_id
         job_name = base.state.running_job['name']
+        logger.debug("caltime finish job_id={}".format(job_id))
         start_time = self.caltimemap[job_id]['start_time']
         end_time = datetime.datetime.now().replace(microsecond=0)
         self.caltimemap.pop(job_id, None)

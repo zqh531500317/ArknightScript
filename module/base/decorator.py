@@ -22,6 +22,7 @@ def before(func):
         from module.schedule.listener import listener
         time.sleep(base.ONE_MINUTES)
         task_name = base.state.running_job['name']
+        logger.debug("caltime start task_name={}".format(task_name))
         listener.caltimemap[task_name]['start_time'] = datetime.datetime.now().replace(microsecond=0)
         logger.info("task %s is started", task_name)
         res = func(*args, **kwargs)
