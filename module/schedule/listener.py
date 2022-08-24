@@ -58,8 +58,11 @@ class Listener:
         start_time = self.caltimemap[job_id]['start_time']
         end_time = datetime.datetime.now().replace(microsecond=0)
         self.caltimemap.pop(job_id, None)
-        logger.info("task running cost: %s minutes", end_time - start_time)
-        logger.info("task %s is finished", job_name)
+        try:
+            logger.info("task running cost: %s minutes", end_time - start_time)
+            logger.info("task %s is finished", job_name)
+        except TypeError as e:
+            logger.exception(e)
 
     def handle_error(self, event):
         if event.exception:
