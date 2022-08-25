@@ -17,3 +17,7 @@ class ChangXiaKuangHuanJi(BaseHuoDong):
     @property
     def huodongmain(self):
         return 605, 690, 625, 710, "活"
+
+    @property
+    def enter_huodong(self):
+        return self.enter_huodong_template["center_one"]

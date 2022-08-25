@@ -32,7 +32,7 @@ class BaseHuoDong(BaseFight):
 
     @property
     def enter_huodong(self):
-        return b_huodong[1]
+        return self.enter_huodong_template["left"]
 
     def enter_gamepass(self):
         CommonStep.ensureGameOpenAndInMain()
