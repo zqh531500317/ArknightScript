@@ -47,6 +47,8 @@ Config:
     # 若开启自动补全芯片，则会刷精一芯片到xinpian_1，精二芯片到xinpian_2
     xinpian_1: 6
     xinpian_2: 10
+    # 刷红票到 hongpiao
+    hongpiao: 0
     #芯片任务 是否限制开放时间
     limit_dayofweek: true
     #芯片任务 是否分析掉落产物

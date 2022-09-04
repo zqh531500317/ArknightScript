@@ -190,6 +190,10 @@ class CoreConfig:
         return self.get("xinpian_2")
 
     @property
+    def hongpiao(self):
+        return self.get("hongpiao")
+
+    @property
     def debug(self):
         return self.get("debug")
 
@@ -216,6 +220,7 @@ class CoreConfig:
     @property
     def restart_hour(self):
         return self.get("restart_hour")
+
     @property
     def restart_minute(self):
         return self.get("restart_minute")

@@ -1,4 +1,5 @@
 import copy
+import math
 import time
 
 import module.error.game
@@ -152,12 +153,19 @@ class DailyStep:
 
     @staticmethod
     def get_xinpian_info(xinpian_1=6, xinpian_2=10):
+        hongpiao = base.hongpiao
+        needhongpiao = 0
         base.randomClick("main_cangku")
         time.sleep(base.sleep_time)
         bag_info = DailyStep.__get_bag_info()
         xinpian_info = {}
         for name, v in bag_info.items():
             num = v["num"]
+            if name == "采购凭证":
+                if hongpiao <= num:
+                    continue
+                else:
+                    needhongpiao = hongpiao - num
             map_name = DailyStep.__get_map_name(name)
             if map_name is None:
                 continue
@@ -171,7 +179,7 @@ class DailyStep:
         logger.debug("=======缺少芯片信息=======")
         for k, v in queshao_info.items():
             logger.info("  %s  %s", k, str(v))
-        return xinpian_info, queshao_info
+        return xinpian_info, queshao_info, needhongpiao
 
     @staticmethod
     def __get_bag_info():
@@ -189,7 +197,7 @@ class DailyStep:
 
     # res 缺少芯片信息
     @staticmethod
-    def do_xinpian(xinpian_info, queshao_info,
+    def do_xinpian(xinpian_info, queshao_info, needhongpiao,
                    limit_dayofweek=base.limit_dayofweek, analyse_item=base.analyse_item):
         dayOfWeek = datetime.now().isoweekday()
         hour = datetime.now().hour
@@ -213,6 +221,8 @@ class DailyStep:
         openTime["PR-B-2"] = [1, 2, 5, 6]
         openTime["PR-D-1"] = [2, 3, 6, 7]
         openTime["PR-D-2"] = [2, 3, 6, 7]
+        openTime["hongpiao"] = [1, 4, 6, 7]
+        openTime["jinengshu"] = [2, 3, 5, 7]
         try:
             for k, v in queshao_info.items():
                 CommonStep.ensureGameOpenAndInMain()
@@ -257,6 +267,19 @@ class DailyStep:
                         v["num"] = v["num"] - 1
                         ...
                     CommonStep.dowait("", TemplateEntity("/fight/pre_fight.png"))
+            # 刷红票
+            if needhongpiao <= 0:
+                logger.info("红票数量到达目标,跳过任务")
+            elif needhongpiao > 0:
+                if limit_dayofweek:
+                    if dayOfWeek not in openTime["hongpiao"]:
+                        logger.info("红票本未开放")
+                        return
+                fighttime_hongpiao = math.ceil(needhongpiao / 21)
+                logger.info("缺少红票{}张,准备刷AP-5  {}次".format(needhongpiao, fighttime_hongpiao))
+                DailyStep.findGame("AP-5")
+                FightStep.cycleFight(fighttime_hongpiao, "AP-5", False, 0, False, 0)
+                ...
         except module.error.game.CanNotChooseDaiLiZhiHui as e:
             e.message()
         except module.error.game.NotInPreFight as e:

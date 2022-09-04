@@ -139,9 +139,9 @@ def xinpian():
     CommonStep.ensureGameOpenAndInMain()
     xinpian_1 = base.xinpian_1
     xinpian_2 = base.xinpian_2
-    data, res = DailyStep.get_xinpian_info(xinpian_1, xinpian_2)
+    data, res, needhongpiao = DailyStep.get_xinpian_info(xinpian_1, xinpian_2)
     CommonStep.ensureGameOpenAndInMain()
-    DailyStep.do_xinpian(data, res)
+    DailyStep.do_xinpian(data, res, needhongpiao)
     CommonStep.ensureGameOpenAndInMain()
 
 
@@ -154,4 +154,4 @@ def get_lizhi():
 
 
 if __name__ == '__main__':
-    get_lizhi()
+    xinpian()
