@@ -20,7 +20,7 @@ class ChangYeLinGuang(BaseHuoDong):
 
     @property
     def enter_huodong(self):
-        return self.enter_huodong_template["left"]
+        return self.enter_huodong_template["center_one"]
 
 
 if __name__ == '__main__':
