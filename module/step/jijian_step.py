@@ -14,6 +14,8 @@ class JiJianStep:
             return "罗比菈塔"
         elif res == "桑赛" or res == "桑进":
             return "桑葚"
+        elif res == "百面鸮":
+            return "白面鸮"
         else:
             return res
 
