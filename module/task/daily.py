@@ -118,6 +118,8 @@ def recruit_daily():
 @my_annotation(desc="单次公开招募")
 @before
 def once_recruit(times):
+    import module.entity.recruit_result
+    module.entity.recruit_result.init()
     CommonStep.ensureGameOpenAndInMain()
     CommonStep.dowait("main_recruit", "/recruit/main.png", description="进入公招界面")
     r = -3
@@ -130,6 +132,8 @@ def once_recruit(times):
 
     base.state.is_fight = "stop"
     CommonStep.ensureGameOpenAndInMain()
+    base.send_wechat("公开招募结果", recruit_result.get_res())
+    base.send("公开招募结果", recruit_result.get_res())
     return r
 
 

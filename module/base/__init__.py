@@ -13,7 +13,9 @@ from module.utils.core_recruitLoader import recruit
 from module.utils.core_assetLoader import ui
 from module.entity.ocr_entity import OcrEntity
 from module.entity.template_entity import TemplateEntity
+from module.entity.recruit_result import recruit_result
 
 __all__ = ["base", "singleton", "bench_time", "logger", "time", "os", "shutil",
            "Union", "List", "Tuple", "types", "math", "func_set_timeout", "ci",
-           "recruit", "ui", "OcrEntity", "TemplateEntity", 'before', 'my_annotation']
+           "recruit", "ui", "OcrEntity", "TemplateEntity", 'before', 'my_annotation',
+           "recruit_result"]

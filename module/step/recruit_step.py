@@ -30,10 +30,12 @@ class RecruitStep:
                 if r == -1:
                     return r
                 if r == 999:
+                    recruit_result.add(6)
                     img = base.screen(memery=True)
                     base.save1("recruit", "tags", img)
                     return r
                 elif r == 1:
+                    recruit_result.add(4)
                     img = base.screen(memery=True)
                     base.save1("recruit", "tags", img)
                     CommonStep.dowait("recruit_do", "/recruit/main.png", description="完成选择,等待招募完成")
@@ -41,6 +43,7 @@ class RecruitStep:
                 elif r == 0:
                     b = RecruitStep.is_flashable()
                     if not b:
+                        recruit_result.add(3)
                         img = base.screen(memery=True)
                         base.save1("recruit", "tags", img)
                         CommonStep.dowait("recruit_do", "/recruit/main.png", description="完成选择,等待招募完成")
