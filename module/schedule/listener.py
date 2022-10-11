@@ -81,6 +81,7 @@ class Listener:
                 "jobid=" + str(event.job_id) + "\n " + str(event.exception) + "\n " + str(event.traceback),
                 yagmail.inline(path)
             ]
+            base.send_wechat("任务调度出错", contents=content)
             base.send("任务调度出错", contents=content)
 
     def state_start(self, event):

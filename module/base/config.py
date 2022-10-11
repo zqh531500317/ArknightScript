@@ -166,6 +166,14 @@ class CoreConfig:
         return self.get("enable_mail")
 
     @property
+    def enable_pushplus(self):
+        return self.get("enable_pushplus")
+
+    @property
+    def pushplus_token(self):
+        return self.get("pushplus_token")
+
+    @property
     def sender(self):
         return self.get("sender")
 

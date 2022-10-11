@@ -62,3 +62,8 @@ Config:
     authorization:
     receiver:
     host:
+  pushplus:
+    #推送异常信息至微信
+    enable_pushplus: false
+    # https://www.pushplus.plus/push1.html
+    pushplus_token:

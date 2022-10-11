@@ -45,5 +45,10 @@ class Base(Template, OcrHandler, Watcher):
             logger.info("send email to %s", receiver)
             module.utils.core_utils.send(subject, contents, user, password, host, receiver, attachments)
 
+    def send_wechat(self, subject, contents):
+        if self.enable_pushplus:
+            token = self.pushplus_token
+            module.utils.core_utils.send_wechat(token, subject, contents)
+
 
 base = Base()

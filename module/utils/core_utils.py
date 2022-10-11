@@ -8,6 +8,7 @@ from collections import deque
 import re
 import yagmail
 import importlib
+import requests
 from logzero import logger
 from adbutils import _AdbStreamConnection, AdbTimeout
 
@@ -124,6 +125,15 @@ def send(subject, contents, user, password, host, receiver, attachments=None):
                        password=password,
                        host=host)
     yag.send(receiver, subject, contents, attachments)
+
+
+def send_wechat(token, title, msg):
+    content = msg
+    template = 'html'
+    url = f"https://www.pushplus.plus/send?token={token}&title={title}&content={content}&template={template}"
+    logger.info(url)
+    r = requests.get(url=url)
+    logger.info(r.text)
 
 
 # 通过str 获取函数

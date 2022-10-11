@@ -10,6 +10,7 @@ import module.task.huodong
 from module.base.base import base
 from module.entity.ocr_entity import OcrEntity
 from module.test.core_tester import TestScreen
+import module.utils.core_utils
 
 
 def init_log():
