@@ -20,10 +20,11 @@ class RecruitResult:
         return "公招次数:{},三星及以下:{},四星:{},五星六星:{}".format(self.times, self.starlessthan4,
                                                        self.star4, self.star5or6)
 
+    def reset(self):
+        self.times = 0
+        self.star4 = 0
+        self.star5or6 = 0
+        self.starlessthan4 = 0
+
 
 recruit_result = RecruitResult()
-
-
-def init():
-    global recruit_result
-    recruit_result = RecruitResult()

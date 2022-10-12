@@ -119,7 +119,7 @@ def recruit_daily():
 @before
 def once_recruit(times):
     import module.entity.recruit_result
-    module.entity.recruit_result.init()
+    module.entity.recruit_result.recruit_result.reset()
     CommonStep.ensureGameOpenAndInMain()
     CommonStep.dowait("main_recruit", "/recruit/main.png", description="进入公招界面")
     r = -3
