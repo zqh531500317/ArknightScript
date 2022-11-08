@@ -30,9 +30,10 @@ class BaseAdb(Log, Store):
         try:
             msg = self.adb_client.connect(self.serial, timeout=5)
             logger.info(msg)
+            return True
         except Exception as e:
             logger.exception(e)
-            print("=========")
+            return False
 
     def disconnect(self):
         msg = self.adb_client.disconnect(self.serial)
