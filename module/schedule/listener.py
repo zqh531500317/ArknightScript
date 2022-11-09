@@ -30,6 +30,17 @@ class Listener:
     def start_listener(self, event):
         if self.is_test_scheduler(event):
             return
+        times = 0
+        while True:
+            b = base.connect()
+            if b:
+                break
+            else:
+                times += 1
+            if times >= 3:
+                logger.error("start_listener adb connect error")
+                raise Exception("start_listener adb connect error")
+            time.sleep(60)
         logger.debug("======start_listener=====")
         self.caltime_start(event)
         self.state_start(event)
