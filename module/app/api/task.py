@@ -58,6 +58,16 @@ def recruit():
     return jsonify({'result': "success"})
 
 
+@app_task.route("/scheduler", methods=['post'])
+@login_required
+def scheduler():
+    schedulerEntity = request.get_json()["schedulerEntity"]
+    path = schedulerEntity["path"]
+    base.state.is_scheduler = True
+    module.schedule.jijianScheduler.once_jijian_schedule(path)
+    return jsonify({'result': "success"})
+
+
 @app_task.route("/reschedule_job", methods=['post'])
 @login_required
 def reschedule_job():

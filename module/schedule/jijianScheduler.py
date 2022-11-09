@@ -1,4 +1,5 @@
 from apscheduler.triggers.cron import CronTrigger
+from apscheduler.triggers.date import DateTrigger
 
 import module.task.jijian
 from module.schedule.baseScheduler import base_scheduler
@@ -27,7 +28,7 @@ def clue():
                            id="clue")
 
 
-def jijian_schedule():
+def jijian_schedule(path="/config/schedual.json"):
     scheduler = base_scheduler.scheduler
     job = scheduler.get_job("jijian_schedule")
     if job is not None:
@@ -35,10 +36,16 @@ def jijian_schedule():
     enable_jijian_schedule = base.get("enable_jijian_schedule")
     if not enable_jijian_schedule:
         return
-    cron = base.read_json(base.project_path + "/config/schedual.json")["Config"]["cron"]
+    cron = base.read_json(base.project_path + path)["Config"]["cron"]
     hour = cron["hour"]
     minute = cron["minute"]
     if enable_jijian_schedule:
-        base_scheduler.add_job(module.task.jijian.schedual,
+        base_scheduler.add_job(module.task.jijian.schedual, args=(path,),
                                trigger=CronTrigger(hour=hour, minute=minute),
                                id="jijian_schedule")
+
+
+def once_jijian_schedule(path="/config/schedual.json"):
+    base_scheduler.add_job(module.task.jijian.schedual, args=(path,),
+                           trigger=DateTrigger(),
+                           id="once_jijian_schedule")

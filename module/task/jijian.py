@@ -119,9 +119,9 @@ def use_electricity():
 @my_annotation(desc="基建排班")
 @before
 @func_set_timeout(base.timeout_time_max)
-def schedual():
+def schedual(path):
     msgList = []
-    temp = base.read_json(base.project_path + "/config/schedual.json")
+    temp = base.read_json(base.project_path + path)
     back = copy.deepcopy(temp)
     schedual_dict = temp["Config"]
     data = schedual_dict["data"]
@@ -157,6 +157,7 @@ def schedual():
     sum = JiJianStep.auto_sleep()
     msgList.append("宿舍安排{}为干员进行休息".format(sum))
     base.send("排班完成", '\n'.join(msgList))
+    base.state.is_scheduler = False
     CommonStep.ensureGameOpenAndInMain()
 
 

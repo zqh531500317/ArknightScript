@@ -1,8 +1,8 @@
 {
   "applicationId": "neutralino.arknight",
-  "version": "3.1",
+  "version": "3.2",
   "resourcesURL": "https://raw.githubusercontent.com/zqh531500317/arknight-script/master/webapp/dist/Arknight-Script/resources.neu",
   "data": {
-    "desc": "任务添加中文描述"
+    "desc": "单次排班"
   }
 }

@@ -32,6 +32,10 @@
             <i class="el-icon-right"></i>
             <span slot="title">公开招募</span>
           </el-menu-item>
+          <el-menu-item index="/scheduler">
+            <i class="el-icon-right"></i>
+            <span slot="title">单次排班</span>
+          </el-menu-item>
           <el-menu-item index="/test">
             <i class="el-icon-right"></i>
             <span slot="title">测试</span>

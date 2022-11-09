@@ -33,6 +33,13 @@ const routes = [
         component: () => import('@/views/main/Fight')
     },
     {
+        path: '/scheduler',
+        meta: {
+            auth: true
+        },
+        component: () => import('@/views/main/Scheduler')
+    },
+    {
         path: '/recruit',
         meta: {
             auth: true
