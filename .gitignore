@@ -24,3 +24,4 @@ build
 /webapp/dist/Arknight-Script/neutralinojs.log
 /webapp/dist/Arknight-Script/test.txt
 /webapp/.tmp/
+/config/backup
