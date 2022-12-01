@@ -115,7 +115,10 @@ def state_info():
     blocking_jobs_json = []
     for job in state.blocking_jobs:
         str_fc = job.func_ref
-        desc = get_announce_by_str(str_fc, 'desc')
+        if str_fc is None:
+            desc = "OnceJob"
+        else:
+            desc = get_announce_by_str(str_fc, 'desc')
         blocking_jobs_json.append(
             {"id ": job.id,
              "name": job.name,

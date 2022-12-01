@@ -2,6 +2,7 @@ from module.base import before
 from module.huodong.changxiakuanghuanji import ChangXiaKuangHuanJi
 from module.huodong.changyelinguang import ChangYeLinGuang
 from module.huodong.chenyingyuyin import ChenYingYuYin
+from module.huodong.fengxueguojin import FengXueGuoJin
 from module.huodong.fuchaozhixia import FuChaoZhiXia
 from module.huodong.lvyehuanmeng import LvYeHuanMeng
 from module.huodong.xvgularen import XvGuLaRen
@@ -11,8 +12,13 @@ from module.huodong.duosuoleisi import DuoSuoLeiSi
 
 @before
 def huodong(name, max_fight_time, use_medicine, medicine_num, use_stone, stone_num):
-    now = "xvgularen"
+    now = "fengxueguojin"
     eval(now)(name, max_fight_time, use_medicine, medicine_num, use_stone, stone_num)
+
+
+def fengxueguojin(name: str, max_fight_time, use_medicine, medicine_num, use_stone, stone_num):
+    task = FengXueGuoJin(max_fight_time, name, use_medicine, medicine_num, use_stone, stone_num)
+    task.cycleFight()
 
 
 def xvgularen(name: str, max_fight_time, use_medicine, medicine_num, use_stone, stone_num):
