@@ -8,12 +8,18 @@ from module.huodong.lvyehuanmeng import LvYeHuanMeng
 from module.huodong.xvgularen import XvGuLaRen
 from module.huodong.yurenhao import YuRenHao
 from module.huodong.duosuoleisi import DuoSuoLeiSi
+from module.huodong.zhaowoyihuo import ZhaoWoYiHuo
 
 
 @before
 def huodong(name, max_fight_time, use_medicine, medicine_num, use_stone, stone_num):
-    now = "fengxueguojin"
+    now = "zhaowoyihuo"
     eval(now)(name, max_fight_time, use_medicine, medicine_num, use_stone, stone_num)
+
+
+def zhaowoyihuo(name: str, max_fight_time, use_medicine, medicine_num, use_stone, stone_num):
+    task = ZhaoWoYiHuo(max_fight_time, name, use_medicine, medicine_num, use_stone, stone_num)
+    task.cycleFight()
 
 
 def fengxueguojin(name: str, max_fight_time, use_medicine, medicine_num, use_stone, stone_num):
